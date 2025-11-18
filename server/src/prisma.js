@@ -1,5 +1,5 @@
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "./generated/prisma/index.js";
 
 const globalForPrisma = globalThis;
 
@@ -8,8 +8,8 @@ if (!globalForPrisma.prismaAdapter) {
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "yourpassword",
-    database: "yourdbname",
+    password: "1234",
+    database: "schoolproject-dev",
     connectionLimit: 5,
   });
 }
