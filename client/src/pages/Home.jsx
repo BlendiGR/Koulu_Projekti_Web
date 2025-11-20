@@ -4,6 +4,8 @@ import FeatureCard from "../components/ui/FeatureCard.jsx";
 import HeroSection from "../components/ui/HeroSection.jsx";
 import InfoTile from "../components/ui/InfoTile.jsx";
 import heroBackground from "../public/Hero-Background.png";
+import HorizontalReviewSlider from "../components/ui/HorizontalReviewSlider.jsx";
+import { reviews } from "../config/reviews.js";
 
 export default function Home() {
   const contactCards = [
@@ -107,7 +109,17 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="h-[100vh] mt-20 bg-beige shadow-2xl rounded-3xl"></section>
+      <section className="h-screen mt-20 bg-beige shadow-xl rounded-3xl"></section>
+
+      <section className="py-20">
+        <p className="md:text-5xl text-center text-4xl mb-4">
+          Customer <span className="text-red-100">Reviews</span>
+        </p>
+        <p className="text-center">See what our customers say about us!</p>
+        <div className="mt-10 ">
+          <HorizontalReviewSlider reviews={reviews} />
+        </div>
+      </section>
     </div>
   );
 }

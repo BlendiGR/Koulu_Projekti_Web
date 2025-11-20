@@ -10,7 +10,7 @@ const NavBar = ({ selectedItems = 0, navLinks = [] }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="w-full bg-beige drop-shadow-md fixed top-0 left-0 z-50">
+    <nav className="w-full bg-beige drop-shadow-md fixed top-0 left-0 z-11">
       <div className="max-w-7xl mx-auto flex items-center justify-between p-2">
         {/* Logo */}
         <Link to="/">
