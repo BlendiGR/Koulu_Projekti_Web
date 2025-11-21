@@ -1,6 +1,12 @@
 @import "tailwindcss";
 
 @theme {
+  /*  
+   Nämä värit ovat määritelty figman suunnittelusta.
+   Käykää katsomassa figmassa, jos haluatte tarkistaa värit.
+    Figma linkki: https://www.figma.com/design/jhW08WEXeWEBv2FyfVEVzL/Ryhm%C3%A4-A-Ryhm%C3%A4-Projekti-Figma?node-id=0-1&t=NOtTPrXFj7UWEM0i-1
+   */
+
   --color-red-100: #c73228;
   --color-red-200: #9f2921;
   --color-red-light: #f9eeec;
@@ -21,6 +27,9 @@
   --color-brown-100: #c9c2b8;
 }
 
+/*  
+Animaatio vaakasuuntaiselle reviews osiolle.
+*/
 @layer utilities {
   @keyframes marquee {
     from {

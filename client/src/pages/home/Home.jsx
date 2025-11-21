@@ -1,11 +1,11 @@
 import { Award, Heart, Mail, MapPin, Phone, Users } from "lucide-react";
 
-import FeatureCard from "../components/ui/FeatureCard.jsx";
-import HeroSection from "../components/ui/HeroSection.jsx";
-import InfoTile from "../components/ui/InfoTile.jsx";
-import heroBackground from "../public/Hero-Background.png";
-import HorizontalReviewSlider from "../components/ui/HorizontalReviewSlider.jsx";
-import { reviews } from "../config/reviews.js";
+import FeatureCard from "../../components/ui/FeatureCard.jsx";
+import HeroSection from "./HeroSection.jsx";
+import InfoTile from "../../components/ui/InfoTile.jsx";
+import heroBackground from "/src/assets/images/Hero-Background.png";
+import HorizontalReviewSlider from "../../components/ui/HorizontalReviewSlider.jsx";
+import { reviews } from "../../config/reviews.js";
 
 export default function Home() {
   const contactCards = [

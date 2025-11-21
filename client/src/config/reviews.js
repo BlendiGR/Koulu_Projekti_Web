@@ -1,3 +1,7 @@
+/*
+Tarvittaessa tehdään DB:ssä taulu arvosteluille ja haetaan ne sieltä.
+*/
+
 export const reviews = [
   {
     text: "I've been a regular for years. The consistency is truly impressive—every dish arrives with that signature 'home-cooked by someone who hates you' vibe.",

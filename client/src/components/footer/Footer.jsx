@@ -1,7 +1,7 @@
 import { Facebook, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 import { NAV_LINKS } from "../../config/navigation.js";
-import LogoWhite from "../../public/Fooder-Logo-White.png";
+import LogoWhite from "/src/assets/images/Fooder-Logo-White.png";
 import HoursRow from "./HoursRow.jsx";
 
 const Footer = () => {

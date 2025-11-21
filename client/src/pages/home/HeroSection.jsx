@@ -11,7 +11,9 @@ const HeroSection = ({
     <section
       className="
         relative
-        h-[calc(100vh-64px)]
+        h-screen
+        -mt-16
+        pt-16
         bg-cover bg-center
         flex flex-col items-center justify-center text-center
         px-4
