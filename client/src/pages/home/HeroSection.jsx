@@ -12,7 +12,8 @@ const HeroSection = ({
       className="
         relative
         h-screen
-        -mt-16
+        md:-mt-23
+        -mt-17
         pt-16
         bg-cover bg-center
         flex flex-col items-center justify-center text-center

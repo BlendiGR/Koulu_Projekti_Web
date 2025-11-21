@@ -1,5 +1,5 @@
-export const NAV_LINKS = [
+export const getNavLinks = (user) => [
   { label: "Home", to: "/" },
   { label: "Menu", to: "/menu" },
-  { label: "Visit Us", to: "/visit" },
+  { label: "Visit", to: "/visit" },
 ];

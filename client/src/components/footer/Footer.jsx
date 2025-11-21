@@ -1,10 +1,14 @@
 import { Facebook, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
-import { NAV_LINKS } from "../../config/navigation.js";
+import { getNavLinks } from "../../config/navigation.js";
 import LogoWhite from "/src/assets/images/Fooder-Logo-White.png";
 import HoursRow from "./HoursRow.jsx";
+import { useAuth } from "../../auth/Auth.jsx";
 
 const Footer = () => {
+  const { user } = useAuth();
+  const navLinks = getNavLinks(user);
+
   const hours = [
     { label: "Mon - Fri", time: "10:00 - 22:00" },
     { label: "Weekend", time: "12:00 - 21:00" },
@@ -20,7 +24,7 @@ const Footer = () => {
 
         <div className="flex flex-col items-center md:items-start">
           <p className="font-semibold mb-2">Quick Links</p>
-          {NAV_LINKS.map(({ to, label }) => (
+          {navLinks.map(({ to, label }) => (
             <Link
               key={to}
               to={to}
