@@ -1,42 +1,53 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
+//import { useAuthentication, useUser } from "../hooks/apiHooks";
+import { redirect } from "react-router";
 
-const AuthContext = createContext(null);
+const UserContext = createContext(null);
 
-export function AuthProvider({ children }) {
+const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(() => localStorage.getItem("token"));
+  //const { postLogin } = useAuthentication();
+  //const { getUserByToken } = useUser();
 
-  // Sisään kirjautuminen
-  const login = async (credentials) => {
-    // TODO: täytä tämä backend-kutsulla.
-    // setToken(token)
-    // localStorage.setItem("token", token)
-    // setUser(user)
+  // login, logout and autologin functions are here instead of components
+  const handleLogin = async (credentials) => {
+    try {
+      // TODO: post login credentials to API
+      // TODO: set token to local storage
+      // TODO: set user to state
+      // TODO: navigate to home
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
-  // Ulos kirjautuminen
-  const logout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
-    setUser(null);
+  const handleLogout = () => {
+    try {
+      // TODO: remove token from local storage
+      // TODO: set user to null
+      // TODO: navigate to home or login page
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
-  // Hae käyttäjätiedot jokasella page refreshillä, jos token on asetettu
-  useEffect(() => {
-    if (!token) return;
-
-    const fetchUser = async () => {};
-
-    fetchUser();
-  }, [token]);
+  const handleAutoLogin = async () => {
+    try {
+      // TODO: get token from local storage
+      // TODO: if token exists, get user data from API
+      // TODO: set user to state
+      // TODO: navigate to home
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <UserContext.Provider
+      value={{ user, handleLogin, handleLogout, handleAutoLogin }}
+    >
       {children}
-    </AuthContext.Provider>
+    </UserContext.Provider>
   );
-}
-
-export function useAuth() {
-  return useContext(AuthContext);
-}
+};
+export { UserProvider, UserContext };

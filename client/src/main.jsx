@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 
 import { router } from "./routes.jsx";
-import { AuthProvider } from "./auth/Auth.jsx";
+import { UserProvider } from "./auth/Auth.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <AuthProvider>
+  <UserProvider>
     <RouterProvider router={router} />
-  </AuthProvider>
+  </UserProvider>
 );
