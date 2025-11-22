@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { getNavLinks } from "../../config/navigation.js";
 import LogoWhite from "/src/assets/images/Fooder-Logo-White.png";
 import HoursRow from "./HoursRow.jsx";
-import { useUserContext } from "../../hooks/contextHooks.js";
+import { useAuth } from "../../hooks/useAuth.js";
 
 const Footer = () => {
-  const { user } = useUserContext();
+  const { user } = useAuth();
   const navLinks = getNavLinks(user);
 
   const hours = [

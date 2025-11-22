@@ -10,7 +10,7 @@ import getNavStyles from "./getNavStyles";
 
 import LogoBlack from "/src/assets/images/Fooder-Logo-Black.png";
 import LogoWhite from "/src/assets/images/Fooder-Logo-White.png";
-import { useUserContext } from "../../hooks/contextHooks.js";
+import { useAuth } from "../../hooks/useAuth.js";
 import { getNavLinks } from "../../config/navigation.js";
 
 const NavBar = ({ selectedItems = 0 }) => {
@@ -22,7 +22,7 @@ const NavBar = ({ selectedItems = 0 }) => {
 
   const { navClass, textColor, buttonClass, logoIsBlack } = styles;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { user, handleLogout } = useUserContext();
+  const { user, handleLogout } = useAuth();
   const navLinks = getNavLinks(user);
 
   return (
@@ -43,6 +43,7 @@ const NavBar = ({ selectedItems = 0 }) => {
             selectedItems={selectedItems}
             textColor={textColor}
             user={user}
+            handleLogout={handleLogout}
             buttonClass={buttonClass}
           />
 
@@ -61,6 +62,7 @@ const NavBar = ({ selectedItems = 0 }) => {
       </nav>
       <MobileDrawer
         isOpen={mobileMenuOpen}
+        handleLogout={handleLogout}
         onClose={() => setMobileMenuOpen(false)}
         user={user}
         navLinks={navLinks}
