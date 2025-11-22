@@ -1,4 +1,4 @@
-export default function getNavStyles({ isLanding, scrolled }) {
+const getNavStyles = ({ isLanding, scrolled }) => {
   const navLanding = scrolled
     ? "bg-beige drop-shadow-md"
     : "bg-transparent drop-shadow-none";
@@ -27,4 +27,6 @@ export default function getNavStyles({ isLanding, scrolled }) {
     buttonClass,
     logoIsBlack: isLanding ? scrolled : true,
   };
-}
+};
+
+export default getNavStyles;

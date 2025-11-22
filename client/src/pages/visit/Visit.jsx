@@ -1,3 +1,5 @@
-export default function Visit() {
+const Visit = () => {
   return <h1 className="text-4xl font-bold p-6">Visit Us</h1>;
-}
+};
+
+export default Visit;

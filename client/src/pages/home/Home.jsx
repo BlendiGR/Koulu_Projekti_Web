@@ -7,7 +7,7 @@ import heroBackground from "/src/assets/images/Hero-Background.png";
 import HorizontalReviewSlider from "../../components/ui/HorizontalReviewSlider.jsx";
 import { reviews } from "../../config/reviews.js";
 
-export default function Home() {
+const Home = () => {
   const contactCards = [
     {
       icon: <MapPin size={44} className="text-red-100" />,
@@ -122,4 +122,6 @@ export default function Home() {
       </section>
     </div>
   );
-}
+};
+
+export default Home;

@@ -1,8 +1,15 @@
 import { User } from "lucide-react";
+import LoginButton from "../ui/LoginButton";
 import { NavLink } from "react-router-dom";
 import ShoppingCartButton from "../cart/ShoppingCartButton";
 
-const DesktopNav = ({ navLinks, selectedItems, textColor, buttonClass }) => {
+const DesktopNav = ({
+  navLinks,
+  selectedItems,
+  textColor,
+  buttonClass,
+  user,
+}) => {
   return (
     <div className={`hidden md:flex items-center gap-20 ${textColor}`}>
       <ul className="md:flex items-center text-lg gap-6">
@@ -18,13 +25,7 @@ const DesktopNav = ({ navLinks, selectedItems, textColor, buttonClass }) => {
       </ul>
 
       <div className="flex items-center gap-4">
-        <button
-          className={`px-3 py-1.5 rounded-xl flex items-center gap-1 cursor-pointer transition ${buttonClass}`}
-        >
-          <User />
-          Login
-        </button>
-
+        <LoginButton buttonClass={buttonClass} user={user} />
         <ShoppingCartButton items={selectedItems} />
       </div>
     </div>

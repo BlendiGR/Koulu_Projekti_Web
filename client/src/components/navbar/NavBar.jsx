@@ -5,7 +5,7 @@ import { useState } from "react";
 import ShoppingCartButton from "../cart/ShoppingCartButton";
 import MobileDrawer from "./MobileDrawer";
 import DesktopNav from "./DesktopNav";
-import useNavScroll from "./useNavScroll";
+import useNavScroll from "../../hooks/useNavScroll.js";
 import getNavStyles from "./getNavStyles";
 
 import LogoBlack from "/src/assets/images/Fooder-Logo-Black.png";
@@ -22,7 +22,7 @@ const NavBar = ({ selectedItems = 0 }) => {
 
   const { navClass, textColor, buttonClass, logoIsBlack } = styles;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { user } = useUserContext();
+  const { user, handleLogout } = useUserContext();
   const navLinks = getNavLinks(user);
 
   return (
@@ -42,6 +42,7 @@ const NavBar = ({ selectedItems = 0 }) => {
             navLinks={navLinks}
             selectedItems={selectedItems}
             textColor={textColor}
+            user={user}
             buttonClass={buttonClass}
           />
 
@@ -61,6 +62,7 @@ const NavBar = ({ selectedItems = 0 }) => {
       <MobileDrawer
         isOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
+        user={user}
         navLinks={navLinks}
         ShoppingCartButton={ShoppingCartButton}
         selectedItems={selectedItems}

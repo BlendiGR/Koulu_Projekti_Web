@@ -6,7 +6,7 @@ const ShoppingCartButton = ({ items }) => {
     <>
       <Link
         to="/cart"
-        className={`bg-red-100 text-white rounded-xl flex justify-center items-center text-center gap-1 relative cursor-pointer hover:bg-red-200 active:bg-red-200 w-[50%] py-1.5 px-3`}
+        className={`bg-red-100 hover:bg-red-200 active:hover:bg-red-200 text-white px-4 py-2.5 rounded-xl flex items-center justify-center gap-1 cursor-pointer min-w-[110px]`}
       >
         <ShoppingCart />
         Cart

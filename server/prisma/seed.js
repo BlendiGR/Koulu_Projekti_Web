@@ -1,6 +1,6 @@
 import { prisma } from "../src/prisma.js";
 
-async function main() {
+const main = async () => {
   console.log("Seeding...");
 
   // 1. Create a user
@@ -62,7 +62,7 @@ async function main() {
   });
 
   console.log("Seeding complete.");
-}
+};
 
 main()
   .catch((e) => {

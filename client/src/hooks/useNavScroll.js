@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useNavScroll(isLanding) {
+const useNavScroll = (isLanding) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -13,4 +13,6 @@ export default function useNavScroll(isLanding) {
   }, [isLanding]);
 
   return { scrolled };
-}
+};
+
+export default useNavScroll;

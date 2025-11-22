@@ -33,14 +33,12 @@ const HeroSection = ({
           {subheading}
         </p>
 
-        {ctaText && ctaTo && (
-          <Link
-            to={ctaTo}
-            className="flex justify-center items-center mt-6 px-10 py-3 text-2xl md:text-4xl bg-red-100 text-white rounded-xl hover:bg-red-200 active:bg-red-200 transition mx-auto text-center w-fit"
-          >
-            {ctaText}
-          </Link>
-        )}
+        <Link
+          to={ctaTo}
+          className="flex justify-center items-center mt-6 px-10 py-3 text-2xl md:text-4xl bg-red-100 text-white rounded-xl hover:bg-red-200 active:bg-red-900 transition mx-auto text-center w-fit"
+        >
+          {ctaText}
+        </Link>
       </div>
     </section>
   );

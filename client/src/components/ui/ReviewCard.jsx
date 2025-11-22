@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 
-export default function ReviewCard({ review }) {
+const ReviewCard = ({ review }) => {
   return (
     <div className="bg-beige px-8 py-6 rounded-3xl max-w-[400px] mx-4 text-center">
       <div className="flex justify-center gap-1 mb-3">
@@ -15,4 +15,6 @@ export default function ReviewCard({ review }) {
       <p className="text-sm text-gray-500">{review.timeAgo}</p>
     </div>
   );
-}
+};
+
+export default ReviewCard;

@@ -1,14 +1,17 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { X } from "lucide-react";
 import { useEffect } from "react";
+import LoginButton from "../ui/LoginButton";
 
-export default function MobileDrawer({
+const MobileDrawer = ({
   isOpen,
   onClose,
+  user,
+  handleLogout,
   navLinks = [],
   ShoppingCartButton,
   selectedItems,
-}) {
+}) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -44,21 +47,23 @@ export default function MobileDrawer({
         </button>
 
         {/* Links */}
-        <ul className="flex flex-col gap-8 mt-14 text-black-200">
+        <ul className="flex flex-col gap-8 mt-14 text-black-200 text-xl">
           {navLinks.map((link) => (
-            <li key={link.to}>
-              <Link to={link.to} onClick={onClose} className="text-xl">
+            <li key={link.to} className="active:text-red-200">
+              <NavLink
+                to={link.to}
+                onClick={onClose}
+                className={({ isActive }) => (isActive ? "nav-active" : "")}
+              >
                 {link.label}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>
 
         {/* Buttons */}
         <div className="flex flex-col gap-4 mt-10">
-          <button className="w-full bg-black-200 text-white px-4 py-2 rounded-xl flex items-center justify-center gap-1 cursor-pointer">
-            Login
-          </button>
+          <LoginButton user={user} onClick={handleLogout} mobile />
 
           {ShoppingCartButton && (
             <ShoppingCartButton items={selectedItems} mobile />
@@ -67,4 +72,6 @@ export default function MobileDrawer({
       </div>
     </div>
   );
-}
+};
+
+export default MobileDrawer;

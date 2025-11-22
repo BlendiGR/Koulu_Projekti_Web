@@ -1,6 +1,6 @@
 import ReviewCard from "./ReviewCard";
 
-export default function HorizontalReviewSlider({ reviews = [] }) {
+const HorizontalReviewSlider = ({ reviews = [] }) => {
   const track = [...reviews, ...reviews];
 
   return (
@@ -12,4 +12,6 @@ export default function HorizontalReviewSlider({ reviews = [] }) {
       </div>
     </div>
   );
-}
+};
+
+export default HorizontalReviewSlider;
