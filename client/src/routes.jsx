@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { requireAuth } from "./auth/requireAuth";
+import ProtectedRoute from "./auth/ProtectedRoute";
 
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/home/Home";
@@ -16,11 +16,14 @@ export const router = createBrowserRouter([
       { path: "menu", Component: Menu },
       { path: "visit", Component: Visit },
       { path: "login", Component: Login },
-      { path: "cart", Component: Cart },
-
-      // Lisäkää tarvittaessa suojattuja reittejä tähän:
-      //{path: "reitti", element: <Suojattusivu />, loader: requireAuth }
-      // reittiin pääsee käsiksi sitten <Link to="/reitti">
+      {
+        path: "cart",
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
+      },
     ],
-  }, // tähän adminlayout jne.
+  },
 ]);
