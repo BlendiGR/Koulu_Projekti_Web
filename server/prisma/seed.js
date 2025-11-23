@@ -1,14 +1,14 @@
-import { prisma } from "../src/prisma.js";
+import prisma from "../src/prisma.js";
 
-async function main() {
+const main = async () => {
   console.log("Seeding...");
 
-  // 1. Create a user
+  // 1. Create the initial admin user
   const user = await prisma.user.create({
     data: {
-      username: "testuser",
-      role: "customer",
-      email: "test@example.com",
+      username: "sysadmin",
+      role: "admin",
+      email: "admin@fooder.fi",
       password: "hashedpassword123",
     },
   });
