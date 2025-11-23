@@ -14,8 +14,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-/* ---------- ENUMS ---------- */
+/**
+ * ---------- ENUMS ----------
+ */
 
 enum OrderStatus {
   PREPARING
@@ -28,28 +29,35 @@ enum ProductType {
   DRINK
 }
 
-/* ---------- MODELS ---------- */
+enum UserRole {
+  CUSTOMER
+  ADMIN
+}
+
+/**
+ * ---------- MODELS ----------
+ */
 
 model User {
-  userId    Int       @id @default(autoincrement()) @map("user_id")
-  username  String
+  userId    Int      @id @default(autoincrement()) @map("user_id")
+  username  String   @unique
   role      String
-  email     String
+  email     String   @unique
   password  String
-  createdAt DateTime  @default(now()) @map("created_at")
+  createdAt DateTime @default(now()) @map("created_at")
 
-  orders    Order[]
+  orders Order[]
 
   @@map("users")
 }
 
 model Order {
-  orderId           Int          @id @default(autoincrement()) @map("order_id")
-  status            OrderStatus
-  cost              Decimal
+  orderId            Int         @id @default(autoincrement()) @map("order_id")
+  status             OrderStatus
+  cost               Decimal
   destinationAddress String      @map("destination_address")
-  createdAt         DateTime     @default(now()) @map("created_at")
-  completedAt       DateTime?    @map("completed_at")
+  createdAt          DateTime    @default(now()) @map("created_at")
+  completedAt        DateTime?   @map("completed_at")
 
   userId Int  @map("order_user_id")
   user   User @relation(fields: [userId], references: [userId])
@@ -60,12 +68,12 @@ model Order {
 }
 
 model Product {
-  productId   Int           @id @default(autoincrement()) @map("product_id")
+  productId   Int         @id @default(autoincrement()) @map("product_id")
   type        ProductType
   name        String
   cost        Decimal
   diets       Json
-  imageUrl    String        @map("image_url")
+  imageUrl    String      @map("image_url")
   ingredients Json
 
   orderProducts OrderProduct[]
@@ -74,8 +82,8 @@ model Product {
 }
 
 model OrderProduct {
-  orderId   Int     @map("order_id")
-  productId Int     @map("product_id")
+  orderId   Int @map("order_id")
+  productId Int @map("product_id")
 
   order   Order   @relation(fields: [orderId], references: [orderId])
   product Product @relation(fields: [productId], references: [productId])
