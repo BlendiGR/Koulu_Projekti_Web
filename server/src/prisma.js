@@ -1,23 +1,28 @@
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 import { PrismaClient } from "./generated/prisma/index.js";
+import 'dotenv/config';
 
-const globalForPrisma = globalThis;
+let prisma;
 
-if (!globalForPrisma.prismaAdapter) {
-  globalForPrisma.prismaAdapter = new PrismaMariaDb({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "1234",
-    database: "schoolproject-dev",
-    connectionLimit: 5,
-  });
+const mariaDbAdapter = new PrismaMariaDb({
+  host: process.env.DB_HOST || 'localhost',
+  port: process.env.DB_PORT || 3306,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  connectionLimit: 5,
+});
+
+if (process.env.NODE_ENV === 'production') {
+  prisma = new PrismaClient({adapter: mariaDbAdapter});
+} else {
+  if (!global.prisma) {
+    global.prisma = new PrismaClient({
+      adapter: mariaDbAdapter,
+      log: ['query', 'error', 'warn'],
+    });
+  }
+  prisma = global.prisma;
 }
 
-if (!globalForPrisma.prisma) {
-  globalForPrisma.prisma = new PrismaClient({
-    adapter: globalForPrisma.prismaAdapter,
-  });
-}
-
-export const prisma = globalForPrisma.prisma;
+export default prisma;
