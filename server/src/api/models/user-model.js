@@ -1,4 +1,25 @@
 import prisma from "../../prisma.js";
+import bcrypt from "bcrypt";
+import AppError from "../utils/AppError.js";
+
+/**
+ * Valid user roles.
+ * @type {string[]}
+ */
+const VALID_ROLES = ["CUSTOMER", "ADMIN"];
+
+/**
+ * Common select object to exclude password field.
+ * @type {{userId: boolean, username: boolean, email: boolean, role: boolean, isActive: boolean, createdAt: boolean}}
+ */
+const withoutPasswordSelect = {
+    userId: true,
+    username: true,
+    email: true,
+    role: true,
+    isActive: true,
+    createdAt: true,
+}
 
 /**
  * Get all users from the database.
@@ -12,6 +33,7 @@ export const getUsers = async (filter = {}, skip = 0, take = 100) => {
         where: filter,
         skip: Number(skip),
         take: Number(take),
+        select: withoutPasswordSelect,
     });
 };
 
@@ -22,23 +44,14 @@ export const getUsers = async (filter = {}, skip = 0, take = 100) => {
  */
 export const getUserById = async (userId) => {
     return prisma.user.findUnique({
-        where: { userId: Number(userId) }
-    });
-};
-
-/**
- * Get user by their username.
- * @param {string} username - The username of the user to retrieve.
- * @returns {Promise<*>}
- */
-export const getUserByUsername = async (username) => {
-    return prisma.user.findUnique({
-        where: { username: username }
+        where: { userId: Number(userId) },
+        select: withoutPasswordSelect
     });
 };
 
 /**
  * Get user by their email.
+ * Used in authentication where password is needed.
  * @param {string} email - The email of the user to retrieve.
  * @returns {Promise<*>}
  */
@@ -57,24 +70,31 @@ export const getUserWithOrders = async (userId) => {
     return prisma.user.findUnique({
         where: { userId: Number(userId) },
         include: { orders: true },
+        select: withoutPasswordSelect,
     });
 }
 
 /**
+ * TODO:
+ *  Handle admin creation separately.
+ *
  * Create a new user in the database.
  * @param {Object} userData - The data of the user to create.
  * @returns {Promise<*>}
  */
 export const createUser = async (userData) => {
     try {
-        return prisma.user.create({
+        userData.password = await bcrypt.hash(userData.password, Number(process.env.BCRYPT_SALT) || 10);
+        return await prisma.user.create({
             data: userData,
+            select: withoutPasswordSelect,
         });
     } catch (error) {
         if (error.code === 'P2002') { // Unique field violation
-            throw new Error('Username or email already exists.');
+            throw new AppError('Username or email already exists.', 400, 'DUPLICATE_FIELD');
         }
-        throw error;
+
+        throw new AppError('Failed to create user.', 500, 'USER_CREATION_FAILED', error);
     }
 };
 
@@ -86,16 +106,47 @@ export const createUser = async (userData) => {
  */
 export const updateUser = async (userId, updateData) => {
     try {
-        return prisma.user.update({
+        if (updateData.password) {
+            updateData.password = await bcrypt.hash(updateData.password, Number(process.env.BCRYPT_SALT) || 10);
+        }
+        if (updateData.role && !VALID_ROLES.includes(updateData.role)) {
+            updateData.role = "CUSTOMER";
+        }
+        return await prisma.user.update({
             where: { userId: Number(userId) },
             data: updateData,
+            select: withoutPasswordSelect,
         });
     } catch (error) {
         if (error.code === 'P2002') { // Unique field violation
-            throw new Error('Username or email already exists.');
-        } else {
-            throw error;
+            throw new AppError('Username or email already exists.', 400, 'DUPLICATE_FIELD');
+        } else if (error.code === 'P2025') { // Record not found
+            throw new AppError('User not found.', 404, 'USER_NOT_FOUND', `No user found with ID ${userId}`);
         }
+
+        throw new AppError('Failed to update user.', 500, 'USER_UPDATE_FAILED', error);
+    }
+};
+
+
+/**
+ * Soft delete a user by setting isActive to false.
+ * @param {number} userId - The ID of the user to soft delete.
+ * @returns {Promise<*>}
+ */
+export const softDeleteUser = async (userId) => {
+    try {
+        return await prisma.user.update({
+            where: { userId: Number(userId) },
+            data: { isActive: false },
+            select: withoutPasswordSelect,
+        });
+    } catch (error) {
+        if (error.code === 'P2025') { // Record not found
+            throw new AppError('User not found.', 404, 'USER_NOT_FOUND', `No user found with ID ${userId}`);
+        }
+
+        throw new AppError('Failed to soft delete user.', 500, 'USER_SOFT_DELETE_FAILED', error);
     }
 };
 
@@ -106,13 +157,14 @@ export const updateUser = async (userId, updateData) => {
  */
 export const deleteUser = async (userId) => {
     try {
-        return prisma.user.delete({
+        return await prisma.user.delete({
             where: { userId: Number(userId) },
         });
     } catch (error) {
         if (error.code === 'P2025') { // Record not found
-            throw new Error('User not found.');
+            throw new AppError('User not found.', 404, 'USER_NOT_FOUND', `No user found with ID ${userId}`);
         }
-        throw error;
+
+        throw new AppError('Failed to delete user.', 500, 'USER_DELETION_FAILED', error);
     }
 };
