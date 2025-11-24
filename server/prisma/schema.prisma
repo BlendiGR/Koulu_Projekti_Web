@@ -27,6 +27,7 @@ enum OrderStatus {
 enum ProductType {
   FOOD
   DRINK
+  SIDE
 }
 
 enum UserRole {
@@ -41,9 +42,10 @@ enum UserRole {
 model User {
   userId    Int      @id @default(autoincrement()) @map("user_id")
   username  String   @unique
-  role      String
+  role      UserRole @default(CUSTOMER)
   email     String   @unique
   password  String
+  isActive  Boolean  @default(true) @map("is_active")
   createdAt DateTime @default(now()) @map("created_at")
 
   orders Order[]
@@ -53,7 +55,7 @@ model User {
 
 model Order {
   orderId            Int         @id @default(autoincrement()) @map("order_id")
-  status             OrderStatus
+  status             OrderStatus @default(PREPARING)
   cost               Decimal
   destinationAddress String      @map("destination_address")
   createdAt          DateTime    @default(now()) @map("created_at")
@@ -69,12 +71,13 @@ model Order {
 
 model Product {
   productId   Int         @id @default(autoincrement()) @map("product_id")
-  type        ProductType
+  type        ProductType @default(FOOD)
   name        String
   cost        Decimal
   diets       Json
   imageUrl    String      @map("image_url")
   ingredients Json
+  isActive    Boolean     @default(true) @map("is_active")
 
   orderProducts OrderProduct[]
 
