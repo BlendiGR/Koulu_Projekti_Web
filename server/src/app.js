@@ -1,17 +1,26 @@
 import express from "express";
-import cors from "cors";
+import api from "./api/index.js";
+import {errorHandler, notFoundHandler} from "./middleware/error-handlers.js";
+import {successResponse} from "./middleware/success-response.js";
 
 const app = express();
 
-app.use(cors());
+// Static Files
+app.use(express.static("public"));
+app.use("/uploads", express.static("uploads"));
+
+// Body Parsers
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.json({ message: "API running" });
-});
+// Standardize success responses
+app.use(successResponse);
 
-app.use((req, res) => {
-  res.status(404).json({ error: "Not found" });
-});
+// API Routes
+app.use("/api/v1", api);
+
+// Error Handlers
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 export default app;

@@ -1,15 +1,17 @@
 import prisma from "../src/prisma.js";
+import bcrypt from "bcrypt";
 
 const main = async () => {
   console.log("Seeding...");
 
   // 1. Create the initial admin user
+  const password = await bcrypt.hash("adminpw", 10);
   const user = await prisma.user.create({
     data: {
-      username: "sysadmin",
-      role: "admin",
-      email: "admin@fooder.fi",
-      password: "hashedpassword123",
+      username: "admin",
+      role: "ADMIN",
+      email: "admin1@fooder.fi",
+      password: password,
     },
   });
 
