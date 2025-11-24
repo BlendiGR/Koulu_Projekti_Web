@@ -1,4 +1,11 @@
 import prisma from "../../prisma.js";
+import AppError from "../utils/AppError.js";
+
+/**
+ * Order statuses.
+ * @type {string[]}
+ */
+const ORDER_STATUSES = ["PREPARING", "DELIVERING", "DELIVERED"];
 
 /**
  * Get all orders from the database.
@@ -45,6 +52,10 @@ export const getOrdersWithProducts = async (filter = {}, skip = 0, take = 100) =
  * @returns {Promise<*>}
  */
 export const getOrdersByStatusPaginated = async (status, skip = 0, take = 100) => {
+    if (!ORDER_STATUSES.includes(status)) {
+        throw new AppError("Invalid order status.", 400, "INVALID_ORDER_STATUS", `Status must be one of: ${ORDER_STATUSES.join(", ")}.`);
+    }
+
     return prisma.order.findMany({
         where: { status: status },
         skip: Number(skip),
@@ -93,17 +104,6 @@ export const getOrderWithProducts = async (orderId) => {
 }
 
 /**
- * Get order by its status.
- * @param {string} status - The status of the order to retrieve.
- * @returns {Promise<*>}
- */
-export const getOrdersByStatus = async (status) => {
-    return prisma.order.findMany({
-        where: { status: status }
-    });
-};
-
-/**
  * Get order by its status, including its products.
  * @param {string} status - The status of the order to retrieve.
  * @returns {Promise<*>}
@@ -127,9 +127,13 @@ export const getOrdersByStatusWithProducts = async (status) => {
  * @returns {Promise<*>}
  */
 export const createOrder = async (orderData) => {
-    return prisma.order.create({
-        data: orderData
-    });
+    try {
+        return await prisma.order.create({
+            data: orderData
+        });
+    } catch (error) {
+        throw new AppError("Failed to create order.", 500, "ORDER_CREATION_FAILED", error.message);
+    }
 };
 
 /**
@@ -140,15 +144,15 @@ export const createOrder = async (orderData) => {
  */
 export const updateOrder = async (orderId, updateData) => {
     try {
-        return prisma.order.update({
+        return await prisma.order.update({
             where: { orderId: Number(orderId) },
             data: updateData
         });
     } catch (error) {
-        if (error.code === 'P2025') {
-            throw new Error(`Order with ID ${orderId} does not exist.`);
+        if (error.code === 'P2025') { // Record not found
+            throw new AppError("Order not found.", 404, "ORDER_NOT_FOUND", `No order found with ID ${orderId}`);
         }
-        throw error;
+        throw new AppError("Failed to update order.", 500, "ORDER_UPDATE_FAILED", error.message);
     }
 };
 
@@ -163,9 +167,9 @@ export const deleteOrder = async (orderId) => {
             where: { orderId: Number(orderId) }
         });
     } catch (error) {
-        if (error.code === 'P2025') {
-            throw new Error(`Order with ID ${orderId} does not exist.`);
+        if (error.code === 'P2025') { // Record not found
+            throw new AppError("Order not found.", 404, "ORDER_NOT_FOUND", `No order found with ID ${orderId}`);
         }
-        throw error;
+        throw new AppError("Failed to delete order.", 500, "ORDER_DELETION_FAILED", error.message);
     }
 };
