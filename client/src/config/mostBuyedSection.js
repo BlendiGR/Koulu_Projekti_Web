@@ -1,0 +1,32 @@
+export const mostBuyedProducts = [
+  {
+    id: 1,
+    title: "Cheese Burger",
+    picture: "src/assets/images/Cheese Burger.png",
+    description: "Our #1 bestseller, juicy beef patty with melted cheddar.",
+    price: 8.99,
+    orders: 1200,
+    rank: 1,
+    bgColor: "white",
+  },
+  {
+    id: 2,
+    title: "Crispy Fries",
+    picture: "src/assets/images/French Fries.png",
+    description: "Golden, crispy perfection – perfectly seasoned.",
+    price: 3.99,
+    orders: 980,
+    rank: 2,
+    bgColor: "white",
+  },
+  {
+    id: 3,
+    title: "Chicken Nuggets",
+    picture: "src/assets/images/Chicken Nuggets.png",
+    description: "Crispy on the outside, tender on the inside.",
+    price: 6.99,
+    orders: 875,
+    rank: 3,
+    bgColor: "white",
+  },
+];

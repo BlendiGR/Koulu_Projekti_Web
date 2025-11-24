@@ -6,6 +6,8 @@ import InfoTile from "../../components/ui/InfoTile.jsx";
 import heroBackground from "/src/assets/images/Hero-Background.png";
 import HorizontalReviewSlider from "../../components/ui/HorizontalReviewSlider.jsx";
 import { reviews } from "../../config/reviews.js";
+import ProductCard from "../../components/ui/ProductCard.jsx";
+import { mostBuyedProducts } from "../../config/mostBuyedSection.js";
 
 const Home = () => {
   const contactCards = [
@@ -109,7 +111,23 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="h-screen mt-20 bg-beige shadow-xl rounded-3xl"></section>
+      <section className="p-8 mt-20 bg-beige text-center shadow-xl rounded-3xl">
+        <h3 className="md:text-5xl text-4xl mb-4 pt-11">
+          Most <span className="text-red-100">Ordered</span>
+        </h3>
+        <div className="flex flex-col md:flex-row justify-center items-center gap-10 mt-10">
+          {mostBuyedProducts.map((item) => (
+            <ProductCard
+              bgColor={item.bgColor}
+              picture={item.picture}
+              title={item.title}
+              description={item.description}
+              itemId={item.id}
+              price={item.price}
+            />
+          ))}
+        </div>
+      </section>
 
       <section className="py-20">
         <p className="md:text-5xl text-center text-4xl mb-4">
