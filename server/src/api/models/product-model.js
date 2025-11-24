@@ -1,4 +1,11 @@
 import prisma from "../../prisma.js";
+import AppError from "../utils/AppError.js";
+
+/**
+ * Product types.
+ * @type {string[]}
+ */
+const PRODUCT_TYPES = ["FOOD", "DRINK", "SIDE"];
 
 /**
  * Get all products from the database.
@@ -32,9 +39,16 @@ export const getProductById = async (productId) => {
  * @returns {Promise<*>}
  */
 export const createProduct = async (productData) => {
-    return prisma.product.create({
-        data: productData
-    });
+    try {
+        if (!PRODUCT_TYPES.includes(productData.type)) {
+            productData.type = "FOOD";
+        }
+        return await prisma.product.create({
+            data: productData
+        });
+    } catch (error) {
+        throw new AppError("Failed to create product.", 500, "PRODUCT_CREATION_FAILED", error.message);
+    }
 };
 
 /**
@@ -45,15 +59,18 @@ export const createProduct = async (productData) => {
  */
 export const updateProduct = async (productId, updateData) => {
     try {
-        return prisma.product.update({
+        if (updateData.type && !PRODUCT_TYPES.includes(updateData.type)) {
+            updateData.type = "FOOD";
+        }
+        return await prisma.product.update({
             where: { productId: Number(productId) },
             data: updateData
         });
     } catch (error) {
-        if (error.code === 'P2025') {
-            throw new Error(`Product with ID ${productId} does not exist.`);
+        if (error.code === 'P2025') { // Record not found
+            throw new AppError("Product not found.", 404, "PRODUCT_NOT_FOUND", `No product found with ID ${productId}`);
         }
-        throw error;
+        throw new AppError("Failed to update product.", 500, "PRODUCT_UPDATE_FAILED", error.message);
     }
 };
 
@@ -64,13 +81,13 @@ export const updateProduct = async (productId, updateData) => {
  */
 export const deleteProduct = async (productId) => {
     try {
-        return prisma.product.delete({
+        return await prisma.product.delete({
             where: { productId: Number(productId) }
         });
     } catch (error) {
-        if (error.code === 'P2025') {
-            throw new Error(`Product with ID ${productId} does not exist.`);
+        if (error.code === 'P2025') { // Record not found
+            throw new AppError("Product not found.", 404, "PRODUCT_NOT_FOUND", `No product found with ID ${productId}`);
         }
-        throw error;
+        throw new AppError("Failed to delete product.", 500, "PRODUCT_DELETION_FAILED", error.message);
     }
 };
