@@ -49,6 +49,7 @@ model User {
   createdAt DateTime @default(now()) @map("created_at")
 
   orders Order[]
+  reviews Review[]
 
   @@map("users")
 }
@@ -82,6 +83,19 @@ model Product {
   orderProducts OrderProduct[]
 
   @@map("products")
+}
+
+model Review {
+  reviewId  Int     @id @default(autoincrement()) @map("review_id")
+  rating    Int
+  review    String  @db.Text
+  isActive  Boolean @default(false) @map("is_active")
+  createdAt          DateTime    @default(now()) @map("created_at")
+
+  userId Int  @map("review_user_id")
+  user   User @relation(fields: [userId], references: [userId])
+
+  @@map("reviews")
 }
 
 model OrderProduct {
