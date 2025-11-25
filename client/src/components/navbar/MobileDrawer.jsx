@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { X } from "lucide-react";
 import { useEffect } from "react";
 import LoginButton from "../ui/LoginButton";
+import LangButton from "../ui/LangButton";
 
 const MobileDrawer = ({
   isOpen,
@@ -65,9 +66,8 @@ const MobileDrawer = ({
         <div className="flex flex-col gap-4 mt-10">
           <LoginButton user={user} onClick={handleLogout} mobile />
 
-          {ShoppingCartButton && (
-            <ShoppingCartButton items={selectedItems} mobile />
-          )}
+          {ShoppingCartButton && <ShoppingCartButton mobile />}
+          <LangButton />
         </div>
       </div>
     </div>

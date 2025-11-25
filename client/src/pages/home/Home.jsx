@@ -1,4 +1,5 @@
 import { Award, Heart, Mail, MapPin, Phone, Users } from "lucide-react";
+import { useLang } from "/src/hooks/useLang";
 
 import FeatureCard from "../../components/ui/FeatureCard.jsx";
 import HeroSection from "./HeroSection.jsx";
@@ -10,21 +11,23 @@ import ProductCard from "../../components/ui/ProductCard.jsx";
 import { mostBuyedProducts } from "../../config/mostBuyedSection.js";
 
 const Home = () => {
+  const { t } = useLang();
+
   const contactCards = [
     {
       icon: <MapPin size={44} className="text-red-100" />,
-      title: "Location",
+      title: t("home.contact.location"),
       text: "Blablablakatu 4,\n00100 Helsinki",
     },
     {
       icon: <Phone size={44} className="text-green-100" />,
-      title: "Phone",
-      text: "050 000 0000\nCall us anytime!",
+      title: t("home.contact.phone"),
+      text: `050 000 0000\n${t("home.contact.phone.text")}`,
     },
     {
       icon: <Mail size={44} className="text-blue-400" />,
-      title: "Email",
-      text: "info@web-fooder.fi\nWe'll respond quickly!",
+      title: t("home.contact.email"),
+      text: `info@web-fooder.fi\n${t("home.contact.email.text")}`,
     },
   ];
 
@@ -32,20 +35,20 @@ const Home = () => {
     {
       icon: <Heart size={40} className="text-red-500" />,
       glow: "bg-red-light",
-      title: "Made with Love",
-      text: "Every burger is crafted with care and passion by our experienced chefs",
+      title: t("home.features.made"),
+      text: t("home.features.made.text"),
     },
     {
       icon: <Users size={40} className="text-green-500" />,
       glow: "bg-green-light",
-      title: "Community First",
-      text: "We're proud to support local farmers and give back to our community",
+      title: t("home.features.community"),
+      text: t("home.features.community.text"),
     },
     {
       icon: <Award size={40} className="text-red-500" />,
       glow: "bg-red-light",
-      title: "Award Winning",
-      text: 'Voted "Best Burger in Town" for 5 consecutive years',
+      title: t("home.features.award"),
+      text: t("home.features.award.text"),
     },
   ];
 
@@ -55,43 +58,35 @@ const Home = () => {
         backgroundImage={heroBackground}
         headline={
           <>
-            <span className="text-red-100">Taste </span>
-            <span>Our </span>
-            <span className="text-green-100">Meat</span>
+            <span className="text-red-100">{t("hero.taste")} </span>
+            <span>{t("hero.our")} </span>
+            <span className="text-green-100">{t("hero.meat")}</span>
           </>
         }
-        subheading="Crafted with passion, served with love. Experience the best comfort food in town."
-        ctaText="Order Now"
+        subheading={t("hero.subheading")}
+        ctaText={t("hero.cta")}
         ctaTo="/menu"
       />
 
       <section className="p-8 mt-20 bg-white text-center">
         <h2 className="md:text-5xl text-4xl mb-4">
-          About <span className="text-red-100">Fooder</span>
+          {t("home.about.titlep1")}{" "}
+          <span className="text-red-100">{t("home.about.titlep2")}</span>
         </h2>
 
         <div className="lg:max-w-[70%] mx-auto space-y-8 mt-10">
           <p className="lg:text-xl text-lg text-black-100">
-            Since day one, Fooder Pizzeria has been the neighborhood&apos;s
-            go-to spot for fast, reliable comfort food. From fresh pizzas to
-            stacked burgers and crispy fries, we serve the classics people
-            actually want made quick and made right. Located in the heart of the
-            city, we&apos;re built for anyone looking for good food without the
-            wait.
+            {t("home.about.p1")}
           </p>
 
           <p className="lg:text-xl text-lg text-gray-600">
-            Everything we serve starts with fresh ingredients and
-            straightforward preparation. Our dough is mixed daily, our patties
-            are cooked to order, and our fries are made hot and crisp every
-            time. We source our produce and toppings from trusted local
-            suppliers.
+            {t("home.about.p2")}
           </p>
         </div>
 
         <div
           className="mt-16 lg:max-w-[80%] mx-auto bg-beige p-6 rounded-3xl
-                  flex flex-col lg:flex-row justify-between gap-8"
+                        flex flex-col lg:flex-row justify-between gap-8"
         >
           {contactCards.map(({ icon, title, text }) => (
             <InfoTile key={title} icon={icon} title={title} text={text} />
@@ -113,21 +108,21 @@ const Home = () => {
 
       <section className="p-8 mt-20 bg-beige text-center shadow-xl rounded-3xl">
         <h3 className="md:text-5xl text-4xl mb-4 pt-11">
-          Most <span className="text-red-100">Ordered</span>
+          {t("home.mostOrdered.title")}
         </h3>
-        <div className="flex md:flex-row flex-col  justify-center items-center gap-10 mt-10">
+        <div className="flex md:flex-row flex-col justify-center items-center gap-10 mt-10">
           {mostBuyedProducts.map((item) => (
-            <ProductCard key={item.id} bgColor={"beige"} item={item} />
+            <ProductCard key={item.id} item={item} />
           ))}
         </div>
       </section>
 
       <section className="py-20">
         <p className="md:text-5xl text-center text-4xl mb-4">
-          Customer <span className="text-red-100">Reviews</span>
+          {t("home.reviews.title")}
         </p>
-        <p className="text-center">See what our customers say about us!</p>
-        <div className="mt-10 ">
+        <p className="text-center">{t("home.reviews.subtitle")}</p>
+        <div className="mt-10">
           <HorizontalReviewSlider reviews={reviews} />
         </div>
       </section>

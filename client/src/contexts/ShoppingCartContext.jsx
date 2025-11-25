@@ -1,11 +1,10 @@
 import { createContext, useEffect, useState } from "react";
 
-const CartContext = createContext(null);
-const CART_STORAGE_KEY = "cartItems";
+export const CartContext = createContext(null);
 
 const readStoredCart = () => {
   try {
-    const stored = localStorage.getItem(CART_STORAGE_KEY);
+    const stored = localStorage.getItem("cartItems");
     if (!stored) return [];
     const parsed = JSON.parse(stored);
     return parsed
@@ -20,12 +19,12 @@ const readStoredCart = () => {
   }
 };
 
-const ShoppingCart = ({ children }) => {
+export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => readStoredCart());
 
   useEffect(() => {
     try {
-      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
     } catch (err) {
       console.warn("Failed to persist cart to storage", err);
     }
@@ -42,7 +41,6 @@ const ShoppingCart = ({ children }) => {
             : item
         );
       }
-
       return [...prev, { id: itemId, quantity: 1 }];
     });
   };
@@ -64,10 +62,7 @@ const ShoppingCart = ({ children }) => {
     deleteCartItem,
     clearCart,
     totalItems,
-    readStoredCart,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
-
-export { CartContext, ShoppingCart };

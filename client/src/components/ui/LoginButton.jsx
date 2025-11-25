@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom";
 import { User, LogOut } from "lucide-react";
+import { useLang } from "/src/hooks/useLang";
 
 const LoginButton = ({ user, onClick, mobile = false, buttonClass = "" }) => {
+  const { t } = useLang();
   const baseClass =
     "bg-black-200 text-white px-4 py-2.5 rounded-xl flex items-center justify-center gap-1 cursor-pointer";
 
@@ -13,7 +15,7 @@ const LoginButton = ({ user, onClick, mobile = false, buttonClass = "" }) => {
     return (
       <button className={className} onClick={onClick}>
         <LogOut />
-        Logout
+        {t("nav.logout")}
       </button>
     );
   }
@@ -21,7 +23,7 @@ const LoginButton = ({ user, onClick, mobile = false, buttonClass = "" }) => {
   return (
     <NavLink to="/login" className={className}>
       <User />
-      Login
+      {t("nav.login")}
     </NavLink>
   );
 };

@@ -11,9 +11,9 @@ export const mostBuyedProducts = [
   },
   {
     id: 2,
-    title: "Crispy Fries",
-    picture: "src/assets/images/French Fries.png",
-    description: "Golden, crispy perfection – perfectly seasoned.",
+    name: "Crispy Fries",
+    imageUrl: "src/assets/images/French Fries.png",
+    description: "Golden, crispy perfection, perfectly seasoned.",
     price: 3.99,
     orders: 980,
     rank: 2,
@@ -21,8 +21,8 @@ export const mostBuyedProducts = [
   },
   {
     id: 3,
-    title: "Chicken Nuggets",
-    picture: "src/assets/images/Chicken Nuggets.png",
+    name: "Chicken Nuggets",
+    imageUrl: "src/assets/images/Chicken Nuggets.png",
     description: "Crispy on the outside, tender on the inside.",
     price: 6.99,
     orders: 875,

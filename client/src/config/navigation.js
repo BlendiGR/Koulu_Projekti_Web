@@ -1,11 +1,11 @@
-export const getNavLinks = (user) => [
-  { label: "Home", to: "/" },
-  { label: "Menu", to: "/menu" },
-  { label: "Visit", to: "/visit" },
+export const getNavLinks = (user, t) => [
+  { label: t("nav.home"), to: "/" },
+  { label: t("nav.menu"), to: "/menu" },
+  { label: t("nav.visit"), to: "/visit" },
   ...(user
     ? [
-        { label: "Profile", to: "/profile" },
-        { label: "Orders", to: "/orders" },
+        { label: t("nav.profile"), to: "/profile" },
+        { label: t("nav.orders"), to: "/orders" },
       ]
     : []),
 ];

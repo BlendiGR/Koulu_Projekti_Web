@@ -1,6 +1,7 @@
 import LoginButton from "../ui/LoginButton";
 import { NavLink } from "react-router-dom";
 import ShoppingCartButton from "../cart/ShoppingCartButton";
+import LangButton from "../ui/LangButton";
 
 const DesktopNav = ({
   navLinks,
@@ -31,7 +32,8 @@ const DesktopNav = ({
           user={user}
           onClick={handleLogout}
         />
-        <ShoppingCartButton items={selectedItems} />
+        <ShoppingCartButton />
+        <LangButton />
       </div>
     </div>
   );
