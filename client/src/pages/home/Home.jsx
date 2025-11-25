@@ -56,8 +56,8 @@ const Home = () => {
         headline={
           <>
             <span className="text-red-100">Taste </span>
-            <span>The </span>
-            <span className="text-green-100">Difference</span>
+            <span>Our </span>
+            <span className="text-green-100">Meat</span>
           </>
         }
         subheading="Crafted with passion, served with love. Experience the best comfort food in town."
@@ -115,16 +115,9 @@ const Home = () => {
         <h3 className="md:text-5xl text-4xl mb-4 pt-11">
           Most <span className="text-red-100">Ordered</span>
         </h3>
-        <div className="flex flex-col md:flex-row justify-center items-center gap-10 mt-10">
+        <div className="flex md:flex-row flex-col  justify-center items-center gap-10 mt-10">
           {mostBuyedProducts.map((item) => (
-            <ProductCard
-              bgColor={item.bgColor}
-              picture={item.picture}
-              title={item.title}
-              description={item.description}
-              itemId={item.id}
-              price={item.price}
-            />
+            <ProductCard key={item.id} bgColor={"beige"} item={item} />
           ))}
         </div>
       </section>

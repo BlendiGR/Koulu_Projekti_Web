@@ -1,8 +1,13 @@
-const AddToCartButton = ({ itemId }) => {
-  const handleClick = (e) => {
-    //add to cart
-  };
+import { useCart } from "../../hooks/useCart";
+import { toast } from "sonner";
 
+const AddToCartButton = ({ item }) => {
+  const { addCartItem } = useCart();
+
+  const handleClick = (e) => {
+    toast(item.title + " Added To Cart! bitch ass nigga");
+    addCartItem(item.id);
+  };
   return (
     <>
       <button

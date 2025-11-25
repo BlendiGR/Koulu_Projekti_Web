@@ -1,8 +1,8 @@
 export const mostBuyedProducts = [
   {
     id: 1,
-    title: "Cheese Burger",
-    picture: "src/assets/images/Cheese Burger.png",
+    name: "Cheese Burger",
+    imageUrl: "src/assets/images/Cheese Burger.png",
     description: "Our #1 bestseller, juicy beef patty with melted cheddar.",
     price: 8.99,
     orders: 1200,
