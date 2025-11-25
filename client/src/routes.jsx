@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "./auth/ProtectedRoute";
-
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/home/Home";
 import Menu from "./pages/menu/Menu";
 import Visit from "./pages/visit/Visit";
 import Login from "./pages/login/Login";
 import Cart from "./pages/cart/Cart";
+import Profile from "./pages/profile/Profile";
+import Orders from "./pages/orders/Orders";
 
 export const router = createBrowserRouter([
   {
@@ -16,12 +17,22 @@ export const router = createBrowserRouter([
       { path: "menu", Component: Menu },
       { path: "visit", Component: Visit },
       { path: "login", Component: Login },
+      { path: "cart", Component: Cart },
+
+      // suojatut reitit
       {
-        path: "cart",
+        path: "profile",
         element: (
-          /// Testi
           <ProtectedRoute>
-            <Cart />
+            <Profile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "orders",
+        element: (
+          <ProtectedRoute>
+            <Orders />
           </ProtectedRoute>
         ),
       },

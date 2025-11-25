@@ -1,0 +1,52 @@
+{
+  "nav.home": "Home",
+  "nav.menu": "Menu",
+  "nav.visit": "Visit",
+  "nav.profile": "Profile",
+  "nav.orders": "Orders",
+  "nav.login": "Login",
+  "nav.signout": "Sign Out",
+
+  "hero.taste": "Taste",
+  "hero.our": "Our",
+  "hero.meat": "Meat",
+  "hero.subheading": "Crafted with passion, served with love. Experience the best comfort food in town.",
+  "hero.cta": "Order Now",
+
+  "home.about.titlep1": "About",
+  "home.about.titlep2": "Fooder",
+  "home.about.p1": "Since day one, Fooder Pizzeria has been the neighborhood's go-to spot for fast, reliable comfort food. From fresh pizzas to stacked burgers and crispy fries, we serve the classics people actually want made quick and made right. Located in the heart of the city, we're built for anyone looking for good food without the wait.",
+  "home.about.p2": "Everything we serve starts with fresh ingredients and straightforward preparation. Our dough is mixed daily, our patties are cooked to order, and our fries are made hot and crisp every time. We source our produce and toppings from trusted local suppliers.",
+
+  "home.contact.location": "Location",
+  "home.contact.phone": "Phone",
+  "home.contact.email": "Email",
+  "home.contact.phone.text": "Call us anytime!",
+  "home.contact.email.text": "We'll respond quickly!",
+
+  "home.features.made": "Made with Love",
+  "home.features.made.text": "Every burger is crafted with care and passion by our experienced chefs",
+
+  "home.features.community": "Community First",
+  "home.features.community.text": "We're proud to support local farmers and give back to our community",
+
+  "home.features.award": "Award Winning",
+  "home.features.award.text": "Voted \"Best Burger in Town\" for 5 consecutive years",
+
+  "home.mostOrdered.title": "Most Ordered",
+
+  "home.reviews.title": "Customer Reviews",
+  "home.reviews.subtitle": "See what our customers say about us!",
+
+  "cart.button": "Cart",
+  "cart.addtocart": "Add To Cart",
+
+  "footer.since": "Serving since 2025.",
+  "footer.quickLinks": "Quick Links",
+  "footer.customerService": "Customer Service",
+  "footer.openingHours": "Opening Hours",
+  "footer.followUs": "Follow Us",
+  "footer.hours.weekdays": "Mon - Fri",
+  "footer.hours.weekend": "Weekend",
+  "footer.copyright": "(c) 2025 Fooder"
+}

@@ -1,0 +1,52 @@
+{
+  "nav.home": "Koti",
+  "nav.menu": "Ruokalista",
+  "nav.visit": "Vieraile",
+  "nav.profile": "Profiili",
+  "nav.orders": "Tilaukset",
+  "nav.login": "Kirjaudu",
+  "nav.signout": "Kirjaudu Ulos",
+
+  "hero.taste": "Maista",
+  "hero.our": "Meidän",
+  "hero.meat": "Liha",
+  "hero.subheading": "Valmistettu intohimolla, tarjoiltu rakkaudella. Koe kaupungin paras kotiruoka.",
+  "hero.cta": "Tilaa nyt",
+
+  "home.about.titlep1": "Tietoa",
+  "home.about.titlep2": "Fooderista",
+  "home.about.p1": "Alusta asti Fooder Pizzeria on ollut naapuruston luottopaikka nopealle ja maukkaalle lohturualle. Tuoreista pizzoista meheviin burgereihin ja rapeisiin ranskalaisiin – teemme klassikot nopeasti ja kunnolla. Keskellä kaupunkia sijaitseva Fooder sopii kaikille, jotka haluavat hyvää ruokaa ilman odotusta.",
+  "home.about.p2": "Kaikki alkaa tuoreista raaka-aineista ja selkeästä valmistuksesta. Taikinamme tehdään päivittäin, pihvimme paistetaan tilauksesta ja ranskalaiset tarjoillaan aina kuumina ja rapeina. Hankimme tuoreet tuotteet luotettavilta paikallisilta toimittajilta.",
+
+  "home.contact.location": "Sijainti",
+  "home.contact.phone": "Puhelin",
+  "home.contact.email": "Sähköposti",
+  "home.contact.phone.text": "Soita milloin vain!",
+  "home.contact.email.text": "Vastaamme nopeasti!",
+
+  "home.features.made": "Rakkaudella tehty",
+  "home.features.made.text": "Jokainen burger valmistetaan huolella ja intohimolla kokkiemme toimesta",
+
+  "home.features.community": "Yhteisö ensin",
+  "home.features.community.text": "Tuemme ylpeästi paikallisia viljelijöitä ja annamme takaisin yhteisölle",
+
+  "home.features.award": "Palkittu",
+  "home.features.award.text": "Valittu \"Kaupungin paras burgeri\" 5 vuotta putkeen",
+
+  "home.mostOrdered.title": "Eniten tilatut",
+
+  "home.reviews.title": "Asiakasarviot",
+  "home.reviews.subtitle": "Katso mitä asiakkaamme sanovat!",
+
+  "cart.button": "Kori",
+  "cart.addtocart": "Lisää ostoskoriin",
+
+  "footer.since": "Palvellut vuodesta 2025.",
+  "footer.quickLinks": "Pikalinkit",
+  "footer.customerService": "Asiakaspalvelu",
+  "footer.openingHours": "Aukioloajat",
+  "footer.followUs": "Seuraa meitä",
+  "footer.hours.weekdays": "Ma - Pe",
+  "footer.hours.weekend": "Viikonloppu",
+  "footer.copyright": "(c) 2025 Fooder"
+}

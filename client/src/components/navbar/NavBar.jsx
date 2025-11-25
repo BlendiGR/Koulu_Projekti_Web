@@ -12,8 +12,11 @@ import LogoBlack from "/src/assets/images/Fooder-Logo-Black.png";
 import LogoWhite from "/src/assets/images/Fooder-Logo-White.png";
 import { useAuth } from "../../hooks/useAuth.js";
 import { getNavLinks } from "../../config/navigation.js";
+import { useLang } from "/src/hooks/useLang";
 
-const NavBar = ({ selectedItems = 0 }) => {
+const NavBar = () => {
+  const { t } = useLang();
+
   const { pathname } = useLocation();
   const isLanding = pathname === "/";
 
@@ -23,7 +26,7 @@ const NavBar = ({ selectedItems = 0 }) => {
   const { navClass, textColor, buttonClass, logoIsBlack } = styles;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user, handleLogout } = useAuth();
-  const navLinks = getNavLinks(user);
+  const navLinks = getNavLinks(user, t);
 
   return (
     <>
@@ -40,7 +43,6 @@ const NavBar = ({ selectedItems = 0 }) => {
 
           <DesktopNav
             navLinks={navLinks}
-            selectedItems={selectedItems}
             textColor={textColor}
             user={user}
             handleLogout={handleLogout}
@@ -67,7 +69,6 @@ const NavBar = ({ selectedItems = 0 }) => {
         user={user}
         navLinks={navLinks}
         ShoppingCartButton={ShoppingCartButton}
-        selectedItems={selectedItems}
       />
     </>
   );
