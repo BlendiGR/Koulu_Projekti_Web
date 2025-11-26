@@ -37,7 +37,7 @@ export const login = asyncHandler(async (req, res) => {
         expiresIn: process.env.JWT_EXPIRES_IN || "1h"
     });
 
-    res.sendSuccess({token, userWithoutPassword})
+    res.sendSuccess({token, user: userWithoutPassword});
 });
 
 /**

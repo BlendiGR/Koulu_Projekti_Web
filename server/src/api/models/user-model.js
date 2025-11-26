@@ -80,8 +80,10 @@ export const getUserByEmail = async (email) => {
 export const getUserWithOrders = async (userId) => {
     return prisma.user.findUnique({
         where: { userId: Number(userId) },
-        include: { orders: true },
-        select: withoutPasswordSelect,
+        select: {
+            ...withoutPasswordSelect,
+            orders: true,
+        },
     });
 }
 
@@ -119,9 +121,6 @@ export const updateUser = async (userId, updateData) => {
     try {
         if (updateData.password) {
             updateData.password = await bcrypt.hash(updateData.password, Number(process.env.BCRYPT_SALT) || 10);
-        }
-        if (updateData.role && !VALID_ROLES.includes(updateData.role)) {
-            updateData.role = "CUSTOMER";
         }
         return await prisma.user.update({
             where: { userId: Number(userId) },
@@ -168,9 +167,10 @@ export const softDeleteUser = async (userId) => {
  */
 export const deleteUser = async (userId) => {
     try {
-        return await prisma.user.delete({
+        await prisma.user.delete({
             where: { userId: Number(userId) },
         });
+        return true;
     } catch (error) {
         if (error.code === 'P2025') { // Record not found
             throw new AppError('User not found.', 404, 'USER_NOT_FOUND', `No user found with ID ${userId}`);

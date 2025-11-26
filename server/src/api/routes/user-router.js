@@ -1,7 +1,12 @@
 import express from "express";
 import {authenticateToken, requireRole} from "../../middleware/authentication.js";
 import {validationErrors} from "../../middleware/error-handlers.js";
-import {validateCreateUser, validateUpdateUser, validateUserQuery} from "../validators/user-validators.js";
+import {
+    validateCreateUser,
+    validateUpdateUser,
+    validateUserIdParam,
+    validateUserQuery
+} from "../validators/user-validators.js";
 
 import * as userController from "../controllers/user-controller.js";
 
@@ -24,12 +29,13 @@ userRouter.route("/")
 userRouter.route("/:userId")
     .get(
         authenticateToken,
-        validateUserQuery,
+        validateUserIdParam,
         validationErrors,
         userController.getUserById
     )
     .put(
         authenticateToken,
+        validateUserIdParam,
         validateUpdateUser,
         validationErrors,
         userController.updateUser
@@ -37,12 +43,16 @@ userRouter.route("/:userId")
     .delete(
         authenticateToken,
         requireRole(["ADMIN"]),
+        validateUserIdParam,
+        validationErrors,
         userController.deleteUser
     );
 
 userRouter.route("/:userId/soft-delete")
     .put( // Not DELETE, since it just deactivates the user
         authenticateToken,
+        validateUserIdParam,
+        validationErrors,
         userController.softDeleteUser
     );
 

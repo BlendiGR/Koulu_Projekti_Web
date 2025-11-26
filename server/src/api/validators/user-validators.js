@@ -1,7 +1,14 @@
-import {body, query} from "express-validator";
+import {body, query, param} from "express-validator";
 import AppError from "../../utils/AppError.js";
 
 import {userFields, VALID_ROLES} from "../models/user-model.js";
+
+/**
+ * Validation chain for userId URL parameter.
+ */
+export const validateUserIdParam = [
+    param("userId").isInt({min: 1}).withMessage("User ID must be an integer"),
+];
 
 /**
  * Validation chain for creating a new user.
@@ -10,6 +17,7 @@ export const validateCreateUser = [
     body("email").notEmpty().isEmail().withMessage("Email must be a valid email address"),
     body("username").notEmpty().isString().withMessage("Username must be a valid string"),
     body("password").isLength({min: 8}).withMessage("Password must be at least 8 characters long"),
+    body("role").optional().isIn(VALID_ROLES).withMessage(`Role must be: ${VALID_ROLES.join(" / ")}`),
 ];
 
 /**
@@ -20,6 +28,9 @@ export const validateUpdateUser = [
     body("username").optional().notEmpty().withMessage("Username cannot be empty"),
     body("password").optional().isLength({min: 8}).withMessage("Password must be at least 8 characters long"),
     body("isActive").optional().isBoolean().withMessage("isActive must be a boolean"),
+    body("role").not().exists().withMessage("role cannot be modified"),
+    body("userId").not().exists().withMessage("userId cannot be modified"),
+    body("createdAt").not().exists().withMessage("createdAt cannot be modified"),
 ];
 
 /**
