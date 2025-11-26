@@ -1,5 +1,5 @@
-import {asyncHandler} from "../utils/async-handler.js";
-import AppError from "../utils/AppError.js";
+import {asyncHandler} from "../../utils/async-handler.js";
+import AppError from "../../utils/AppError.js";
 import * as User from "../models/user-model.js";
 
 /**
@@ -12,14 +12,7 @@ export const getAllUsers = asyncHandler(async (req, res) => {
     const {skip = 0, take = 100, ...filters} = req.query;
     if (filters.userId) filters.userId = Number(filters.userId);
 
-    const skipNum = Number(skip);
-    const takeNum = Number(take);
-
-    if (isNaN(skipNum) || isNaN(takeNum)) {
-        throw new AppError("Invalid pagination parameters", 400, "INVALID_PAGINATION", "Skip and take must be valid numbers.");
-    }
-
-    const users = await User.getUsers(filters, skipNum, takeNum);
+    const users = await User.getUsers(filters, skip, take);
 
     res.sendSuccess(users);
 });

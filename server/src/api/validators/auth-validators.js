@@ -5,5 +5,5 @@ import {body} from "express-validator";
  */
 export const validateLogin = [
     body("email").isEmail().withMessage("Must be a valid email address"),
-    body("password").isString().isLength({min: 8}),
-]
+    body("password").isString().isLength({min: 6}), // TODO change to higher
+];

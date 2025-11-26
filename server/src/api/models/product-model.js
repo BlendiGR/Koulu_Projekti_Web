@@ -1,5 +1,5 @@
 import prisma from "../../prisma.js";
-import AppError from "../utils/AppError.js";
+import AppError from "../../utils/AppError.js";
 
 /**
  * Product types.

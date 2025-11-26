@@ -1,5 +1,5 @@
-import {asyncHandler} from "../utils/async-handler.js";
-import AppError from "../utils/AppError.js";
+import {asyncHandler} from "../../utils/async-handler.js";
+import AppError from "../../utils/AppError.js";
 import * as Product from "../models/product-model.js";
 
 /**

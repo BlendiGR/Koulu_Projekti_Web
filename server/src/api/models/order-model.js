@@ -1,11 +1,11 @@
 import prisma from "../../prisma.js";
-import AppError from "../utils/AppError.js";
+import AppError from "../../utils/AppError.js";
 
 /**
  * Order statuses.
  * @type {string[]}
  */
-const ORDER_STATUSES = ["PREPARING", "DELIVERING", "DELIVERED"];
+export const ORDER_STATUSES = ["PREPARING", "DELIVERING", "DELIVERED"];
 
 /**
  * Get all orders from the database.
@@ -163,7 +163,7 @@ export const updateOrder = async (orderId, updateData) => {
  */
 export const deleteOrder = async (orderId) => {
     try {
-        return prisma.order.delete({
+        return await prisma.order.delete({
             where: { orderId: Number(orderId) }
         });
     } catch (error) {

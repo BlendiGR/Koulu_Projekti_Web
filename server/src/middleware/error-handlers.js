@@ -1,6 +1,6 @@
 import multer from "multer";
 import { validationResult } from "express-validator";
-import AppError from "../api/utils/AppError.js";
+import AppError from "../utils/AppError.js";
 
 /**
  * Middleware to handle not found routes.
@@ -9,7 +9,7 @@ import AppError from "../api/utils/AppError.js";
  * @param next - Express next middleware function
  */
 export const notFoundHandler = (req, res, next) => {
-    const error = new AppError(`Route ${req.originalUrl} not found`, 404, "blaablaa");
+    const error = new AppError(`Route ${req.originalUrl} not found`, 404);
     next(error);
 };
 
@@ -44,9 +44,8 @@ export const validationErrors = (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        const messages = errors.array().map((e) => `${e.path}: ${e.msg}`).join(', ');
-        const error = new Error(messages);
-        error.status = 400;
+        const messages = errors.array().map((e) => e.msg).join(', ');
+        const error = new AppError(messages, 400, "INVALID_VALUES", messages);
         return next(error);
     }
     next();

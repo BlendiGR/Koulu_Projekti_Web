@@ -1,12 +1,12 @@
 import prisma from "../../prisma.js";
 import bcrypt from "bcrypt";
-import AppError from "../utils/AppError.js";
+import AppError from "../../utils/AppError.js";
 
 /**
  * Valid user roles.
  * @type {string[]}
  */
-const VALID_ROLES = ["CUSTOMER", "ADMIN"];
+export const VALID_ROLES = ["CUSTOMER", "ADMIN"];
 
 /**
  * Common select object to exclude password field.
@@ -20,6 +20,17 @@ const withoutPasswordSelect = {
     isActive: true,
     createdAt: true,
 }
+
+/**
+ * Valid query params for the user model.
+ * Used in validators/user-validators.js
+ */
+export const userFields = [
+    "userId",
+    "email",
+    "username",
+    "role"
+];
 
 /**
  * Get all users from the database.

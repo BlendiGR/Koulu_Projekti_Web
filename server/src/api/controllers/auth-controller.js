@@ -2,9 +2,9 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import "dotenv/config";
 
-import {asyncHandler} from "../utils/async-handler.js";
+import {asyncHandler} from "../../utils/async-handler.js";
 import {getUserByEmail} from "../models/user-model.js";
-import AppError from "../utils/AppError.js";
+import AppError from "../../utils/AppError.js";
 
 /**
  * User login controller.
