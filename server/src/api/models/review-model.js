@@ -2,6 +2,20 @@ import prisma from "../../prisma.js";
 import AppError from "../../utils/AppError.js";
 
 /**
+ * Valid query params for the review model.
+ * Used in validators/review-validators.js
+ * @type {string[]}
+ */
+export const reviewFields = [
+    "reviewId",
+    "userId",
+    "productId",
+    "rating",
+    "review",
+    "isActive"
+]
+
+/**
  * Get all reviews from the database.
  * @param {Object} filter - Filter criteria for querying reviews.
  * @param {number} skip - Number of records to skip for pagination.
