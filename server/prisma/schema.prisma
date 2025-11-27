@@ -65,6 +65,8 @@ model Order {
   userId Int  @map("order_user_id")
   user   User @relation(fields: [userId], references: [userId])
 
+  orderer String @map("orderer_name") @default("")
+
   orderProducts OrderProduct[]
 
   @@map("orders")
@@ -93,7 +95,7 @@ model Review {
   createdAt          DateTime    @default(now()) @map("created_at")
 
   userId Int  @map("review_user_id")
-  user   User @relation(fields: [userId], references: [userId])
+  user   User @relation(fields: [userId], references: [userId], onDelete: Cascade)
 
   @@map("reviews")
 }
