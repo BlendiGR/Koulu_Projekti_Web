@@ -48,5 +48,60 @@
   "footer.followUs": "Seuraa meitä",
   "footer.hours.weekdays": "Ma - Pe",
   "footer.hours.weekend": "Viikonloppu",
-  "footer.copyright": "(c) 2025 Fooder"
+  "footer.copyright": "(c) 2025 Fooder",
+  "delivery.firstName.min": "Etunimen tulee olla vähintään 2 merkkiä pitkä",
+  "delivery.lastName.min": "Sukunimen tulee olla vähintään 2 merkkiä pitkä",
+  "delivery.phone.invalid": "Puhelinnumero ei ole kelvollinen",
+  "delivery.street.min": "Katuosoite on liian lyhyt",
+  "delivery.postalCode.invalid": "Postinumeron tulee olla 5 numeroa",
+  "delivery.city.min": "Kaupungin nimen tulee olla vähintään 2 merkkiä pitkä",
+
+  "register.fullName.min": "Koko nimen tulee olla vähintään 3 merkkiä pitkä",
+  "register.fullName.invalid": "Nimi sisältää virheellisiä merkkejä",
+  "register.email.invalid": "Sähköpostiosoite ei ole kelvollinen",
+  "register.phone.invalid": "Puhelinnumero ei ole kelvollinen",
+  "register.password.min": "Salasanan tulee olla vähintään 8 merkkiä pitkä",
+  "register.password.uppercase": "Salasanassa tulee olla iso kirjain",
+  "register.password.lowercase": "Salasanassa tulee olla pieni kirjain",
+  "register.password.number": "Salasanassa tulee olla numero",
+  "register.password.symbol": "Salasanassa tulee olla erikoismerkki",
+  "register.confirmPassword.mismatch": "Salasanat eivät täsmää",
+  "register.terms.required": "Hyväksy palvelun ehdot jatkaaksesi",
+
+  "login.email.invalid": "Sähköpostiosoite ei ole kelvollinen",
+  "login.password.min": "Salasanan tulee olla vähintään 6 merkkiä pitkä",
+
+  "form.email.label": "Sähköposti",
+  "form.email.placeholder": "Syötä sähköpostiosoite",
+
+  "form.password.label": "Salasana",
+  "form.password.placeholder": "Syötä salasana",
+
+  "form.confirmPassword.label": "Vahvista salasana",
+  "form.confirmPassword.placeholder": "Toista salasana",
+
+  "form.fullName.label": "Koko nimi",
+  "form.fullName.placeholder": "Syötä koko nimi",
+
+  "form.phone.label": "Puhelin",
+  "form.phone.placeholder": "Syötä puhelinnumero",
+
+  "form.firstName.label": "Etunimi",
+  "form.firstName.placeholder": "Syötä etunimi",
+
+  "form.lastName.label": "Sukunimi",
+  "form.lastName.placeholder": "Syötä sukunimi",
+
+  "form.street.label": "Katuosoite",
+  "form.street.placeholder": "Syötä katuosoite",
+
+  "form.postalCode.label": "Postinumero",
+  "form.postalCode.placeholder": "12345",
+
+  "form.city.label": "Kaupunki",
+  "form.city.placeholder": "Syötä kaupunki",
+
+  "form.terms.label": "Hyväksyn palvelun ehdot",
+
+  "form.login.error.message": "Väärä sähköposti tai salasana!"
 }

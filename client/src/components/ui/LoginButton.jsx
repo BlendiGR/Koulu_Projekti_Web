@@ -15,7 +15,7 @@ const LoginButton = ({ user, onClick, mobile = false, buttonClass = "" }) => {
     return (
       <button className={className} onClick={onClick}>
         <LogOut />
-        {t("nav.logout")}
+        {t("nav.signout")}
       </button>
     );
   }

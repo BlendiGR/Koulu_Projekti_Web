@@ -1,15 +1,23 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../components/navbar/NavBar.jsx";
 import Footer from "../components/footer/Footer.jsx";
-import { Toaster } from "sonner";
+import { useAuth } from "../hooks/useAuth.js";
+import { useEffect } from "react";
 
 const MainLayout = () => {
+  const { handleAutoLogin } = useAuth();
+
+  console.log("Mounted!");
+
+  useEffect(() => {
+    handleAutoLogin();
+  }, []);
+
   return (
-    <div className="min-h-screen">
+    <div>
       <NavBar />
-      <main className="md:mt-[92px] mt-[68px]">
+      <main className="mt-22">
         <Outlet />
-        <Toaster />
       </main>
       <Footer />
     </div>

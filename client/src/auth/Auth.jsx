@@ -1,53 +1,67 @@
 import { createContext, useState } from "react";
-//import { useAuthentication, useUser } from "../hooks/apiHooks";
-import { redirect } from "react-router";
+import { useNavigate, useLocation } from "react-router";
+import { useUser } from "/src/hooks/apiHooks";
 
 const UserContext = createContext(null);
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  //const { postLogin } = useAuthentication();
-  //const { getUserByToken } = useUser();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  // login, logout and autologin functions are here instead of components
+  const { getUserByToken, postLogin } = useUser();
+
   const handleLogin = async (credentials) => {
-    try {
-      // TODO: post login credentials to API
-      // TODO: set token to local storage
-      // TODO: set user to state
-      // TODO: navigate to home
-    } catch (e) {
-      console.log(e.message);
+    const loginRes = await postLogin(credentials);
+
+    if (!loginRes.success) {
+      return loginRes;
     }
+
+    const data = loginRes.data.data;
+
+    const token = data.token;
+    localStorage.setItem("token", token);
+
+    setUser(data.userWithoutPassword);
+    navigate("/");
+
+    return { success: true };
   };
 
   const handleLogout = () => {
-    try {
-      // TODO: remove token from local storage
-      // TODO: set user to null
-      // TODO: navigate to home or login page
-    } catch (e) {
-      console.log(e.message);
-    }
+    localStorage.removeItem("token");
+    setUser(null);
+    navigate("/login");
   };
 
   const handleAutoLogin = async () => {
-    try {
-      // TODO: get token from local storage
-      // TODO: if token exists, get user data from API
-      // TODO: set user to state
-      // TODO: navigate to home
-    } catch (e) {
-      console.log(e.message);
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    console.log("firing!");
+    const meRes = await getUserByToken();
+
+    if (!meRes.success) {
+      localStorage.removeItem("token");
+      return;
     }
+    setUser(meRes.data);
+    navigate(location.pathname);
   };
 
   return (
     <UserContext.Provider
-      value={{ user, handleLogin, handleLogout, handleAutoLogin }}
+      value={{
+        user,
+        handleLogin,
+        handleLogout,
+        handleAutoLogin,
+      }}
     >
       {children}
     </UserContext.Provider>
   );
 };
+
 export { UserProvider, UserContext };

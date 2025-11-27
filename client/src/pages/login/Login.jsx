@@ -1,5 +1,14 @@
+import LoginForm from "/src/components/ui/LoginForm";
+import { useLang } from "/src/hooks/useLang";
+
 const Login = () => {
-  return <h1 className="text-4xl font-bold p-6">Login</h1>;
+  const { t } = useLang();
+
+  return (
+    <div className="flex items-center justify-center py-20">
+      <LoginForm t={t} />;
+    </div>
+  );
 };
 
 export default Login;
