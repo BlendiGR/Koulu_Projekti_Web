@@ -16,12 +16,12 @@ userRouter.route("/")
     .get(
         authenticateToken,
         requireRole(["ADMIN"]),
-        validateUserQuery,
+        ...validateUserQuery,
         validationErrors,
         userController.getAllUsers
     )
     .post(
-        validateCreateUser,
+        ...validateCreateUser,
         validationErrors,
         userController.createUser
     );
@@ -29,13 +29,13 @@ userRouter.route("/")
 userRouter.route("/:userId")
     .get(
         authenticateToken,
-        validateUserIdParam,
+        ...validateUserIdParam,
         validationErrors,
         userController.getUserById
     )
     .put(
         authenticateToken,
-        validateUserIdParam,
+        ...validateUserIdParam,
         validateUpdateUser,
         validationErrors,
         userController.updateUser
@@ -43,7 +43,7 @@ userRouter.route("/:userId")
     .delete(
         authenticateToken,
         requireRole(["ADMIN"]),
-        validateUserIdParam,
+        ...validateUserIdParam,
         validationErrors,
         userController.deleteUser
     );
@@ -51,7 +51,7 @@ userRouter.route("/:userId")
 userRouter.route("/:userId/soft-delete")
     .put( // Not DELETE, since it just deactivates the user
         authenticateToken,
-        validateUserIdParam,
+        ...validateUserIdParam,
         validationErrors,
         userController.softDeleteUser
     );

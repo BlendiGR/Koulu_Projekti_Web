@@ -9,7 +9,7 @@ const authRouter = express.Router();
 
 authRouter.route("/login")
     .post(
-        validateLogin,
+        ...validateLogin,
         validationErrors,
         authController.login
     );
