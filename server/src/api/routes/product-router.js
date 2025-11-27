@@ -1,7 +1,7 @@
 import express from "express";
 import {authenticateToken, requireRole} from "../../middleware/authentication.js";
 import {validationErrors} from "../../middleware/error-handlers.js";
-import {validateCreateProduct, validateUpdateProduct, validateProductQuery} from "../validators/product-validators.js";
+import {validateProductIdParam, validateCreateProduct, validateUpdateProduct, validateProductQuery} from "../validators/product-validators.js";
 
 import * as productController from "../controllers/product-controller.js";
 
@@ -9,34 +9,36 @@ const productRouter = express.Router();
 
 productRouter.route("/")
     .get(
-        validateProductQuery,
+        ...validateProductQuery,
         validationErrors,
         productController.getAllProducts
     )
     .post(
         authenticateToken,
         requireRole(["ADMIN"]),
-        validateCreateProduct,
+        ...validateCreateProduct,
         validationErrors,
         productController.createProduct
     );
 
 productRouter.route("/:productId")
     .get(
-        validateProductQuery,
+        ...validateProductQuery,
         validationErrors,
         productController.getProductById
     )
     .put(
         authenticateToken,
         requireRole(["ADMIN"]),
-        validateUpdateProduct,
+        ...validateUpdateProduct,
         validationErrors,
         productController.updateProduct
     )
     .delete(
         authenticateToken,
         requireRole(["ADMIN"]),
+        ...validateProductIdParam,
+        validationErrors,
         productController.deleteProduct
     );
 
