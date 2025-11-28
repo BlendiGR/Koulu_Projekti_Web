@@ -1,14 +1,14 @@
 import { Award, Heart, Mail, MapPin, Phone, Users } from "lucide-react";
 import { useLang } from "/src/hooks/useLang";
 
-import FeatureCard from "../../components/ui/FeatureCard.jsx";
-import HeroSection from "./HeroSection.jsx";
-import InfoTile from "../../components/ui/InfoTile.jsx";
+import FeatureCard from "/src/components/common/ui/FeatureCard.jsx";
+import HeroSection from "/src/pages/HeroSection.jsx";
+import InfoTile from "/src/components/common/ui/InfoTile.jsx";
 import heroBackground from "/src/assets/images/Hero-Background.png";
-import HorizontalReviewSlider from "../../components/ui/HorizontalReviewSlider.jsx";
-import { reviews } from "../../config/reviews.js";
-import ProductCard from "../../components/ui/ProductCard.jsx";
-import { mostBuyedProducts } from "../../config/mostBuyedSection.js";
+import HorizontalReviewSlider from "/src/components/common/ui/HorizontalReviewSlider.jsx";
+import { reviews } from "/src/config/reviews.js";
+import ProductCard from "/src/components/common/ui/ProductCard.jsx";
+import { mostBuyedProducts } from "/src/config/mostBuyedSection.js";
 
 const Home = () => {
   const { t } = useLang();

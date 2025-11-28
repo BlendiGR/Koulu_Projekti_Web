@@ -1,4 +1,4 @@
-import LoginForm from "/src/components/ui/LoginForm";
+import LoginForm from "/src/components/common/ui/LoginForm";
 import { useLang } from "/src/hooks/useLang";
 
 const Login = () => {

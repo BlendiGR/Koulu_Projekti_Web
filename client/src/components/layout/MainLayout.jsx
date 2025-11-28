@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import NavBar from "../components/navbar/NavBar.jsx";
-import Footer from "../components/footer/Footer.jsx";
-import { useAuth } from "../hooks/useAuth.js";
+import NavBar from "/src/components/layout/Navbar/NavBar.jsx";
+import Footer from "/src/components/layout/Footer/Footer.jsx";
+import { useAuth } from "/src/features/auth/hooks/useAuth.js";
 import { useEffect } from "react";
 import { Toaster } from "sonner";
 

@@ -1,17 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import MainLayout from "./layouts/MainLayout";
-import Home from "./pages/home/Home";
-import Menu from "./pages/menu/Menu";
-import Visit from "./pages/visit/Visit";
-import Login from "./pages/login/Login";
-import Cart from "./pages/cart/Cart";
-import Profile from "./pages/profile/Profile";
-import Orders from "./pages/orders/Orders";
-import ProtectedRoute from "./auth/ProtectedRoute";
+import MainLayout from "/src/components/layout/MainLayout";
+import Home from "/src/pages/Home";
+import Menu from "/src/features/menu/pages/Menu";
+import Visit from "/src/pages/Visit";
+import Login from "/src/features/auth/pages/Login";
+import Cart from "/src/features/cart/pages/Cart";
+import Profile from "/src/pages/Profile";
+import Orders from "/src/features/orders/pages/Orders";
+import ProtectedRoute from "/src/features/auth/components/ProtectedRoute";
 
-import { AuthProvider } from "./auth/Auth.jsx";
-import { LanguageProvider } from "./contexts/LanguageContext.jsx";
-import { CartProvider } from "./contexts/ShoppingCartContext.jsx";
+import { AuthProvider } from "/src/features/auth/context/AuthContext.jsx";
+import { LanguageProvider } from "/src/context/LanguageContext.jsx";
+import { CartProvider } from "/src/features/cart/context/ShoppingCartContext.jsx";
 
 const App = () => {
   return (

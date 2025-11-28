@@ -1,7 +1,7 @@
 import { ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLang } from "/src/hooks/useLang";
-import { useCart } from "/src/hooks/useCart";
+import { useCart } from "/src/features/cart/hooks/useCart.js";
 
 const ShoppingCartButton = () => {
   const { t } = useLang();

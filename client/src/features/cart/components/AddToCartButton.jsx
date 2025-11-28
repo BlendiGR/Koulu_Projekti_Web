@@ -1,4 +1,4 @@
-import { useCart } from "../../hooks/useCart";
+import { useCart } from "/src/features/cart/hooks/useCart.js";
 import { toast } from "sonner";
 import { useLang } from "/src/hooks/useLang";
 

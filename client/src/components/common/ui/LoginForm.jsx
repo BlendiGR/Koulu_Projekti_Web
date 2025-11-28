@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema } from "/src/schemas/loginSchema";
-import { useAuth } from "/src/hooks/useAuth";
+import { loginSchema } from "/src/schemas/loginSchema.js";
+import { useAuth } from "/src/features/auth/hooks/useAuth.js";
 import { useState } from "react";
 
 const LoginForm = ({ t }) => {

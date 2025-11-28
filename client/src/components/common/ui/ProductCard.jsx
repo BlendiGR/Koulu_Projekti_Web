@@ -1,4 +1,4 @@
-import AddToCartButton from "../cart/AddToCartButton";
+import AddToCartButton from "/src/features/cart/components/AddToCartButton.jsx";
 
 const ProductCard = ({ item = {}, bgColor = "white" }) => {
   const {

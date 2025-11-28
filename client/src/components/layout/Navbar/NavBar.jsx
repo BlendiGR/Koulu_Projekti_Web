@@ -2,16 +2,16 @@ import { Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 
-import ShoppingCartButton from "../cart/ShoppingCartButton";
-import MobileDrawer from "./MobileDrawer";
-import DesktopNav from "./DesktopNav";
-import useNavScroll from "../../hooks/useNavScroll.js";
-import getNavStyles from "./getNavStyles";
+import ShoppingCartButton from "/src/features/cart/components/ShoppingCartButton";
+import MobileDrawer from "/src/components/layout/Navbar/MobileDrawer";
+import DesktopNav from "/src/components/layout/Navbar/DesktopNav";
+import useNavScroll from "/src/hooks/useNavScroll.js";
+import getNavStyles from "/src/components/layout/Navbar/getNavStyles";
 
 import LogoBlack from "/src/assets/images/Fooder-Logo-Black.png";
 import LogoWhite from "/src/assets/images/Fooder-Logo-White.png";
-import { useAuth } from "../../hooks/useAuth.js";
-import { getNavLinks } from "../../config/navigation.js";
+import { useAuth } from "/src/features/auth/hooks/useAuth.js";
+import { getNavLinks } from "/src/config/navigation.js";
 import { useLang } from "/src/hooks/useLang";
 
 const NavBar = () => {

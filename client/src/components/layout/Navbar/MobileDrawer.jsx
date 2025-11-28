@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { X } from "lucide-react";
 import { useEffect } from "react";
-import LoginButton from "../ui/LoginButton";
-import LangButton from "../ui/LangButton";
+import LoginButton from "/src/components/common/ui/LoginButton.jsx";
+import LangButton from "/src/components/common/ui/LangButton.jsx";
 
 const MobileDrawer = ({
   isOpen,
