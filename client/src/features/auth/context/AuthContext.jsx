@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem("token", token);
     setUser(user);
 
-    // TODO
+
     if (user.role === "ADMIN") {
       navigate("/admin");
       return { success: true };
@@ -39,14 +39,13 @@ const AuthProvider = ({ children }) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setUser(null);
-    navigate("/login");
+    navigate("/");
   };
 
   const handleAutoLogin = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    console.log("firing!");
     const meRes = await getUserByToken();
 
     if (!meRes.success) {

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import MainLayout from "/src/components/layout/MainLayout";
+import AdminLayout from "/src/components/layout/AdminLayout";
 import Home from "/src/pages/Home";
 import Menu from "/src/features/menu/pages/Menu";
 import Visit from "/src/pages/Visit";
@@ -8,6 +9,7 @@ import Cart from "/src/features/cart/pages/Cart";
 import Profile from "/src/pages/Profile";
 import Orders from "/src/features/orders/pages/Orders";
 import ProtectedRoute from "/src/features/auth/components/ProtectedRoute";
+import ProtectedRouteAdmin from "/src/features/auth/components/ProtectedRouteAdmin";
 
 import { AuthProvider } from "/src/features/auth/context/AuthContext.jsx";
 import { LanguageProvider } from "/src/context/LanguageContext.jsx";
@@ -46,7 +48,18 @@ const App = () => {
                   }
                 />
               </Route>
-              {/* TODO: lisää adminlayout ja reitit tähän, suojaa niitä <ProtectedRouteAdmin /> */}
+
+              {/* Admin Reitit */}
+              <Route
+                path="admin"
+                element={
+                  <ProtectedRouteAdmin>
+                    <AdminLayout />
+                  </ProtectedRouteAdmin>
+                }
+              >
+                {/* Lisää tähän admin reitit */}
+              </Route>
             </Routes>
           </CartProvider>
         </AuthProvider>
