@@ -22,7 +22,7 @@ const HeroSection = ({
       "
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className="absolute inset-0 bg-black/60 rounded-b-3xl shadow-2xl"></div>
+      <div className="absolute inset-0 bg-black/50 rounded-b-3xl shadow-2xl"></div>
 
       <div className="relative z-10 space-y-4">
         <h1 className="text-5xl md:text-7xl font-semibold text-white leading-tight">

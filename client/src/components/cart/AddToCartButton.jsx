@@ -9,8 +9,8 @@ const AddToCartButton = ({ item }) => {
   const handleClick = (e) => {
     toast(
       <span className="md:text-xl text-lg">
-        <span className="text-red-200 font-semibold">{item.name}</span> added to
-        cart.
+        <span className="text-red-200 font-semibold">{item.name}</span>{" "}
+        {t("cart.addedtocart")}
       </span>
     );
     addCartItem(item.id);

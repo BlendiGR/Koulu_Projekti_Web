@@ -23,10 +23,6 @@ export const registerSchema = (t) =>
         .regex(/[^A-Za-z0-9]/, t("register.password.symbol")),
 
       confirmPassword: z.string(),
-
-      terms: z
-        .boolean()
-        .refine((v) => v === true, t("register.terms.required")),
     })
     .refine((data) => data.password === data.confirmPassword, {
       message: t("register.confirmPassword.mismatch"),

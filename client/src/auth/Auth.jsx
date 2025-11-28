@@ -2,9 +2,9 @@ import { createContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { useUser } from "/src/hooks/apiHooks";
 
-const UserContext = createContext(null);
+const AuthContext = createContext(null);
 
-const UserProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -13,17 +13,24 @@ const UserProvider = ({ children }) => {
 
   const handleLogin = async (credentials) => {
     const loginRes = await postLogin(credentials);
-
     if (!loginRes.success) {
       return loginRes;
     }
 
     const data = loginRes.data.data;
 
+    const user = data.userWithoutPassword;
     const token = data.token;
-    localStorage.setItem("token", token);
 
-    setUser(data.userWithoutPassword);
+    localStorage.setItem("token", token);
+    setUser(user);
+
+    // TODO
+    if (user.role === "ADMIN") {
+      navigate("/admin");
+      return { success: true };
+    }
+
     navigate("/");
 
     return { success: true };
@@ -51,7 +58,7 @@ const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider
+    <AuthContext.Provider
       value={{
         user,
         handleLogin,
@@ -60,8 +67,8 @@ const UserProvider = ({ children }) => {
       }}
     >
       {children}
-    </UserContext.Provider>
+    </AuthContext.Provider>
   );
 };
 
-export { UserProvider, UserContext };
+export { AuthProvider, AuthContext };

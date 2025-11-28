@@ -11,15 +11,16 @@ import Profile from "./pages/profile/Profile";
 import Orders from "./pages/orders/Orders";
 import ProtectedRoute from "./auth/ProtectedRoute";
 
-import { UserProvider } from "./auth/Auth.jsx";
+import { AuthProvider } from "./auth/Auth.jsx";
 import { LanguageProvider } from "./contexts/LanguageContext.jsx";
 import { CartProvider } from "./contexts/ShoppingCartContext.jsx";
+import { Toaster } from "sonner";
 
 const App = () => {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <LanguageProvider>
-        <UserProvider>
+        <AuthProvider>
           <CartProvider>
             <Routes>
               <Route element={<MainLayout />}>
@@ -50,7 +51,7 @@ const App = () => {
               </Route>
             </Routes>
           </CartProvider>
-        </UserProvider>
+        </AuthProvider>
       </LanguageProvider>
     </BrowserRouter>
   );

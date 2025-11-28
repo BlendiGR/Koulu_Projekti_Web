@@ -1,4 +1,3 @@
-// utils/fetchData.js
 export const fetchData = async (url, options = {}) => {
   try {
     const res = await fetch(url, options);
