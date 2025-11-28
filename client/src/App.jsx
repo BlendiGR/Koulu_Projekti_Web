@@ -1,6 +1,4 @@
-// App.jsx
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { BrowserRouter, Routes, Route } from "react-router";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/home/Home";
 import Menu from "./pages/menu/Menu";
@@ -14,7 +12,6 @@ import ProtectedRoute from "./auth/ProtectedRoute";
 import { AuthProvider } from "./auth/Auth.jsx";
 import { LanguageProvider } from "./contexts/LanguageContext.jsx";
 import { CartProvider } from "./contexts/ShoppingCartContext.jsx";
-import { Toaster } from "sonner";
 
 const App = () => {
   return (
@@ -49,6 +46,7 @@ const App = () => {
                   }
                 />
               </Route>
+              {/* TODO: lisää adminlayout ja reitit tähän, suojaa niitä <ProtectedRouteAdmin /> */}
             </Routes>
           </CartProvider>
         </AuthProvider>
