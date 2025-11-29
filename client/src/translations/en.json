@@ -40,6 +40,7 @@
 
   "cart.button": "Cart",
   "cart.addtocart": "Add To Cart",
+  "cart.addedtocart": "Added To Cart",
 
   "footer.since": "Serving since 2025.",
   "footer.quickLinks": "Quick Links",
@@ -48,5 +49,61 @@
   "footer.followUs": "Follow Us",
   "footer.hours.weekdays": "Mon - Fri",
   "footer.hours.weekend": "Weekend",
-  "footer.copyright": "(c) 2025 Fooder"
+  "footer.copyright": "(c) 2025 Fooder",
+
+  "delivery.firstName.min": "First name must be at least 2 characters",
+  "delivery.lastName.min": "Last name must be at least 2 characters",
+  "delivery.phone.invalid": "Invalid Finnish phone number",
+  "delivery.street.min": "Street address is too short",
+  "delivery.postalCode.invalid": "Postal code must be 5 digits",
+  "delivery.city.min": "City must be at least 2 characters",
+
+  "register.fullName.min": "Full name must be at least 3 characters",
+  "register.fullName.invalid": "Full name contains invalid characters",
+  "register.email.invalid": "Invalid email format",
+  "register.phone.invalid": "Invalid Finnish phone number",
+  "register.password.min": "Password must be at least 8 characters",
+  "register.password.uppercase": "Password must contain an uppercase letter",
+  "register.password.lowercase": "Password must contain a lowercase letter",
+  "register.password.number": "Password must contain a number",
+  "register.password.symbol": "Password must contain a symbol",
+  "register.confirmPassword.mismatch": "Passwords do not match",
+  "register.terms.required": "You must accept the terms to continue",
+
+  "login.email.invalid": "Invalid email",
+  "login.password.min": "Password must be at least 6 characters",
+
+  "form.email.label": "Email",
+  "form.email.placeholder": "Enter your email",
+
+  "form.password.label": "Password",
+  "form.password.placeholder": "Enter your password",
+
+  "form.confirmPassword.label": "Confirm Password",
+  "form.confirmPassword.placeholder": "Repeat your password",
+
+  "form.fullName.label": "Full Name",
+  "form.fullName.placeholder": "Enter your full name",
+
+  "form.phone.label": "Phone",
+  "form.phone.placeholder": "Enter your phone number",
+
+  "form.firstName.label": "First Name",
+  "form.firstName.placeholder": "Enter your first name",
+
+  "form.lastName.label": "Last Name",
+  "form.lastName.placeholder": "Enter your last name",
+
+  "form.street.label": "Street Address",
+  "form.street.placeholder": "Enter your street address",
+
+  "form.postalCode.label": "Postal Code",
+  "form.postalCode.placeholder": "12345",
+
+  "form.city.label": "City",
+  "form.city.placeholder": "Enter your city",
+
+  "form.terms.label": "I accept the terms and conditions",
+
+  "form.login.error.message": "Invalid email or password!"
 }
