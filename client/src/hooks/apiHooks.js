@@ -1,7 +1,7 @@
 import { fetchData } from "/src/utils/fetchData";
 import { useNavigate } from "react-router";
 
-const API = import.meta.env.VITE_API_BASE;
+const API = "/api/v1";
 
 // --------------------------
 // USER HOOK
