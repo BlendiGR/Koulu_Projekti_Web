@@ -37,7 +37,7 @@ const NavBar = () => {
             <img
               src={logoIsBlack ? LogoBlack : LogoWhite}
               alt="Logo"
-              className="w-35 md:w-50 h-auto"
+              className="w-35 md:w-50 h-auto active:scale-102"
             />
           </Link>
 
