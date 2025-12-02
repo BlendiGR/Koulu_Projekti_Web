@@ -4,10 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:api": "SET NODE_ENV=test & jest --selectProjects api --runInBand",
     "dev": "nodemon src/index.js",
-    "start": "node index.js",
+    "start": "node src/index.js",
     "seed": "prisma db seed"
+  },
+  "jest": {
+    "projects": [
+      {
+        "displayName": "api",
+        "testEnvironment": "node",
+        "testMatch": [
+          "<rootDir>/tests/api/**/*.test.js"
+        ]
+      }
+    ]
   },
   "keywords": [],
   "author": "",
@@ -26,8 +38,10 @@
   },
   "devDependencies": {
     "globals": "^16.5.0",
+    "jest": "^30.2.0",
     "nodemon": "^3.1.11",
-    "prisma": "^6.19.0"
+    "prisma": "^6.19.0",
+    "supertest": "^7.1.4"
   },
   "prisma": {
     "seed": "node ./prisma/seed.js"
