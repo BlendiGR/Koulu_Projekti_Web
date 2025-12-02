@@ -1,5 +1,38 @@
+import { useLang } from "/src/hooks/useLang";
+import ProductCard from "/src/components/common/ui/ProductCard.jsx";
+import { allProducts } from "/src/config/allProducts.js";
+import { mostBuyedProducts } from "/src/config/mostBuyedSection.js";
+
+
 const Menu = () => {
-  return <h1 className="text-4xl font-bold p-6">Menu</h1>;
+  const { t } = useLang();
+  return (
+    <div>
+      <section className="p-8 mt-20 bg-beige text-center shadow-xl rounded-3xl">
+        <h1 className="md:text-5xl text-4xl mb-4 pt-11">
+          {t("menu.title")}
+        </h1>
+        <p className="text-gray-700 max-w-xl mx-auto text-lg md:text-xl">
+          {t("menu.subheading")}
+        </p>
+        <div className="flex md:flex-row flex-col justify-center items-center gap-10 mt-10">
+          {allProducts.map((item) => (
+            <ProductCard key={item.id} item={item} />
+          ))}
+        </div>
+        <div className="flex md:flex-row flex-col justify-center items-center gap-10 mt-10">
+          {allProducts.map((item) => (
+            <ProductCard key={item.id} item={item} />
+          ))}
+        </div>
+        <div className="flex md:flex-row flex-col justify-center items-center gap-10 mt-10">
+          {mostBuyedProducts.map((item) => (
+            <ProductCard key={item.id} item={item} />
+          ))}
+        </div>
+      </section>
+    </div>
+  );
 };
 
 export default Menu;

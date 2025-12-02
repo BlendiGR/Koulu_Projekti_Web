@@ -8,8 +8,8 @@
   "nav.signout": "Sign Out",
 
   "hero.taste": "Taste",
-  "hero.our": "Our",
-  "hero.meat": "Meat",
+  "hero.real": "Real",
+  "hero.food": "Food",
   "hero.subheading": "Crafted with passion, served with love. Experience the best comfort food in town.",
   "hero.cta": "Order Now",
 
@@ -105,5 +105,8 @@
 
   "form.terms.label": "I accept the terms and conditions",
 
-  "form.login.error.message": "Invalid email or password!"
+  "form.login.error.message": "Invalid email or password!",
+
+  "menu.title": "Our Menu",
+  "menu.subheading": "Delicious pizzas, burgers, kebab, and more"
 }

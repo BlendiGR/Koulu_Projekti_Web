@@ -8,8 +8,8 @@
   "nav.signout": "Kirjaudu Ulos",
 
   "hero.taste": "Maista",
-  "hero.our": "Meidän",
-  "hero.meat": "Liha",
+  "hero.real": "Aito",
+  "hero.food": "Ruoka",
   "hero.subheading": "Valmistettu intohimolla, tarjoiltu rakkaudella. Koe kaupungin paras kotiruoka.",
   "hero.cta": "Tilaa nyt",
 
@@ -104,5 +104,8 @@
 
   "form.terms.label": "Hyväksyn palvelun ehdot",
 
-  "form.login.error.message": "Väärä sähköposti tai salasana!"
+  "form.login.error.message": "Väärä sähköposti tai salasana!",
+
+  "menu.title": "Meidän Ruokalista",
+  "menu.subheading": "Herkulliset pizzas, burgers, kebab, and more"
 }
