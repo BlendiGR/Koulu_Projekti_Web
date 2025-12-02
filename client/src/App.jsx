@@ -14,6 +14,7 @@ import ProtectedRouteAdmin from "/src/features/auth/components/ProtectedRouteAdm
 import { AuthProvider } from "/src/features/auth/context/AuthContext.jsx";
 import { LanguageProvider } from "/src/context/LanguageContext.jsx";
 import { CartProvider } from "/src/features/cart/context/ShoppingCartContext.jsx";
+import ScrollToTop from "/src/utils/scrollToTop.jsx";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
       <LanguageProvider>
         <AuthProvider>
           <CartProvider>
+            <ScrollToTop />
             <Routes>
               <Route element={<MainLayout />}>
                 <Route index element={<Home />} />

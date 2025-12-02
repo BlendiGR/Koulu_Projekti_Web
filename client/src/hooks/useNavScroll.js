@@ -4,7 +4,12 @@ const useNavScroll = (isLanding) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    if (!isLanding) return;
+    if (!isLanding) {
+      setScrolled(false);
+      return;
+    }
+
+    setScrolled(window.scrollY > 100);
 
     const onScroll = () => setScrolled(window.scrollY > 100);
 
