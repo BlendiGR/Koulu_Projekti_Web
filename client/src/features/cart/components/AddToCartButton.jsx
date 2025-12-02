@@ -6,14 +6,14 @@ const AddToCartButton = ({ item }) => {
   const { addCartItem } = useCart();
   const { t } = useLang();
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     toast(
       <span className="md:text-xl text-lg">
         <span className="text-red-200 font-semibold">{item.name}</span>{" "}
         {t("cart.addedtocart")}
       </span>
     );
-    addCartItem(item.id);
+    addCartItem(item);
   };
   return (
     <>

@@ -41,11 +41,7 @@ const App = () => {
 
                 <Route
                   path="orders"
-                  element={
-                    <ProtectedRoute>
-                      <Orders />
-                    </ProtectedRoute>
-                  }
+                  element={<Orders />}
                 />
               </Route>
 
