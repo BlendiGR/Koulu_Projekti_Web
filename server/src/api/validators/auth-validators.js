@@ -4,6 +4,18 @@ import {body} from "express-validator";
  * Validation chain for login.
  */
 export const validateLogin = [
-    body("email").isEmail().withMessage("Must be a valid email address"),
-    body("password").isString().isLength({min: 6}), // TODO change to higher
+    body("email")
+        .trim()
+        .notEmpty()
+        .withMessage("Email is required")
+        .bail()
+        .isEmail()
+        .withMessage("Email must be a valid email address"),
+    body("password")
+        .notEmpty()
+        .withMessage("Password is required")
+        .bail()
+        .isString()
+        .isLength({min: 6}) // TODO change
+        .withMessage("Password must be at least 8 characters"),
 ];
