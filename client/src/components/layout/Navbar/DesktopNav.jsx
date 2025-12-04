@@ -5,7 +5,6 @@ import LangButton from "/src/components/common/ui/LangButton.jsx";
 
 const DesktopNav = ({
   navLinks,
-  selectedItems,
   textColor,
   buttonClass,
   user,

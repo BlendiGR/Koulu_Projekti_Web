@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useMemo } from "react";
 
 export const CartContext = createContext(null);
 
@@ -65,10 +65,28 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => setCartItems([]);
 
-  const totalItems = cartItems.reduce(
-    (sum, item) => sum + (item.quantity ?? 0),
-    0
-  );
+  // Calculate total items
+  const totalItems = useMemo(() => {
+    return cartItems.reduce((sum, item) => sum + (item.quantity ?? 0), 0);
+  }, [cartItems]);
+
+  // Calculate total price (including tax)
+  const totalPrice = useMemo(() => {
+    return cartItems.reduce(
+      (sum, item) => sum + (Number(item.price) || 10) * item.quantity,
+      0
+    );
+  }, [cartItems]);
+
+  // Calculate tax (14%)
+  const totalTax = useMemo(() => {
+    return totalPrice * 0.14;
+  }, [totalPrice]);
+
+  // Calculate price without tax
+  const withoutTax = useMemo(() => {
+    return totalPrice - totalTax;
+  }, [totalPrice, totalTax]);
 
   const value = {
     cartItems,
@@ -76,6 +94,9 @@ export const CartProvider = ({ children }) => {
     deleteCartItem,
     clearCart,
     totalItems,
+    totalPrice,
+    totalTax,
+    withoutTax,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

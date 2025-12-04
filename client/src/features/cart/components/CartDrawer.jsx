@@ -6,11 +6,7 @@ import OrderSummary from "/src/features/cart/components/OrderSummary";
 
 const CartDrawer = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
-  const { cartItems, deleteCartItem, totalItems } = useCart();
-
-  const totalPrice = cartItems.reduce((sum, item) => sum + (Number(item.price) || 10) * item.quantity, 0);
-  const totalTax = totalPrice * 0.14;
-  const withoutTax = totalPrice - totalTax;
+  const { cartItems, deleteCartItem, totalItems, totalPrice, totalTax, withoutTax } = useCart();
 
   const handleCheckout = () => {
     navigate('/checkout');
