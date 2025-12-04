@@ -16,6 +16,6 @@ export const validateLogin = [
         .withMessage("Password is required")
         .bail()
         .isString()
-        .isLength({min: 6}) // TODO change
+        .isLength({min: 8})
         .withMessage("Password must be at least 8 characters"),
 ];

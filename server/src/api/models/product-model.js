@@ -2,6 +2,13 @@ import prisma from "../../prisma.js";
 import AppError from "../../utils/AppError.js";
 
 /**
+ * Valid product types.
+ * @type {string[]}
+ */
+export const PRODUCT_TYPES = ["FOOD", "DRINK", "SIDE"];
+
+
+/**
  * Valid query params for the product model.
  * Used in validators/product-validators.js
  * @type {string[]}
@@ -14,12 +21,6 @@ export const productFields = [
     "type",
     "isActive"
 ];
-
-/**
- * Product types.
- * @type {string[]}
- */
-const PRODUCT_TYPES = ["FOOD", "DRINK", "SIDE"];
 
 /**
  * Get all products from the database.

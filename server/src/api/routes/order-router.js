@@ -37,7 +37,7 @@ orderRouter.route("/:orderId")
     .put(
         authenticateToken,
         ...validateOrderIdParam,
-        validateUpdateOrder,
+        ...validateUpdateOrder,
         validationErrors,
         orderController.updateOrder
     )
