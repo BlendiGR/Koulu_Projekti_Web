@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { X } from "lucide-react";
-import { useEffect } from "react";
 import LoginButton from "/src/components/common/ui/LoginButton.jsx";
 import LangButton from "/src/components/common/ui/LangButton.jsx";
 
@@ -11,20 +10,7 @@ const MobileDrawer = ({
   handleLogout,
   navLinks = [],
   ShoppingCartButton,
-  selectedItems,
 }) => {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
-
   return (
     <div
       className={`fixed inset-0 z-999 bg-black/30 transition-opacity duration-300 ${
@@ -35,7 +21,7 @@ const MobileDrawer = ({
     >
       {/* Drawer panel */}
       <div
-        className={`absolute top-0 left-0 h-full w-[80%] max-w-[320px] bg-white shadow-lg p-6 transition-transform duration-300 ${
+        className={`absolute top-0 left-0 h-full w-full bg-white shadow-lg p-6 transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >

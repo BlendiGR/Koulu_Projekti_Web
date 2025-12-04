@@ -10,6 +10,7 @@ import Profile from "/src/pages/Profile";
 import Orders from "/src/features/orders/pages/Orders";
 import ProtectedRoute from "/src/features/auth/components/ProtectedRoute";
 import ProtectedRouteAdmin from "/src/features/auth/components/ProtectedRouteAdmin";
+import Checkout from "/src/features/cart/pages/Checkout";
 
 import { AuthProvider } from "/src/features/auth/context/AuthContext.jsx";
 import { LanguageProvider } from "/src/context/LanguageContext.jsx";
@@ -30,6 +31,7 @@ const App = () => {
                 <Route path="visit" element={<Visit />} />
                 <Route path="login" element={<Login />} />
                 <Route path="cart" element={<Cart />} />
+                <Route path="checkout" element={<Checkout />} />
 
                 {/*  Suojatut */}
                 <Route

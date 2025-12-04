@@ -1,6 +1,6 @@
 import { Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import ShoppingCartButton from "/src/features/cart/components/ShoppingCartButton";
 import MobileDrawer from "/src/components/layout/Navbar/MobileDrawer";
@@ -27,6 +27,26 @@ const NavBar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user, handleLogout } = useAuth();
   const navLinks = getNavLinks(user, t);
+
+  // Estä scrollia kun mobile menu on auki
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const scrollY = window.scrollY;
+      
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [mobileMenuOpen]);
 
   return (
     <>
