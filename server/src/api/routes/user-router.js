@@ -1,5 +1,6 @@
 import express from "express";
 import {authenticateToken, requireRole} from "../../middleware/authentication.js";
+import {authorizeOwnerOrAdmin} from "../../middleware/authorization.js";
 import {validationErrors} from "../../middleware/error-handlers.js";
 import {
     validateCreateUser,
@@ -8,6 +9,7 @@ import {
     validateUserQuery
 } from "../validators/user-validators.js";
 
+import {getUserById} from "../models/user-model.js";
 import * as userController from "../controllers/user-controller.js";
 
 const userRouter = express.Router();
@@ -29,12 +31,14 @@ userRouter.route("/")
 userRouter.route("/:userId")
     .get(
         authenticateToken,
+        authorizeOwnerOrAdmin(getUserById, {idField: "userId"}),
         ...validateUserIdParam,
         validationErrors,
         userController.getUserById
     )
     .put(
         authenticateToken,
+        authorizeOwnerOrAdmin(getUserById, {idField: "userId"}),
         ...validateUserIdParam,
         validateUpdateUser,
         validationErrors,
@@ -51,6 +55,7 @@ userRouter.route("/:userId")
 userRouter.route("/:userId/soft-delete")
     .put( // Not DELETE, since it just deactivates the user
         authenticateToken,
+        authorizeOwnerOrAdmin(getUserById, {idField: "userId"}),
         ...validateUserIdParam,
         validationErrors,
         userController.softDeleteUser

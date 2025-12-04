@@ -14,8 +14,6 @@ const reviewRouter = express.Router();
 
 reviewRouter.route("/")
     .get(
-        authenticateToken,
-        requireRole(["ADMIN"]),
         ...validateReviewQuery,
         validationErrors,
         reviewController.getAllReviews
@@ -29,7 +27,6 @@ reviewRouter.route("/")
 
 reviewRouter.route("/:reviewId")
     .get(
-        authenticateToken,
         ...validateReviewIdParam,
         validationErrors,
         reviewController.getReviewById
@@ -45,7 +42,7 @@ reviewRouter.route("/:reviewId")
     .delete(
         authenticateToken,
         requireRole(["ADMIN"]),
-        validateReviewIdParam,
+        ...validateReviewIdParam,
         validationErrors,
         reviewController.deleteReview
     );

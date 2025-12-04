@@ -23,13 +23,14 @@ productRouter.route("/")
 
 productRouter.route("/:productId")
     .get(
-        ...validateProductQuery,
+        ...validateProductIdParam,
         validationErrors,
         productController.getProductById
     )
     .put(
         authenticateToken,
         requireRole(["ADMIN"]),
+        ...validateProductIdParam,
         ...validateUpdateProduct,
         validationErrors,
         productController.updateProduct
