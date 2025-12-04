@@ -1,14 +1,27 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { deliveryInfoSchema } from "/src/schemas/deliveryInfoSchema.js";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const ShippingForm = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm({
+const ShippingForm = ({ onFormChange }) => {
+    const { register, watch, formState: { errors, isValid } } = useForm({
         resolver: zodResolver(deliveryInfoSchema),
+        mode: "onChange",
+        defaultValues: {
+            phone: "+358"
+        }
     });
+
+    useEffect(() => {
+        onFormChange(isValid, formValues);
+    }, [isValid]);
+
+
+    const formValues = watch();
+    
     return (
         <div>
-            <form onSubmit={handleSubmit()}>
+            <form>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
@@ -18,7 +31,7 @@ const ShippingForm = () => {
                             type="text"
                             id="firstName"
                             {...register("firstName")}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="bg-white p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         />
                         {errors.firstName && (
                             <p className="mt-2 text-sm text-red-600">{errors.firstName.message}</p>
@@ -32,7 +45,7 @@ const ShippingForm = () => {
                             type="text"
                             id="lastName"
                             {...register("lastName")}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="bg-white p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         />
                         {errors.lastName && (
                             <p className="mt-2 text-sm text-red-600">{errors.lastName.message}</p>
@@ -46,7 +59,7 @@ const ShippingForm = () => {
                             type="text"
                             id="phone"
                             {...register("phone")}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="bg-white p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         />
                         {errors.phone && (
                             <p className="mt-2 text-sm text-red-600">{errors.phone.message}</p>
@@ -60,7 +73,7 @@ const ShippingForm = () => {
                             type="text"
                             id="street"
                             {...register("street")}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="bg-white p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         />
                         {errors.street && (
                             <p className="mt-2 text-sm text-red-600">{errors.street.message}</p>
@@ -74,7 +87,7 @@ const ShippingForm = () => {
                             type="text"
                             id="postalCode"
                             {...register("postalCode")}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="bg-white p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         />
                         {errors.postalCode && (
                             <p className="mt-2 text-sm text-red-600">{errors.postalCode.message}</p>
@@ -88,7 +101,7 @@ const ShippingForm = () => {
                             type="text"
                             id="city"
                             {...register("city")}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="bg-white p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         />
                         {errors.city && (
                             <p className="mt-2 text-sm text-red-600">{errors.city.message}</p>

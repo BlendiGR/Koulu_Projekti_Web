@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { Check } from 'lucide-react';
 import { useCart } from "/src/features/cart/hooks/useCart.js";
 import CartProductSummary from "/src/features/cart/components/CartProductSummary";
 import OrderSummary from "/src/features/cart/components/OrderSummary";
@@ -7,8 +8,12 @@ import ShippingForm from "/src/features/cart/components/ShippingForm";
 
 const Checkout = () => {
     const { cartItems, deleteCartItem, totalItems, totalPrice, totalTax, withoutTax } = useCart();
-    const [isShippingInfoCompleted, setIsShippingInfoCompleted] = useState(true);
+    const [shippingData, setShippingData] = useState(null);
+    const [isShippingValid, setIsShippingValid] = useState(false);
 
+    const handleShippingFormChange = useCallback((isValid) => {
+        setIsShippingValid(isValid);
+    }, []);
 
     return (
         <div className="max-w-7xl mx-auto p-4 md:p-8">
@@ -43,12 +48,20 @@ const Checkout = () => {
 
                     <Dropdown
                         title="Shipping Details"
-                        badge="Required"
-                        defaultExpanded={isShippingInfoCompleted}
+                        badge={isShippingValid ? <span className="text-green-500">Proceed to Payment Details</span> : <span className="text-red-100">Required</span>}
+                        defaultExpanded={true}
                     >
                         <ShippingForm
-                            onSubmit={() => {}}
+                            onFormChange={handleShippingFormChange}
                         />
+                    </Dropdown>
+
+                    <Dropdown
+                        title="Payment Details"
+                        badge={isShippingValid ? <span className="text-red-500">Required</span> : <span className="text-red-500">Fill shipping details first</span>}
+                        defaultExpanded={isShippingValid}
+                        disabled={!isShippingValid}
+                    >
                     </Dropdown>
                 </div>
 
