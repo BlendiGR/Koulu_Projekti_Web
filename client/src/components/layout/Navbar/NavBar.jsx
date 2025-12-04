@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import ShoppingCartButton from "/src/features/cart/components/ShoppingCartButton";
+import CartDrawer from "/src/features/cart/components/CartDrawer";
 import MobileDrawer from "/src/components/layout/Navbar/MobileDrawer";
 import DesktopNav from "/src/components/layout/Navbar/DesktopNav";
 import useNavScroll from "/src/hooks/useNavScroll.js";
@@ -25,12 +26,13 @@ const NavBar = () => {
 
   const { navClass, textColor, buttonClass, logoIsBlack } = styles;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const { user, handleLogout } = useAuth();
   const navLinks = getNavLinks(user, t);
 
   // Estä scrollia kun mobile menu on auki
   useEffect(() => {
-    if (mobileMenuOpen) {
+    if (mobileMenuOpen || cartDrawerOpen) {
       const scrollY = window.scrollY;
       
       document.body.style.position = 'fixed';
@@ -46,7 +48,7 @@ const NavBar = () => {
         window.scrollTo(0, scrollY);
       };
     }
-  }, [mobileMenuOpen]);
+  }, [mobileMenuOpen, cartDrawerOpen]);
 
   return (
     <>
@@ -67,18 +69,23 @@ const NavBar = () => {
             user={user}
             handleLogout={handleLogout}
             buttonClass={buttonClass}
+            onCartClick={() => setCartDrawerOpen(true)}
           />
 
-          {/* Hamppari Menun nappi */}
-          {!mobileMenuOpen && (
-            <button
-              onClick={() => {
-                setMobileMenuOpen(true);
-              }}
-              className={`md:hidden mr-1 ${textColor}`}
-            >
-              <Menu size={30} />
-            </button>
+          {/* Mobile cart button & hamburger menu */}
+          {!mobileMenuOpen && !cartDrawerOpen && (
+            <div className={`md:hidden flex items-center gap-4 ${textColor}`}>
+              <ShoppingCartButton 
+                mobile 
+                onClick={() => setCartDrawerOpen(true)} 
+              />
+              <button
+                onClick={() => setMobileMenuOpen(true)}
+                className={`mr-1 ${textColor}`}
+              >
+                <Menu size={30} />
+              </button>
+            </div>
           )}
         </div>
       </nav>
@@ -88,7 +95,10 @@ const NavBar = () => {
         onClose={() => setMobileMenuOpen(false)}
         user={user}
         navLinks={navLinks}
-        ShoppingCartButton={ShoppingCartButton}
+      />
+      <CartDrawer 
+        isOpen={cartDrawerOpen}
+        onClose={() => setCartDrawerOpen(false)}
       />
     </>
   );

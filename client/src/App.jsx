@@ -5,7 +5,6 @@ import Home from "/src/pages/Home";
 import Menu from "/src/features/menu/pages/Menu";
 import Visit from "/src/pages/Visit";
 import Login from "/src/features/auth/pages/Login";
-import Cart from "/src/features/cart/pages/Cart";
 import Profile from "/src/pages/Profile";
 import Orders from "/src/features/orders/pages/Orders";
 import ProtectedRoute from "/src/features/auth/components/ProtectedRoute";
@@ -30,7 +29,6 @@ const App = () => {
                 <Route path="menu" element={<Menu />} />
                 <Route path="visit" element={<Visit />} />
                 <Route path="login" element={<Login />} />
-                <Route path="cart" element={<Cart />} />
                 <Route path="checkout" element={<Checkout />} />
 
                 {/*  Suojatut */}

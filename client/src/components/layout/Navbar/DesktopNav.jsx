@@ -10,6 +10,7 @@ const DesktopNav = ({
   buttonClass,
   user,
   handleLogout,
+  onCartClick,
 }) => {
   return (
     <div className={`hidden md:flex items-center gap-20 ${textColor}`}>
@@ -32,7 +33,7 @@ const DesktopNav = ({
           user={user}
           onClick={handleLogout}
         />
-        <ShoppingCartButton />
+        <ShoppingCartButton onClick={onCartClick} />
         <LangButton />
       </div>
     </div>
