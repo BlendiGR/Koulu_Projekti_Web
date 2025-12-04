@@ -53,11 +53,6 @@ export const getAllOrdersWithProducts = asyncHandler(async (req, res) => {
  */
 export const getOrderById = asyncHandler(async (req, res) => {
     const orderId = Number(req.params.orderId);
-
-    if (isNaN(orderId)) {
-        throw new AppError("Invalid order ID", 400, "INVALID_ORDER_ID", "Order ID must be a valid number.");
-    }
-
     const order = await Order.getOrderById(orderId);
 
     if (!order) {
@@ -65,4 +60,63 @@ export const getOrderById = asyncHandler(async (req, res) => {
     }
 
     res.sendSuccess(order);
+});
+
+/**
+ * Get orders by associated user
+ * @param req - Express request object
+ * @param res - Express response object
+ * @returns {Promise<void>}
+ */
+export const getOrdersByUserId = asyncHandler(async (req, res) => {
+   const userId = Number(req.params.userId);
+   const orders = await Order.getOrdersByUserId(userId);
+
+   res.sendSuccess(orders);
+});
+
+/**
+ * Create a new order.
+ * @param req - Express request object
+ * @param res - Express response object
+ * @returns {Promise<void>}
+ */
+export const createOrder = asyncHandler(async (req, res) => {
+    const orderData = { ...req.body };
+
+    // Parse and remove undefined fields
+    Object.keys(orderData).forEach(key => orderData[key] === undefined && delete orderData[key]);
+
+    const newOrder = await Order.createOrder(orderData);
+    res.sendSuccess(newOrder, 201);
+});
+
+/**
+ * Update an existing order.
+ * @param req - Express request object
+ * @param res - Express response object
+ * @returns {Promise<void>}
+ */
+export const updateOrder = asyncHandler(async (req, res) => {
+    const orderId = Number(req.params.orderId);
+    const updateData = { ...req.body };
+
+    // Parse and remove undefined fields
+    Object.keys(updateData).forEach(key => updateData[key] === undefined && delete updateData[key]);
+
+    const updatedOrder = await Order.updateOrder(orderId, updateData);
+    res.sendSuccess(updatedOrder);
+});
+
+/**
+ * Delete an order by ID.
+ * @param req - Express request object
+ * @param res - Express response object
+ * @returns {Promise<void>}
+ */
+export const deleteOrder = asyncHandler(async (req, res) => {
+    const orderId = Number(req.params.orderId);
+
+    await Order.deleteOrder(orderId);
+    res.sendSuccess(null, 204);
 });
