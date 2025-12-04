@@ -1,15 +1,24 @@
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useLang } from "/src/hooks/useLang.js";
 import { useCart } from "/src/features/cart/hooks/useCart.js";
 import CartProductSummary from "/src/features/cart/components/CartProductSummary";
 import OrderSummary from "/src/features/cart/components/OrderSummary";
 
 const CartDrawer = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
-  const { cartItems, deleteCartItem, totalItems, totalPrice, totalTax, withoutTax } = useCart();
+  const { t } = useLang();
+  const {
+    cartItems,
+    deleteCartItem,
+    totalItems,
+    totalPrice,
+    totalTax,
+    withoutTax,
+  } = useCart();
 
   const handleCheckout = () => {
-    navigate('/checkout');
+    navigate("/checkout");
     onClose();
   };
 
@@ -32,7 +41,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-brown-100">
           <h2 className="text-2xl font-bold text-gray-800">
-            Shopping <span className="text-red-100">Cart</span>
+             {t("cart.shoppingCart")}
           </h2>
           <button
             onClick={onClose}
@@ -43,7 +52,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
         </div>
 
         {/* Tilaus tuotteet */}
-        <div 
+        <div
           className="flex-1 overflow-y-auto p-6 relative"
           style={{
             background: `
@@ -52,14 +61,14 @@ const CartDrawer = ({ isOpen, onClose }) => {
               radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.15), rgba(0,0,0,0)),
               radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.15), rgba(0,0,0,0)) 0 100%
             `,
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: '100% 40px, 100% 40px, 100% 14px, 100% 14px',
-            backgroundAttachment: 'local, local, scroll, scroll'
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "100% 40px, 100% 40px, 100% 14px, 100% 14px",
+            backgroundAttachment: "local, local, scroll, scroll",
           }}
         >
           {cartItems.length === 0 ? (
             <div className="bg-beige p-8 rounded-3xl border border-brown-100 text-center">
-              <p className="text-xl text-gray-600">Your cart is empty.</p>
+              <p className="text-xl text-gray-600">{t("cart.empty")}</p>
             </div>
           ) : (
             <div className="space-y-6">
@@ -87,9 +96,9 @@ const CartDrawer = ({ isOpen, onClose }) => {
               actionButton={
                 <button
                   onClick={handleCheckout}
-                  className="w-full bg-red-100 hover:bg-red-200 text-white font-semibold py-4 px-6 rounded-xl shadow-lg active:scale-101 transition-transform"
+                  className="w-full bg-red-100 hover:bg-red-200 text-white font-semibold py-4 px-6 rounded-xl shadow-lg active:scale-101 transition-transform cursor-pointer"
                 >
-                  Proceed to Checkout
+                  {t("cart.proceedCheckout")}
                 </button>
               }
             />

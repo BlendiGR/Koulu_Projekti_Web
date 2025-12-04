@@ -1,109 +1,189 @@
 {
-  "nav.home": "Home",
-  "nav.menu": "Menu",
-  "nav.visit": "Visit",
-  "nav.profile": "Profile",
-  "nav.orders": "Orders",
-  "nav.login": "Login",
-  "nav.signout": "Sign Out",
-
-  "hero.taste": "Taste",
-  "hero.our": "Great",
-  "hero.meat": "Food",
-  "hero.subheading": "Crafted with passion, served with love. Experience the best comfort food in town.",
-  "hero.cta": "Order Now",
-
-  "home.about.titlep1": "About",
-  "home.about.titlep2": "Fooder",
-  "home.about.p1": "Since day one, Fooder Pizzeria has been the neighborhood's go-to spot for fast, reliable comfort food. From fresh pizzas to stacked burgers and crispy fries, we serve the classics people actually want made quick and made right. Located in the heart of the city, we're built for anyone looking for good food without the wait.",
-  "home.about.p2": "Everything we serve starts with fresh ingredients and straightforward preparation. Our dough is mixed daily, our patties are cooked to order, and our fries are made hot and crisp every time. We source our produce and toppings from trusted local suppliers.",
-
-  "home.contact.location": "Location",
-  "home.contact.phone": "Phone",
-  "home.contact.email": "Email",
-  "home.contact.phone.text": "Call us anytime!",
-  "home.contact.email.text": "We'll respond quickly!",
-
-  "home.features.made": "Made with Love",
-  "home.features.made.text": "Every burger is crafted with care and passion by our experienced chefs",
-
-  "home.features.community": "Community First",
-  "home.features.community.text": "We're proud to support local farmers and give back to our community",
-
-  "home.features.award": "Award Winning",
-  "home.features.award.text": "Voted \"Best Burger in Town\" for 5 consecutive years",
-
-  "home.mostOrdered.title": "Most Ordered",
-
-  "home.reviews.title": "Customer Reviews",
-  "home.reviews.subtitle": "See what our customers say about us!",
-
-  "cart.button": "Cart",
-  "cart.addtocart": "Add To Cart",
-  "cart.addedtocart": "Added To Cart",
-
-  "footer.since": "Serving since 2025.",
-  "footer.quickLinks": "Quick Links",
-  "footer.customerService": "Customer Service",
-  "footer.openingHours": "Opening Hours",
-  "footer.followUs": "Follow Us",
-  "footer.hours.weekdays": "Mon - Fri",
-  "footer.hours.weekend": "Weekend",
-  "footer.copyright": "(c) 2025 Fooder",
-
-  "delivery.firstName.min": "First name must be at least 2 characters",
-  "delivery.lastName.min": "Last name must be at least 2 characters",
-  "delivery.phone.invalid": "Invalid Finnish phone number",
-  "delivery.street.min": "Street address is too short",
-  "delivery.postalCode.invalid": "Postal code must be 5 digits",
-  "delivery.city.min": "City must be at least 2 characters",
-
-  "register.fullName.min": "Full name must be at least 3 characters",
-  "register.fullName.invalid": "Full name contains invalid characters",
-  "register.email.invalid": "Invalid email format",
-  "register.phone.invalid": "Invalid Finnish phone number",
-  "register.password.min": "Password must be at least 8 characters",
-  "register.password.uppercase": "Password must contain an uppercase letter",
-  "register.password.lowercase": "Password must contain a lowercase letter",
-  "register.password.number": "Password must contain a number",
-  "register.password.symbol": "Password must contain a symbol",
-  "register.confirmPassword.mismatch": "Passwords do not match",
-  "register.terms.required": "You must accept the terms to continue",
-
-  "login.email.invalid": "Invalid email",
-  "login.password.min": "Password must be at least 6 characters",
-
-  "form.email.label": "Email",
-  "form.email.placeholder": "Enter your email",
-
-  "form.password.label": "Password",
-  "form.password.placeholder": "Enter your password",
-
-  "form.confirmPassword.label": "Confirm Password",
-  "form.confirmPassword.placeholder": "Repeat your password",
-
-  "form.fullName.label": "Full Name",
-  "form.fullName.placeholder": "Enter your full name",
-
-  "form.phone.label": "Phone",
-  "form.phone.placeholder": "Enter your phone number",
-
-  "form.firstName.label": "First Name",
-  "form.firstName.placeholder": "Enter your first name",
-
-  "form.lastName.label": "Last Name",
-  "form.lastName.placeholder": "Enter your last name",
-
-  "form.street.label": "Street Address",
-  "form.street.placeholder": "Enter your street address",
-
-  "form.postalCode.label": "Postal Code",
-  "form.postalCode.placeholder": "12345",
-
-  "form.city.label": "City",
-  "form.city.placeholder": "Enter your city",
-
-  "form.terms.label": "I accept the terms and conditions",
-
-  "form.login.error.message": "Invalid email or password!"
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "visit": "Visit",
+    "profile": "Profile",
+    "orders": "Orders",
+    "login": "Login",
+    "signout": "Sign Out"
+  },
+  "hero": {
+    "taste": "Taste",
+    "our": "Great",
+    "meat": "Food",
+    "subheading": "Crafted with passion, served with love. Experience the best comfort food in town.",
+    "cta": "Order Now"
+  },
+  "home": {
+    "about": {
+      "titlep1": "About",
+      "titlep2": "Fooder",
+      "p1": "Since day one, Fooder Pizzeria has been the neighborhood's go-to spot for fast, reliable comfort food. From fresh pizzas to stacked burgers and crispy fries, we serve the classics people actually want made quick and made right. Located in the heart of the city, we're built for anyone looking for good food without the wait.",
+      "p2": "Everything we serve starts with fresh ingredients and straightforward preparation. Our dough is mixed daily, our patties are cooked to order, and our fries are made hot and crisp every time. We source our produce and toppings from trusted local suppliers."
+    },
+    "contact": {
+      "location": "Location",
+      "phone": "Phone",
+      "email": "Email",
+      "phoneText": "Call us anytime!",
+      "emailText": "We'll respond quickly!"
+    },
+    "features": {
+      "made": "Made with Love",
+      "madeText": "Every burger is crafted with care and passion by our experienced chefs",
+      "community": "Community First",
+      "communityText": "We're proud to support local farmers and give back to our community",
+      "award": "Award Winning",
+      "awardText": "Voted \"Best Burger in Town\" for 5 consecutive years"
+    },
+    "mostOrdered": {
+      "title": "Most Ordered"
+    },
+    "reviews": {
+      "title": "Customer Reviews",
+      "subtitle": "See what our customers say about us!"
+    }
+  },
+  "cart": {
+    "button": "Cart",
+    "addtocart": "Add To Cart",
+    "addedtocart": "Added To Cart",
+    "shoppingCart": "Shopping Cart",
+    "proceedCheckout": "Proceed to Checkout",
+    "empty": "Your cart is empty."
+  },
+  "checkout": {
+    "title": "Checkout",
+    "cartSummary": "Cart Summary",
+    "shippingDetails": "Shipping Details",
+    "paymentDetails": "Payment Details",
+    "proceedPayment": "Proceed to Payment Details",
+    "required": "Required",
+    "fillShippingFirst": "Fill shipping details first",
+    "emptyCart": "Your cart is empty"
+  },
+  "orderSummary": {
+    "title": "Order Summary",
+    "totalNoTax": "Total without tax",
+    "totalTax": "Total tax (14%)",
+    "total": "Total",
+    "items": "items",
+    "item": "item"
+  },
+  "footer": {
+    "since": "Serving since 2025.",
+    "quickLinks": "Quick Links",
+    "customerService": "Customer Service",
+    "openingHours": "Opening Hours",
+    "followUs": "Follow Us",
+    "hours": {
+      "weekdays": "Mon - Fri",
+      "weekend": "Weekend"
+    },
+    "copyright": "(c) 2025 Fooder"
+  },
+  "delivery": {
+    "firstName": {
+      "min": "First name must be at least 2 characters"
+    },
+    "lastName": {
+      "min": "Last name must be at least 2 characters"
+    },
+    "phone": {
+      "invalid": "Invalid Finnish phone number"
+    },
+    "street": {
+      "min": "Street address is too short"
+    },
+    "postalCode": {
+      "invalid": "Postal code must be 5 digits"
+    },
+    "city": {
+      "min": "City must be at least 2 characters"
+    }
+  },
+  "register": {
+    "fullName": {
+      "min": "Full name must be at least 3 characters",
+      "invalid": "Full name contains invalid characters"
+    },
+    "email": {
+      "invalid": "Invalid email format"
+    },
+    "phone": {
+      "invalid": "Invalid Finnish phone number"
+    },
+    "password": {
+      "min": "Password must be at least 8 characters",
+      "uppercase": "Password must contain an uppercase letter",
+      "lowercase": "Password must contain a lowercase letter",
+      "number": "Password must contain a number",
+      "symbol": "Password must contain a symbol"
+    },
+    "confirmPassword": {
+      "mismatch": "Passwords do not match"
+    },
+    "terms": {
+      "required": "You must accept the terms to continue"
+    }
+  },
+  "login": {
+    "email": {
+      "invalid": "Invalid email"
+    },
+    "password": {
+      "min": "Password must be at least 6 characters"
+    }
+  },
+  "form": {
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter your email"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter your password"
+    },
+    "confirmPassword": {
+      "label": "Confirm Password",
+      "placeholder": "Repeat your password"
+    },
+    "fullName": {
+      "label": "Full Name",
+      "placeholder": "Enter your full name"
+    },
+    "phone": {
+      "label": "Phone",
+      "placeholder": "Enter your phone number"
+    },
+    "firstName": {
+      "label": "First Name",
+      "placeholder": "Enter your first name"
+    },
+    "lastName": {
+      "label": "Last Name",
+      "placeholder": "Enter your last name"
+    },
+    "street": {
+      "label": "Street Address",
+      "placeholder": "Enter your street address"
+    },
+    "postalCode": {
+      "label": "Postal Code",
+      "placeholder": "12345"
+    },
+    "city": {
+      "label": "City",
+      "placeholder": "Enter your city"
+    },
+    "terms": {
+      "label": "I accept the terms and conditions"
+    },
+    "login": {
+      "error": {
+        "message": "Invalid email or password!"
+      }
+    }
+  }
 }

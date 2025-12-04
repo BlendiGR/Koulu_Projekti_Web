@@ -18,7 +18,7 @@ const DesktopNav = ({
           <li key={link.to}>
             <NavLink
               to={link.to}
-              className={({ isActive }) => isActive && "nav-active"}
+              className={({ isActive }) => isActive ? "nav-active" : undefined}
             >
               {link.label}
             </NavLink>
@@ -33,7 +33,7 @@ const DesktopNav = ({
           onClick={handleLogout}
         />
         <ShoppingCartButton onClick={onCartClick} />
-        <LangButton />
+        <LangButton color={textColor} />
       </div>
     </div>
   );

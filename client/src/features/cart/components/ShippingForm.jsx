@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
-import { deliveryInfoSchema } from "/src/schemas/deliveryInfoSchema.js";
+import {useLang } from "/src/hooks/useLang.js";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { deliveryInfoSchema } from "/src/schemas/deliveryInfoSchema.js";
 
 const ShippingForm = ({ onFormChange }) => {
+    const { t } = useLang();
     const { register, watch, formState: { errors, isValid } } = useForm({
-        resolver: zodResolver(deliveryInfoSchema),
+        resolver: zodResolver(deliveryInfoSchema(t)),
         mode: "onChange",
         defaultValues: {
             phone: "+358"
@@ -25,7 +27,7 @@ const ShippingForm = ({ onFormChange }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-                            First Name
+                            {t("form.firstName.label")}
                         </label>
                         <input
                             type="text"
@@ -39,7 +41,7 @@ const ShippingForm = ({ onFormChange }) => {
                     </div>
                     <div>
                         <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
-                            Last Name
+                            {t("form.lastName.label")}
                         </label>
                         <input
                             type="text"
@@ -53,7 +55,7 @@ const ShippingForm = ({ onFormChange }) => {
                     </div>
                     <div>
                         <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                            Phone
+                            {t("form.phone.label")}
                         </label>
                         <input
                             type="text"
@@ -67,7 +69,7 @@ const ShippingForm = ({ onFormChange }) => {
                     </div>
                     <div>
                         <label htmlFor="street" className="block text-sm font-medium text-gray-700">
-                            Street
+                            {t("form.street.label")}
                         </label>
                         <input
                             type="text"
@@ -81,7 +83,7 @@ const ShippingForm = ({ onFormChange }) => {
                     </div>
                     <div>
                         <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700">
-                            Postal Code
+                            {t("form.postalCode.label")}
                         </label>
                         <input
                             type="text"
@@ -95,7 +97,7 @@ const ShippingForm = ({ onFormChange }) => {
                     </div>
                     <div>
                         <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-                            City
+                            {t("form.city.label")}
                         </label>
                         <input
                             type="text"
