@@ -5,18 +5,27 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test:api": "SET NODE_ENV=test & jest --selectProjects api --runInBand",
+    "test:api": "cross-env NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js --selectProjects api",
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
     "seed": "prisma db seed"
   },
   "jest": {
+    "setupFiles": [
+      "<rootDir>/jest.env-setup.js"
+    ],
     "projects": [
       {
         "displayName": "api",
         "testEnvironment": "node",
         "testMatch": [
           "<rootDir>/tests/api/**/*.test.js"
+        ],
+        "setupFiles": [
+          "<rootDir>/jest.env-setup.js"
+        ],
+        "setupFilesAfterEnv": [
+          "<rootDir>/tests/api/setup-api.js"
         ]
       }
     ]
@@ -37,6 +46,7 @@
     "sharp": "^0.34.5"
   },
   "devDependencies": {
+    "cross-env": "^10.1.0",
     "globals": "^16.5.0",
     "jest": "^30.2.0",
     "nodemon": "^3.1.11",
