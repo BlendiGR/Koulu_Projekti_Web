@@ -55,9 +55,9 @@ export const getProductById = async (productId) => {
  */
 export const createProduct = async (productData) => {
     try {
-        if (!PRODUCT_TYPES.includes(productData.type)) {
-            throw new AppError("Invalid product type.", 400, "INVALID_PRODUCT_TYPE", `Type must be one of: ${PRODUCT_TYPES.join(", ")}.`);
-        }
+        // if (!PRODUCT_TYPES.includes(productData.type)) {
+        //     throw new AppError("Invalid product type.", 400, "INVALID_PRODUCT_TYPE", `Type must be one of: ${PRODUCT_TYPES.join(", ")}.`);
+        // }
         return await prisma.product.create({
             data: productData
         });
@@ -74,9 +74,9 @@ export const createProduct = async (productData) => {
  */
 export const updateProduct = async (productId, updateData) => {
     try {
-        if (updateData.type && !PRODUCT_TYPES.includes(updateData.type)) {
-            throw new AppError("Invalid product type.", 400, "INVALID_PRODUCT_TYPE", `Type must be one of: ${PRODUCT_TYPES.join(", ")}.`);
-        }
+        // if (updateData.type && !PRODUCT_TYPES.includes(updateData.type)) {
+        //     throw new AppError("Invalid product type.", 400, "INVALID_PRODUCT_TYPE", `Type must be one of: ${PRODUCT_TYPES.join(", ")}.`);
+        // }
         return await prisma.product.update({
             where: { productId: Number(productId) },
             data: updateData
