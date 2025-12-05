@@ -25,7 +25,7 @@ const Checkout = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-8">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">{t("checkout.title")}</h2>
+      <h2 className="text-3xl text-center text-red-100 font-bold mb-6 text-gray-800">{t("checkout.title")}</h2>
 
       <div className="flex flex-col lg:grid lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
