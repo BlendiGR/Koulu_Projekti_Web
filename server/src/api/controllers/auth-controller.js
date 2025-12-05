@@ -2,9 +2,9 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import "dotenv/config";
 
-import {asyncHandler} from "../utils/async-handler.js";
+import {asyncHandler} from "../../utils/async-handler.js";
 import {getUserByEmail} from "../models/user-model.js";
-import AppError from "../utils/AppError.js";
+import AppError from "../../utils/AppError.js";
 
 /**
  * User login controller.
@@ -37,7 +37,7 @@ export const login = asyncHandler(async (req, res) => {
         expiresIn: process.env.JWT_EXPIRES_IN || "1h"
     });
 
-    res.sendSuccess({token, userWithoutPassword})
+    res.sendSuccess({token, user: userWithoutPassword});
 });
 
 /**

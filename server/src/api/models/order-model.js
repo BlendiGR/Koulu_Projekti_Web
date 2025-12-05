@@ -1,11 +1,22 @@
 import prisma from "../../prisma.js";
-import AppError from "../utils/AppError.js";
+import AppError from "../../utils/AppError.js";
+
+/**
+ * Valid query params for the order model.
+ * Used in validators/order-validators.js
+ * @type {string[]}
+ */
+export const orderFields = [
+    "orderId",
+    "userId",
+    "status",
+];
 
 /**
  * Order statuses.
  * @type {string[]}
  */
-const ORDER_STATUSES = ["PREPARING", "DELIVERING", "DELIVERED"];
+export const ORDER_STATUSES = ["PREPARING", "DELIVERING", "DELIVERED"];
 
 /**
  * Get all orders from the database.
@@ -127,11 +138,82 @@ export const getOrdersByStatusWithProducts = async (status) => {
  * @returns {Promise<*>}
  */
 export const createOrder = async (orderData) => {
+    const { products, ...orderFields } = orderData;
+
+    // normalize input: allow [1, "2", {productId:3, quantity:2}, ...]
+    const items = Array.isArray(products)
+        ? products.map(item => {
+            if (typeof item === "number" || typeof item === "string") {
+                return { productId: Number(item), quantity: 1 };
+            }
+            return {
+                productId: Number(item?.productId),
+                quantity: Number(item?.quantity ?? 1)
+            };
+        }).filter(i => Number.isFinite(i.productId) && Number.isFinite(i.quantity))
+        : [];
+
+    if (!items.length) {
+        throw new AppError("No products provided", 400, "NO_PRODUCTS_PROVIDED", "At least one valid productId must be provided.");
+    }
+
+    // validate quantities (must be positive integers)
+    for (const it of items) {
+        if (!Number.isInteger(it.quantity) || it.quantity < 1) {
+            throw new AppError("Invalid quantity.", 400, "INVALID_QUANTITY", `Quantity for product ${it.productId} must be a positive integer.`);
+        }
+    }
+
+    // allow duplicates (multiple lines for same product are combined)
+    const consolidated = items.reduce((acc, it) => {
+        if (!acc[it.productId]) acc[it.productId] = 0;
+        acc[it.productId] += it.quantity;
+        return acc;
+    }, {});
+    const uniqueIds = Object.keys(consolidated).map(id => Number(id));
+
+    // fetch products and ensure existence
+    const productsFromDb = await prisma.product.findMany({
+        where: { productId: { in: uniqueIds } },
+        select: { productId: true, cost: true }
+    });
+
+    if (productsFromDb.length !== uniqueIds.length) {
+        throw new AppError("One or more products not found.", 400, "PRODUCTS_NOT_FOUND");
+    }
+
+    const costMap = {};
+    productsFromDb.forEach(p => { costMap[p.productId] = Number(p.cost); });
+
+    // compute total cost
+    const totalCost = uniqueIds.reduce((sum, pid) => {
+        const qty = consolidated[pid] || 0;
+        return sum + (costMap[pid] * qty);
+    }, 0);
+
     try {
         return await prisma.order.create({
-            data: orderData
+            data: {
+                ...orderFields,
+                ...(orderFields.userId !== undefined ? { userId: Number(orderFields.userId) } : {}),
+                cost: String(totalCost),
+                orderProducts: {
+                    create: uniqueIds.map(productId => ({
+                        quantity: consolidated[productId],
+                        product: { connect: { productId } }
+                    }))
+                },
+            },
+            include: {
+                orderProducts: {
+                    include: { product: true }
+                }
+            }
         });
     } catch (error) {
+        if (error.code === 'P2025') {
+            throw new AppError("One or more products not found.", 400, "PRODUCTS_NOT_FOUND", error.message);
+        }
         throw new AppError("Failed to create order.", 500, "ORDER_CREATION_FAILED", error.message);
     }
 };
@@ -163,7 +245,7 @@ export const updateOrder = async (orderId, updateData) => {
  */
 export const deleteOrder = async (orderId) => {
     try {
-        return prisma.order.delete({
+        return await prisma.order.delete({
             where: { orderId: Number(orderId) }
         });
     } catch (error) {

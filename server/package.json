@@ -4,10 +4,31 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:api": "cross-env NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js --selectProjects api",
     "dev": "nodemon src/index.js",
-    "start": "node index.js",
+    "start": "node src/index.js",
     "seed": "prisma db seed"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/jest.env-setup.js"
+    ],
+    "projects": [
+      {
+        "displayName": "api",
+        "testEnvironment": "node",
+        "testMatch": [
+          "<rootDir>/tests/api/**/*.test.js"
+        ],
+        "setupFiles": [
+          "<rootDir>/jest.env-setup.js"
+        ],
+        "setupFilesAfterEnv": [
+          "<rootDir>/tests/api/setup-api.js"
+        ]
+      }
+    ]
   },
   "keywords": [],
   "author": "",
@@ -26,9 +47,12 @@
     "sharp": "^0.34.5"
   },
   "devDependencies": {
+    "cross-env": "^10.1.0",
     "globals": "^16.5.0",
+    "jest": "^30.2.0",
     "nodemon": "^3.1.11",
-    "prisma": "^6.19.0"
+    "prisma": "^6.19.0",
+    "supertest": "^7.1.4"
   },
   "prisma": {
     "seed": "node ./prisma/seed.js"

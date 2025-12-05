@@ -1,5 +1,6 @@
-import {asyncHandler} from "../utils/async-handler.js";
-import AppError from "../utils/AppError.js";
+import {asyncHandler} from "../../utils/async-handler.js";
+import AppError from "../../utils/AppError.js";
+import {ensureExists} from "../../utils/ensure-exists.js";
 import * as User from "../models/user-model.js";
 
 /**
@@ -10,16 +11,8 @@ import * as User from "../models/user-model.js";
  */
 export const getAllUsers = asyncHandler(async (req, res) => {
     const {skip = 0, take = 100, ...filters} = req.query;
-    if (filters.userId) filters.userId = Number(filters.userId);
 
-    const skipNum = Number(skip);
-    const takeNum = Number(take);
-
-    if (isNaN(skipNum) || isNaN(takeNum)) {
-        throw new AppError("Invalid pagination parameters", 400, "INVALID_PAGINATION", "Skip and take must be valid numbers.");
-    }
-
-    const users = await User.getUsers(filters, skipNum, takeNum);
+    const users = await User.getUsers(filters, skip, take);
 
     res.sendSuccess(users);
 });
@@ -34,19 +27,12 @@ export const getUserById = asyncHandler(async (req, res) => {
     const requester = res.locals.user;
     const userId = Number(req.params.userId);
 
-    if (isNaN(userId)) {
-        throw new AppError("Invalid user ID", 400, "INVALID_USER_ID", "User ID must be a valid number.");
-    }
-
     if (requester.role !== "ADMIN" && requester.userId !== userId) {
         throw new AppError("Forbidden", 403, "FORBIDDEN");
     }
 
     const user = await User.getUserById(userId);
-
-    if (!user) {
-        throw new AppError("User not found", 404, "USER_NOT_FOUND", `No user found with ID ${userId}`);
-    }
+    ensureExists(user, "User not found", "USER_NOT_FOUND");
 
     res.sendSuccess(user);
 });
@@ -58,8 +44,7 @@ export const getUserById = asyncHandler(async (req, res) => {
  * @returns {Promise<void>}
  */
 export const createUser = asyncHandler(async (req, res) => {
-    const {username, role, email, password, isActive} = req.body;
-    const userData = {username, role, email, password, isActive};
+    const userData = { ...req.body };
 
     // Parse and remove undefined fields
     Object.keys(userData).forEach(key => userData[key] === undefined && delete userData[key]);
@@ -82,16 +67,12 @@ export const updateUser = asyncHandler(async (req, res) => {
         throw new AppError("Forbidden", 403, "FORBIDDEN", "You can only update your own account.");
     }
 
-    const {username, email, password, isActive} = req.body;
-    const updateData = {username, email, password, isActive};
-
-    // Parse and remove undefined fields
+    const updateData = {...req.body};
     Object.keys(updateData).forEach(key => updateData[key] === undefined && delete updateData[key]);
 
     const updatedUser = await User.updateUser(userId, updateData);
-    const {password: pwd, ...userWithoutPassword} = updatedUser;
 
-    res.sendSuccess(userWithoutPassword);
+    res.sendSuccess(updatedUser);
 });
 
 /**
