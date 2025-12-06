@@ -8,10 +8,14 @@ const steps = [
 
 const OrderStatus = ({ status = "PREPARING" }) => {
   const activeIndex = steps.findIndex(s => s.key === status);
-
-  const progressPercentage = (activeIndex + 1) / (steps.length - 1 ) * 100;
-
-  console.log(progressPercentage);
+  let progressPercentage = 0;
+  if (status === "PREPARING") {
+    progressPercentage = 15;
+  } else if (status === "DELIVERING") {
+    progressPercentage = 50;
+  } else if (status === "DELIVERED") {
+    progressPercentage = 100;
+  }
 
   return (
     <div
@@ -26,7 +30,7 @@ const OrderStatus = ({ status = "PREPARING" }) => {
 
       <div 
         className={`hidden p-1 md:block absolute top-6 left-0 h-[3px] bg-green-100 transition-all duration-500 z-10`}
-        style={{ width: `${progressPercentage / 2.7}%` }} 
+        style={{ width: `${progressPercentage}%` }} 
       />
 
       <div className="md:hidden absolute left-1/2 top-0 h-full w-[3px] bg-gray-300 z-0 transform -translate-x-1/2" />
