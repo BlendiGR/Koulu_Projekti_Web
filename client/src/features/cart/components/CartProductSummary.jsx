@@ -27,7 +27,7 @@ const CartProductSummary = ({item, index, deleteCartItem, cartItems}) => {
                            <span className="font-semibold">{item.quantity}</span>
                         </div>
                         <p className="font-bold text-lg text-gray-800">
-                          {item.price ? `${(item.price * item.quantity).toFixed(2)} €` : '10.00 €'}
+                          {item.price ? `${(item.cost * item.quantity).toFixed(2)} €` : '10.00 €'}
                         </p>
                       </div>
                     </div>

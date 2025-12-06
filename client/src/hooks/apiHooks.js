@@ -110,5 +110,19 @@ export const useOrder = () => {
     });
   };
 
-  return { submitOrder, loading, error, order };
+  const getOrderById = async (orderId) => {
+    const res = await fetchData(`${API}/orders/${orderId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.success) {
+      throw new Error(res.error?.message || "Order not found");
+    }
+
+    return res.data;
+  }
+
+  return { submitOrder, loading, error, order, getOrderById };
 };
