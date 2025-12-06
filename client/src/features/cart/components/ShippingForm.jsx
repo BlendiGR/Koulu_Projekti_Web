@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
-import {useLang } from "/src/hooks/useLang.js";
+import { useLang } from "/src/hooks/useLang.js";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { deliveryInfoSchema } from "/src/schemas/deliveryInfoSchema.js";
 

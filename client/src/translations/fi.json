@@ -55,7 +55,7 @@
   },
   "checkout": {
     "title": "Kassa",
-    "cartSummary": "Ostoskorin yhteenveto",
+    "cartSummary": "Tuotteet",
     "shippingDetails": "Toimitustiedot",
     "paymentDetails": "Maksutiedot",
     "proceedPayment": "Siirry maksamaan",

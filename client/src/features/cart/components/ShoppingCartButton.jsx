@@ -1,6 +1,7 @@
 import { ShoppingCart } from "lucide-react";
 import { useLang } from "/src/hooks/useLang";
 import { useCart } from "/src/features/cart/hooks/useCart.js";
+import RedButton from "/src/components/common/ui/RedButton";
 
 const ShoppingCartButton = ({ onClick, mobile = false }) => {
   const { t } = useLang();
@@ -23,9 +24,10 @@ const ShoppingCartButton = ({ onClick, mobile = false }) => {
   }
 
   return (
-    <button
+    <RedButton
       onClick={onClick}
-      className="relative bg-red-100 hover:bg-red-200 active:hover:bg-red-200 text-white px-4 py-2.5 rounded-xl flex items-center justify-center gap-1 cursor-pointer min-w-[110px]"
+      size="sm"
+      className="relative flex items-center justify-center gap-1 min-w-[110px]"
     >
       <ShoppingCart />
       {t("cart.button")}
@@ -34,7 +36,7 @@ const ShoppingCartButton = ({ onClick, mobile = false }) => {
           {totalItems}
         </span>
       )}
-    </button>
+    </RedButton>
   );
 };
 

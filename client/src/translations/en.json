@@ -55,7 +55,7 @@
   },
   "checkout": {
     "title": "Checkout",
-    "cartSummary": "Cart Summary",
+    "cartSummary": "Products",
     "shippingDetails": "Shipping Details",
     "paymentDetails": "Payment Details",
     "proceedPayment": "Proceed to Payment Details",

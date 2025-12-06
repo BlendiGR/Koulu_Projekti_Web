@@ -5,6 +5,9 @@ import CartProductSummary from "/src/features/cart/components/CartProductSummary
 import OrderSummary from "/src/features/cart/components/OrderSummary";
 import Dropdown from "/src/components/common/ui/Dropdown";
 import ShippingForm from "/src/features/cart/components/ShippingForm";
+import Spinner from "/src/components/common/ui/Spinner";
+import { useLoading } from "/src/hooks/useLoading";
+import RedButton from "/src/components/common/ui/RedButton";
 
 const Checkout = () => {
   const {
@@ -18,6 +21,7 @@ const Checkout = () => {
   const { t } = useLang();
   const [shippingData, setShippingData] = useState(null);
   const [isShippingValid, setIsShippingValid] = useState(false);
+  const { loading, withLoading } = useLoading();
 
   const handleShippingFormChange = useCallback((isValid) => {
     setIsShippingValid(isValid);
@@ -95,6 +99,15 @@ const Checkout = () => {
               totalItems={totalItems}
               totalTax={totalTax}
               withoutTax={withoutTax}
+              actionButton={
+                <RedButton
+                  //onClick={handleCheckout}
+                  disabled={!isShippingValid}
+                  fullWidth
+                >
+                  {t("checkout.proceedPayment")}
+                </RedButton>
+              }
             />
           </div>
         </div>

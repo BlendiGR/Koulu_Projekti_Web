@@ -4,6 +4,7 @@ import { useLang } from "/src/hooks/useLang.js";
 import { useCart } from "/src/features/cart/hooks/useCart.js";
 import CartProductSummary from "/src/features/cart/components/CartProductSummary";
 import OrderSummary from "/src/features/cart/components/OrderSummary";
+import RedButton from "/src/components/common/ui/RedButton";
 
 const CartDrawer = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -94,12 +95,13 @@ const CartDrawer = ({ isOpen, onClose }) => {
               totalTax={totalTax}
               totalPrice={totalPrice}
               actionButton={
-                <button
+                <RedButton
+                  fullWidth
+                  size="lg"
                   onClick={handleCheckout}
-                  className="w-full bg-red-100 hover:bg-red-200 text-white font-semibold py-4 px-6 rounded-xl shadow-lg active:scale-101 transition-transform cursor-pointer"
                 >
                   {t("cart.proceedCheckout")}
-                </button>
+                </RedButton>
               }
             />
           </div>
