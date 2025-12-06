@@ -2,6 +2,13 @@ import prisma from "../../prisma.js";
 import AppError from "../../utils/AppError.js";
 
 /**
+ * Valid product types.
+ * @type {string[]}
+ */
+export const PRODUCT_TYPES = ["FOOD", "DRINK", "SIDE"];
+
+
+/**
  * Valid query params for the product model.
  * Used in validators/product-validators.js
  * @type {string[]}
@@ -14,12 +21,6 @@ export const productFields = [
     "type",
     "isActive"
 ];
-
-/**
- * Product types.
- * @type {string[]}
- */
-const PRODUCT_TYPES = ["FOOD", "DRINK", "SIDE"];
 
 /**
  * Get all products from the database.
@@ -54,9 +55,9 @@ export const getProductById = async (productId) => {
  */
 export const createProduct = async (productData) => {
     try {
-        if (!PRODUCT_TYPES.includes(productData.type)) {
-            throw new AppError("Invalid product type.", 400, "INVALID_PRODUCT_TYPE", `Type must be one of: ${PRODUCT_TYPES.join(", ")}.`);
-        }
+        // if (!PRODUCT_TYPES.includes(productData.type)) {
+        //     throw new AppError("Invalid product type.", 400, "INVALID_PRODUCT_TYPE", `Type must be one of: ${PRODUCT_TYPES.join(", ")}.`);
+        // }
         return await prisma.product.create({
             data: productData
         });
@@ -73,9 +74,9 @@ export const createProduct = async (productData) => {
  */
 export const updateProduct = async (productId, updateData) => {
     try {
-        if (updateData.type && !PRODUCT_TYPES.includes(updateData.type)) {
-            throw new AppError("Invalid product type.", 400, "INVALID_PRODUCT_TYPE", `Type must be one of: ${PRODUCT_TYPES.join(", ")}.`);
-        }
+        // if (updateData.type && !PRODUCT_TYPES.includes(updateData.type)) {
+        //     throw new AppError("Invalid product type.", 400, "INVALID_PRODUCT_TYPE", `Type must be one of: ${PRODUCT_TYPES.join(", ")}.`);
+        // }
         return await prisma.product.update({
             where: { productId: Number(productId) },
             data: updateData

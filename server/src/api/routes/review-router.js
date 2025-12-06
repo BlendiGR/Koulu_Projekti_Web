@@ -14,38 +14,35 @@ const reviewRouter = express.Router();
 
 reviewRouter.route("/")
     .get(
-        authenticateToken,
-        requireRole(["ADMIN"]),
-        validateReviewQuery,
+        ...validateReviewQuery,
         validationErrors,
         reviewController.getAllReviews
     )
     .post(
         authenticateToken,
-        validateCreateReview,
+        ...validateCreateReview,
         validationErrors,
         reviewController.createReview
     );
 
 reviewRouter.route("/:reviewId")
     .get(
-        authenticateToken,
-        validateReviewIdParam,
+        ...validateReviewIdParam,
         validationErrors,
         reviewController.getReviewById
     )
     .put(
         authenticateToken,
         requireRole(["ADMIN"]),
-        validateReviewIdParam,
-        validateUpdateReview,
+        ...validateReviewIdParam,
+        ...validateUpdateReview,
         validationErrors,
         reviewController.updateReview
     )
     .delete(
         authenticateToken,
         requireRole(["ADMIN"]),
-        validateReviewIdParam,
+        ...validateReviewIdParam,
         validationErrors,
         reviewController.deleteReview
     );
