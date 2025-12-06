@@ -22,12 +22,12 @@ const Home = () => {
     {
       icon: <Phone size={44} className="text-green-100" />,
       title: t("home.contact.phone"),
-      text: `050 000 0000\n${t("home.contact.phone.text")}`,
+      text: `050 000 0000\n${t("home.contact.phoneText")}`,
     },
     {
       icon: <Mail size={44} className="text-blue-400" />,
       title: t("home.contact.email"),
-      text: `info@web-fooder.fi\n${t("home.contact.email.text")}`,
+      text: `info@web-fooder.fi\n${t("home.contact.emailText")}`,
     },
   ];
 
@@ -36,19 +36,19 @@ const Home = () => {
       icon: <Heart size={40} className="text-red-500" />,
       glow: "bg-red-light",
       title: t("home.features.made"),
-      text: t("home.features.made.text"),
+      text: t("home.features.madeText"),
     },
     {
       icon: <Users size={40} className="text-green-500" />,
       glow: "bg-green-light",
       title: t("home.features.community"),
-      text: t("home.features.community.text"),
+      text: t("home.features.communityText"),
     },
     {
       icon: <Award size={40} className="text-red-500" />,
       glow: "bg-red-light",
       title: t("home.features.award"),
-      text: t("home.features.award.text"),
+      text: t("home.features.awardText"),
     },
   ];
 

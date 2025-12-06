@@ -61,7 +61,11 @@
     "proceedPayment": "Siirry maksamaan",
     "required": "Pakollinen",
     "fillShippingFirst": "Täytä toimitustiedot ensin",
-    "emptyCart": "Ostoskorisi on tyhjä"
+    "emptyCart": "Ostoskorisi on tyhjä",
+    "placeOrder": "Tilaa"
+  },
+  "global": {
+    "processing": "Käsitellään..."
   },
   "orderSummary": {
     "title": "Tilauksen yhteenveto",

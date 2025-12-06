@@ -61,7 +61,12 @@
     "proceedPayment": "Proceed to Payment Details",
     "required": "Required",
     "fillShippingFirst": "Fill shipping details first",
-    "emptyCart": "Your cart is empty"
+    "emptyCart": "Your cart is empty",
+    "placeOrder": "Place Order"
+  
+  },
+  "global": {
+    "processing": "Processing..."
   },
   "orderSummary": {
     "title": "Order Summary",
