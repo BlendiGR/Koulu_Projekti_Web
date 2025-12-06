@@ -21,7 +21,7 @@ const Checkout = () => {
   const { postOrder } = useOrder();
   const { t } = useLang();
   const [isShippingValid, setIsShippingValid] = useState(false);
-  const { loading, withLoading } = useLoading();
+  const { loading, withLoading, error } = useLoading();
 
   
 
@@ -29,8 +29,14 @@ const Checkout = () => {
     setIsShippingValid(isValid);
   }, []);
 
+  const handlePlaceOrder = async () => {
+    await withLoading(async () => {
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    });
+};
+
   return (
-    <div className="max-w-7xl mx-auto p-4 md:p-8">
+    <div className="max-w-7xl mx-auto p-4 md:p-8 min-h-[calc(100vh-5rem)]">
       <h2 className="text-3xl text-center text-red-100 font-bold mb-6 text-gray-800">{t("checkout.title")}</h2>
 
       <div className="flex flex-col lg:grid lg:grid-cols-3 gap-8">
@@ -82,7 +88,7 @@ const Checkout = () => {
             title={t("checkout.paymentDetails")}
             badge={
               isShippingValid ? (
-                <span className="text-red-500">{t("checkout.required")}</span>
+                <span className="text-red-100">{t("checkout.required")}</span>
               ) : (
                 <span className="text-red-100">
                   {t("checkout.fillShippingFirst")}
@@ -97,20 +103,36 @@ const Checkout = () => {
         <div className="lg:col-span-1">
           <div className="lg:sticky lg:top-8">
             <OrderSummary
-              totalPrice={totalPrice}
-              totalItems={totalItems}
-              totalTax={totalTax}
-              withoutTax={withoutTax}
-              actionButton={
-                <RedButton
-                  //onClick={handleCheckout}
-                  disabled={!isShippingValid}
-                  fullWidth
-                >
-                  {t("checkout.proceedPayment")}
-                </RedButton>
-              }
-            />
+                totalPrice={totalPrice}
+                totalItems={totalItems}
+                totalTax={totalTax}
+                withoutTax={withoutTax}
+                actionButton={
+                  <>
+                    {error && (
+                      <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+                         {error}
+                      </div>
+                    )}
+                    
+                    <RedButton
+                      fullWidth
+                      size="lg"
+                      onClick={handlePlaceOrder}
+                      disabled={!isShippingValid || loading}
+                    >
+                      {loading ? (
+                        <div className="flex items-center justify-center gap-2">
+                          <Spinner size={20} ringColor="#ffffff40" spinColor="#ffffff" />
+                          <span>{t("global.processing")}</span>
+                        </div>
+                      ) : (
+                        t("checkout.placeOrder")
+                      )}
+                    </RedButton>
+                  </>
+                }
+              />
           </div>
         </div>
       </div>
