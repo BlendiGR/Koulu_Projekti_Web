@@ -69,3 +69,22 @@ export const useFile = () => {
 
   return { postFile };
 };
+// --------------------------
+// ORDER HOOK
+// --------------------------
+export const useOrder = () => {
+  const token = localStorage.getItem("token");
+  const postOrder = async (orderData) => {
+    const res = await fetchData(`${API}/orders`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(orderData),
+    });
+
+    return res;
+  };
+
+  return { postOrder };
+};

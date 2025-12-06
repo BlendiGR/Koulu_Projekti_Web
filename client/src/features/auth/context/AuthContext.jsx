@@ -19,11 +19,13 @@ const AuthProvider = ({ children }) => {
 
     const data = loginRes.data.data;
 
-    const user = data.userWithoutPassword;
+    const user = data.user;
     const token = data.token;
 
     localStorage.setItem("token", token);
     setUser(user);
+
+    console.log(user)
 
 
     if (user.role === "ADMIN") {
