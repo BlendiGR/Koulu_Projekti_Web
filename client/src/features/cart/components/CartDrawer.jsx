@@ -5,6 +5,7 @@ import { useCart } from "/src/features/cart/hooks/useCart.js";
 import CartProductSummary from "/src/features/cart/components/CartProductSummary";
 import OrderSummary from "/src/features/cart/components/OrderSummary";
 import RedButton from "/src/components/common/ui/RedButton";
+import { useAuth } from "/src/features/auth/hooks/useAuth";
 
 const CartDrawer = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -18,8 +19,15 @@ const CartDrawer = ({ isOpen, onClose }) => {
     withoutTax,
   } = useCart();
 
+  const { user } = useAuth();
+
   const handleCheckout = () => {
     navigate("/checkout");
+    onClose();
+  };
+
+  const handleLogin = () => {
+    navigate("/login");
     onClose();
   };
 
@@ -95,13 +103,24 @@ const CartDrawer = ({ isOpen, onClose }) => {
               totalTax={totalTax}
               totalPrice={totalPrice}
               actionButton={
-                <RedButton
+                user ? (
+                  <RedButton
                   fullWidth
                   size="lg"
                   onClick={handleCheckout}
                 >
                   {t("cart.proceedCheckout")}
+                </RedButton>  
+                ) : (
+                  <RedButton
+                  fullWidth
+                  size="lg"
+                  onClick={handleLogin}
+                >
+                  {t("cart.loginToCheckout")}
                 </RedButton>
+                )
+                
               }
             />
           </div>

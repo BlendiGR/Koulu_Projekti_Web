@@ -18,15 +18,12 @@ const AuthProvider = ({ children }) => {
     }
 
     const data = loginRes.data.data;
-
-    const user = data.user;
     const token = data.token;
+    const user = data.user;
 
     localStorage.setItem("token", token);
     setUser(user);
-
     console.log(user)
-
 
     if (user.role === "ADMIN") {
       navigate("/admin");
@@ -54,7 +51,8 @@ const AuthProvider = ({ children }) => {
       localStorage.removeItem("token");
       return;
     }
-    setUser(meRes.data);
+    console.log(meRes)
+    setUser(meRes.data.data);
     navigate(location.pathname);
   };
 

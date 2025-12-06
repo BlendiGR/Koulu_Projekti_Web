@@ -51,7 +51,8 @@
     "addedtocart": "Lisätty ostoskoriin",
     "shoppingCart": "Ostoskori",
     "proceedCheckout": "Siirry kassalle",
-    "empty": "Ostoskorisi on tyhjä."
+    "empty": "Ostoskorisi on tyhjä.",
+    "loginToCheckout": "Kirjaudu siirryttäksesi kassalle"
   },
   "checkout": {
     "title": "Kassa",
@@ -62,7 +63,8 @@
     "required": "Pakollinen",
     "fillShippingFirst": "Täytä toimitustiedot ensin",
     "emptyCart": "Ostoskorisi on tyhjä",
-    "placeOrder": "Tilaa"
+    "placeOrder": "Tilaa",  
+    "customer": "Tilaaja"
   },
   "global": {
     "processing": "Käsitellään..."

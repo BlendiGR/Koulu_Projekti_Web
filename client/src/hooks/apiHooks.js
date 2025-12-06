@@ -1,5 +1,8 @@
 import { fetchData } from "/src/utils/fetchData";
 import { useNavigate } from "react-router";
+import { useState } from "react";
+import { useLoading } from "/src/hooks/useLoading";
+import { useAuth } from "/src/features/auth/hooks/useAuth";
 
 const API = "/api/v1";
 
@@ -72,19 +75,40 @@ export const useFile = () => {
 // --------------------------
 // ORDER HOOK
 // --------------------------
-export const useOrder = () => {
-  const token = localStorage.getItem("token");
-  const postOrder = async (orderData) => {
-    const res = await fetchData(`${API}/orders`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(orderData),
-    });
 
-    return res;
+export const useOrder = () => {
+  const { loading, error, withLoading, setLoadingError } = useLoading();
+  const [order, setOrder] = useState(null);
+  const token = localStorage.getItem("token");
+  const { user } = useAuth();
+
+  const submitOrder = async (orderData) => {
+    const { fullAddress, items } = orderData;
+    return await withLoading(async () => {
+      const res = await fetchData(`${API}/orders`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user.userId,
+          destinationAddress: fullAddress,
+          products: items.map(item => ({
+            productId: item.id,
+            quantity: item.quantity || 1 
+          }))
+        }),
+      });
+
+      if (!res.success) {
+        throw new Error(res.error?.message || "Order submission failed");
+      }
+
+      setOrder(res.data);
+      return res;
+    });
   };
 
-  return { postOrder };
+  return { submitOrder, loading, error, order };
 };

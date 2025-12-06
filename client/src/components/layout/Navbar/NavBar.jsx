@@ -74,7 +74,7 @@ const NavBar = () => {
 
           {/* Mobile cart button & hamburger menu */}
           {!mobileMenuOpen && !cartDrawerOpen && (
-            <div className={`md:hidden flex items-center gap-4 ${textColor}`}>
+            <div className={`lg:hidden flex items-center gap-4 ${textColor}`}>
               <ShoppingCartButton 
                 mobile 
                 onClick={() => setCartDrawerOpen(true)} 

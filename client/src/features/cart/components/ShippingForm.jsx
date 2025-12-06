@@ -6,53 +6,39 @@ import { deliveryInfoSchema } from "/src/schemas/deliveryInfoSchema.js";
 
 const ShippingForm = ({ onFormChange }) => {
     const { t } = useLang();
+
     const { register, watch, formState: { errors, isValid } } = useForm({
         resolver: zodResolver(deliveryInfoSchema(t)),
         mode: "onChange",
-        defaultValues: {
-            phone: "+358"
-        }
     });
 
+    const phone = watch("phone");
+    const street = watch("street");
+    const postalCode = watch("postalCode");
+    const city = watch("city");
+
+
+
     useEffect(() => {
-        onFormChange(isValid, formValues);
-    }, [isValid]);
+        const cleanData = {
+            fullAddress: `${street ?? ""}, ${postalCode ?? ""} ${city ?? ""}`.trim(),
+            phone
+        };
+
+        onFormChange(isValid, cleanData);
+    }, [
+        isValid,
+        phone,
+        street,
+        postalCode,
+        city
+    ]);
 
 
-    const formValues = watch();
-    
     return (
         <div>
             <form>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-                            {t("form.firstName.label")}
-                        </label>
-                        <input
-                            type="text"
-                            id="firstName"
-                            {...register("firstName")}
-                            className="bg-white p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        />
-                        {errors.firstName && (
-                            <p className="mt-2 text-sm text-red-600">{errors.firstName.message}</p>
-                        )}
-                    </div>
-                    <div>
-                        <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
-                            {t("form.lastName.label")}
-                        </label>
-                        <input
-                            type="text"
-                            id="lastName"
-                            {...register("lastName")}
-                            className="bg-white p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        />
-                        {errors.lastName && (
-                            <p className="mt-2 text-sm text-red-600">{errors.lastName.message}</p>
-                        )}
-                    </div>
                     <div>
                         <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
                             {t("form.phone.label")}

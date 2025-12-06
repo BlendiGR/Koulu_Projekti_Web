@@ -12,7 +12,7 @@ const DesktopNav = ({
   onCartClick,
 }) => {
   return (
-    <div className={`hidden md:flex items-center gap-20 ${textColor}`}>
+    <div className={`hidden lg:flex items-center gap-20 ${textColor}`}>
       <ul className="md:flex items-center text-lg gap-6">
         {navLinks.map((link) => (
           <li key={link.to}>

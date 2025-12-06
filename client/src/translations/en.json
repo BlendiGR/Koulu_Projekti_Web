@@ -51,7 +51,8 @@
     "addedtocart": "Added To Cart",
     "shoppingCart": "Shopping Cart",
     "proceedCheckout": "Proceed to Checkout",
-    "empty": "Your cart is empty."
+    "empty": "Your cart is empty.",
+    "loginToCheckout": "Login to Checkout"
   },
   "checkout": {
     "title": "Checkout",
@@ -62,8 +63,8 @@
     "required": "Required",
     "fillShippingFirst": "Fill shipping details first",
     "emptyCart": "Your cart is empty",
-    "placeOrder": "Place Order"
-  
+    "placeOrder": "Place Order",
+    "customer": "Customer"
   },
   "global": {
     "processing": "Processing..."
