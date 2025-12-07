@@ -68,6 +68,20 @@
   "register.password.symbol": "Salasanassa tulee olla erikoismerkki",
   "register.confirmPassword.mismatch": "Salasanat eivät täsmää",
   "register.terms.required": "Hyväksy palvelun ehdot jatkaaksesi",
+  "register.fullName.label": "Koko nimi",
+  "register.fullName.placeholder": "John Doe",
+
+  "register.email.label": "Sähköposti",
+  "register.email.placeholder": "john@example.com",
+
+  "register.phone.label": "Puhelinnumero",
+  "register.phone.placeholder": "+358 40 123 4567",
+
+  "register.password.label": "Salasana",
+  "register.password.placeholder": "********",
+
+  "register.confirmPassword.label": "Vahvista salasana",
+  "register.confirmPassword.placeholder": "********",
 
   "login.email.invalid": "Sähköpostiosoite ei ole kelvollinen",
   "login.password.min": "Salasanan tulee olla vähintään 6 merkkiä pitkä",

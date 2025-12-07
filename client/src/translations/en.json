@@ -69,6 +69,20 @@
   "register.password.symbol": "Password must contain a symbol",
   "register.confirmPassword.mismatch": "Passwords do not match",
   "register.terms.required": "You must accept the terms to continue",
+  "register.fullName.label": "Full Name",
+  "register.fullName.placeholder": "John Doe",
+
+  "register.email.label": "Email",
+  "register.email.placeholder": "john@example.com",
+
+  "register.phone.label": "Phone Number",
+  "register.phone.placeholder": "+358 40 123 4567",
+
+  "register.password.label": "Password",
+  "register.password.placeholder": "********",
+
+  "register.confirmPassword.label": "Confirm Password",
+  "register.confirmPassword.placeholder": "********",
 
   "login.email.invalid": "Invalid email",
   "login.password.min": "Password must be at least 6 characters",

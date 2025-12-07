@@ -1,7 +1,7 @@
-import LoginForm from "/src/components/common/ui/LoginForm";
+import RegisterForm from "/src/components/common/ui/RegisterForm";
 import { useLang } from "/src/hooks/useLang";
 
-const Login = () => {
+const Register = () => {
   const { t } = useLang();
 
   return (
@@ -10,14 +10,12 @@ const Login = () => {
         <h1 className="text-3xl font-semibold">
           Welcome to <span className="text-red-600">Fooder</span>
         </h1>
-        <p className="text-gray-600 mt-2">
-          Sign in to order your favorite meals
-        </p>
+        <p className="text-gray-600 mt-2">Sign up to order your foodie meals</p>
       </div>
 
-      <LoginForm t={t} />
+      <RegisterForm t={t} />
     </div>
   );
 };
 
-export default Login;
+export default Register;
