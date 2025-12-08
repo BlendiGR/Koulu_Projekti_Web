@@ -112,10 +112,14 @@
   "register": {
     "fullName": {
       "min": "Koko nimen tulee olla vähintään 3 merkkiä pitkä",
-      "invalid": "Nimi sisältää virheellisiä merkkejä"
+      "invalid": "Nimi sisältää virheellisiä merkkejä",
+      "label": "Koko nimi",
+      "placeholder": "Matti Meikäläinen"
     },
     "email": {
-      "invalid": "Sähköpostiosoite ei ole kelvollinen"
+      "invalid": "Sähköpostiosoite ei ole kelvollinen",
+      "label": "Sähköposti",
+      "placeholder": "matti@esimerkki.fi"
     },
     "phone": {
       "invalid": "Puhelinnumero ei ole kelvollinen"
@@ -125,10 +129,14 @@
       "uppercase": "Salasanassa tulee olla iso kirjain",
       "lowercase": "Salasanassa tulee olla pieni kirjain",
       "number": "Salasanassa tulee olla numero",
-      "symbol": "Salasanassa tulee olla erikoismerkki"
+      "symbol": "Salasanassa tulee olla erikoismerkki",
+      "label": "Salasana",
+      "placeholder": "********"
     },
     "confirmPassword": {
-      "mismatch": "Salasanat eivät täsmää"
+      "mismatch": "Salasanat eivät täsmää",
+      "label": "Vahvista salasana",
+      "placeholder": "********"
     },
     "terms": {
       "required": "Hyväksy palvelun ehdot jatkaaksesi"
@@ -189,6 +197,19 @@
     "login": {
       "error": {
         "message": "Väärä sähköposti tai salasana!"
+      },
+      "forgotPassword": "Unohditko salasanan?"
+    },
+    "register": {
+      "button": "Luo tili",
+      "error": {
+        "alreadyExists": "Käyttäjätunnus tai sähköposti on jo käytössä!"
+      },
+      "terms": {
+        "agree": "Hyväksyn",
+        "service": "Palvelun ehdot",
+        "and": "ja",
+        "privacy": "Tietosuojakäytännön"
       }
     }
   }

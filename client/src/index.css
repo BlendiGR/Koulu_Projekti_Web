@@ -58,3 +58,9 @@ Animaatio vaakasuuntaiselle reviews osiolle.
   height: 2px;
   background-color: currentColor;
 }
+
+@media (min-width: 768px) {
+  .mobile-bg-only {
+    background-image: none !important;
+  }
+}

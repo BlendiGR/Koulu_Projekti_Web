@@ -112,10 +112,14 @@
   "register": {
     "fullName": {
       "min": "Full name must be at least 3 characters",
-      "invalid": "Full name contains invalid characters"
+      "invalid": "Full name contains invalid characters",
+      "label": "Full Name",
+      "placeholder": "John Doe"
     },
     "email": {
-      "invalid": "Invalid email format"
+      "invalid": "Invalid email format",
+      "label": "Email",
+      "placeholder": "john@example.com"
     },
     "phone": {
       "invalid": "Invalid Finnish phone number"
@@ -125,10 +129,14 @@
       "uppercase": "Password must contain an uppercase letter",
       "lowercase": "Password must contain a lowercase letter",
       "number": "Password must contain a number",
-      "symbol": "Password must contain a symbol"
+      "symbol": "Password must contain a symbol",
+      "label": "Password",
+      "placeholder": "********"
     },
     "confirmPassword": {
-      "mismatch": "Passwords do not match"
+      "mismatch": "Passwords do not match",
+      "label": "Confirm Password",
+      "placeholder": "********"
     },
     "terms": {
       "required": "You must accept the terms to continue"
@@ -189,6 +197,19 @@
     "login": {
       "error": {
         "message": "Invalid email or password!"
+      },
+      "forgotPassword": "Forgot password?"
+    },
+    "register": {
+      "button": "Create Account",
+      "error": {
+        "alreadyExists": "Username or email already exists!"
+      },
+      "terms": {
+        "agree": "I agree to the",
+        "service": "Terms of Service",
+        "and": "and",
+        "privacy": "Privacy Policy"
       }
     }
   }

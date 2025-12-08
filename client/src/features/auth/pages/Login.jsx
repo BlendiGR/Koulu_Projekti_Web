@@ -8,14 +8,19 @@ const Login = () => {
   const [activeTab, setActiveTab] = useState("login");
 
   return (
-    <div className="flex flex-col md:flex-row min-h-[calc(100vh-10rem)]">
-      <div className="flex flex-col items-center md:items-end justify-center py-20 px-4 md:pr-12 w-full md:w-1/2">
-        <div className="w-full max-w-md p-6">
+    <div className="flex flex-col md:flex-row">
+      <div 
+        className="flex flex-col items-center md:items-end justify-center py-3 px-4 md:pr-12 w-full md:w-1/2 bg-cover bg-center mobile-bg-only"
+        style={{
+          backgroundImage: "url('/src/assets/images/Hero-Background.png')",
+        }}
+      >
+        <div className="w-full max-w-md p-6 mb-10">
           <div className="text-center mb-10">
-            <h1 className="text-3xl font-semibold">
+            <h1 className="text-white md:text-black text-3xl font-semibold">
               Welcome to <span className="text-red-600">Fooder</span>
             </h1>
-            <p className="text-gray-600 mt-2">
+            <p className="text-white md:text-gray-600 mt-2">
               Sign in to order your favorite meals
             </p>
           </div>
@@ -44,7 +49,7 @@ const Login = () => {
               </button>
             </div>
 
-            <div className="relative overflow-hidden min-h-[420px] transition-all duration-300">
+            <div className="relative overflow-hidden min-h-[480px] transition-all duration-300">
               <div
                 className={`transition-all duration-300 ease-in-out ${
                   activeTab === "login"
@@ -61,7 +66,7 @@ const Login = () => {
                     : "opacity-0 translate-x-full absolute inset-0 pointer-events-none"
                 }`}
               >
-                <RegisterForm t={t} />
+                <RegisterForm t={t} state={setActiveTab} />
               </div>
             </div>
           </div>

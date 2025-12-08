@@ -67,7 +67,7 @@ const LoginForm = ({ t }) => {
 
           <div className="flex justify-end text-xs text-gray-500">
             <button type="button" className="hover:underline">
-              Forgot password?
+              {t("form.login.forgotPassword")}
             </button>
           </div>
 

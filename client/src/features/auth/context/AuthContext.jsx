@@ -9,7 +9,18 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { getUserByToken, postLogin } = useUser();
+  const { getUserByToken, postLogin, postUser } = useUser();
+
+  const handleRegister = async (credientials) => {
+    const registerRes = await postUser(credientials);
+    if (!registerRes.success) {
+      return registerRes;
+    }
+
+    navigate("/login");
+
+    return { success: true };
+  }
 
   const handleLogin = async (credentials) => {
     const loginRes = await postLogin(credentials);
@@ -63,6 +74,7 @@ const AuthProvider = ({ children }) => {
         handleLogin,
         handleLogout,
         handleAutoLogin,
+        handleRegister
       }}
     >
       {children}

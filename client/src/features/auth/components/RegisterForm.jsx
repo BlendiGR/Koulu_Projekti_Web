@@ -2,23 +2,45 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "/src/schemas/registerSchema.js";
 import { useState } from "react";
+import { useAuth } from "/src/features/auth/hooks/useAuth.js";
 
-const RegisterForm = ({ t }) => {
+
+const RegisterForm = ({ t, state }) => {
+  const { handleRegister } = useAuth();
   const [backendError, setBackendError] = useState(null);
+  const setState = state;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(registerSchema(t)),
   });
 
-  const onSubmit = async (data) => {
+    const onSubmit = async (data) => {
+    const payLoad = {
+      username: data.fullName,
+      email: data.email,
+      password: data.password,
+    }
+    console.log(payLoad)
     setBackendError(null);
-    console.log("Register submit data:", data);
-  };
+    const res = await handleRegister(payLoad);
 
+    if (!res.success) {
+      if (res.error.message === "Username or email already exists.") {
+        setBackendError(t("form.register.error.alreadyExists"));
+        return;
+      }
+      setBackendError(res.error.message);
+      return;
+    }
+    reset();
+    setState("login");
+
+  };
   return (
     <>
       {backendError && (
@@ -91,8 +113,8 @@ const RegisterForm = ({ t }) => {
           <div className="flex items-start gap-2 text-xs text-gray-600">
             <input type="checkbox" className="mt-1" {...register("terms")} />
             <p>
-              I agree to the <span className="underline">Terms of Service</span>{" "}
-              and <span className="underline">Privacy Policy</span>
+              {t("form.register.terms.agree")} <span className="underline">{t("form.register.terms.service")}</span>{" "}
+              {t("form.register.terms.and")} <span className="underline">{t("form.register.terms.privacy")}</span>
             </p>
           </div>
 
@@ -100,7 +122,7 @@ const RegisterForm = ({ t }) => {
             type="submit"
             className="mt-2 bg-red-100 text-white py-2 rounded hover:bg-red-200 transition"
           >
-            Create Account
+            {t("form.register.button")}
           </button>
       </form>
     </>

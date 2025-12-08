@@ -21,7 +21,7 @@ export const useUser = () => {
   };
 
   const postUser = async (inputs) => {
-    return await fetchData(`${API}/auth/register`, {
+    return await fetchData(`${API}/users`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(inputs),

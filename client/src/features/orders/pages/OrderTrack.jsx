@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import OrderStatus from "./components/OrderStatus";
 import OrderProductSummary from "/src/features/orders/pages/components/OrderProductSummary";
-import Spinner from "/src/components/Spinner";
+import Spinner from "/src/components/common/ui/Spinner";
 
 const OrderTrack = () => {
     const [order, setOrder] = useState(null);
