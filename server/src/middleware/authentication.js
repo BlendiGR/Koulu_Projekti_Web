@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import "dotenv/config";
+import AppError from "../utils/AppError.js";
 
 /**
  * Middleware to authenticate JWT token from Authorization header
@@ -10,30 +11,28 @@ import "dotenv/config";
 export const authenticateToken = (req, res, next) => {
     const authHeader = req.headers["authorization"];
 
-    // Must be "Bearer <token>"
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-        return res.status(401).json({ error: "No token provided" });
+        throw new AppError("Authorization header missing or malformed.", 401, "UNAUTHORIZED");
     }
 
+    // Must be "Bearer <token>"
     const token = authHeader.split(" ")[1];
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         if (!decoded || !decoded.userId)  {
-            return res.status(403).json({ error: "Invalid token payload." });
+            throw new AppError("Invalid token payload.", 403, "FORBIDDEN");
         }
 
         res.locals.user = decoded;
         next();
     } catch (error) {
-        console.error("Token verification failed:", error);
-
         if (error.name === "TokenExpiredError") {
-            return res.status(401).json({error: "Token has expired."});
+            throw new AppError("Expired token.", 401, "UNAUTHORIZED");
         }
 
-        return res.sendStatus(403).json({error: "Invalid or expired token."}); // Forbidden
+        throw new AppError("Invalid or expired token.", 401, "UNAUTHORIZED");
     }
 };
 
@@ -45,11 +44,11 @@ export const requireRole = (roles) => (req, res, next) => {
     const user = res.locals.user;
 
     if (!user) {
-        return res.status(401).json({ error: "Unauthorized." });
+        throw new AppError("Missing authentication.", 401, "UNAUTHORIZED");
     }
 
     if (!roles.includes(user.role)) {
-        return res.status(403).json({ error: "Access denied: insufficient permissions." });
+        throw new AppError("Access denied: insufficient permissions.", 403, "FORBIDDEN");
     }
     next();
 }
