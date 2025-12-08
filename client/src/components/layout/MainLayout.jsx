@@ -15,7 +15,7 @@ const MainLayout = () => {
   }, []);
 
   return (
-    <div>
+    <div >
       <NavBar />
       <main className="md:mt-22 mt-17">
         <Outlet />

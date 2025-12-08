@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "/src/schemas/loginSchema.js";
 import { useAuth } from "/src/features/auth/hooks/useAuth.js";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 const LoginForm = ({ t }) => {
   const { handleLogin } = useAuth();
@@ -32,22 +31,8 @@ const LoginForm = ({ t }) => {
   };
 
   return (
-    <div className="w-full max-w-md">
-      <div className="bg-[#f5f0ea] rounded-xl shadow-md p-6">
-        {/* Login/Register tabit */}
-        <div className="flex mb-6 rounded-full overflow-hidden border border-gray-200">
-          <div className="flex-1 bg-green-800 text-white py-2 text-center text-sm font-medium">
-            Login
-          </div>
-          <Link
-            to="/register"
-            className="flex-1 bg-black/5 text-gray-700 py-2 text-center text-sm font-medium hover:bg-black/10 transition"
-          >
-            Register
-          </Link>
-        </div>
-
-        {backendError && (
+    <>
+      {backendError && (
           <p className="text-red-600 p-2 rounded text-sm mb-2">
             {backendError}
           </p>
@@ -88,13 +73,12 @@ const LoginForm = ({ t }) => {
 
           <button
             type="submit"
-            className="mt-2 bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
+            className="mt-2 bg-red-100 text-white py-2 rounded hover:bg-red-200 transition"
           >
             {t("nav.login")}
           </button>
-        </form>
-      </div>
-    </div>
+      </form>
+    </>
   );
 };
 

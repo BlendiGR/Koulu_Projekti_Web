@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "/src/schemas/registerSchema.js";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 const RegisterForm = ({ t }) => {
   const [backendError, setBackendError] = useState(null);
@@ -21,22 +20,8 @@ const RegisterForm = ({ t }) => {
   };
 
   return (
-    <div className="w-full max-w-md">
-      <div className="bg-[#f5f0ea] rounded-xl shadow-md p-6">
-        {/* Login/Register tabit */}
-        <div className="flex mb-6 rounded-full overflow-hidden border border-gray-200">
-          <Link
-            to="/login"
-            className="flex-1 bg-black/5 text-gray-700 py-2 text-center text-sm font-medium hover:bg-black/10 transition"
-          >
-            Login
-          </Link>
-          <div className="flex-1 bg-green-800 text-white py-2 text-center text-sm font-medium">
-            Register
-          </div>
-        </div>
-
-        {backendError && (
+    <>
+      {backendError && (
           <p className="text-red-600 p-2 rounded text-sm mb-2">
             {backendError}
           </p>
@@ -70,20 +55,6 @@ const RegisterForm = ({ t }) => {
               <p className="text-red-500 text-sm">{errors.email.message}</p>
             )}
           </div>
-
-          <div className="flex flex-col">
-            <label className="font-medium">{t("register.phone.label")}</label>
-            <input
-              type="tel"
-              placeholder={t("register.phone.placeholder")}
-              {...register("phone")}
-              className="border border-gray-300 p-2 rounded bg-white placeholder:text-gray-400"
-            />
-            {errors.phone && (
-              <p className="text-red-500 text-sm">{errors.phone.message}</p>
-            )}
-          </div>
-
           <div className="flex flex-col">
             <label className="font-medium">
               {t("register.password.label")}
@@ -127,13 +98,12 @@ const RegisterForm = ({ t }) => {
 
           <button
             type="submit"
-            className="mt-2 bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
+            className="mt-2 bg-red-100 text-white py-2 rounded hover:bg-red-200 transition"
           >
             Create Account
           </button>
-        </form>
-      </div>
-    </div>
+      </form>
+    </>
   );
 };
 
