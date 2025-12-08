@@ -13,7 +13,7 @@ const DesktopNav = ({
 }) => {
   return (
     <div className={`hidden lg:flex items-center gap-20 ${textColor}`}>
-      <ul className="md:flex items-center text-lg gap-6">
+      <ul className="md:flex items-center text-lg font-semibold gap-6">
         {navLinks.map((link) => (
           <li key={link.to}>
             <NavLink

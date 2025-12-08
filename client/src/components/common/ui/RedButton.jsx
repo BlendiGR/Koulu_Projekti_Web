@@ -11,7 +11,7 @@ const RedButton = ({
   const sizeClasses = {
     sm: "py-2 px-4 text-sm",
     md: "py-3 px-5",
-    lg: "py-4 px-6 font-semibold",
+    lg: "py-4 px-6",
   };
 
   return (
@@ -27,7 +27,7 @@ const RedButton = ({
         active:bg-red-200
         text-white 
         rounded-xl 
-        shadow-lg 
+        shadow-sm 
         active:scale-101 
         transition-all
         duration-200

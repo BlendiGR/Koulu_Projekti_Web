@@ -33,7 +33,7 @@ const MobileDrawer = ({
         </button>
 
         {/* linkit */}
-        <ul className="flex flex-col gap-8 mt-14 text-black-200 text-xl">
+        <ul className="flex flex-col gap-8 mt-14 text-black-200 font-semibold text-xl">
           {navLinks.map((link) => (
             <li key={link.to} className="active:text-red-200">
               <NavLink

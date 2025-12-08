@@ -6,7 +6,7 @@ export const registerSchema = (t) =>
       fullName: z
         .string()
         .min(3, t("register.fullName.min"))
-        .regex(/^[A-Za-zÀ-ÿ\s'-]+$/, t("register.fullName.invalid")),
+        .regex(/^[\p{L}](?:[\p{L}\p{M}]|[ '-](?=[\p{L}]))*[\p{L}]$/u, t("register.fullName.invalid")),
 
       email: z.email(t("register.email.invalid")),
 

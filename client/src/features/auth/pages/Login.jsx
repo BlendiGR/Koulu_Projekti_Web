@@ -17,10 +17,10 @@ const Login = () => {
       >
         <div className="w-full max-w-md p-6 mb-10">
           <div className="text-center mb-10">
-            <h1 className="text-white md:text-black text-3xl font-semibold">
+            <h1 className="text-white md:text-black text-5xl mt-5 font-extrabold">
               Welcome to <span className="text-red-600">Fooder</span>
             </h1>
-            <p className="text-white md:text-gray-600 mt-2">
+            <p className="text-white md:text-gray-600 mt-2 text-lg font-medium mt-5">
               Sign in to order your favorite meals
             </p>
           </div>
@@ -29,7 +29,7 @@ const Login = () => {
             <div className="flex mb-6 rounded-full bg-gray-100 p-1 border border-gray-200">
               <button
                 onClick={() => setActiveTab("login")}
-                className={`flex-1 py-2 px-6 text-center text-sm font-medium rounded-full transition-all duration-300 ${
+                className={`flex-1 py-2 px-6 text-center text-md font-medium rounded-full transition-all duration-300 ${
                   activeTab === "login"
                     ? "bg-green-200 text-white"
                     : "text-gray-700 hover:bg-gray-300"

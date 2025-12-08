@@ -38,10 +38,12 @@
       "awardText": "Valittu \"Kaupungin paras burgeri\" 5 vuotta putkeen"
     },
     "mostOrdered": {
-      "title": "Eniten tilatut"
+      "titleOne": "Eniten",
+      "titleTwo": "tilatut"
     },
     "reviews": {
-      "title": "Asiakasarviot",
+      "titleOne": "Asiakas",
+      "titleTwo": "arviot",
       "subtitle": "Katso mitä asiakkaamme sanovat!"
     }
   },

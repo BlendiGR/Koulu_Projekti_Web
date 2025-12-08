@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "/src/schemas/loginSchema.js";
 import { useAuth } from "/src/features/auth/hooks/useAuth.js";
+import RedButton from "/src/components/common/ui/RedButton";
 import { useState } from "react";
 
 const LoginForm = ({ t }) => {
@@ -71,12 +72,12 @@ const LoginForm = ({ t }) => {
             </button>
           </div>
 
-          <button
+          <RedButton
             type="submit"
-            className="mt-2 bg-red-100 text-white py-2 rounded hover:bg-red-200 transition"
+            className="font-semibold text-lg"
           >
             {t("nav.login")}
-          </button>
+          </RedButton>
       </form>
     </>
   );

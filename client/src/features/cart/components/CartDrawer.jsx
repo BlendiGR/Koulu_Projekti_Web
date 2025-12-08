@@ -107,6 +107,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
                   <RedButton
                   fullWidth
                   size="lg"
+                  className="font-semibold"
                   onClick={handleCheckout}
                 >
                   {t("cart.proceedCheckout")}
@@ -116,6 +117,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
                   fullWidth
                   size="lg"
                   onClick={handleLogin}
+                  className="font-semibold"
                 >
                   {t("cart.loginToCheckout")}
                 </RedButton>

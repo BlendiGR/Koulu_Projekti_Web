@@ -28,7 +28,7 @@ const Dropdown = ({
 
   return (
     <div
-      className={`bg-beige rounded-2xl shadow-md border border-brown-100 overflow-hidden ${
+      className={`bg-beige rounded-2xl shadow-sm border border-brown-100 overflow-hidden ${
         disabled ? "opacity-60 cursor-not-allowed" : ""
       } ${className}`}
     >

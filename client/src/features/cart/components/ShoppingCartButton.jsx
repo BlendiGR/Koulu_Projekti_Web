@@ -30,7 +30,7 @@ const ShoppingCartButton = ({ onClick, mobile = false }) => {
       className="relative flex items-center justify-center gap-1 min-w-[120px]"
     >
       <ShoppingCart />
-      <p className="text-lg">{t("cart.button")} {totalPrice > 0 ? totalPrice.toFixed(2) + " €" : ""}</p>
+      <p className="text-lg font-medium">{t("cart.button")} {totalPrice > 0 ? totalPrice.toFixed(2) + " €" : ""}</p>
       {totalItems > 0 && (
         <span className="absolute -top-2 -right-2 bg-white text-black-100 rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shadow-md">
           {totalItems}

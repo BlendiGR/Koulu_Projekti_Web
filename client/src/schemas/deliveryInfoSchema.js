@@ -4,7 +4,7 @@ export const deliveryInfoSchema = (t) =>
   z.object({
     phone: z
       .string()
-      .regex(/^(?:\+358|0)\s?\d[\d\s-]{5,}$/, t("delivery.phone.invalid")),
+      .regex(/^(?:\+358\s?(?:40|41|44|45)\s?\d{3}\s?\d{4}|0(?:40|41|44|45)\s?\d{3}\s?\d{4})$/, t("delivery.phone.invalid")),
 
     street: z.string().min(5, t("delivery.street.min")),
 

@@ -38,10 +38,12 @@
       "awardText": "Voted \"Best Burger in Town\" for 5 consecutive years"
     },
     "mostOrdered": {
-      "title": "Most Ordered"
+      "titleOne": "Most",
+      "titleTwo": "Ordered"
     },
     "reviews": {
-      "title": "Customer Reviews",
+      "titleOne": "Customer",
+      "titleTwo": " Reviews",
       "subtitle": "See what our customers say about us!"
     }
   },

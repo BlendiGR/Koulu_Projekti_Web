@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "/src/schemas/registerSchema.js";
 import { useState } from "react";
 import { useAuth } from "/src/features/auth/hooks/useAuth.js";
+import RedButton from "/src/components/common/ui/RedButton";
 
 
 const RegisterForm = ({ t, state }) => {
@@ -118,12 +119,12 @@ const RegisterForm = ({ t, state }) => {
             </p>
           </div>
 
-          <button
+          <RedButton
             type="submit"
-            className="mt-2 bg-red-100 text-white py-2 rounded hover:bg-red-200 transition"
+            className="font-semibold text-lg"
           >
             {t("form.register.button")}
-          </button>
+          </RedButton>
       </form>
     </>
   );
