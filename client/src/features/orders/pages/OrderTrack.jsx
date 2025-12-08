@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import OrderStatus from "./components/OrderStatus";
 import OrderProductSummary from "/src/features/orders/pages/components/OrderProductSummary";
+import Spinner from "/src/components/Spinner";
 
 const OrderTrack = () => {
     const [order, setOrder] = useState(null);
@@ -19,11 +20,10 @@ const OrderTrack = () => {
         fetchOrder();
     }, []);
 
-    console.log(order?.orderProducts[1].product);
     return (
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-5rem)]">
             {!order ? (
-                <div>Loading...</div>
+                <Spinner />
             ) : (
                 <>
                     <h1 className="md:text-5xl text-3xl font-bold text-center ">Tracking <span className="text-red-100">Order #{orderId}</span></h1>
