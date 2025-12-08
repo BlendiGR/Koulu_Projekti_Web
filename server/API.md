@@ -13,29 +13,29 @@ Quick navigation:
 
 ### Endpoint summary
 
-| Method | Path                          | Description                          | Auth                       |
-|--------|-------------------------------|--------------------------------------|----------------------------|
-| POST   | /api/v1/auth/login           | Login, get JWT and user info         | Public                     |
-| POST   | /api/v1/users                | Register new user                    | Public                     |
-| GET    | /api/v1/users                | List users                           | Admin                      |
-| GET    | /api/v1/users/:userId        | Get user details                     | Owner or Admin             |
-| PATCH  | /api/v1/users/:userId        | Update user                          | Owner or Admin             |
-| DELETE | /api/v1/users/:userId        | Delete/deactivate user               | Owner or Admin             |
-| GET    | /api/v1/products             | List products                        | Public                     |
-| GET    | /api/v1/products/:productId  | Get product                          | Public                     |
-| POST   | /api/v1/products             | Create product                       | Admin                      |
-| PATCH  | /api/v1/products/:productId  | Update product                       | Admin                      |
-| DELETE | /api/v1/products/:productId  | Delete product                       | Admin                      |
-| POST   | /api/v1/orders               | Create order                         | Authenticated user         |
-| GET    | /api/v1/orders               | List orders                          | Authenticated user / Admin |
-| GET    | /api/v1/orders/:orderId      | Get order details                    | Owner or Admin             |
-| PATCH  | /api/v1/orders/:orderId      | Update order                         | Owner or Admin             |
-| DELETE | /api/v1/orders/:orderId      | Cancel/delete order                  | Owner or Admin             |
-| GET    | /api/v1/reviews              | List reviews                         | Public                     |
-| GET    | /api/v1/reviews/:reviewId    | Get review                           | Public                     |
-| POST   | /api/v1/reviews              | Create review                        | Authenticated user         |
-| PATCH  | /api/v1/reviews/:reviewId    | Update review                        | Owner or Admin             |
-| DELETE | /api/v1/reviews/:reviewId    | Delete review                        | Owner or Admin             |
+| Method | Path                        | Description                  | Auth                       |
+|--------|-----------------------------|------------------------------|----------------------------|
+| POST   | /api/v1/auth/login          | Login, get JWT and user info | Public                     |
+| POST   | /api/v1/users               | Register new user            | Public                     |
+| GET    | /api/v1/users               | List users                   | Admin                      |
+| GET    | /api/v1/users/:userId       | Get user details             | Owner or Admin             |
+| PATCH  | /api/v1/users/:userId       | Update user                  | Owner or Admin             |
+| DELETE | /api/v1/users/:userId       | Delete/deactivate user       | Owner or Admin             |
+| GET    | /api/v1/products            | List products                | Public                     |
+| GET    | /api/v1/products/:productId | Get product                  | Public                     |
+| POST   | /api/v1/products            | Create product               | Admin                      |
+| PATCH  | /api/v1/products/:productId | Update product               | Admin                      |
+| DELETE | /api/v1/products/:productId | Delete product               | Admin                      |
+| POST   | /api/v1/orders              | Create order                 | Authenticated user         |
+| GET    | /api/v1/orders              | List orders                  | Authenticated user / Admin |
+| GET    | /api/v1/orders/:orderId     | Get order details            | Owner or Admin             |
+| PATCH  | /api/v1/orders/:orderId     | Update order                 | Owner or Admin             |
+| DELETE | /api/v1/orders/:orderId     | Cancel/delete order          | Owner or Admin             |
+| GET    | /api/v1/reviews             | List reviews                 | Public                     |
+| GET    | /api/v1/reviews/:reviewId   | Get review                   | Public                     |
+| POST   | /api/v1/reviews             | Create review                | Authenticated user         |
+| PATCH  | /api/v1/reviews/:reviewId   | Update review                | Owner or Admin             |
+| DELETE | /api/v1/reviews/:reviewId   | Delete review                | Owner or Admin             |
 
 ## Common for all endpoints
 
