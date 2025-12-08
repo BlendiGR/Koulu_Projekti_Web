@@ -8,11 +8,7 @@ export const registerSchema = (t) =>
         .min(3, t("register.fullName.min"))
         .regex(/^[A-Za-zÀ-ÿ\s'-]+$/, t("register.fullName.invalid")),
 
-      email: z.string().email(t("register.email.invalid")),
-
-      phone: z
-        .string()
-        .regex(/^(?:\+358|0)\s?\d[\d\s-]{5,}$/, t("register.phone.invalid")),
+      email: z.email(t("register.email.invalid")),
 
       password: z
         .string()

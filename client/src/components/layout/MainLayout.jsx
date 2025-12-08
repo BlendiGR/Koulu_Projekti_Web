@@ -17,7 +17,7 @@ const MainLayout = () => {
   }, []);
 
   return (
-    <div>
+    <div >
       <NavBar />
       <main className={location.pathname === "/" ? "" : "mt-22 md:mt-22"}>
         <Outlet />
