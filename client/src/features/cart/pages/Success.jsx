@@ -15,20 +15,22 @@ const Success = () => {
           <CircleCheckBig size={100} color="green" />
         </span>
         <h1 className="md:text-5xl text-4xl pt-3 font-extrabold">
-          Thank you for <span className="text-red-100">Ordering!</span>
+          {t("success.titleOne")} <span className="text-red-100">{t("success.titleTwo")}</span>
         </h1>
         <p className="text-sm md:text-xl mb-2 text-center font-medium text-gray-600">
-          Your delicious meal is on its way! We've received your order and
-          started preparing it.
+          {t("success.subtitle")}
         </p>
         <RedButton
           className="mt-4 text-2xl w-[50%] font-semibold"
           onClick={() => navigate("/orders/" + orderId)}
         >
-          Track Order
+          {t("success.trackOrder")}
         </RedButton>
-        <button className="bg-beige hover:bg-gray-100 active:bg-gray-200 text-black rounded-xl shadow-sm active:scale-101 transition-all duration-200 cursor-pointer text-2xl py-3 px-5 w-[50%]">
-          Back to Home
+        <button 
+          onClick={() => navigate("/")}
+          className="bg-beige hover:bg-gray-100 active:bg-gray-300 text-black rounded-xl shadow-sm active:scale-101 transition-all duration-200 cursor-pointer text-2xl py-3 px-5 w-[50%]"
+        >
+          {t("success.home")}
         </button>
       </div>
     </div>

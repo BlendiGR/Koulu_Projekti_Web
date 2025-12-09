@@ -10,12 +10,12 @@ const Login = () => {
   return (
     <div className="flex flex-col md:flex-row">
       <div
-        className="flex flex-col items-center md:items-end justify-center py-3 px-4 md:pr-12 w-full md:w-1/2 bg-cover bg-center mobile-bg-only"
+        className="flex flex-col items-center md:items-end justify-center py-3 px-4 md:pr-12 w-full md:w-1/2 bg-cover bg-center mobile-bg-only" // mobile-bg-only custom class to display background image only on mobile 
         style={{
           backgroundImage: "url('/src/assets/images/Hero-Background.png')",
         }}
       >
-        <div className="w-full max-w-md p-6 mb-10">
+        <div className="w-full min-h-screen max-w-md p-6 mb-10">
           <div className="text-center mb-10">
             <h1 className="text-white md:text-black text-5xl mt-5 font-extrabold">
               Welcome to <span className="text-red-600">Fooder</span>
@@ -49,7 +49,7 @@ const Login = () => {
               </button>
             </div>
 
-            <div className="relative overflow-hidden min-h-[480px] transition-all duration-300">
+            <div className="relative overflow-hidden transition-all duration-300">
               <div
                 className={`transition-all duration-300 ease-in-out ${
                   activeTab === "login"

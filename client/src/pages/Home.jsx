@@ -78,21 +78,10 @@ const Home = () => {
           <p className="lg:text-xl text-lg text-black-100 font-medium">
             {t("home.about.p1")}
           </p>
-
           <p className="lg:text-xl text-lg text-gray-600">
             {t("home.about.p2")}
           </p>
         </div>
-
-        <div
-          className="mt-16 lg:max-w-[80%] mx-auto bg-beige p-6 rounded-3xl
-                        flex flex-col lg:flex-row justify-between gap-8"
-        >
-          {contactCards.map(({ icon, title, text }) => (
-            <InfoTile key={title} icon={icon} title={title} text={text} />
-          ))}
-        </div>
-
         <div className="mt-16 lg:max-w-[80%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {featureCards.map(({ icon, title, text, glow }) => (
             <FeatureCard

@@ -3,9 +3,14 @@ import { z } from "zod";
 export const registerSchema = (t) =>
   z
     .object({
-      fullName: z
+      firstName: z
         .string()
-        .min(3, t("register.fullName.min"))
+        .min(2, t("register.firstName.min"))
+        .regex(/^[\p{L}](?:[\p{L}\p{M}]|[ '-](?=[\p{L}]))*[\p{L}]$/u, t("register.fullName.invalid")),
+
+      lastName: z
+        .string()
+        .min(2, t("register.lastName.min"))
         .regex(/^[\p{L}](?:[\p{L}\p{M}]|[ '-](?=[\p{L}]))*[\p{L}]$/u, t("register.fullName.invalid")),
 
       email: z.email(t("register.email.invalid")),

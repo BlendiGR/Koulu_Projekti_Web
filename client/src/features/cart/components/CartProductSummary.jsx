@@ -1,11 +1,13 @@
 import { Trash2 } from "lucide-react";
+import { useLang } from "/src/hooks/useLang.js";
 
 const CartProductSummary = ({ item, index, deleteCartItem, cartItems }) => {
+  const { t } = useLang();
   return (
     <div key={item.id}>
       <div className="flex flex-row items-center gap-4 md:gap-6">
         <img
-          src={item.imageUrl}
+          src={"/" + item.imageUrl}
           alt={item.name}
           className="w-24 h-24 md:w-32 md:h-32 object-cover rounded-xl shadow-sm"
         />
@@ -22,7 +24,7 @@ const CartProductSummary = ({ item, index, deleteCartItem, cartItems }) => {
           </div>
           <div className="flex justify-between items-end mt-4">
             <div className="flex items-center gap-2 bg-white/50 px-3 py-1 rounded-lg">
-              <span className="text-sm text-gray-600">Qty:</span>
+              <span className="text-sm text-gray-600">{t("cart.quantity")}:</span>
               <span className="font-semibold">{item.quantity}</span>
             </div>
             <p className="font-bold text-lg text-gray-800">

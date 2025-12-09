@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useAuth } from "/src/features/auth/hooks/useAuth.js";
 import RedButton from "/src/components/common/ui/RedButton";
 
+import { combineName } from "/src/utils/formatters.js";
+
 const RegisterForm = ({ t, state }) => {
   const { handleRegister } = useAuth();
   const [backendError, setBackendError] = useState(null);
@@ -21,11 +23,10 @@ const RegisterForm = ({ t, state }) => {
 
   const onSubmit = async (data) => {
     const payLoad = {
-      username: data.fullName,
+      username: combineName(data.firstName, data.lastName),
       email: data.email,
       password: data.password,
     };
-    console.log(payLoad);
     setBackendError(null);
     const res = await handleRegister(payLoad);
 
@@ -47,17 +48,31 @@ const RegisterForm = ({ t, state }) => {
       )}
 
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col">
-          <label className="font-medium">{t("register.fullName.label")}</label>
-          <input
-            type="text"
-            placeholder={t("register.fullName.placeholder")}
-            {...register("fullName")}
-            className="border border-gray-300 p-2 rounded bg-white placeholder:text-gray-400"
-          />
-          {errors.fullName && (
-            <p className="text-red-500 text-sm">{errors.fullName.message}</p>
-          )}
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col w-full">
+            <label className="font-medium">{t("form.firstName.label")}</label>
+            <input
+              type="text"
+              placeholder={t("form.firstName.placeholder")}
+              {...register("firstName")}
+              className="border border-gray-300 p-2 rounded bg-white placeholder:text-gray-400"
+            />
+            {errors.firstName && (
+              <p className="text-red-500 text-sm">{errors.firstName.message}</p>
+            )}
+          </div>
+          <div className="flex flex-col w-full">
+            <label className="font-medium">{t("form.lastName.label")}</label>
+            <input
+              type="text"
+              placeholder={t("form.lastName.placeholder")}
+              {...register("lastName")}
+              className="border border-gray-300 p-2 rounded bg-white placeholder:text-gray-400"
+            />
+            {errors.lastName && (
+              <p className="text-red-500 text-sm">{errors.lastName.message}</p>
+            )}
+          </div>
         </div>
 
         <div className="flex flex-col">

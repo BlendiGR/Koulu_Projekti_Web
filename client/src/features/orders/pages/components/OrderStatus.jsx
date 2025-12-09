@@ -1,27 +1,29 @@
-import { Package, Truck, CheckCircle } from "lucide-react";
-
-const steps = [
-  {
-    key: "PREPARING",
-    label: "Preparing",
-    sub: "We're cooking your order",
-    icon: Package,
-  },
-  {
-    key: "DELIVERING",
-    label: "Delivering",
-    sub: "On the way to you",
-    icon: Truck,
-  },
-  {
-    key: "DELIVERED",
-    label: "Delivered",
-    sub: "Enjoy your meal!",
-    icon: CheckCircle,
-  },
-];
+import { CookingPot, Truck, CheckCircle } from "lucide-react";
+import { useLang } from "/src/hooks/useLang.js";
 
 const OrderStatus = ({ status = "PREPARING" }) => {
+  const { t } = useLang();
+  
+  const steps = [
+    {
+      key: "PREPARING",
+      label: t("orderStatus.preparing.label"),
+      sub: t("orderStatus.preparing.sub"),
+      icon: CookingPot,
+    },
+    {
+      key: "DELIVERING",
+      label: t("orderStatus.delivering.label"),
+      sub: t("orderStatus.delivering.sub"),
+      icon: Truck,
+    },
+    {
+      key: "DELIVERED",
+      label: t("orderStatus.delivered.label"),
+      sub: t("orderStatus.delivered.sub"),
+      icon: CheckCircle,
+    },
+  ];
   const activeIndex = steps.findIndex((s) => s.key === status);
   let progressPercentage = 0;
   if (status === "PREPARING") {

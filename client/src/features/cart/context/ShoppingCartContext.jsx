@@ -30,18 +30,18 @@ export const CartProvider = ({ children }) => {
     }
   }, [cartItems]);
 
-  const addCartItem = (item) => {
+  const addCartItem = (item, quantity = 1) => {
     if (!item) return;
     setCartItems((prev) => {
       const existing = prev.find((i) => i.id === item.id);
       if (existing) {
         return prev.map((i) =>
           i.id === item.id
-            ? { ...i, ...item, quantity: (i.quantity ?? 0) + 1 }
+            ? { ...i, ...item, quantity: (i.quantity ?? 0) + quantity }
             : i
         );
       }
-      return [...prev, { ...item, quantity: 1 }];
+      return [...prev, { ...item, quantity: quantity }];
     });
   };
 
