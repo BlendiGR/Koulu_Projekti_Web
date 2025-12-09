@@ -1,5 +1,5 @@
 import { useLang } from "/src/hooks/useLang.js";
-import { useOrder } from "/src/hooks/apiHooks.js";
+import { useOrder } from "/src/hooks/api";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import OrderStatus from "./components/OrderStatus";

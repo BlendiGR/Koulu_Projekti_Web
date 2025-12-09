@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router";
 import { useCart } from "/src/features/cart/hooks/useCart.js";
-import { useOrder } from "/src/hooks/apiHooks";
+import { useOrder } from "/src/hooks/api";
 import { useAuth } from "/src/features/auth/hooks/useAuth";
 import { useLoading } from "/src/hooks/useLoading.js";
 

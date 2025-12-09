@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useProduct } from "/src/hooks/apiHooks.js";
+import { useProduct } from "/src/hooks/api";
 
 const AdminPanel = () => {
   const { getProducts, createProduct } = useProduct();
