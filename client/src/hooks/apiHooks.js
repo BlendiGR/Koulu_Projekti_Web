@@ -21,7 +21,7 @@ export const useUser = () => {
   };
 
   const postUser = async (inputs) => {
-    return await fetchData(`${API}/auth/register`, {
+    return await fetchData(`${API}/users`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(inputs),
@@ -94,10 +94,10 @@ export const useOrder = () => {
         body: JSON.stringify({
           userId: user.userId,
           destinationAddress: fullAddress,
-          products: items.map(item => ({
+          products: items.map((item) => ({
             productId: item.id,
-            quantity: item.quantity || 1 
-          }))
+            quantity: item.quantity || 1,
+          })),
         }),
       });
 
@@ -122,7 +122,7 @@ export const useOrder = () => {
     }
 
     return res.data;
-  }
+  };
 
   return { submitOrder, loading, error, order, getOrderById };
 };

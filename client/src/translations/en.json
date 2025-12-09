@@ -15,6 +15,13 @@
     "subheading": "Crafted with passion, served with love. Experience the best comfort food in town.",
     "cta": "Order Now"
   },
+  "success": {
+    "titleOne": "Thank you for",
+    "titleTwo": "Ordering!",
+    "subtitle": "Your delicious meal is on its way! We've received your order and started preparing it.",
+    "trackOrder": "Track Order",
+    "home": "Back to Home"
+  },
   "home": {
     "about": {
       "titlep1": "About",
@@ -38,10 +45,12 @@
       "awardText": "Voted \"Best Burger in Town\" for 5 consecutive years"
     },
     "mostOrdered": {
-      "title": "Most Ordered"
+      "titleOne": "Most",
+      "titleTwo": "Ordered"
     },
     "reviews": {
-      "title": "Customer Reviews",
+      "titleOne": "Customer",
+      "titleTwo": " Reviews",
       "subtitle": "See what our customers say about us!"
     }
   },
@@ -52,7 +61,9 @@
     "shoppingCart": "Shopping Cart",
     "proceedCheckout": "Proceed to Checkout",
     "empty": "Your cart is empty.",
-    "loginToCheckout": "Login to Checkout"
+    "loginToCheckout": "Login to Checkout",
+    "close": "Continue Shopping",
+    "quantity": "Quantity"
   },
   "checkout": {
     "title": "Checkout",
@@ -66,9 +77,6 @@
     "placeOrder": "Place Order",
     "customer": "Customer"
   },
-  "global": {
-    "processing": "Processing..."
-  },
   "orderSummary": {
     "title": "Order Summary",
     "totalNoTax": "Total without tax",
@@ -76,6 +84,34 @@
     "total": "Total",
     "items": "items",
     "item": "item"
+  },
+  "orderTrack": {
+    "tracking": "Tracking",
+    "order": "Order",
+    "estimatedDelivery": "Estimated delivery time",
+    "notAvailable": "N/A",
+    "orderProducts": "Products",
+    "product": "Products",
+    "orderId": "Order ID",
+    "destinationAddress": "Delivery Address",
+    "orderDate": "Order Date",
+    "orderStatus": "Status",
+    "orderTotal": "Total",
+    "orderDetails": "Details"
+  },
+  "orderStatus": {
+    "preparing": {
+      "label": "Preparing",
+      "sub": "We're cooking your order"
+    },
+    "delivering": {
+      "label": "Delivering",
+      "sub": "On the way to you"
+    },
+    "delivered": {
+      "label": "Delivered",
+      "sub": "Enjoy your meal!"
+    }
   },
   "footer": {
     "since": "Serving since 2025.",
@@ -112,10 +148,14 @@
   "register": {
     "fullName": {
       "min": "Full name must be at least 3 characters",
-      "invalid": "Full name contains invalid characters"
+      "invalid": "Full name contains invalid characters",
+      "label": "Full Name",
+      "placeholder": "John Doe"
     },
     "email": {
-      "invalid": "Invalid email format"
+      "invalid": "Invalid email format",
+      "label": "Email",
+      "placeholder": "john@example.com"
     },
     "phone": {
       "invalid": "Invalid Finnish phone number"
@@ -125,10 +165,14 @@
       "uppercase": "Password must contain an uppercase letter",
       "lowercase": "Password must contain a lowercase letter",
       "number": "Password must contain a number",
-      "symbol": "Password must contain a symbol"
+      "symbol": "Password must contain a symbol",
+      "label": "Password",
+      "placeholder": "********"
     },
     "confirmPassword": {
-      "mismatch": "Passwords do not match"
+      "mismatch": "Passwords do not match",
+      "label": "Confirm Password",
+      "placeholder": "********"
     },
     "terms": {
       "required": "You must accept the terms to continue"
@@ -189,7 +233,23 @@
     "login": {
       "error": {
         "message": "Invalid email or password!"
+      },
+      "forgotPassword": "Forgot password?"
+    },
+    "register": {
+      "button": "Create Account",
+      "error": {
+        "alreadyExists": "Username or email already exists!"
+      },
+      "terms": {
+        "agree": "I agree to the",
+        "service": "Terms of Service",
+        "and": "and",
+        "privacy": "Privacy Policy"
       }
     }
+  },
+  "global": {
+    "processing": "Processing..."
   }
 }

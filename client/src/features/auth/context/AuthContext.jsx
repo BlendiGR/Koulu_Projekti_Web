@@ -9,7 +9,18 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { getUserByToken, postLogin } = useUser();
+  const { getUserByToken, postLogin, postUser } = useUser();
+
+  const handleRegister = async (credientials) => {
+    const registerRes = await postUser(credientials);
+    if (!registerRes.success) {
+      return registerRes;
+    }
+
+    navigate("/login");
+
+    return { success: true };
+  };
 
   const handleLogin = async (credentials) => {
     const loginRes = await postLogin(credentials);
@@ -23,7 +34,7 @@ const AuthProvider = ({ children }) => {
 
     localStorage.setItem("token", token);
     setUser(user);
-    console.log(user)
+    console.log(user);
 
     if (user.role === "ADMIN") {
       navigate("/admin");
@@ -51,7 +62,7 @@ const AuthProvider = ({ children }) => {
       localStorage.removeItem("token");
       return;
     }
-    console.log(meRes)
+    console.log(meRes);
     setUser(meRes.data.data);
     navigate(location.pathname);
   };
@@ -63,6 +74,7 @@ const AuthProvider = ({ children }) => {
         handleLogin,
         handleLogout,
         handleAutoLogin,
+        handleRegister,
       }}
     >
       {children}

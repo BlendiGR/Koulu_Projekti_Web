@@ -30,16 +30,18 @@ export const CartProvider = ({ children }) => {
     }
   }, [cartItems]);
 
-  const addCartItem = (item) => {
+  const addCartItem = (item, quantity = 1) => {
     if (!item) return;
     setCartItems((prev) => {
       const existing = prev.find((i) => i.id === item.id);
       if (existing) {
         return prev.map((i) =>
-          i.id === item.id ? { ...i, ...item, quantity: (i.quantity ?? 0) + 1 } : i
+          i.id === item.id
+            ? { ...i, ...item, quantity: (i.quantity ?? 0) + quantity }
+            : i
         );
       }
-      return [...prev, { ...item, quantity: 1 }];
+      return [...prev, { ...item, quantity: quantity }];
     });
   };
 
@@ -53,9 +55,7 @@ export const CartProvider = ({ children }) => {
 
       if (existingItem.quantity && existingItem.quantity > 1) {
         return prev.map((item) =>
-          item.id === itemId
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
+          item.id === itemId ? { ...item, quantity: item.quantity - 1 } : item
         );
       } else {
         return prev.filter((item) => item.id !== itemId);
@@ -65,12 +65,10 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => setCartItems([]);
 
-  // Calculate total items
   const totalItems = useMemo(() => {
     return cartItems.reduce((sum, item) => sum + (item.quantity ?? 0), 0);
   }, [cartItems]);
 
-  // Calculate total price (including tax)
   const totalPrice = useMemo(() => {
     return cartItems.reduce(
       (sum, item) => sum + (Number(item.price) || 10) * item.quantity,
@@ -78,12 +76,9 @@ export const CartProvider = ({ children }) => {
     );
   }, [cartItems]);
 
-  // Calculate tax (14%)
   const totalTax = useMemo(() => {
     return totalPrice * 0.14;
   }, [totalPrice]);
-
-  // Calculate price without tax
   const withoutTax = useMemo(() => {
     return totalPrice - totalTax;
   }, [totalPrice, totalTax]);

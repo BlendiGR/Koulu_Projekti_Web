@@ -15,11 +15,18 @@
     "subheading": "Valmistettu intohimolla, tarjoiltu rakkaudella. Koe kaupungin paras kotiruoka.",
     "cta": "Tilaa nyt"
   },
+  "success": {
+    "titleOne": "Kiitos",
+    "titleTwo": "tilauksestasi!",
+    "subtitle": "Herkullinen ateriasi on tulossa! Olemme vastaanottaneet tilauksesi ja aloittaneet sen valmistuksen.",
+    "trackOrder": "Seuraa tilausta",
+    "home": "Takaisin kotiin"
+  },
   "home": {
     "about": {
       "titlep1": "Tietoa",
       "titlep2": "Fooderista",
-      "p1": "Alusta asti Fooder Pizzeria on ollut naapuruston luottopaikka nopealle ja maukkaalle lohturualle. Tuoreista pizzoista meheviin burgereihin ja rapeisiin ranskalaisiin – teemme klassikot nopeasti ja kunnolla. Keskellä kaupunkia sijaitseva Fooder sopii kaikille, jotka haluavat hyvää ruokaa ilman odotusta.",
+      "p1": "Alusta asti Fooder Pizzeria on ollut naapuruston luottopaikka nopealle ja maukkaalle lohturuuale. Tuoreista pizzoista meheviin burgereihin ja rapeisiin ranskalaisiin – teemme klassikot nopeasti ja kunnolla. Keskellä kaupunkia sijaitseva Fooder sopii kaikille, jotka haluavat hyvää ruokaa ilman odotusta.",
       "p2": "Kaikki alkaa tuoreista raaka-aineista ja selkeästä valmistuksesta. Taikinamme tehdään päivittäin, pihvimme paistetaan tilauksesta ja ranskalaiset tarjoillaan aina kuumina ja rapeina. Hankimme tuoreet tuotteet luotettavilta paikallisilta toimittajilta."
     },
     "contact": {
@@ -38,10 +45,12 @@
       "awardText": "Valittu \"Kaupungin paras burgeri\" 5 vuotta putkeen"
     },
     "mostOrdered": {
-      "title": "Eniten tilatut"
+      "titleOne": "Eniten",
+      "titleTwo": "tilatut"
     },
     "reviews": {
-      "title": "Asiakasarviot",
+      "titleOne": "Asiakas",
+      "titleTwo": "arviot",
       "subtitle": "Katso mitä asiakkaamme sanovat!"
     }
   },
@@ -52,7 +61,9 @@
     "shoppingCart": "Ostoskori",
     "proceedCheckout": "Siirry kassalle",
     "empty": "Ostoskorisi on tyhjä.",
-    "loginToCheckout": "Kirjaudu siirryttäksesi kassalle"
+    "loginToCheckout": "Kirjaudu siirryttäksesi kassalle",
+    "close": "Jatka ostoksia",
+    "quantity": "Määrä"
   },
   "checkout": {
     "title": "Kassa",
@@ -66,9 +77,6 @@
     "placeOrder": "Tilaa",  
     "customer": "Tilaaja"
   },
-  "global": {
-    "processing": "Käsitellään..."
-  },
   "orderSummary": {
     "title": "Tilauksen yhteenveto",
     "totalNoTax": "Yhteensä (alv 0%)",
@@ -76,6 +84,34 @@
     "total": "Yhteensä",
     "items": "tuotetta",
     "item": "tuote"
+  },
+  "orderTrack": {
+    "tracking": "Seuranta",
+    "order": "Tilaus",
+    "estimatedDelivery": "Arvioitu toimitusaika",
+    "notAvailable": "Ei tiedossa",
+    "orderProducts": "Tuotteet",
+    "product": "Tuotetta",
+    "orderId": "Tilausnumero",
+    "destinationAddress": "Toimitusosoite",
+    "orderDate": "Tilauspäivä",
+    "orderStatus": "Tila",
+    "orderTotal": "Yhteensä",
+    "orderDetails": "Tiedot"
+  },
+  "orderStatus": {
+    "preparing": {
+      "label": "Valmistetaan",
+      "sub": "Valmistamme tilaustasi"
+    },
+    "delivering": {
+      "label": "Toimitetaan",
+      "sub": "Matkalla sinulle"
+    },
+    "delivered": {
+      "label": "Toimitettu",
+      "sub": "Nautiskele ateriasta!"
+    }
   },
   "footer": {
     "since": "Palvellut vuodesta 2025.",
@@ -112,10 +148,14 @@
   "register": {
     "fullName": {
       "min": "Koko nimen tulee olla vähintään 3 merkkiä pitkä",
-      "invalid": "Nimi sisältää virheellisiä merkkejä"
+      "invalid": "Nimi sisältää virheellisiä merkkejä",
+      "label": "Koko nimi",
+      "placeholder": "Matti Meikäläinen"
     },
     "email": {
-      "invalid": "Sähköpostiosoite ei ole kelvollinen"
+      "invalid": "Sähköpostiosoite ei ole kelvollinen",
+      "label": "Sähköposti",
+      "placeholder": "matti@esimerkki.fi"
     },
     "phone": {
       "invalid": "Puhelinnumero ei ole kelvollinen"
@@ -125,10 +165,14 @@
       "uppercase": "Salasanassa tulee olla iso kirjain",
       "lowercase": "Salasanassa tulee olla pieni kirjain",
       "number": "Salasanassa tulee olla numero",
-      "symbol": "Salasanassa tulee olla erikoismerkki"
+      "symbol": "Salasanassa tulee olla erikoismerkki",
+      "label": "Salasana",
+      "placeholder": "********"
     },
     "confirmPassword": {
-      "mismatch": "Salasanat eivät täsmää"
+      "mismatch": "Salasanat eivät täsmää",
+      "label": "Vahvista salasana",
+      "placeholder": "********"
     },
     "terms": {
       "required": "Hyväksy palvelun ehdot jatkaaksesi"
@@ -189,7 +233,23 @@
     "login": {
       "error": {
         "message": "Väärä sähköposti tai salasana!"
+      },
+      "forgotPassword": "Unohditko salasanan?"
+    },
+    "register": {
+      "button": "Luo tili",
+      "error": {
+        "alreadyExists": "Käyttäjätunnus tai sähköposti on jo käytössä!"
+      },
+      "terms": {
+        "agree": "Hyväksyn",
+        "service": "Palvelun ehdot",
+        "and": "ja",
+        "privacy": "Tietosuojakäytännön"
       }
     }
+  },
+  "global": {
+    "processing": "Käsitellään..."
   }
 }

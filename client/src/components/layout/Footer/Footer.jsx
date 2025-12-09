@@ -20,13 +20,11 @@ const Footer = () => {
   return (
     <footer className="bg-black-200 text-white py-10">
       <div className="max-w-6xl mx-auto grid grid-cols-1 px-5 md:grid-cols-5 gap-10 text-center md:text-left">
-        {/* Logo + tagline */}
         <div className="flex flex-col items-center md:items-start">
-          <img src={LogoWhite} alt="Logo" className="h-10 mb-4" />
+          <img src={LogoWhite} alt="Logo" className="h-16 mb-4" />
           <p className="text-brown-100 text-sm">{t("footer.since")}</p>
         </div>
 
-        {/* Quick links */}
         <div className="flex flex-col items-center md:items-start">
           <p className="font-semibold mb-2">{t("footer.quickLinks")}</p>
           {navLinks.map(({ to, label }) => (
@@ -40,14 +38,12 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* Contact */}
         <div className="flex flex-col items-center md:items-start">
           <p className="font-semibold mb-2">{t("footer.customerService")}</p>
           <p className="text-brown-100">050 000 000</p>
           <p className="text-brown-100">info@web-fooder.fi</p>
         </div>
 
-        {/* Opening hours */}
         <div className="flex flex-col items-center md:items-start">
           <p className="font-semibold mb-2">{t("footer.openingHours")}</p>
           <div className="flex flex-col gap-3">
@@ -57,7 +53,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Socials */}
         <div className="flex flex-col items-center md:items-start">
           <p className="font-semibold mb-2">{t("footer.followUs")}</p>
           <div className="flex flex-row gap-3">

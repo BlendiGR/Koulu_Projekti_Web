@@ -8,7 +8,7 @@ import { useLocation } from "react-router";
 
 const MainLayout = () => {
   const { handleAutoLogin } = useAuth();
-    const location = useLocation();
+  const location = useLocation();
 
   console.log("Mounted!");
 
@@ -19,7 +19,7 @@ const MainLayout = () => {
   return (
     <div>
       <NavBar />
-      <main className={location.pathname === "/" ? "" : "mt-22 md:mt-22"}>
+      <main className={location.pathname === "/" ? "" : "mt-17 md:mt-22"}>
         <Outlet />
         <Toaster position="bottom-right" />
       </main>

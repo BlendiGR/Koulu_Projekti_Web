@@ -50,7 +50,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-brown-100">
           <h2 className="text-2xl font-bold text-gray-800">
-             {t("cart.shoppingCart")}
+            {t("cart.shoppingCart")}
           </h2>
           <button
             onClick={onClose}
@@ -105,22 +105,23 @@ const CartDrawer = ({ isOpen, onClose }) => {
               actionButton={
                 user ? (
                   <RedButton
-                  fullWidth
-                  size="lg"
-                  onClick={handleCheckout}
-                >
-                  {t("cart.proceedCheckout")}
-                </RedButton>  
+                    fullWidth
+                    size="lg"
+                    className="font-semibold"
+                    onClick={handleCheckout}
+                  >
+                    {t("cart.proceedCheckout")}
+                  </RedButton>
                 ) : (
                   <RedButton
-                  fullWidth
-                  size="lg"
-                  onClick={handleLogin}
-                >
-                  {t("cart.loginToCheckout")}
-                </RedButton>
+                    fullWidth
+                    size="lg"
+                    onClick={handleLogin}
+                    className="font-semibold"
+                  >
+                    {t("cart.loginToCheckout")}
+                  </RedButton>
                 )
-                
               }
             />
           </div>

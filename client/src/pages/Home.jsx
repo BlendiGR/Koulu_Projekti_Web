@@ -68,31 +68,20 @@ const Home = () => {
         ctaTo="/menu"
       />
 
-      <section className="p-8 mt-20 bg-white text-center">
-        <h2 className="md:text-5xl text-4xl mb-4">
+      <section className="p-8 mt-25 bg-white text-center">
+        <h2 className="md:text-5xl text-4xl mb-4 font-bold">
           {t("home.about.titlep1")}{" "}
           <span className="text-red-100">{t("home.about.titlep2")}</span>
         </h2>
 
         <div className="lg:max-w-[70%] mx-auto space-y-8 mt-10">
-          <p className="lg:text-xl text-lg text-black-100">
+          <p className="lg:text-xl text-lg text-black-100 font-medium">
             {t("home.about.p1")}
           </p>
-
           <p className="lg:text-xl text-lg text-gray-600">
             {t("home.about.p2")}
           </p>
         </div>
-
-        <div
-          className="mt-16 lg:max-w-[80%] mx-auto bg-beige p-6 rounded-3xl
-                        flex flex-col lg:flex-row justify-between gap-8"
-        >
-          {contactCards.map(({ icon, title, text }) => (
-            <InfoTile key={title} icon={icon} title={title} text={text} />
-          ))}
-        </div>
-
         <div className="mt-16 lg:max-w-[80%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {featureCards.map(({ icon, title, text, glow }) => (
             <FeatureCard
@@ -106,9 +95,10 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="p-8 mt-20 bg-beige text-center shadow-xl rounded-3xl">
-        <h3 className="md:text-5xl text-4xl mb-4 pt-11">
-          {t("home.mostOrdered.title")}
+      <section className="py-25 mt-20 bg-beige text-center shadow-xl rounded-3xl">
+        <h3 className="md:text-5xl text-4xl mb-4 font-bold">
+          {t("home.mostOrdered.titleOne")}{" "}
+          <span className="text-red-100">{t("home.mostOrdered.titleTwo")}</span>
         </h3>
         <div className="flex md:flex-row flex-col justify-center items-center gap-10 mt-10">
           {mostBuyedProducts.map((item) => (
@@ -117,11 +107,12 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-20">
-        <p className="md:text-5xl text-center text-4xl mb-4">
-          {t("home.reviews.title")}
+      <section className="py-25">
+        <p className="md:text-5xl text-center text-4xl mb-4 font-bold">
+          {t("home.reviews.titleOne")}
+          <span className="text-red-100">{t("home.reviews.titleTwo")}</span>
         </p>
-        <p className="text-center">{t("home.reviews.subtitle")}</p>
+        <p className="text-center font-medium">{t("home.reviews.subtitle")}</p>
         <div className="mt-10">
           <HorizontalReviewSlider reviews={reviews} />
         </div>

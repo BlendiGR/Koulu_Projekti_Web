@@ -3,16 +3,17 @@ import { z } from "zod";
 export const registerSchema = (t) =>
   z
     .object({
-      fullName: z
+      firstName: z
         .string()
-        .min(3, t("register.fullName.min"))
-        .regex(/^[A-Za-zÀ-ÿ\s'-]+$/, t("register.fullName.invalid")),
+        .min(2, t("register.firstName.min"))
+        .regex(/^[\p{L}](?:[\p{L}\p{M}]|[ '-](?=[\p{L}]))*[\p{L}]$/u, t("register.fullName.invalid")),
 
-      email: z.string().email(t("register.email.invalid")),
-
-      phone: z
+      lastName: z
         .string()
-        .regex(/^(?:\+358|0)\s?\d[\d\s-]{5,}$/, t("register.phone.invalid")),
+        .min(2, t("register.lastName.min"))
+        .regex(/^[\p{L}](?:[\p{L}\p{M}]|[ '-](?=[\p{L}]))*[\p{L}]$/u, t("register.fullName.invalid")),
+
+      email: z.email(t("register.email.invalid")),
 
       password: z
         .string()

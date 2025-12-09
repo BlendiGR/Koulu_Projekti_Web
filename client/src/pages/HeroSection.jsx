@@ -22,17 +22,17 @@ const HeroSection = ({
       <div className="absolute inset-0 bg-black/50 rounded-b-3xl shadow-2xl"></div>
 
       <div className="relative z-10 space-y-4">
-        <h1 className="text-5xl md:text-7xl font-semibold text-white leading-tight">
+        <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-tight">
           {headline}
         </h1>
 
-        <p className="text-gray-100 max-w-xl mx-auto text-lg md:text-xl">
+        <p className="text-gray-100 max-w-xl mx-auto text-xl font-medium md:text-2xl">
           {subheading}
         </p>
 
         <Link
           to={ctaTo}
-          className="flex justify-center items-center mt-6 px-10 py-3 text-2xl md:text-4xl bg-red-100 text-white rounded-xl hover:bg-red-200 active:bg-red-900 transition mx-auto text-center w-fit"
+          className="flex justify-center items-center mt-6 px-10 py-3 text-2xl md:text-4xl font-medium bg-red-100 text-white rounded-xl hover:bg-red-200 active:bg-red-900 transition mx-auto text-center w-fit"
         >
           {ctaText}
         </Link>

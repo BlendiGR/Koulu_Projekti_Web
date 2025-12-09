@@ -1,6 +1,6 @@
 import { useLang } from "/src/hooks/useLang";
 
-const LangButton = ({color}) => {
+const LangButton = ({ color }) => {
   const { lang, setLang } = useLang();
 
   return (

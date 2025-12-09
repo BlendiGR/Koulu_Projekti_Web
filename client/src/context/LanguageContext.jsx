@@ -19,7 +19,7 @@ export const LanguageProvider = ({ children }) => {
   const t = (key) => {
     const keys = key.split(".");
     let value = dictionaries[lang];
-    
+
     for (const k of keys) {
       if (value && value[k]) {
         value = value[k];
@@ -27,7 +27,7 @@ export const LanguageProvider = ({ children }) => {
         return key;
       }
     }
-    
+
     return value;
   };
 
