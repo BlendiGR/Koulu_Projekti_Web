@@ -6,7 +6,7 @@ import {successResponse} from "./middleware/success-response.js";
 const app = express();
 
 // Static Files
-app.use(express.static("public"));
+// app.use(express.static("public"));
 app.use("/uploads", express.static("uploads"));
 
 // Body Parsers

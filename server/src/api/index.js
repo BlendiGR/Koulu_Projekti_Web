@@ -5,6 +5,7 @@ import authRouter from "./routes/auth-router.js";
 import productRouter from "./routes/product-router.js";
 import orderRouter from "./routes/order-router.js";
 import reviewRouter from "./routes/review-router.js";
+import mediaRouter from "./routes/media-router.js";
 
 const router = express.Router();
 
@@ -13,5 +14,6 @@ router.use("/users", userRouter);
 router.use("/products", productRouter);
 router.use("/orders", orderRouter);
 router.use("/reviews", reviewRouter);
+router.use("/media", mediaRouter);
 
 export default router;
