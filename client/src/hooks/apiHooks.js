@@ -134,10 +134,14 @@ export const useProduct = () => {
     // build query string
     const qs = new URLSearchParams(params).toString();
     const url = qs ? `${API}/products?${qs}` : `${API}/products`;
+    console.log(qs);
     const res = await fetchData(url);
     if (!res.success) return res;
     // unwrap server envelope: server returns { success: true, data: <payload> }
     const payload = res.data && res.data.data !== undefined ? res.data.data : res.data;
+
+    console.table(payload);
+
     return { success: true, data: payload };
   };
 
@@ -155,5 +159,35 @@ export const useProduct = () => {
     const payload = res.data && res.data.data !== undefined ? res.data.data : res.data;
     return { success: true, data: payload };
   };
-    return { getProducts, createProduct };
+
+  const updateProduct = async (productId, productData, token) => {
+    const headers = { "Content-Type": "application/json" };
+    if (token) headers.Authorization = `Bearer ${token}`;
+
+    const res = await fetchData(`${API}/products/${productId}`, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify(productData),
+    });
+
+    if (!res.success) return res;
+    const payload = res.data && res.data.data !== undefined ? res.data.data : res.data;
+    return { success: true, data: payload };
+  };
+
+  const deleteProduct = async (productId, token) => {
+    const headers = {};
+    if (token) headers.Authorization = `Bearer ${token}`;
+
+    const res = await fetchData(`${API}/products/${productId}`, {
+      method: "DELETE",
+      headers,
+    });
+
+    if (!res.success) return res;
+    const payload = res.data && res.data.data !== undefined ? res.data.data : res.data;
+    return { success: true, data: payload };
+  };
+
+  return { getProducts, createProduct, updateProduct, deleteProduct };
 };
