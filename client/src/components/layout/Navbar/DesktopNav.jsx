@@ -2,6 +2,7 @@ import LoginButton from "/src/components/common/ui/LoginButton.jsx";
 import { NavLink } from "react-router-dom";
 import ShoppingCartButton from "/src/features/cart/components/ShoppingCartButton.jsx";
 import LangButton from "/src/components/common/ui/LangButton.jsx";
+import RedButton from "../../common/ui/RedButton.jsx";
 
 const DesktopNav = ({
   navLinks,

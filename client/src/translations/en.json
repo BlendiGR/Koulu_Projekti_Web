@@ -6,7 +6,8 @@
     "profile": "Profile",
     "orders": "Orders",
     "login": "Login",
-    "signout": "Sign Out"
+    "signout": "Sign Out",
+    "admin": "Admin"
   },
   "hero": {
     "taste": "Taste",

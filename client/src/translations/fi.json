@@ -6,7 +6,8 @@
     "profile": "Profiili",
     "orders": "Tilaukset",
     "login": "Kirjaudu",
-    "signout": "Kirjaudu Ulos"
+    "signout": "Kirjaudu Ulos",
+    "admin": "Hallinta"
   },
   "hero": {
     "taste": "Maista",

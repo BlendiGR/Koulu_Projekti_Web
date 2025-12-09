@@ -31,7 +31,7 @@ const NavBar = () => {
   const navLinks = getNavLinks(user, t);
 
   // Estä scrollia kun mobile menu on auki
-  useEffect(() => {
+  /*useEffect(() => {
     if (mobileMenuOpen || cartDrawerOpen) {
       const scrollY = window.scrollY;
       
@@ -48,7 +48,7 @@ const NavBar = () => {
         window.scrollTo(0, scrollY);
       };
     }
-  }, [mobileMenuOpen, cartDrawerOpen]);
+  }, [mobileMenuOpen, cartDrawerOpen]);*/
 
   return (
     <>

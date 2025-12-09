@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "/src/components/layout/MainLayout";
-import AdminLayout from "/src/components/layout/AdminLayout";
 import Home from "/src/pages/Home";
 import Menu from "/src/features/menu/pages/Menu";
 import Visit from "/src/pages/Visit";
@@ -12,6 +11,7 @@ import ProtectedRouteAdmin from "/src/features/auth/components/ProtectedRouteAdm
 import Checkout from "/src/features/cart/pages/Checkout";
 import Success from "/src/features/cart/pages/Success";
 import OrderTrack from "/src/features/orders/pages/OrderTrack";
+import AdminPanel from "/src/features/admin/pages/AdminPanel";
 
 import { AuthProvider } from "/src/features/auth/context/AuthContext.jsx";
 import { LanguageProvider } from "/src/context/LanguageContext.jsx";
@@ -75,19 +75,17 @@ const App = () => {
                     </ProtectedRoute>
                   }
                 />
+
+                  <Route
+                    path="admin"
+                    element={
+                      <ProtectedRouteAdmin>
+                        <AdminPanel />
+                      </ProtectedRouteAdmin>
+                    }
+                  />
               </Route>
 
-              {/* Admin Reitit */}
-              <Route
-                path="admin"
-                element={
-                  <ProtectedRouteAdmin>
-                    <AdminLayout />
-                  </ProtectedRouteAdmin>
-                }
-              >
-                {/* Lisää tähän admin reitit */}
-              </Route>
             </Routes>
           </CartProvider>
         </AuthProvider>
