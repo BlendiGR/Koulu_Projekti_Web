@@ -13,14 +13,12 @@ const PaymentForm = ({ onFormChange }) => {
   });
 
   useEffect(() => {
-    onFormChange(false, { method: "mock" });
+    onFormChange(true, { method: "mock" });
   }, []);
 
   return (
     <div>
-        <div className="p-4 bg-green-50 text-green-700 rounded-lg">
-           
-        </div>
+      <div className="p-4 bg-green-50 text-green-700 rounded-lg"></div>
     </div>
   );
 };

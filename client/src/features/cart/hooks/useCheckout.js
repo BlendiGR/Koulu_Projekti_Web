@@ -43,11 +43,13 @@ export const useCheckout = () => {
       await withLoading(async () => {
         const res = await submitOrder(fullOrderData);
         if (res.success) {
-          setOrder(res.data.data);
+          setOrder(res.data);
           clearCart();
-          navigate("/success/" + res.data.data.orderId);
+          navigate("/success/" + res.data.orderId);
         } else {
-          throw new Error(res.error?.message || res.error || "Failed to place order");
+          throw new Error(
+            res.error?.message || res.error || "Failed to place order"
+          );
         }
       });
     } catch (err) {

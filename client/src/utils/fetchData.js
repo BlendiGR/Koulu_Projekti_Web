@@ -16,7 +16,7 @@ export const fetchData = async (url, options = {}) => {
 
     return {
       success: true,
-      data: json,
+      data: json.data,
     };
   } catch (err) {
     return {

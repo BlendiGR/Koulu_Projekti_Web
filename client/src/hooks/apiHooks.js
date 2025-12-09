@@ -137,7 +137,7 @@ export const useProduct = () => {
     const res = await fetchData(url);
     if (!res.success) return res;
     // unwrap server envelope: server returns { success: true, data: <payload> }
-    const payload = res.data && res.data.data !== undefined ? res.data.data : res.data;
+    const payload = res.data && res.data !== undefined ? res.data : res.data;
     return { success: true, data: payload };
   };
 
@@ -152,8 +152,8 @@ export const useProduct = () => {
     });
 
     if (!res.success) return res;
-    const payload = res.data && res.data.data !== undefined ? res.data.data : res.data;
+    const payload = res.data && res.data !== undefined ? res.data : res.data;
     return { success: true, data: payload };
   };
-    return { getProducts, createProduct };
+  return { getProducts, createProduct };
 };

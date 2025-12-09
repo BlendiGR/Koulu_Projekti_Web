@@ -22,7 +22,6 @@ const OrderTrack = () => {
     fetchOrder();
   }, []);
 
-
   console.log(order);
 
   const orderDetailsColumns = [
@@ -61,39 +60,48 @@ const OrderTrack = () => {
       ) : (
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-5rem)]">
           <h1 className="md:text-5xl text-3xl font-bold text-center ">
-            {t("orderTrack.tracking")} <span className="text-red-100">{t("orderTrack.order")} #{orderId}</span>
+            {t("orderTrack.tracking")}{" "}
+            <span className="text-red-100">
+              {t("orderTrack.order")} #{orderId}
+            </span>
           </h1>
           <div className="flex flex-col items-center justify-center w-[80%] p-4 bg-beige rounded-xl shadow-md mt-6">
             <OrderStatus status={order.status} />
             <hr className="mt-6 border-brown-100/50  w-[80%]" />
             <div className="mt-6 p-6 border-1 border-brown-100 text-brown-200 rounded-2xl bg-[#FEFCE8]">
-              <p>{t("orderTrack.estimatedDelivery")}: <strong>{t("orderTrack.notAvailable")}</strong></p>
+              <p>
+                {t("orderTrack.estimatedDelivery")}:{" "}
+                <strong>{t("orderTrack.notAvailable")}</strong>
+              </p>
             </div>
           </div>
           <div className="flex flex-col md:items-center md:justify-between mt-6 w-[80%]">
             <Dropdown
-            title={t("orderTrack.orderProducts")}
-            rightLabel={order.orderProducts?.length + ". " + t("orderTrack.product")}
-            className="mt-6 w-full"
-            children={
-              <div className="flex flex-row flex-wrap gap-6 mt-6">
-                {order.orderProducts?.map((orderProduct) => (
-                  <OrderProductSummary
-                    key={orderProduct.productId}
-                    product={orderProduct.product}
-                    quantity={orderProduct.quantity}
-                  />
-                ))}
-              </div>
-            }
-          />
+              title={t("orderTrack.orderProducts")}
+              rightLabel={
+                order.orderProducts?.length + ". " + t("orderTrack.product")
+              }
+              className="mt-6 w-full"
+              children={
+                <div className="flex flex-row flex-wrap gap-6 mt-6">
+                  {order.orderProducts?.map((orderProduct) => (
+                    <OrderProductSummary
+                      key={orderProduct.productId}
+                      product={orderProduct.product}
+                      quantity={orderProduct.quantity}
+                    />
+                  ))}
+                </div>
+              }
+            />
 
-          <Dropdown
-            title={t("orderTrack.orderDetails")}
-            className="mt-6 w-full"
-            children={<ResponsiveTable columns={orderDetailsColumns} data={order} />}
-          />
-
+            <Dropdown
+              title={t("orderTrack.orderDetails")}
+              className="mt-6 w-full"
+              children={
+                <ResponsiveTable columns={orderDetailsColumns} data={order} />
+              }
+            />
           </div>
         </div>
       )}

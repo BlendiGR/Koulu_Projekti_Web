@@ -20,7 +20,7 @@ const Checkout = () => {
     withoutTax,
   } = useCart();
   const { t } = useLang();
-  
+
   const {
     isShippingValid,
     isPaymentValid,
@@ -30,12 +30,12 @@ const Checkout = () => {
     loading,
     error,
     order,
-    user
+    user,
   } = useCheckout();
 
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-8 min-h-[calc(100vh-5rem)]">
-      <h2 className="text-3xl text-center text-red-100 font-bold py-6 text-gray-800">
+      <h2 className="text-3xl text-center text-red-100 font-bold py-6 ">
         {t("checkout.title")}
       </h2>
 
@@ -134,7 +134,9 @@ const Checkout = () => {
                     size="lg"
                     className="font-bold"
                     onClick={handlePlaceOrder}
-                    disabled={!isShippingValid || loading || order || !isPaymentValid}
+                    disabled={
+                      !isShippingValid || loading || order || !isPaymentValid
+                    }
                   >
                     {loading ? (
                       <div className="flex items-center justify-center gap-2">
