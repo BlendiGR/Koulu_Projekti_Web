@@ -5,15 +5,18 @@ import Home from "/src/pages/Home";
 import Menu from "/src/features/menu/pages/Menu";
 import Visit from "/src/pages/Visit";
 import Login from "/src/features/auth/pages/Login";
-import Cart from "/src/features/cart/pages/Cart";
 import Profile from "/src/pages/Profile";
 import Orders from "/src/features/orders/pages/Orders";
 import ProtectedRoute from "/src/features/auth/components/ProtectedRoute";
 import ProtectedRouteAdmin from "/src/features/auth/components/ProtectedRouteAdmin";
+import Checkout from "/src/features/cart/pages/Checkout";
+import Success from "/src/features/cart/pages/Success";
+import OrderTrack from "/src/features/orders/pages/OrderTrack";
 
 import { AuthProvider } from "/src/features/auth/context/AuthContext.jsx";
 import { LanguageProvider } from "/src/context/LanguageContext.jsx";
 import { CartProvider } from "/src/features/cart/context/ShoppingCartContext.jsx";
+import ScrollToTop from "/src/utils/scrollToTop.jsx";
 
 const App = () => {
   return (
@@ -21,15 +24,26 @@ const App = () => {
       <LanguageProvider>
         <AuthProvider>
           <CartProvider>
+            <ScrollToTop />
             <Routes>
               <Route element={<MainLayout />}>
                 <Route index element={<Home />} />
                 <Route path="menu" element={<Menu />} />
                 <Route path="visit" element={<Visit />} />
                 <Route path="login" element={<Login />} />
-                <Route path="cart" element={<Cart />} />
 
                 {/*  Suojatut */}
+                <Route path="checkout" element={
+                  <ProtectedRoute>
+                    <Checkout />
+                  </ProtectedRoute>
+                } />
+                <Route path="success/:orderId" element={
+                  <ProtectedRoute>
+                    <Success />
+                  </ProtectedRoute>
+                } />
+
                 <Route
                   path="profile"
                   element={
@@ -47,7 +61,16 @@ const App = () => {
                     </ProtectedRoute>
                   }
                 />
+                <Route
+                  path="orders/:orderId"
+                  element={
+                    <ProtectedRoute>
+                      <OrderTrack />
+                    </ProtectedRoute>
+                  }
+                />
               </Route>
+             
 
               {/* Admin Reitit */}
               <Route

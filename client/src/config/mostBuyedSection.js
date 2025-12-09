@@ -1,6 +1,6 @@
 export const mostBuyedProducts = [
   {
-    id: 1,
+    id: 3,
     name: "Cheese Burger",
     imageUrl: "src/assets/images/Cheese Burger.png",
     description: "Our #1 bestseller, juicy beef patty with melted cheddar.",
@@ -10,7 +10,7 @@ export const mostBuyedProducts = [
     bgColor: "white",
   },
   {
-    id: 2,
+    id: 1,
     name: "Crispy Fries",
     imageUrl: "src/assets/images/French Fries.png",
     description: "Golden, crispy perfection, perfectly seasoned.",
@@ -20,7 +20,7 @@ export const mostBuyedProducts = [
     bgColor: "white",
   },
   {
-    id: 3,
+    id: 2,
     name: "Chicken Nuggets",
     imageUrl: "src/assets/images/Chicken Nuggets.png",
     description: "Crispy on the outside, tender on the inside.",

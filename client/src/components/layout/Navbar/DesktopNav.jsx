@@ -5,20 +5,20 @@ import LangButton from "/src/components/common/ui/LangButton.jsx";
 
 const DesktopNav = ({
   navLinks,
-  selectedItems,
   textColor,
   buttonClass,
   user,
   handleLogout,
+  onCartClick,
 }) => {
   return (
-    <div className={`hidden md:flex items-center gap-20 ${textColor}`}>
+    <div className={`hidden lg:flex items-center gap-20 ${textColor}`}>
       <ul className="md:flex items-center text-lg gap-6">
         {navLinks.map((link) => (
           <li key={link.to}>
             <NavLink
               to={link.to}
-              className={({ isActive }) => isActive && "nav-active"}
+              className={({ isActive }) => isActive ? "nav-active" : undefined}
             >
               {link.label}
             </NavLink>
@@ -32,8 +32,8 @@ const DesktopNav = ({
           user={user}
           onClick={handleLogout}
         />
-        <ShoppingCartButton />
-        <LangButton />
+        <ShoppingCartButton onClick={onCartClick} />
+        <LangButton color={textColor} />
       </div>
     </div>
   );

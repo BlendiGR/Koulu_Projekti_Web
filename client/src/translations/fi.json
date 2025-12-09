@@ -1,108 +1,195 @@
 {
-  "nav.home": "Koti",
-  "nav.menu": "Ruokalista",
-  "nav.visit": "Vieraile",
-  "nav.profile": "Profiili",
-  "nav.orders": "Tilaukset",
-  "nav.login": "Kirjaudu",
-  "nav.signout": "Kirjaudu Ulos",
-
-  "hero.taste": "Maista",
-  "hero.our": "Meidän",
-  "hero.meat": "Liha",
-  "hero.subheading": "Valmistettu intohimolla, tarjoiltu rakkaudella. Koe kaupungin paras kotiruoka.",
-  "hero.cta": "Tilaa nyt",
-
-  "home.about.titlep1": "Tietoa",
-  "home.about.titlep2": "Fooderista",
-  "home.about.p1": "Alusta asti Fooder Pizzeria on ollut naapuruston luottopaikka nopealle ja maukkaalle lohturualle. Tuoreista pizzoista meheviin burgereihin ja rapeisiin ranskalaisiin – teemme klassikot nopeasti ja kunnolla. Keskellä kaupunkia sijaitseva Fooder sopii kaikille, jotka haluavat hyvää ruokaa ilman odotusta.",
-  "home.about.p2": "Kaikki alkaa tuoreista raaka-aineista ja selkeästä valmistuksesta. Taikinamme tehdään päivittäin, pihvimme paistetaan tilauksesta ja ranskalaiset tarjoillaan aina kuumina ja rapeina. Hankimme tuoreet tuotteet luotettavilta paikallisilta toimittajilta.",
-
-  "home.contact.location": "Sijainti",
-  "home.contact.phone": "Puhelin",
-  "home.contact.email": "Sähköposti",
-  "home.contact.phone.text": "Soita milloin vain!",
-  "home.contact.email.text": "Vastaamme nopeasti!",
-
-  "home.features.made": "Rakkaudella tehty",
-  "home.features.made.text": "Jokainen burger valmistetaan huolella ja intohimolla kokkiemme toimesta",
-
-  "home.features.community": "Yhteisö ensin",
-  "home.features.community.text": "Tuemme ylpeästi paikallisia viljelijöitä ja annamme takaisin yhteisölle",
-
-  "home.features.award": "Palkittu",
-  "home.features.award.text": "Valittu \"Kaupungin paras burgeri\" 5 vuotta putkeen",
-
-  "home.mostOrdered.title": "Eniten tilatut",
-
-  "home.reviews.title": "Asiakasarviot",
-  "home.reviews.subtitle": "Katso mitä asiakkaamme sanovat!",
-
-  "cart.button": "Kori",
-  "cart.addtocart": "Lisää ostoskoriin",
-  "cart.addedtocart": "Lisätty ostoskoriin",
-
-  "footer.since": "Palvellut vuodesta 2025.",
-  "footer.quickLinks": "Pikalinkit",
-  "footer.customerService": "Asiakaspalvelu",
-  "footer.openingHours": "Aukioloajat",
-  "footer.followUs": "Seuraa meitä",
-  "footer.hours.weekdays": "Ma - Pe",
-  "footer.hours.weekend": "Viikonloppu",
-  "footer.copyright": "(c) 2025 Fooder",
-  "delivery.firstName.min": "Etunimen tulee olla vähintään 2 merkkiä pitkä",
-  "delivery.lastName.min": "Sukunimen tulee olla vähintään 2 merkkiä pitkä",
-  "delivery.phone.invalid": "Puhelinnumero ei ole kelvollinen",
-  "delivery.street.min": "Katuosoite on liian lyhyt",
-  "delivery.postalCode.invalid": "Postinumeron tulee olla 5 numeroa",
-  "delivery.city.min": "Kaupungin nimen tulee olla vähintään 2 merkkiä pitkä",
-
-  "register.fullName.min": "Koko nimen tulee olla vähintään 3 merkkiä pitkä",
-  "register.fullName.invalid": "Nimi sisältää virheellisiä merkkejä",
-  "register.email.invalid": "Sähköpostiosoite ei ole kelvollinen",
-  "register.phone.invalid": "Puhelinnumero ei ole kelvollinen",
-  "register.password.min": "Salasanan tulee olla vähintään 8 merkkiä pitkä",
-  "register.password.uppercase": "Salasanassa tulee olla iso kirjain",
-  "register.password.lowercase": "Salasanassa tulee olla pieni kirjain",
-  "register.password.number": "Salasanassa tulee olla numero",
-  "register.password.symbol": "Salasanassa tulee olla erikoismerkki",
-  "register.confirmPassword.mismatch": "Salasanat eivät täsmää",
-  "register.terms.required": "Hyväksy palvelun ehdot jatkaaksesi",
-
-  "login.email.invalid": "Sähköpostiosoite ei ole kelvollinen",
-  "login.password.min": "Salasanan tulee olla vähintään 6 merkkiä pitkä",
-
-  "form.email.label": "Sähköposti",
-  "form.email.placeholder": "Syötä sähköpostiosoite",
-
-  "form.password.label": "Salasana",
-  "form.password.placeholder": "Syötä salasana",
-
-  "form.confirmPassword.label": "Vahvista salasana",
-  "form.confirmPassword.placeholder": "Toista salasana",
-
-  "form.fullName.label": "Koko nimi",
-  "form.fullName.placeholder": "Syötä koko nimi",
-
-  "form.phone.label": "Puhelin",
-  "form.phone.placeholder": "Syötä puhelinnumero",
-
-  "form.firstName.label": "Etunimi",
-  "form.firstName.placeholder": "Syötä etunimi",
-
-  "form.lastName.label": "Sukunimi",
-  "form.lastName.placeholder": "Syötä sukunimi",
-
-  "form.street.label": "Katuosoite",
-  "form.street.placeholder": "Syötä katuosoite",
-
-  "form.postalCode.label": "Postinumero",
-  "form.postalCode.placeholder": "12345",
-
-  "form.city.label": "Kaupunki",
-  "form.city.placeholder": "Syötä kaupunki",
-
-  "form.terms.label": "Hyväksyn palvelun ehdot",
-
-  "form.login.error.message": "Väärä sähköposti tai salasana!"
+  "nav": {
+    "home": "Koti",
+    "menu": "Ruokalista",
+    "visit": "Vieraile",
+    "profile": "Profiili",
+    "orders": "Tilaukset",
+    "login": "Kirjaudu",
+    "signout": "Kirjaudu Ulos"
+  },
+  "hero": {
+    "taste": "Maista",
+    "our": "Upea",
+    "meat": "Ruoka",
+    "subheading": "Valmistettu intohimolla, tarjoiltu rakkaudella. Koe kaupungin paras kotiruoka.",
+    "cta": "Tilaa nyt"
+  },
+  "home": {
+    "about": {
+      "titlep1": "Tietoa",
+      "titlep2": "Fooderista",
+      "p1": "Alusta asti Fooder Pizzeria on ollut naapuruston luottopaikka nopealle ja maukkaalle lohturualle. Tuoreista pizzoista meheviin burgereihin ja rapeisiin ranskalaisiin – teemme klassikot nopeasti ja kunnolla. Keskellä kaupunkia sijaitseva Fooder sopii kaikille, jotka haluavat hyvää ruokaa ilman odotusta.",
+      "p2": "Kaikki alkaa tuoreista raaka-aineista ja selkeästä valmistuksesta. Taikinamme tehdään päivittäin, pihvimme paistetaan tilauksesta ja ranskalaiset tarjoillaan aina kuumina ja rapeina. Hankimme tuoreet tuotteet luotettavilta paikallisilta toimittajilta."
+    },
+    "contact": {
+      "location": "Sijainti",
+      "phone": "Puhelin",
+      "email": "Sähköposti",
+      "phoneText": "Soita milloin vain!",
+      "emailText": "Vastaamme nopeasti!"
+    },
+    "features": {
+      "made": "Rakkaudella tehty",
+      "madeText": "Jokainen burger valmistetaan huolella ja intohimolla kokkiemme toimesta",
+      "community": "Yhteisö ensin",
+      "communityText": "Tuemme ylpeästi paikallisia viljelijöitä ja annamme takaisin yhteisölle",
+      "award": "Palkittu",
+      "awardText": "Valittu \"Kaupungin paras burgeri\" 5 vuotta putkeen"
+    },
+    "mostOrdered": {
+      "title": "Eniten tilatut"
+    },
+    "reviews": {
+      "title": "Asiakasarviot",
+      "subtitle": "Katso mitä asiakkaamme sanovat!"
+    }
+  },
+  "cart": {
+    "button": "Kori",
+    "addtocart": "Lisää ostoskoriin",
+    "addedtocart": "Lisätty ostoskoriin",
+    "shoppingCart": "Ostoskori",
+    "proceedCheckout": "Siirry kassalle",
+    "empty": "Ostoskorisi on tyhjä.",
+    "loginToCheckout": "Kirjaudu siirryttäksesi kassalle"
+  },
+  "checkout": {
+    "title": "Kassa",
+    "cartSummary": "Tuotteet",
+    "shippingDetails": "Toimitustiedot",
+    "paymentDetails": "Maksutiedot",
+    "proceedPayment": "Siirry maksamaan",
+    "required": "Pakollinen",
+    "fillShippingFirst": "Täytä toimitustiedot ensin",
+    "emptyCart": "Ostoskorisi on tyhjä",
+    "placeOrder": "Tilaa",  
+    "customer": "Tilaaja"
+  },
+  "global": {
+    "processing": "Käsitellään..."
+  },
+  "orderSummary": {
+    "title": "Tilauksen yhteenveto",
+    "totalNoTax": "Yhteensä (alv 0%)",
+    "totalTax": "Vero (14%)",
+    "total": "Yhteensä",
+    "items": "tuotetta",
+    "item": "tuote"
+  },
+  "footer": {
+    "since": "Palvellut vuodesta 2025.",
+    "quickLinks": "Pikalinkit",
+    "customerService": "Asiakaspalvelu",
+    "openingHours": "Aukioloajat",
+    "followUs": "Seuraa meitä",
+    "hours": {
+      "weekdays": "Ma - Pe",
+      "weekend": "Viikonloppu"
+    },
+    "copyright": "(c) 2025 Fooder"
+  },
+  "delivery": {
+    "firstName": {
+      "min": "Etunimen tulee olla vähintään 2 merkkiä pitkä"
+    },
+    "lastName": {
+      "min": "Sukunimen tulee olla vähintään 2 merkkiä pitkä"
+    },
+    "phone": {
+      "invalid": "Puhelinnumero ei ole kelvollinen"
+    },
+    "street": {
+      "min": "Katuosoite on liian lyhyt"
+    },
+    "postalCode": {
+      "invalid": "Postinumeron tulee olla 5 numeroa"
+    },
+    "city": {
+      "min": "Kaupungin nimen tulee olla vähintään 2 merkkiä pitkä"
+    }
+  },
+  "register": {
+    "fullName": {
+      "min": "Koko nimen tulee olla vähintään 3 merkkiä pitkä",
+      "invalid": "Nimi sisältää virheellisiä merkkejä"
+    },
+    "email": {
+      "invalid": "Sähköpostiosoite ei ole kelvollinen"
+    },
+    "phone": {
+      "invalid": "Puhelinnumero ei ole kelvollinen"
+    },
+    "password": {
+      "min": "Salasanan tulee olla vähintään 8 merkkiä pitkä",
+      "uppercase": "Salasanassa tulee olla iso kirjain",
+      "lowercase": "Salasanassa tulee olla pieni kirjain",
+      "number": "Salasanassa tulee olla numero",
+      "symbol": "Salasanassa tulee olla erikoismerkki"
+    },
+    "confirmPassword": {
+      "mismatch": "Salasanat eivät täsmää"
+    },
+    "terms": {
+      "required": "Hyväksy palvelun ehdot jatkaaksesi"
+    }
+  },
+  "login": {
+    "email": {
+      "invalid": "Sähköpostiosoite ei ole kelvollinen"
+    },
+    "password": {
+      "min": "Salasanan tulee olla vähintään 6 merkkiä pitkä"
+    }
+  },
+  "form": {
+    "email": {
+      "label": "Sähköposti",
+      "placeholder": "Syötä sähköpostiosoite"
+    },
+    "password": {
+      "label": "Salasana",
+      "placeholder": "Syötä salasana"
+    },
+    "confirmPassword": {
+      "label": "Vahvista salasana",
+      "placeholder": "Toista salasana"
+    },
+    "fullName": {
+      "label": "Koko nimi",
+      "placeholder": "Syötä koko nimi"
+    },
+    "phone": {
+      "label": "Puhelin",
+      "placeholder": "Syötä puhelinnumero"
+    },
+    "firstName": {
+      "label": "Etunimi",
+      "placeholder": "Syötä etunimi"
+    },
+    "lastName": {
+      "label": "Sukunimi",
+      "placeholder": "Syötä sukunimi"
+    },
+    "street": {
+      "label": "Katuosoite",
+      "placeholder": "Syötä katuosoite"
+    },
+    "postalCode": {
+      "label": "Postinumero",
+      "placeholder": "12345"
+    },
+    "city": {
+      "label": "Kaupunki",
+      "placeholder": "Syötä kaupunki"
+    },
+    "terms": {
+      "label": "Hyväksyn palvelun ehdot"
+    },
+    "login": {
+      "error": {
+        "message": "Väärä sähköposti tai salasana!"
+      }
+    }
+  }
 }

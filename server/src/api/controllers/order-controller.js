@@ -53,7 +53,7 @@ export const getAllOrdersWithProducts = asyncHandler(async (req, res) => {
  */
 export const getOrderById = asyncHandler(async (req, res) => {
     const orderId = Number(req.params.orderId);
-    const order = await Order.getOrderById(orderId);
+    const order = await Order.getOrderWithProducts(orderId);
 
     if (!order) {
         throw new AppError("Order not found", 404, "ORDER_NOT_FOUND", `No order found with ID ${orderId}`);

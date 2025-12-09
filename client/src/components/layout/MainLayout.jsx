@@ -4,9 +4,11 @@ import Footer from "/src/components/layout/Footer/Footer.jsx";
 import { useAuth } from "/src/features/auth/hooks/useAuth.js";
 import { useEffect } from "react";
 import { Toaster } from "sonner";
+import { useLocation } from "react-router";
 
 const MainLayout = () => {
   const { handleAutoLogin } = useAuth();
+    const location = useLocation();
 
   console.log("Mounted!");
 
@@ -17,7 +19,7 @@ const MainLayout = () => {
   return (
     <div>
       <NavBar />
-      <main className="md:mt-22 mt-17">
+      <main className={location.pathname === "/" ? "" : "mt-22 md:mt-22"}>
         <Outlet />
         <Toaster position="bottom-right" />
       </main>

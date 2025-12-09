@@ -5,7 +5,7 @@ const main = async () => {
   console.log("Seeding...");
 
   // 1. Create the initial admin user
-  const password = await bcrypt.hash("adminpw", 10);
+  const password = await bcrypt.hash("adminpassword", 10);
   const user = await prisma.user.create({
     data: {
       username: "admin",

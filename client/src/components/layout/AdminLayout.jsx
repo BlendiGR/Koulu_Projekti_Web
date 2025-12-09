@@ -13,7 +13,7 @@ const AdminLayout = () => {
   return (
     <div>
       <NavBar />
-      <main className="md:mt-22 mt-17">
+      <main>
         <Outlet />
       </main>
     </div>

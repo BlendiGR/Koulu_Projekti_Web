@@ -1,8 +1,9 @@
 import { Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import ShoppingCartButton from "/src/features/cart/components/ShoppingCartButton";
+import CartDrawer from "/src/features/cart/components/CartDrawer";
 import MobileDrawer from "/src/components/layout/Navbar/MobileDrawer";
 import DesktopNav from "/src/components/layout/Navbar/DesktopNav";
 import useNavScroll from "/src/hooks/useNavScroll.js";
@@ -25,8 +26,29 @@ const NavBar = () => {
 
   const { navClass, textColor, buttonClass, logoIsBlack } = styles;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const { user, handleLogout } = useAuth();
   const navLinks = getNavLinks(user, t);
+
+  // Estä scrollia kun mobile menu on auki
+  useEffect(() => {
+    if (mobileMenuOpen || cartDrawerOpen) {
+      const scrollY = window.scrollY;
+      
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [mobileMenuOpen, cartDrawerOpen]);
 
   return (
     <>
@@ -37,7 +59,7 @@ const NavBar = () => {
             <img
               src={logoIsBlack ? LogoBlack : LogoWhite}
               alt="Logo"
-              className="w-35 md:w-50 h-auto"
+              className="w-35 md:w-50 h-auto active:scale-102"
             />
           </Link>
 
@@ -47,18 +69,23 @@ const NavBar = () => {
             user={user}
             handleLogout={handleLogout}
             buttonClass={buttonClass}
+            onCartClick={() => setCartDrawerOpen(true)}
           />
 
-          {/* Hamppari Menun nappi */}
-          {!mobileMenuOpen && (
-            <button
-              onClick={() => {
-                setMobileMenuOpen(true);
-              }}
-              className={`md:hidden mr-1 ${textColor}`}
-            >
-              <Menu size={30} />
-            </button>
+          {/* Mobile cart button & hamburger menu */}
+          {!mobileMenuOpen && !cartDrawerOpen && (
+            <div className={`lg:hidden flex items-center gap-4 ${textColor}`}>
+              <ShoppingCartButton 
+                mobile 
+                onClick={() => setCartDrawerOpen(true)} 
+              />
+              <button
+                onClick={() => setMobileMenuOpen(true)}
+                className={`mr-1 ${textColor}`}
+              >
+                <Menu size={30} />
+              </button>
+            </div>
           )}
         </div>
       </nav>
@@ -68,7 +95,10 @@ const NavBar = () => {
         onClose={() => setMobileMenuOpen(false)}
         user={user}
         navLinks={navLinks}
-        ShoppingCartButton={ShoppingCartButton}
+      />
+      <CartDrawer 
+        isOpen={cartDrawerOpen}
+        onClose={() => setCartDrawerOpen(false)}
       />
     </>
   );
