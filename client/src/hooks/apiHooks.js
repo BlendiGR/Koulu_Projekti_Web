@@ -142,12 +142,12 @@ export const useProduct = () => {
   };
 
   const createProduct = async (productData, token) => {
+    const headers = { "Content-Type": "application/json" };
+    if (token) headers.Authorization = `Bearer ${token}`;
+
     const res = await fetchData(`${API}/products`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token ? `Bearer ${token}` : undefined,
-      },
+      headers,
       body: JSON.stringify(productData),
     });
 
@@ -155,3 +155,5 @@ export const useProduct = () => {
     const payload = res.data && res.data.data !== undefined ? res.data.data : res.data;
     return { success: true, data: payload };
   };
+    return { getProducts, createProduct };
+};
