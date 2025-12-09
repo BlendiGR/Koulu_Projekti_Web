@@ -26,7 +26,7 @@ const Checkout = () => {
   const { submitOrder, loading, error, order } = useOrder();
   const { user } = useAuth();
   const navigate = useNavigate();
-  
+
   const [isShippingValid, setIsShippingValid] = useState(false);
   const [isPaymentValid, setIsPaymentValid] = useState(false);
 
@@ -41,9 +41,9 @@ const Checkout = () => {
     if (!shippingData) return;
 
     const fullOrderData = {
-        ...shippingData,
-        items: cartItems,
-        userId: user?._id || user?.id || null
+      ...shippingData,
+      items: cartItems,
+      userId: user?._id || user?.id || null,
     };
 
     const res = await submitOrder(fullOrderData);
@@ -52,21 +52,25 @@ const Checkout = () => {
       clearCart();
       navigate("/success/" + res.data.data.orderId);
       return;
-    } 
-    
+    }
+
     setLoadingError(res.error);
   };
 
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-8 min-h-[calc(100vh-5rem)]">
-      <h2 className="text-3xl text-center text-red-100 font-bold py-6 text-gray-800">{t("checkout.title")}</h2>
+      <h2 className="text-3xl text-center text-red-100 font-bold py-6 text-gray-800">
+        {t("checkout.title")}
+      </h2>
 
       <div className="flex flex-col lg:grid lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
           <Dropdown
             title={t("checkout.cartSummary")}
             badge={`${totalItems} ${
-              totalItems === 1 ? t("orderSummary.item") : t("orderSummary.items")
+              totalItems === 1
+                ? t("orderSummary.item")
+                : t("orderSummary.items")
             }`}
             rightLabel={`${totalPrice.toFixed(2)} €`}
             defaultExpanded={false}
@@ -130,43 +134,48 @@ const Checkout = () => {
         <div className="lg:col-span-1">
           <div className="lg:sticky lg:top-8">
             <OrderSummary
-                totalPrice={totalPrice}
-                totalItems={totalItems}
-                totalTax={totalTax}
-                withoutTax={withoutTax}
-                actionButton={
-                  <>
-                    {error && (
-                      <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
-                         {error.message || "Something went wrong"}
-                      </div>
-                    )}
-                    
-                    {order && (
-                         <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-green-600 text-sm">
-                            {t("checkout.orderSuccess") || "Order Placed Successfully!"}
-                         </div>
-                    )}
+              totalPrice={totalPrice}
+              totalItems={totalItems}
+              totalTax={totalTax}
+              withoutTax={withoutTax}
+              actionButton={
+                <>
+                  {error && (
+                    <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+                      {error.message || "Something went wrong"}
+                    </div>
+                  )}
 
-                    <RedButton
-                      fullWidth
-                      size="lg"
-                      className="font-bold"
-                      onClick={handlePlaceOrder}
-                      disabled={!isShippingValid || loading || order}
-                    >
-                      {loading ? (
-                        <div className="flex items-center justify-center gap-2">
-                          <Spinner size={20} ringColor="#ffffff40" spinColor="#ffffff" />
-                          <span>{t("global.processing")}</span>
-                        </div>
-                      ) : (
-                        t("checkout.placeOrder")
-                      )}
-                    </RedButton>
-                  </>
-                }
-              />
+                  {order && (
+                    <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-green-600 text-sm">
+                      {t("checkout.orderSuccess") ||
+                        "Order Placed Successfully!"}
+                    </div>
+                  )}
+
+                  <RedButton
+                    fullWidth
+                    size="lg"
+                    className="font-bold"
+                    onClick={handlePlaceOrder}
+                    disabled={!isShippingValid || loading || order}
+                  >
+                    {loading ? (
+                      <div className="flex items-center justify-center gap-2">
+                        <Spinner
+                          size={20}
+                          ringColor="#ffffff40"
+                          spinColor="#ffffff"
+                        />
+                        <span>{t("global.processing")}</span>
+                      </div>
+                    ) : (
+                      t("checkout.placeOrder")
+                    )}
+                  </RedButton>
+                </>
+              }
+            />
           </div>
         </div>
       </div>

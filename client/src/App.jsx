@@ -33,16 +33,22 @@ const App = () => {
                 <Route path="login" element={<Login />} />
 
                 {/*  Suojatut */}
-                <Route path="checkout" element={
-                  <ProtectedRoute>
-                    <Checkout />
-                  </ProtectedRoute>
-                } />
-                <Route path="success/:orderId" element={
-                  <ProtectedRoute>
-                    <Success />
-                  </ProtectedRoute>
-                } />
+                <Route
+                  path="checkout"
+                  element={
+                    <ProtectedRoute>
+                      <Checkout />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="success/:orderId"
+                  element={
+                    <ProtectedRoute>
+                      <Success />
+                    </ProtectedRoute>
+                  }
+                />
 
                 <Route
                   path="profile"
@@ -70,7 +76,6 @@ const App = () => {
                   }
                 />
               </Route>
-             
 
               {/* Admin Reitit */}
               <Route

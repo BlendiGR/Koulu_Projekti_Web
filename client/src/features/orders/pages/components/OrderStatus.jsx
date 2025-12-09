@@ -1,13 +1,28 @@
 import { Package, Truck, CheckCircle } from "lucide-react";
 
 const steps = [
-  { key: "PREPARING", label: "Preparing", sub: "We're cooking your order", icon: Package },
-  { key: "DELIVERING", label: "Delivering", sub: "On the way to you", icon: Truck },
-  { key: "DELIVERED", label: "Delivered", sub: "Enjoy your meal!", icon: CheckCircle },
+  {
+    key: "PREPARING",
+    label: "Preparing",
+    sub: "We're cooking your order",
+    icon: Package,
+  },
+  {
+    key: "DELIVERING",
+    label: "Delivering",
+    sub: "On the way to you",
+    icon: Truck,
+  },
+  {
+    key: "DELIVERED",
+    label: "Delivered",
+    sub: "Enjoy your meal!",
+    icon: CheckCircle,
+  },
 ];
 
 const OrderStatus = ({ status = "PREPARING" }) => {
-  const activeIndex = steps.findIndex(s => s.key === status);
+  const activeIndex = steps.findIndex((s) => s.key === status);
   let progressPercentage = 0;
   if (status === "PREPARING") {
     progressPercentage = 15;
@@ -25,19 +40,18 @@ const OrderStatus = ({ status = "PREPARING" }) => {
         md:flex-row md:items-center md:justify-between
       "
     >
-
       <div className="hidden md:block p-1 absolute top-6 left-0 w-full h-[3px] bg-gray-300 z-0" />
 
-      <div 
+      <div
         className={`hidden p-1 md:block absolute top-6 left-0 h-[3px] bg-green-100 transition-all duration-500 z-10`}
-        style={{ width: `${progressPercentage}%` }} 
+        style={{ width: `${progressPercentage}%` }}
       />
 
       <div className="md:hidden absolute left-1/2 top-0 h-full w-[3px] bg-gray-300 z-0 transform -translate-x-1/2" />
-       
-      <div 
+
+      <div
         className="md:hidden absolute left-1/2 top-0 w-[3px] bg-green-600 transition-all duration-500 z-10 transform -translate-x-1/2"
-        style={{ height: `${progressPercentage}%` }} 
+        style={{ height: `${progressPercentage}%` }}
       />
 
       {steps.map((step, index) => {
@@ -61,12 +75,16 @@ const OrderStatus = ({ status = "PREPARING" }) => {
                 w-10 h-10 text-sm
                 sm:w-12 sm:h-12 sm:text-base
                 md:w-16 md:h-16 md:text-lg
-                ${isActive ? "bg-green-100 text-white shadow-lg scale-110" : "bg-gray-300 text-gray-500"}
+                ${
+                  isActive
+                    ? "bg-green-100 text-white shadow-lg scale-110"
+                    : "bg-gray-300 text-gray-500"
+                }
               `}
             >
-              <Icon 
-                size={ index === activeIndex ?   24 : 20 } 
-                className="sm:size-6 md:size-8" 
+              <Icon
+                size={index === activeIndex ? 24 : 20}
+                className="sm:size-6 md:size-8"
               />
             </div>
 

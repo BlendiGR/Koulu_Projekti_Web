@@ -54,7 +54,8 @@
     "shoppingCart": "Ostoskori",
     "proceedCheckout": "Siirry kassalle",
     "empty": "Ostoskorisi on tyhjä.",
-    "loginToCheckout": "Kirjaudu siirryttäksesi kassalle"
+    "loginToCheckout": "Kirjaudu siirryttäksesi kassalle",
+    "close": "Jatka ostoksia"
   },
   "checkout": {
     "title": "Kassa",

@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
     navigate("/login");
 
     return { success: true };
-  }
+  };
 
   const handleLogin = async (credentials) => {
     const loginRes = await postLogin(credentials);
@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
 
     localStorage.setItem("token", token);
     setUser(user);
-    console.log(user)
+    console.log(user);
 
     if (user.role === "ADMIN") {
       navigate("/admin");
@@ -62,7 +62,7 @@ const AuthProvider = ({ children }) => {
       localStorage.removeItem("token");
       return;
     }
-    console.log(meRes)
+    console.log(meRes);
     setUser(meRes.data.data);
     navigate(location.pathname);
   };
@@ -74,7 +74,7 @@ const AuthProvider = ({ children }) => {
         handleLogin,
         handleLogout,
         handleAutoLogin,
-        handleRegister
+        handleRegister,
       }}
     >
       {children}

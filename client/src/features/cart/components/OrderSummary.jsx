@@ -10,13 +10,18 @@ const OrderSummary = ({
   const { t } = useLang();
   return (
     <div className="bg-beige p-6 rounded-3xl border border-brown-100 shadow-sm sticky top-4">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">{t("orderSummary.title")}</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">
+        {t("orderSummary.title")}
+      </h2>
 
       <div className="space-y-3 mb-6">
         <div className="flex justify-between text-gray-600 font-medium">
           <span>
             {t("orderSummary.totalNoTax")} ({totalItems}{" "}
-            {totalItems === 1 ? t("orderSummary.item") : t("orderSummary.items")})
+            {totalItems === 1
+              ? t("orderSummary.item")
+              : t("orderSummary.items")}
+            )
           </span>
           <span>{withoutTax.toFixed(2)} €</span>
         </div>

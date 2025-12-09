@@ -1,7 +1,7 @@
 const Spinner = ({
   size = 32,
-  ringColor = "#f3f4f6",  
-  spinColor = "red-100",    
+  ringColor = "#f3f4f6",
+  spinColor = "red-100",
   thickness = 4,
   className = "",
   ...rest

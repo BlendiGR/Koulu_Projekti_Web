@@ -34,50 +34,45 @@ const LoginForm = ({ t }) => {
   return (
     <>
       {backendError && (
-          <p className="text-red-600 p-2 rounded text-sm mb-2">
-            {backendError}
-          </p>
-        )}
+        <p className="text-red-600 p-2 rounded text-sm mb-2">{backendError}</p>
+      )}
 
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col">
-            <label className="font-medium">{t("form.email.label")}</label>
-            <input
-              type="email"
-              placeholder={t("form.email.placeholder")}
-              {...register("email")}
-              className="border border-gray-300 p-2 rounded bg-white placeholder:text-gray-400"
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm">{errors.email.message}</p>
-            )}
-          </div>
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col">
+          <label className="font-medium">{t("form.email.label")}</label>
+          <input
+            type="email"
+            placeholder={t("form.email.placeholder")}
+            {...register("email")}
+            className="border border-gray-300 p-2 rounded bg-white placeholder:text-gray-400"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
+          )}
+        </div>
 
-          <div className="flex flex-col">
-            <label className="font-medium">{t("form.password.label")}</label>
-            <input
-              type="password"
-              placeholder={t("form.password.placeholder")}
-              {...register("password")}
-              className="border border-gray-300 p-2 rounded bg-white placeholder:text-gray-400"
-            />
-            {errors.password && (
-              <p className="text-red-500 text-sm">{errors.password.message}</p>
-            )}
-          </div>
+        <div className="flex flex-col">
+          <label className="font-medium">{t("form.password.label")}</label>
+          <input
+            type="password"
+            placeholder={t("form.password.placeholder")}
+            {...register("password")}
+            className="border border-gray-300 p-2 rounded bg-white placeholder:text-gray-400"
+          />
+          {errors.password && (
+            <p className="text-red-500 text-sm">{errors.password.message}</p>
+          )}
+        </div>
 
-          <div className="flex justify-end text-xs text-gray-500">
-            <button type="button" className="hover:underline">
-              {t("form.login.forgotPassword")}
-            </button>
-          </div>
+        <div className="flex justify-end text-xs text-gray-500">
+          <button type="button" className="hover:underline">
+            {t("form.login.forgotPassword")}
+          </button>
+        </div>
 
-          <RedButton
-            type="submit"
-            className="font-semibold text-lg"
-          >
-            {t("nav.login")}
-          </RedButton>
+        <RedButton type="submit" className="font-semibold text-lg">
+          {t("nav.login")}
+        </RedButton>
       </form>
     </>
   );

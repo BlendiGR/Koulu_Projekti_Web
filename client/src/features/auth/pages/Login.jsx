@@ -9,7 +9,7 @@ const Login = () => {
 
   return (
     <div className="flex flex-col md:flex-row">
-      <div 
+      <div
         className="flex flex-col items-center md:items-end justify-center py-3 px-4 md:pr-12 w-full md:w-1/2 bg-cover bg-center mobile-bg-only"
         style={{
           backgroundImage: "url('/src/assets/images/Hero-Background.png')",
@@ -73,7 +73,11 @@ const Login = () => {
         </div>
       </div>
       <div className="hidden md:flex md:w-1/2 bg-gray-100 items-center justify-center">
-        <img src="/src/assets/images/login.png" alt="Login Page Image" className="w-full h-full object-cover transition-all duration-300 ease-in-out"/>
+        <img
+          src="/src/assets/images/login.png"
+          alt="Login Page Image"
+          className="w-full h-full object-cover transition-all duration-300 ease-in-out"
+        />
       </div>
     </div>
   );

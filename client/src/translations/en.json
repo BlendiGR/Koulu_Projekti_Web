@@ -54,7 +54,8 @@
     "shoppingCart": "Shopping Cart",
     "proceedCheckout": "Proceed to Checkout",
     "empty": "Your cart is empty.",
-    "loginToCheckout": "Login to Checkout"
+    "loginToCheckout": "Login to Checkout",
+    "close": "Continue Shopping"
   },
   "checkout": {
     "title": "Checkout",
