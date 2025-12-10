@@ -21,9 +21,9 @@ const main = async () => {
       type: "FOOD",
       name: "Crispy Fries",
       cost: 3.99,
-      diets: { vegetarian: true, vegan: true },
+      diets: ["vegan", "vegetarian"],
       imageUrl: "src/assets/images/French Fries.png",
-      ingredients: { list: ["Potato", "Oil", "Salt", "Pepper"] },
+      ingredients: ["Potato", "Oil", "Salt", "Pepper"],
     },
   });
 
@@ -32,9 +32,9 @@ const main = async () => {
       type: "FOOD",
       name: "Chicken Nuggets",
       cost: 6.99,
-      diets: { vegetarian: false, vegan: false },
+      diets: ["vegan", "vegetarian"],
       imageUrl: "src/assets/images/Chicken Nuggets.png",
-      ingredients: { list: ["Chicken", "Breading", "Salt", "Pepper"] },
+      ingredients: ["Chicken", "Breading", "Salt", "Pepper"],
     },
   });
 
@@ -43,9 +43,9 @@ const main = async () => {
       type: "FOOD",
       name: "Cheese Burger",
       cost: 8.99,
-      diets: { vegetarian: false, vegan: false },
+      diets: ["vegan", "vegetarian"],
       imageUrl: "src/assets/images/Cheese Burger.png",
-      ingredients: { list: ["Beef", "Cheddar", "Ketchup", "Mustard", "Mayonnaise", "Lettuce", "Tomato", "Onion"] },
+      ingredients: ["Beef", "Cheddar", "Ketchup", "Mustard", "Mayonnaise", "Lettuce", "Tomato", "Onion"],
     },
   });
 
