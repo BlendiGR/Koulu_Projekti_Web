@@ -269,6 +269,8 @@
       "loading": "Ladataan...",
       "creating": "Luodaan...",
       "created": "Luonti onnistui",
+      "updated": "Päivitys onnistui",
+      "uploadSuccess": "Tiedoston lataus onnistui",
       "confirmDelete": "Haluatko varmasti poistaa tämän?",
       "deleteFail": "Poistaminen epäonnistui",
       "waitForFileUpload": "Odota tiedoston latautumista...",
@@ -323,6 +325,41 @@
       "ratingGuide": "Anna arvosana (1 - 5)",
       "review": "Arvostelu",
       "reviewGuide": "Kirjoita vapaamuotoinen arvostelu"
+    },
+    "users": {
+      "title": "Käyttäjät",
+      "singular": "käyttäjä",
+      "addUser": "Lisää käyttäjä",
+      "editUser": "Muokkaa käyttäjää",
+      "deleteUser": "Poista käyttäjä",
+      "roleAdmin": "Ylläpitäjä",
+      "roleCustomer": "Asiakas",
+      "createFail": "Käyttäjän luominen epäonnistui",
+      "createSuccess": "Käyttäjä luotu onnistuneesti",
+      "id": "Tunniste",
+      "username": "Nimi",
+      "email": "Sähköposti",
+      "role": "Rooli",
+      "active": "Aktiivinen"
+    },
+    "coupons": {
+      "title": "Kupongit",
+      "singular": "kuponki",
+      "addCoupon": "Lisää kuponki",
+      "editCoupon": "Muokkaa kuponkia",
+      "deleteCoupon": "Poista kuponki",
+      "createFail": "Kupongin luominen epäonnistui",
+      "createSuccess": "Kuponki luotu onnistuneesti",
+      "code": "Koodi",
+      "discount": "Alennus (%)",
+      "discountGuide": "Anna alennusprosentti (esim. 10 tarkoittaa 10% alennusta)",
+      "active": "Aktiivinen"
+    },
+    "announcement": {
+      "title": "Ilmoitus",
+      "boxTitle": "Sivustoilmoitus",
+      "message": "Viesti",
+      "active": "Näytä ilmoitus"
     }
   },
   "global": {
