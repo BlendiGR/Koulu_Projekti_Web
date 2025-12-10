@@ -10,10 +10,14 @@ import {useLang} from "../../../hooks/useLang.js";
 import {Pencil, Trash, Save, CircleX} from "lucide-react";
 import {showError, showSuccess} from "../../../utils/toast.jsx";
 
-const RecordRow = ({ item = {}, idKey = "id", fields = [], cellClass = "", resolver, onUpdate, onDelete, postFile }) => {
+const RecordRow = ({item = {}, idKey = "id", fields = [], cellClass = "", resolver, onUpdate, onDelete, postFile }) => {
     const { t } = useLang();
     const defaultValues = fields.reduce((acc, f) => {
-        acc[f.name] = item[f.name] ?? f.default ?? "";
+        if (f.type === "checkbox") {
+            acc[f.name] = Boolean(item[f.name] ?? f.default ?? false);
+        } else {
+            acc[f.name] = item[f.name] ?? f.default ?? "";
+        }
         return acc;
     }, {});
 
@@ -27,17 +31,14 @@ const RecordRow = ({ item = {}, idKey = "id", fields = [], cellClass = "", resol
     const [editing, setEditing] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [submitting, setSubmitting] = useState(false);
-    const [error, setError] = useState(null);
 
     const startEdit = () => {
-        setError(null);
         reset(defaultValues);
         setEditing(true);
     };
 
     const cancelEdit = () => {
         setEditing(false);
-        setError(null);
         reset(defaultValues);
     };
 
@@ -52,38 +53,42 @@ const RecordRow = ({ item = {}, idKey = "id", fields = [], cellClass = "", resol
             const url = payload?.url || (payload && payload.url) || null;
             if (url) setValue(name, url, { shouldValidate: true, shouldDirty: true });
         } else {
-            const msg = res?.error?.message || t("admin.common.uploadFail");
-            showError(msg);
-            setError(msg);
+            showError(res?.error?.message || t("admin.common.uploadFail"));
         }
     };
 
     const onSubmit = async (values) => {
-        setError(null);
         if (uploading) {
-            const msg = t("admin.common.waitForUpload");
-            showError(msg);
-            setError(msg);
+            showError(t("admin.common.waitForUpload"));
             return;
         }
         setSubmitting(true);
         try {
+            const payload = { ...values };
+            fields.forEach(f => {
+                if (f.type === "read-only") delete payload[f.name];
+            });
+
             const id = item[idKey];
-            const res = await onUpdate(id, values);
+            const res = await onUpdate(id, payload);
             setSubmitting(false);
             if (res && res.success) {
                 setEditing(false);
+                showSuccess(t("admin.common.updated"));
             } else {
-                const msg = res?.error?.message || t("admin.common.updateFail");
-                showError(msg);
-                setError(msg);
+                showError(res?.error?.message || t("admin.common.updateFail"));
             }
         } catch (err) {
-            const msg = err?.message || t("admin.common.updateFail");
             setSubmitting(false);
-            showError(msg);
-            setError(msg);
+            showError(err?.message || t("admin.common.updateFail"));
         }
+    };
+
+    const onInvalid = (errs) => {
+        console.log("RecordRow validation errors:", errs);
+        const firstKey = Object.keys(errs)[0];
+        const msg = errs[firstKey]?.message || t("admin.common.validationFail");
+        showError(msg);
     };
 
     const handleDelete = async () => {
@@ -91,7 +96,7 @@ const RecordRow = ({ item = {}, idKey = "id", fields = [], cellClass = "", resol
         const id = item[idKey];
         const res = await onDelete(id);
         if (!(res && res.success)) {
-            setError(res?.error?.message || t("admin.common.deleteFail"));
+            showError(res?.error?.message || t("admin.common.deleteFail"));
         }
     };
 
@@ -132,6 +137,12 @@ const RecordRow = ({ item = {}, idKey = "id", fields = [], cellClass = "", resol
                                 inputClass="w-full p-1"
                                 previewClass="w-20 h-14 object-cover rounded"
                             />
+                        </td>
+                    );
+                case "read-only":
+                    return (
+                        <td key={key} className={cellClass}>
+                            <span className="text-sm text-gray-700">{value ?? "—"}</span>
                         </td>
                     );
                 default:
@@ -175,7 +186,7 @@ const RecordRow = ({ item = {}, idKey = "id", fields = [], cellClass = "", resol
                     </div>
                 ) : (
                     <div className="inline-flex gap-2">
-                        <button type="button" title={submitting ? t("admin.common.saving") : t("admin.common.save")} onClick={handleSubmit(onSubmit)} disabled={uploading || submitting} className="p-2 bg-green-600 text-white rounded text-sm rounded-full">
+                        <button type="button" title={submitting ? t("admin.common.saving") : t("admin.common.save")} onClick={() => handleSubmit(onSubmit, onInvalid)()} disabled={uploading || submitting} className="p-2 bg-green-600 text-white rounded text-sm rounded-full">
                             <Save size={20} />
                         </button>
                         <button type="button" title={t("admin.common.cancel")} onClick={cancelEdit} className="p-2 bg-gray-300 rounded text-sm rounded-full">
@@ -183,7 +194,6 @@ const RecordRow = ({ item = {}, idKey = "id", fields = [], cellClass = "", resol
                         </button>
                     </div>
                 )}
-                {error && <div className="mt-1 text-xs text-red-600">{error}</div>}
             </td>
         </tr>
     );

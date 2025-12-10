@@ -1,4 +1,4 @@
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useEffect, useCallback, useMemo} from 'react';
 import {useForm} from 'react-hook-form';
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useLang} from "../../../hooks/useLang.js";
@@ -26,8 +26,13 @@ const RecordContainer = ({
     const [loading, setLoading] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [previewUrl, setPreviewUrl] = useState(null);
+
+    const resolvedFormSchema = useMemo(() => {
+        if (!createSchema) return null;
+        return typeof createSchema === "function" ? createSchema(t) : createSchema;
+    }, [createSchema, t]);
     const form = useForm({
-        resolver: createSchema ? zodResolver(createSchema) : undefined,
+        resolver: resolvedFormSchema ? zodResolver(resolvedFormSchema) : undefined,
         defaultValues: createDefaultValues,
     });
     const { register, handleSubmit, reset, setValue, formState: { errors } } = form;

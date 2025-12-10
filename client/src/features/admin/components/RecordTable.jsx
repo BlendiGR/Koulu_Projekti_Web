@@ -50,7 +50,7 @@ const RecordTable = ({
                     ) : (
                         <tr>
                             <td colSpan={fields.length + 1} className="px-3 py-4 text-sm text-gray-500 text-center">
-                                {t("admin.products.noProducts")}
+                                {t("admin.common.noRecords")}
                             </td>
                         </tr>
                     )}
