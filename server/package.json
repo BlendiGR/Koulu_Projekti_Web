@@ -44,6 +44,7 @@
     "express-validator": "^7.3.1",
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
+    "prisma": "^6.19.0",
     "sharp": "^0.34.5"
   },
   "devDependencies": {
@@ -51,7 +52,6 @@
     "globals": "^16.5.0",
     "jest": "^30.2.0",
     "nodemon": "^3.1.11",
-    "prisma": "^6.19.0",
     "supertest": "^7.1.4"
   },
   "prisma": {
