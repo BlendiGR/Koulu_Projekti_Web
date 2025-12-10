@@ -64,7 +64,12 @@
     "empty": "Your cart is empty.",
     "loginToCheckout": "Login to Checkout",
     "close": "Continue Shopping",
-    "quantity": "Quantity"
+    "quantity": "Quantity",
+    "coupon": {
+      "label": "Coupon",
+      "placeholder": "Enter coupon code",
+      "notFound": "Coupon not found"
+    }
   },
   "checkout": {
     "title": "Checkout",
@@ -83,6 +88,7 @@
     "totalNoTax": "Total without tax",
     "totalTax": "Total tax (14%)",
     "total": "Total",
+    "discount": "Discount",
     "items": "items",
     "item": "item"
   },

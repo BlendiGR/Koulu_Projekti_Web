@@ -8,6 +8,7 @@ import MobileDrawer from "/src/components/layout/Navbar/MobileDrawer";
 import DesktopNav from "/src/components/layout/Navbar/DesktopNav";
 import useNavScroll from "/src/hooks/useNavScroll.js";
 import getNavStyles from "/src/components/layout/Navbar/getNavStyles";
+import Announcement from "/src/components/layout/Announcement.jsx";
 
 import LogoBlack from "/src/assets/images/Fooder-Logo-Black.png";
 import LogoWhite from "/src/assets/images/Fooder-Logo-White.png";
@@ -15,7 +16,7 @@ import { useAuth } from "/src/features/auth/hooks/useAuth.js";
 import { getNavLinks } from "/src/config/navigation.js";
 import { useLang } from "/src/hooks/useLang";
 
-const NavBar = () => {
+const NavBar = ({ announcement, onDismiss }) => {
   const { t } = useLang();
 
   const { pathname } = useLocation();
@@ -53,7 +54,8 @@ const NavBar = () => {
   return (
     <>
       <nav className={navClass}>
-        <div className="max-w-7xl mx-auto flex items-center justify-between p-2">
+        {announcement && <Announcement data={announcement} onDismiss={onDismiss} />}
+        <div className="max-w-[90%] mx-auto flex items-center justify-between p-2">
           {/* Fooder Logo */}
           <Link to="/">
             <img

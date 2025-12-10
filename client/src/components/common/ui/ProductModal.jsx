@@ -13,7 +13,7 @@ const ProductModal = ({ isOpen, onClose, product }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
       
-      <div className="flex flex-col md:flex-row relative bg-beige rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+      <div className="flex flex-col md:flex-row relative bg-beige rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 p-2 rounded-full hover:bg-white active:bg-gray-300 cursor-pointer z-20 shadow-sm"

@@ -19,8 +19,20 @@ const readStoredCart = () => {
   }
 };
 
+const readStoredCoupon = () => {
+  try {
+    const stored = localStorage.getItem("appliedCoupon");
+    if (!stored) return null;
+    return JSON.parse(stored);
+  } catch (err) {
+    console.warn("Failed to read coupon from storage", err);
+    return null;
+  }
+};
+
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => readStoredCart());
+  const [appliedCoupon, setAppliedCoupon] = useState(() => readStoredCoupon());
 
   useEffect(() => {
     try {
@@ -29,6 +41,18 @@ export const CartProvider = ({ children }) => {
       console.warn("Failed to persist cart to storage", err);
     }
   }, [cartItems]);
+
+  useEffect(() => {
+    try {
+      if (appliedCoupon) {
+        localStorage.setItem("appliedCoupon", JSON.stringify(appliedCoupon));
+      } else {
+        localStorage.removeItem("appliedCoupon");
+      }
+    } catch (err) {
+      console.warn("Failed to persist coupon to storage", err);
+    }
+  }, [appliedCoupon]);
 
   const addCartItem = (item, quantity = 1) => {
     if (!item) return;
@@ -63,35 +87,61 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  const clearCart = () => setCartItems([]);
+  const clearCart = () => {
+    setCartItems([]);
+    setAppliedCoupon(null);
+  };
+
+  const applyCoupon = (coupon) => {
+    setAppliedCoupon(coupon);
+  };
+
+  const removeCoupon = () => {
+    setAppliedCoupon(null);
+  };
 
   const totalItems = useMemo(() => {
     return cartItems.reduce((sum, item) => sum + (item.quantity ?? 0), 0);
   }, [cartItems]);
 
   const totalPrice = useMemo(() => {
-    return cartItems.reduce(
+    const basePrice = cartItems.reduce(
       (sum, item) => sum + (Number(item.price) || 10) * item.quantity,
       0
     );
-  }, [cartItems]);
+    
+    // Calculate discount as percentage of base price
+    if (appliedCoupon && appliedCoupon.isActive) {
+      const discountPercent = Number(appliedCoupon.discount) || 0;
+      const discountAmount = (basePrice * discountPercent) / 100;
+      return Math.max(0, basePrice - discountAmount);
+    }
+    
+    return basePrice;
+  }, [cartItems, appliedCoupon]);
+
+  // Discount percentage value (for display)
+  const discount = useMemo(() => {
+    if (!appliedCoupon || !appliedCoupon.isActive) return 0;
+    return Number(appliedCoupon.discount) || 0;
+  }, [appliedCoupon]);
 
   const totalTax = useMemo(() => {
     return totalPrice * 0.14;
   }, [totalPrice]);
-  const withoutTax = useMemo(() => {
-    return totalPrice - totalTax;
-  }, [totalPrice, totalTax]);
 
   const value = {
     cartItems,
     addCartItem,
     deleteCartItem,
     clearCart,
+    appliedCoupon,
+    applyCoupon,
+    removeCoupon,
     totalItems,
     totalPrice,
+    discount,
     totalTax,
-    withoutTax,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

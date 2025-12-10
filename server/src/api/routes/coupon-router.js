@@ -4,7 +4,7 @@ import * as couponController from "../controllers/coupon-controller.js";
 
 const couponRouter = express.Router();
 
-couponRouter.get("/code/:code", couponController.getCouponByCode);
+couponRouter.get("/:code", couponController.getCouponByCode);
 
 couponRouter.post(
     "/",

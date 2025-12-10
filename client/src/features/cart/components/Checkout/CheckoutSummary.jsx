@@ -7,7 +7,6 @@ const CheckoutSummary = ({
     totalPrice,
     totalItems,
     totalTax,
-    withoutTax,
     error,
     order,
     loading,
@@ -24,7 +23,6 @@ const CheckoutSummary = ({
                     totalPrice={totalPrice}
                     totalItems={totalItems}
                     totalTax={totalTax}
-                    withoutTax={withoutTax}
                     actionButton={
                         <>
                             {error && (

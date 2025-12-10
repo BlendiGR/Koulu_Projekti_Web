@@ -6,7 +6,7 @@ import { useAuth } from "/src/features/auth/hooks/useAuth";
 import { useLoading } from "/src/hooks/useLoading.js";
 
 export const useCheckout = () => {
-  const { cartItems, clearCart } = useCart();
+  const { cartItems, appliedCoupon, clearCart } = useCart();
   const { submitOrder } = useOrder();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -46,6 +46,7 @@ export const useCheckout = () => {
                      ...shippingData,
                      items: cartItems,
                      userId: user?._id || user?.id || null,
+                     ...(appliedCoupon ? { couponId: appliedCoupon.id } : {}),
                  };
 
                  const { error: confirmError, paymentIntent } = await stripe.confirmPayment({

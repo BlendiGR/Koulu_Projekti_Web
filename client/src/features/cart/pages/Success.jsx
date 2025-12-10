@@ -21,14 +21,14 @@ const Success = () => {
           {t("success.subtitle")}
         </p>
         <RedButton
-          className="mt-4 text-2xl w-[50%] font-semibold"
+          className="mt-4 md:text-2xl w-[50%] font-semibold"
           onClick={() => navigate("/orders/" + orderId)}
         >
           {t("success.trackOrder")}
         </RedButton>
         <button 
           onClick={() => navigate("/")}
-          className="bg-beige hover:bg-gray-100 active:bg-gray-300 text-black rounded-xl shadow-sm active:scale-101 transition-all duration-200 cursor-pointer text-2xl py-3 px-5 w-[50%]"
+          className="bg-beige hover:bg-gray-100 active:bg-gray-300 text-black rounded-xl shadow-sm active:scale-101 transition-all duration-200 cursor-pointer md:text-2xl py-3 px-5 w-[50%]"
         >
           {t("success.home")}
         </button>

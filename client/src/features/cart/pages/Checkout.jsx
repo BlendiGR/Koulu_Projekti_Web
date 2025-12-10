@@ -14,7 +14,6 @@ const CheckoutContent = () => {
         totalItems,
         totalPrice,
         totalTax,
-        withoutTax,
     } = useCart();
     const { t } = useLang();
 
@@ -58,7 +57,6 @@ const CheckoutContent = () => {
                     totalPrice={totalPrice}
                     totalItems={totalItems}
                     totalTax={totalTax}
-                    withoutTax={withoutTax}
                     error={error}
                     order={order}
                     loading={loading}

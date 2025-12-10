@@ -6,6 +6,8 @@ import CartProductSummary from "/src/features/cart/components/CartProductSummary
 import OrderSummary from "/src/features/cart/components/OrderSummary";
 import RedButton from "/src/components/common/ui/RedButton";
 import { useAuth } from "/src/features/auth/hooks/useAuth";
+import CouponChecker from "/src/features/cart/components/CouponChecker";
+import { useEffect } from "react";
 
 const CartDrawer = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -16,7 +18,6 @@ const CartDrawer = ({ isOpen, onClose }) => {
     totalItems,
     totalPrice,
     totalTax,
-    withoutTax,
   } = useCart();
 
   const { user } = useAuth();
@@ -31,9 +32,17 @@ const CartDrawer = ({ isOpen, onClose }) => {
     onClose();
   };
 
+   useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpen]);
+
   return (
     <div
-      className={`fixed inset-0 z-999 bg-black/30 transition-opacity duration-300 ${
+      className={`fixed inset-0 z-999 bg-black/30 transition-opacity duration-300 overflow-y-auto ${
         isOpen
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
@@ -41,7 +50,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
       onClick={onClose}
     >
       <div
-        className={`absolute top-0 right-0 h-full w-full md:w-[450px] bg-white shadow-lg transition-transform duration-300 ${
+        className={`absolute top-0 right-0 min-h-full w-full md:w-[450px] transition-transform duration-300 bg-white ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } flex flex-col`}
         onClick={(e) => e.stopPropagation()}
@@ -58,18 +67,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
           </button>
         </div>
         <div
-          className="flex-1 overflow-y-auto p-6 relative"
-          style={{
-            background: `
-              linear-gradient(white 30%, rgba(255,255,255,0)),
-              linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
-              radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.15), rgba(0,0,0,0)),
-              radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.15), rgba(0,0,0,0)) 0 100%
-            `,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "100% 40px, 100% 40px, 100% 14px, 100% 14px",
-            backgroundAttachment: "local, local, scroll, scroll",
-          }}
+          className="flex-1 p-6 relative"
         >
           {cartItems.length === 0 ? (
             <div className="bg-beige p-8 rounded-3xl border border-brown-100 text-center">
@@ -90,10 +88,10 @@ const CartDrawer = ({ isOpen, onClose }) => {
           )}
         </div>
         {cartItems.length > 0 && (
-          <div className="p-6 border-t border-brown-100">
+          <div className="flex flex-col gap-4 p-6 border-t border-brown-100">
+            <CouponChecker />
             <OrderSummary
               totalItems={totalItems}
-              withoutTax={withoutTax}
               totalTax={totalTax}
               totalPrice={totalPrice}
               actionButton={

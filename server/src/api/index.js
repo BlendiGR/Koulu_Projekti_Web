@@ -16,7 +16,7 @@ router.use("/users", userRouter);
 router.use("/products", productRouter);
 router.use("/orders", orderRouter);
 router.use("/reviews", reviewRouter);
-router.use("/announcements", announcementRouter);
+router.use("/announcement", announcementRouter);
 router.use("/coupons", couponRouter);
 router.use("/payments", paymentRouter);
 

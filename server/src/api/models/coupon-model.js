@@ -8,7 +8,10 @@ import AppError from "../../utils/AppError.js";
  */
 export const getCouponByCode = async (code) => {
     return prisma.coupon.findUnique({
-        where: { code }
+        where: { 
+            code,
+            isActive: true
+        }
     });
 };
 
