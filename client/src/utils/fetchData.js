@@ -1,6 +1,7 @@
 export const fetchData = async (url, options = {}) => {
+  const baseUrl = import.meta.env.VITE_BASE_URL;
   try {
-    const res = await fetch(url, options);
+    const res = await fetch(`${url}`, options);
     const json = await res.json();
 
     if (!res.ok) {

@@ -22,6 +22,13 @@ export const useUser = () => {
     });
   };
 
+  const getUserHasReviewed = async (userId) => {
+    const token = localStorage.getItem("token");
+    return await fetchData(`${API}/users/reviews/${userId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  };
+
   const getUserByToken = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -43,5 +50,5 @@ export const useUser = () => {
     return res;
   };
 
-  return { postLogin, postUser, getUserByToken };
+  return { postLogin, postUser, getUserByToken, getUserHasReviewed };
 };

@@ -79,10 +79,17 @@ export const getReviewsByUser = async (userId, skip = 0, take = 100) => {
  * @param {Object} reviewData - Data for the new review.
  * @returns {Promise<*>}
  */
-export const createReview = async (reviewData) => {
-    return prisma.review.create({
+export const createReview = async (reviewData, userId) => {
+    const newReview = await prisma.review.create({
         data: reviewData,
     });
+
+    await prisma.user.update({
+        where: { userId: userId },
+        data: { reviewed: true }
+    });
+
+    return newReview;
 };
 
 /**

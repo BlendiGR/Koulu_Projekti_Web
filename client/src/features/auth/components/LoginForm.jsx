@@ -4,10 +4,14 @@ import { loginSchema } from "/src/schemas/loginSchema.js";
 import { useAuth } from "/src/features/auth/hooks/useAuth.js";
 import RedButton from "/src/components/common/ui/RedButton";
 import { useState } from "react";
+import { useSearchParams } from "react-router";
 
 const LoginForm = ({ t }) => {
   const { handleLogin } = useAuth();
   const [backendError, setBackendError] = useState(null);
+  const [searchParams] = useSearchParams();
+
+  const redirectTo = searchParams.get("redirect") || null;
 
   const {
     register,
@@ -19,7 +23,7 @@ const LoginForm = ({ t }) => {
 
   const onSubmit = async (data) => {
     setBackendError(null);
-    const res = await handleLogin(data);
+    const res = await handleLogin(data, redirectTo);
 
     if (!res.success) {
       if (res.error.message === "Invalid email or password.") {
@@ -35,6 +39,12 @@ const LoginForm = ({ t }) => {
     <>
       {backendError && (
         <p className="text-red-600 p-2 rounded text-sm mb-2">{backendError}</p>
+      )}
+
+      {redirectTo && (
+        <p className="text-red-600 p-2 rounded text-sm mb-2">
+          {t("review.redirect")}
+        </p>
       )}
 
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>

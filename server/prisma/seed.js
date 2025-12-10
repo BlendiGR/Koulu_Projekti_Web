@@ -12,6 +12,7 @@ const main = async () => {
       role: "ADMIN",
       email: "admin1@fooder.fi",
       password: password,
+      locale: "fi",
     },
   });
 
@@ -56,6 +57,7 @@ const main = async () => {
       cost: 12.48,
       destinationAddress: "Test Street 123",
       userId: user.userId,
+      phone: "0441234567",
     },
   });
 

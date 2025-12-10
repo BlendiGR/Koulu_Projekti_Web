@@ -2,6 +2,7 @@ import express from "express";
 import api from "./api/index.js";
 import {errorHandler, notFoundHandler} from "./middleware/error-handlers.js";
 import {successResponse} from "./middleware/success-response.js";
+import cors from "cors";
 
 const app = express();
 
@@ -12,6 +13,12 @@ app.use("/uploads", express.static("uploads"));
 // Body Parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// CORS
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true
+}));
 
 // Standardize success responses
 app.use(successResponse);

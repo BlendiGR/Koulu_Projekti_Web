@@ -28,6 +28,14 @@ userRouter.route("/")
         userController.createUser
     );
 
+userRouter.route("/reviews/:userId")
+    .get(
+        authenticateToken,
+        ...validateUserIdParam,
+        validationErrors,
+        userController.getHasReviewed
+    );
+
 userRouter.route("/:userId")
     .get(
         authenticateToken,

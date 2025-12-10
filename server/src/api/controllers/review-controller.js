@@ -1,6 +1,7 @@
 import {asyncHandler} from "../../utils/async-handler.js";
 import AppError from "../../utils/AppError.js";
 import * as Review from "../models/review-model.js";
+import prisma from "../../prisma.js";
 
 /**
  * Get all reviews with optional filtering and pagination.
@@ -73,12 +74,27 @@ export const getReviewsByUser = asyncHandler(async (req, res) => {
  * @returns {Promise<void>}
  */
 export const createReview = asyncHandler(async (req, res) => {
-    const reviewData = { ...req.body };
+    // Separate userId from the rest of the review data
+    const { userId, ...reviewData } = req.body;
 
-    // Parse and remove undefined fields
+    // Check if user exists and hasn't reviewed yet
+    const user = await prisma.user.findUnique({
+        where: { 
+            userId: userId,
+            reviewed: false
+         }
+    });
+
+    if (!user) {
+        throw new AppError("USER NOT FOUND", 404, "USER_NOT_FOUND", `User with ID ${userId} not found or user has already reviewed.`);
+    }
+
+    // Parse and remove undefined fields from reviewData
     Object.keys(reviewData).forEach(key => reviewData[key] === undefined && delete reviewData[key]);
 
-    const newReview = await Review.createReview(reviewData);
+    // Create the review with userId included
+    const newReview = await Review.createReview(reviewData, userId);
+    
     res.sendSuccess(newReview, 201);
 });
 

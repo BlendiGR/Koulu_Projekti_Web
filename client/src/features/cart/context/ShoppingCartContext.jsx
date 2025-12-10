@@ -104,6 +104,7 @@ export const CartProvider = ({ children }) => {
     return cartItems.reduce((sum, item) => sum + (item.quantity ?? 0), 0);
   }, [cartItems]);
 
+  
   const totalPrice = useMemo(() => {
     const basePrice = cartItems.reduce(
       (sum, item) => sum + (Number(item.price) || 10) * item.quantity,
@@ -116,6 +117,7 @@ export const CartProvider = ({ children }) => {
       const discountAmount = (basePrice * discountPercent) / 100;
       return Math.max(0, basePrice - discountAmount);
     }
+
     
     return basePrice;
   }, [cartItems, appliedCoupon]);

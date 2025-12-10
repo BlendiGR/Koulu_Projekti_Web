@@ -16,7 +16,6 @@ export const validateReviewIdParam = [
  * Validation chain for creating a new review.
  */
 export const validateCreateReview = [
-    body("productId").isInt({ min: 1 }).withMessage("productId must be a positive integer").toInt(),
     body("userId").isInt({ min: 1 }).withMessage("userId must be a positive integer").toInt(),
     body("rating").isInt({ min: 1, max: 5 }).withMessage("rating must be an integer between 1 and 5").toInt(),
     body("review").isString().trim().notEmpty().withMessage("review must be a non-empty string")

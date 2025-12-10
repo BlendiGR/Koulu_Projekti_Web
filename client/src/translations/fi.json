@@ -103,7 +103,8 @@
     "orderDate": "Tilauspäivä",
     "orderStatus": "Tila",
     "orderTotal": "Yhteensä",
-    "orderDetails": "Tiedot"
+    "orderDetails": "Tiedot",
+    "phone": "Puhelin"
   },
   "orderStatus": {
     "preparing": {
@@ -253,6 +254,28 @@
         "and": "ja",
         "privacy": "Tietosuojakäytännön"
       }
+    }
+  },
+  "review": {
+    "rating": {
+      "min": "Valitse arvosana",
+      "max": "Arvosanan tulee olla välillä 1-5"
+    },
+    "review": {
+      "required": "Kirjoita arvostelu",
+      "max": "Arvostelu saa olla enintään 300 merkkiä"
+    },
+    "redirect": "Kirjaudu jättääksesi arvostelun",
+    "username": {
+      "required": "Syötä nimesi",
+      "max": "Nimi saa olla enintään 100 merkkiä"
+    },
+    "thankYou": {
+      "title": "Kiitos arvostelustasi!",
+      "message": "Arvostamme suuresti, että käytit aikaa kokemuksesi jakamiseen kanssamme.",
+      "subtitle": "Palautteesi auttaa meitä parantamaan palveluamme.",
+      "backHome": "Takaisin etusivulle",
+      "viewMenu": "Katso menu"
     }
   },
   "global": {

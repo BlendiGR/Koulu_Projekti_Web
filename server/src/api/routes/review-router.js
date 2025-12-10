@@ -5,7 +5,7 @@ import {
     validateReviewIdParam,
     validateCreateReview,
     validateUpdateReview,
-    validateReviewQuery
+    validateReviewQuery,
 } from "../validators/review-validators.js";
 
 import * as reviewController from "../controllers/review-controller.js";

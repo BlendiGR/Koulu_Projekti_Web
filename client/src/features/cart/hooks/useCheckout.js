@@ -49,6 +49,7 @@ export const useCheckout = () => {
                      ...(appliedCoupon ? { couponId: appliedCoupon.id } : {}),
                  };
 
+                 console.log(fullOrderData);
                  const { error: confirmError, paymentIntent } = await stripe.confirmPayment({
                      elements,
                      confirmParams: {
@@ -76,7 +77,7 @@ export const useCheckout = () => {
                  if (paymentIntent && paymentIntent.status === "succeeded") {
                      const res = await submitOrder({
                          ...fullOrderData,
-                         paymentIntentId: paymentIntent.id, 
+                         paymentIntentId: paymentIntent.id,
                      });
                      
                      if (res.success) {

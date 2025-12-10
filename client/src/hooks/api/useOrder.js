@@ -12,7 +12,6 @@ export const useOrder = () => {
   const { user } = useAuth();
 
   const submitOrder = async (orderData) => {
-    const { fullAddress, items } = orderData;
     return await withLoading(async () => {
       const res = await fetchData(`${API}/orders`, {
         method: "POST",
@@ -22,11 +21,14 @@ export const useOrder = () => {
         },
         body: JSON.stringify({
           userId: user.userId,
-          destinationAddress: fullAddress,
-          products: items.map((item) => ({
+          destinationAddress: orderData.fullAddress,
+          phone: orderData.phone,
+          products: orderData.items.map((item) => ({
             productId: item.id,
             quantity: item.quantity || 1,
           })),
+          ...(orderData.couponId ? { couponId: orderData.couponId } : {}),
+          ...(orderData.paymentIntentId ? { paymentIntentId: orderData.paymentIntentId } : {}),
         }),
       });
 

@@ -4,6 +4,19 @@ import {ensureExists} from "../../utils/ensure-exists.js";
 import * as User from "../models/user-model.js";
 
 /**
+ * Check if user has reviewed.
+ * @param req - Express request object
+ * @param res - Express response object
+ * @returns {Promise<void>}
+ */
+export const getHasReviewed = asyncHandler(async (req, res) => {
+    const userId = Number(req.params.userId);
+    ensureExists(userId, "User not found", "USER_NOT_FOUND");
+    const hasReviewed = await User.getHasReviewed(userId);
+    res.sendSuccess(hasReviewed);
+});
+
+/**
  * Get all users with optional filtering and pagination.
  * @param req - Express request object
  * @param res - Express response object

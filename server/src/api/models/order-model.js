@@ -10,6 +10,7 @@ export const orderFields = [
     "orderId",
     "userId",
     "status",
+    "phone",
 ];
 
 /**
@@ -138,7 +139,9 @@ export const getOrdersByStatusWithProducts = async (status) => {
  * @returns {Promise<*>}
  */
 export const createOrder = async (orderData) => {
+    console.log(orderData);
     const { products, couponId, ...orderFields} = orderData;
+
 
     // normalize input: allow [1, "2", {productId:3, quantity:2}, ...]
     const items = Array.isArray(products)

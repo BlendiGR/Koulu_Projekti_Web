@@ -26,12 +26,17 @@ const OrderTrack = () => {
 
   const orderDetailsColumns = [
     {
-      key: "id",
+      key: "orderId",
       translationKey: "orderTrack.orderId",
     },
     {
       key: "destinationAddress",
       translationKey: "orderTrack.destinationAddress",
+      alignRight: true,
+    },
+    {
+      key: "phone",
+      translationKey: "orderTrack.phone",
       alignRight: true,
     },
     {
