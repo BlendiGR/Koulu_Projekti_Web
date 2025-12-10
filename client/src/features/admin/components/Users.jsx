@@ -10,7 +10,7 @@ import Submit from "./formFields/Submit.jsx";
 import SortBar from "./SortBar.jsx";
 
 const Users = () => {
-    const {getUsers, createUser, updateUser, deleteUser} = useUser();
+    const {getUsers, createUserAdmin, updateUserAdmin, deleteUser} = useUser();
     const {t} = useLang();
 
     const [sortBy, setSortBy] = useState("");
@@ -40,8 +40,8 @@ const Users = () => {
         <RecordContainer
             title={t("admin.users.title")}
             getItems={getUsers}
-            createItem={(values, token) => createUser(values, token)}
-            updateItem={(id, values, token) => updateUser(id, values, token)}
+            createItem={(values, token) => createUserAdmin(values, token)}
+            updateItem={(id, values, token) => updateUserAdmin(id, values, token)}
             deleteItem={(id) => deleteUser(id)}
             allowCreate={false} // for now, just allow user creation via registration. admins can then edit roles/status.
             createSchema={null} // use registration schema if needed
