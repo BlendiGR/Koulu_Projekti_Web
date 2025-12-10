@@ -234,7 +234,17 @@ export const useReview = () => {
   };
 
   const deleteReview = async (reviewId, token) => {
+    const headers = {};
+    if (token) headers.Authorization = `Bearer ${token}`;
 
+    const res = await fetchData(`${API}/reviews/${reviewId}`, {
+      method: "DELETE",
+      headers,
+    });
+
+    if (!res.success) return res;
+    const payload = res.data && res.data.data !== undefined ? res.data.data : res.data;
+    return { success: true, data: payload };
   };
 
   return {getReviews, createReview, updateReview, deleteReview};
