@@ -27,13 +27,27 @@ export const productFields = [
  * @param {Object} filter - Filter criteria for querying products.
  * @param {number} skip - Number of records to skip for pagination.
  * @param {number} take - Number of records to take for pagination.
+ * @param {string} sortBy - Field to sort by.
+ * @param {string} sortOrder - Sort order, either "asc" or "desc".
  * @returns {Promise<*>}
  */
-export const getProducts = async (filter = {}, skip = 0, take = 100) => {
+export const getProducts = async (filter = {}, skip = 0, take = 100, sortBy, sortOrder = "asc") => {
     return prisma.product.findMany({
         where: filter,
         skip: Number(skip),
         take: Number(take),
+        orderBy: sortBy ? { [sortBy]: sortOrder || "asc" } : undefined,
+    });
+};
+
+/**
+ * Get product count.
+ * @param {Object} filter - Filter criteria for counting products.
+ * @returns {Promise<number>}
+ */
+export const getProductCount = async (filter = {}) => {
+    return prisma.product.count({
+        where: filter
     });
 };
 

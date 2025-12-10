@@ -2,7 +2,19 @@ import {body, query, param} from "express-validator";
 import AppError from "../../utils/AppError.js";
 
 import {productFields, PRODUCT_TYPES} from "../models/product-model.js";
-const allowedQueryFields = [...productFields, "skip", "take"];
+const allowedQueryFields = [...productFields, "skip", "take", "sortBy", "sortOrder"];
+
+// helper to validate imageUrl: accept absolute URLs or relative /uploads paths
+const isValidImageUrl = (val) => {
+    if (typeof val !== 'string') return false;
+    if (val.startsWith('/uploads/')) return true;
+    try {
+        new URL(val);
+        return true;
+    } catch {
+        return false;
+    }
+};
 
 /**
  * Validation chain for productId URL parameter.
@@ -22,7 +34,11 @@ export const validateCreateProduct = [
         if (Array.isArray(val) || (val && typeof val === "object")) return true;
         throw new AppError("diets must be an array or an object (JSON)", 400, "INVALID_DIETS_FORMAT", "Diets must be provided as an array or JSON object.");
     }),
-    body("imageUrl").optional().isURL().withMessage("imageUrl must be a valid URL"),
+    body("imageUrl").optional().custom((val) => {
+        if (val == null) return true;
+        if (isValidImageUrl(val)) return true;
+        throw new AppError("imageUrl must be a valid URL or an /uploads path", 400, "INVALID_IMAGE_URL", "imageUrl must be an absolute URL or a /uploads/<file> path.");
+    }),
     body("ingredients").optional().custom((val) => {
         if (Array.isArray(val) || (val && typeof val === "object")) return true;
         throw new AppError("ingredients must be an array or an object (JSON)", 400, "INVALID_INGREDIENTS_FORMAT", "Ingredients must be provided as an array or JSON object.");
@@ -45,7 +61,11 @@ export const validateUpdateProduct = [
         if (Array.isArray(val) || (val && typeof val === "object")) return true;
         throw new AppError("diets must be an array or an object (JSON)", 400, "INVALID_DIETS_FORMAT", "Diets must be provided as an array or JSON object.");
     }),
-    body("imageUrl").optional().isURL().withMessage("imageUrl must be a valid URL"),
+    body("imageUrl").optional().custom((val) => {
+        if (val == null) return true;
+        if (isValidImageUrl(val)) return true;
+        throw new AppError("imageUrl must be a valid URL or an /uploads path", 400, "INVALID_IMAGE_URL", "imageUrl must be an absolute URL or a /uploads/<file> path.");
+    }),
     body("ingredients").optional().custom((val) => {
         if (Array.isArray(val) || (val && typeof val === "object")) return true;
         throw new AppError("ingredients must be an array or an object (JSON)", 400, "INVALID_INGREDIENTS_FORMAT", "Ingredients must be provided as an array or JSON object.");
@@ -75,6 +95,12 @@ export const validateProductQuery = [
     }),
     query("skip").optional().isInt({ min: 0 }).withMessage("skip must be a non-negative integer").toInt(),
     query("take").optional().isInt({ min: 1, max: 100 }).withMessage("take must be an integer between 1 and 100").toInt(),
+    query("sortBy").optional().isString().isIn(productFields).withMessage(`sortBy must be one of: ${productFields.join(", ")}`),
+    query("sortOrder")
+        .optional()
+        .customSanitizer((v) => (v == null ? v : String(v).toLowerCase()))
+        .isIn(["asc", "desc"]).withMessage("sortOrder must be either 'asc' or 'desc'"),
+
     query("productId").optional().isInt({ min: 1 }).withMessage("productId must be a positive integer").toInt(),
     query("name").optional().isString().withMessage("name must be a string"),
     query("type").optional().isString().isIn(PRODUCT_TYPES).withMessage(`type must be one of: ${PRODUCT_TYPES.join(", ")}`),
