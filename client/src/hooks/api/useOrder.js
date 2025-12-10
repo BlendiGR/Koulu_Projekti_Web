@@ -53,5 +53,34 @@ export const useOrder = () => {
     return res.data;
   };
 
-  return { submitOrder, loading, error, order, getOrderById };
+  // Admin hooks
+  const getOrdersAdmin = async (params) => {
+    const qs = new URLSearchParams(params).toString();
+    const url = qs ? `${API}/orders?${qs}` : `${API}/orders`;
+    const token = localStorage.getItem("token");
+    const res = await fetchData(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (!res.success) return res;
+
+    return {success: true, data: res.data};
+  }
+
+  const updateOrder = async (orderId, orderData, token) => {
+    const headers = { "Content-Type": "application/json" };
+    if (token) headers.Authorization = `Bearer ${token}`;
+
+    const res = await fetchData(`${API}/orders/${orderId}`, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify(orderData),
+    });
+
+    if (!res.success) return res;
+
+    return { success: true, data: res.data };
+  }
+
+  return { submitOrder, loading, error, order, getOrderById, getOrdersAdmin, updateOrder };
 };
