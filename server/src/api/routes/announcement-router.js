@@ -6,6 +6,13 @@ const announcementRouter = express.Router();
 
 announcementRouter.get("/", announcementController.getAnnouncement);
 
+announcementRouter.get(
+    "/admin",
+    authenticateToken,
+    requireRole(["ADMIN"]),
+    announcementController.getAdminAnnouncement
+);
+
 announcementRouter.put(
     "/",
     authenticateToken,
