@@ -138,7 +138,7 @@ export const getOrdersByStatusWithProducts = async (status) => {
  * @returns {Promise<*>}
  */
 export const createOrder = async (orderData) => {
-    const { products, ...orderFields } = orderData;
+    const { products, couponId, ...orderFields} = orderData;
 
     // normalize input: allow [1, "2", {productId:3, quantity:2}, ...]
     const items = Array.isArray(products)
@@ -185,18 +185,41 @@ export const createOrder = async (orderData) => {
     const costMap = {};
     productsFromDb.forEach(p => { costMap[p.productId] = Number(p.cost); });
 
-    // compute total cost
     const totalCost = uniqueIds.reduce((sum, pid) => {
         const qty = consolidated[pid] || 0;
         return sum + (costMap[pid] * qty);
     }, 0);
+
+    // Handle coupon validation and discount calculation
+    let finalCost = totalCost;
+    let appliedDiscount = 0;
+
+    if (couponId) {
+        const coupon = await prisma.coupon.findUnique({
+            where: { id: Number(couponId) }
+        });
+
+        if (!coupon) {
+            throw new AppError("Coupon not found.", 404, "COUPON_NOT_FOUND", `No coupon found with ID ${couponId}`);
+        }
+
+        if (!coupon.isActive) {
+            throw new AppError("Coupon is not active.", 400, "COUPON_INACTIVE", "This coupon is no longer valid.");
+        }
+
+        const discountPercentage = Number(coupon.discount);
+        appliedDiscount = (totalCost * discountPercentage) / 100;
+        finalCost = totalCost - appliedDiscount;
+
+        if (finalCost < 0) finalCost = 0;
+    }
 
     try {
         return await prisma.order.create({
             data: {
                 ...orderFields,
                 ...(orderFields.userId !== undefined ? { userId: Number(orderFields.userId) } : {}),
-                cost: String(totalCost),
+                cost: String(finalCost),
                 orderProducts: {
                     create: uniqueIds.map(productId => ({
                         quantity: consolidated[productId],

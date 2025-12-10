@@ -29,13 +29,14 @@ orderRouter.route("/")
         orderController.createOrder
     );
 
+
 orderRouter.route("/:orderId")
     .get(
         authenticateToken,
         authorizeOwnerOrAdmin(getOrderById, {idField: "orderId"}),
         ...validateOrderIdParam,
         validationErrors,
-        orderController.getOrderById
+        orderController.getOrderWithProducts
     )
     .put(
         authenticateToken,

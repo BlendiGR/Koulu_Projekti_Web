@@ -40,14 +40,12 @@ const CartDrawer = ({ isOpen, onClose }) => {
       }`}
       onClick={onClose}
     >
-      {/* drawer */}
       <div
         className={`absolute top-0 right-0 h-full w-full md:w-[450px] bg-white shadow-lg transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } flex flex-col`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-brown-100">
           <h2 className="text-2xl font-bold text-gray-800">
             {t("cart.shoppingCart")}
@@ -59,8 +57,6 @@ const CartDrawer = ({ isOpen, onClose }) => {
             <X size={28} />
           </button>
         </div>
-
-        {/* Tilaus tuotteet */}
         <div
           className="flex-1 overflow-y-auto p-6 relative"
           style={{
@@ -93,8 +89,6 @@ const CartDrawer = ({ isOpen, onClose }) => {
             </div>
           )}
         </div>
-
-        {/* Tilaus yhteenveto */}
         {cartItems.length > 0 && (
           <div className="p-6 border-t border-brown-100">
             <OrderSummary
