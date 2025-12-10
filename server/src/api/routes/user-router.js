@@ -6,7 +6,9 @@ import {
     validateCreateUser,
     validateUpdateUser,
     validateUserIdParam,
-    validateUserQuery
+    validateUserQuery,
+    validateAdminUpdateUser,
+    validateAdminCreateUser
 } from "../validators/user-validators.js";
 
 import {getUserById} from "../models/user-model.js";
@@ -24,6 +26,15 @@ userRouter.route("/")
     )
     .post(
         ...validateCreateUser,
+        validationErrors,
+        userController.createUser
+    );
+
+userRouter.route("/admin")
+    .post(
+        authenticateToken,
+        requireRole(["ADMIN"]),
+        validateAdminCreateUser,
         validationErrors,
         userController.createUser
     );
@@ -50,6 +61,16 @@ userRouter.route("/:userId")
         ...validateUserIdParam,
         validationErrors,
         userController.deleteUser
+    );
+
+userRouter.route("/:userId/admin")
+    .put(
+        authenticateToken,
+        requireRole(["ADMIN"]),
+        ...validateUserIdParam,
+        validateAdminUpdateUser,
+        validationErrors,
+        userController.updateUser
     );
 
 userRouter.route("/:userId/soft-delete")
