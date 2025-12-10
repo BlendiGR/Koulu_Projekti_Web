@@ -1,12 +1,12 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router";
 import { useCart } from "/src/features/cart/hooks/useCart.js";
-import { useOrder } from "/src/hooks/apiHooks";
+import { useOrder } from "/src/hooks/api";
 import { useAuth } from "/src/features/auth/hooks/useAuth";
 import { useLoading } from "/src/hooks/useLoading.js";
 
 export const useCheckout = () => {
-  const { cartItems, clearCart } = useCart();
+  const { cartItems, appliedCoupon, clearCart } = useCart();
   const { submitOrder } = useOrder();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -28,30 +28,73 @@ export const useCheckout = () => {
     setPaymentData(data);
   }, []);
 
-  const handlePlaceOrder = async () => {
+  const handlePlaceOrder = async (stripe, elements) => {
     if (!shippingData || !paymentData) return;
+    
+    if (stripe && elements) {
+         clearError();
+         
+         try {
+             await withLoading(async () => {
+                 const { error: submitError } = await elements.submit();
+                 if (submitError) {
+                     console.error("Stripe validation error:", submitError);
+                     return;
+                 }
 
-    clearError();
+                 const fullOrderData = {
+                     ...shippingData,
+                     items: cartItems,
+                     userId: user?._id || user?.id || null,
+                     ...(appliedCoupon ? { couponId: appliedCoupon.id } : {}),
+                 };
 
-    const fullOrderData = {
-      ...shippingData,
-      items: cartItems,
-      userId: user?._id || user?.id || null,
-    };
+                 const { error: confirmError, paymentIntent } = await stripe.confirmPayment({
+                     elements,
+                     confirmParams: {
+                         return_url: window.location.origin + "/checkout/verify", 
+                         payment_method_data: {
+                             billing_details: {
+                                 name: shippingData.fullName,
+                                 email: shippingData.email,
+                                 address: {
+                                     line1: shippingData.address,
+                                     city: shippingData.city,
+                                     postal_code: shippingData.zipCode,
+                                     country: 'FI',
+                                 }
+                             }
+                         }
+                     },
+                     redirect: "if_required",
+                 });
 
-    try {
-      await withLoading(async () => {
-        const res = await submitOrder(fullOrderData);
-        if (res.success) {
-          setOrder(res.data.data);
-          clearCart();
-          navigate("/success/" + res.data.data.orderId);
-        } else {
-          throw new Error(res.error?.message || res.error || "Failed to place order");
-        }
-      });
-    } catch (err) {
-      console.error("Order placement failed:", err);
+                 if (confirmError) {
+                     throw new Error(confirmError.message);
+                 }
+
+                 if (paymentIntent && paymentIntent.status === "succeeded") {
+                     const res = await submitOrder({
+                         ...fullOrderData,
+                         paymentIntentId: paymentIntent.id, 
+                     });
+                     
+                     if (res.success) {
+                         setOrder(res.data);
+                         clearCart();
+                         navigate("/success/" + res.data.orderId);
+                     } else {
+                         throw new Error(
+                             res.error?.message || res.error || "Payment succeeded but order creation failed."
+                         );
+                     }
+                 } else {
+                      throw new Error("Payment status: " + paymentIntent.status);
+                 }
+             });
+         } catch (err) {
+             console.error("Order processing failed:", err);
+         }
     }
   };
 

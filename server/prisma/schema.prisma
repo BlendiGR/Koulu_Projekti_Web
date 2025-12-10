@@ -111,3 +111,26 @@ model OrderProduct {
   @@id([orderId, productId])
   @@map("order_products")
 }
+
+model Announcement {
+  id          Int      @id @default(autoincrement())
+  title       String
+  message     String
+
+  isActive    Boolean  @default(true)
+  isSingleton Boolean  @default(true) @unique 
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("announcements")
+}
+
+model Coupon {
+  id          Int      @id @default(autoincrement())
+  code        String   @unique
+  discount    Decimal
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@map("coupons")
+}

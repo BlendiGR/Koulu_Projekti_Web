@@ -64,7 +64,12 @@
     "empty": "Ostoskorisi on tyhjä.",
     "loginToCheckout": "Kirjaudu siirryttäksesi kassalle",
     "close": "Jatka ostoksia",
-    "quantity": "Määrä"
+    "quantity": "Määrä",
+    "coupon": {
+      "label": "Kuponki",
+      "placeholder": "Anna kupongin koodi",
+      "notFound": "Kupongia ei löytynyt"
+    }
   },
   "checkout": {
     "title": "Kassa",

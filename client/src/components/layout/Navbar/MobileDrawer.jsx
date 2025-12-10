@@ -10,6 +10,12 @@ const MobileDrawer = ({
   handleLogout,
   navLinks = [],
 }) => {
+
+  const handleLogoutAndClose = () => {
+    handleLogout();
+    onClose();
+  };
+
   return (
     <div
       className={`fixed inset-0 z-999 bg-black/30 transition-opacity duration-300 ${
@@ -48,7 +54,7 @@ const MobileDrawer = ({
         </ul>
 
         <div className="flex flex-col gap-4 mt-10">
-          <LoginButton user={user} onClick={handleLogout} mobile />
+          <LoginButton user={user} onClick={handleLogoutAndClose} mobile />
           <LangButton />
         </div>
       </div>

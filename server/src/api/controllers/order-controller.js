@@ -17,22 +17,7 @@ export const getAllOrders = asyncHandler(async (req, res) => {
 });
 
 /**
- * Get orders by status with pagination.
- * @param req - Express request object
- * @param res - Express response object
- * @returns {Promise<void>}
- */
-export const getOrdersByStatus = asyncHandler(async (req, res) => {
-    const status = req.params.status;
-    const {skip = 0, take = 100} = req.query;
-
-    const orders = await Order.getOrdersByStatusPaginated(status, skip, take);
-
-    res.sendSuccess(orders);
-});
-
-/**
- * Get all orders with their products, with optional filtering and pagination.
+ * Get all orders with their products.
  * @param req - Express request object
  * @param res - Express response object
  * @returns {Promise<void>}
@@ -46,6 +31,21 @@ export const getAllOrdersWithProducts = asyncHandler(async (req, res) => {
 });
 
 /**
+ * Get orders by status.
+ * @param req - Express request object
+ * @param res - Express response object
+ * @returns {Promise<void>}
+ */
+export const getOrdersByStatus = asyncHandler(async (req, res) => {
+    const {status} = req.params;
+    const {skip = 0, take = 100} = req.query;
+
+    const orders = await Order.getOrdersByStatusPaginated(status, skip, take);
+
+    res.sendSuccess(orders);
+});
+
+/**
  * Get a single order by ID.
  * @param req - Express request object
  * @param res - Express response object
@@ -53,7 +53,7 @@ export const getAllOrdersWithProducts = asyncHandler(async (req, res) => {
  */
 export const getOrderById = asyncHandler(async (req, res) => {
     const orderId = Number(req.params.orderId);
-    const order = await Order.getOrderWithProducts(orderId);
+    const order = await Order.getOrderById(orderId);
 
     if (!order) {
         throw new AppError("Order not found", 404, "ORDER_NOT_FOUND", `No order found with ID ${orderId}`);
@@ -76,18 +76,45 @@ export const getOrdersByUserId = asyncHandler(async (req, res) => {
 });
 
 /**
+ * Get a single order with its products.
+ * @param req - Express request object
+ * @param res - Express response object
+ * @returns {Promise<void>}
+ */
+export const getOrderWithProducts = asyncHandler(async (req, res) => {
+    const orderId = Number(req.params.orderId);
+    const order = await Order.getOrderWithProducts(orderId);
+
+    if (!order) {
+        throw new AppError("Order not found", 404, "ORDER_NOT_FOUND", `No order found with ID ${orderId}`);
+    }
+
+    res.sendSuccess(order);
+});
+
+/**
+ * Get orders by status with products.
+ * @param req - Express request object
+ * @param res - Express response object
+ * @returns {Promise<void>}
+ */
+export const getOrdersByStatusWithProducts = asyncHandler(async (req, res) => {
+    const {status} = req.params;
+    const orders = await Order.getOrdersByStatusWithProducts(status);
+
+    res.sendSuccess(orders);
+});
+
+/**
  * Create a new order.
  * @param req - Express request object
  * @param res - Express response object
  * @returns {Promise<void>}
  */
 export const createOrder = asyncHandler(async (req, res) => {
-    const orderData = { ...req.body };
-
-    // Parse and remove undefined fields
-    Object.keys(orderData).forEach(key => orderData[key] === undefined && delete orderData[key]);
-
+    const orderData = req.body;
     const newOrder = await Order.createOrder(orderData);
+
     res.sendSuccess(newOrder, 201);
 });
 
@@ -99,17 +126,14 @@ export const createOrder = asyncHandler(async (req, res) => {
  */
 export const updateOrder = asyncHandler(async (req, res) => {
     const orderId = Number(req.params.orderId);
-    const updateData = { ...req.body };
-
-    // Parse and remove undefined fields
-    Object.keys(updateData).forEach(key => updateData[key] === undefined && delete updateData[key]);
+    const updateData = req.body;
 
     const updatedOrder = await Order.updateOrder(orderId, updateData);
     res.sendSuccess(updatedOrder);
 });
 
 /**
- * Delete an order by ID.
+ * Delete an order by its ID.
  * @param req - Express request object
  * @param res - Express response object
  * @returns {Promise<void>}
@@ -118,5 +142,5 @@ export const deleteOrder = asyncHandler(async (req, res) => {
     const orderId = Number(req.params.orderId);
 
     await Order.deleteOrder(orderId);
-    res.sendSuccess(null, 204);
+    res.sendSuccess({ message: `Order with ID ${orderId} has been deleted.` });
 });

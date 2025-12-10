@@ -1,0 +1,47 @@
+import { fetchData } from "../../utils/fetchData";
+import { useNavigate } from "react-router";
+
+const API = "/api/v1";
+
+export const useUser = () => {
+  const navigate = useNavigate();
+
+  const postLogin = async (inputs) => {
+    return await fetchData(`${API}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(inputs),
+    });
+  };
+
+  const postUser = async (inputs) => {
+    return await fetchData(`${API}/users`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(inputs),
+    });
+  };
+
+  const getUserByToken = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return {
+        success: false,
+        error: { message: "Unauthorized", code: "NO_TOKEN" },
+      };
+    }
+
+    const res = await fetchData(`${API}/auth/me`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (!res.success) {
+      localStorage.removeItem("token");
+      navigate("/login");
+    }
+
+    return res;
+  };
+
+  return { postLogin, postUser, getUserByToken };
+};

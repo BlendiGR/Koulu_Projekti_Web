@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
-import { useUser } from "/src/hooks/apiHooks";
+import { useUser } from "/src/hooks/api";
 
 const AuthContext = createContext(null);
 
@@ -28,7 +28,8 @@ const AuthProvider = ({ children }) => {
       return loginRes;
     }
 
-    const data = loginRes.data.data;
+    const data = loginRes.data;
+    console.log(loginRes.data);
     const token = data.token;
     const user = data.user;
 
@@ -63,7 +64,7 @@ const AuthProvider = ({ children }) => {
       return;
     }
     console.log(meRes);
-    setUser(meRes.data.data);
+    setUser(meRes.data);
     navigate(location.pathname);
   };
 

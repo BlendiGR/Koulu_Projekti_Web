@@ -8,6 +8,7 @@ import MobileDrawer from "/src/components/layout/Navbar/MobileDrawer";
 import DesktopNav from "/src/components/layout/Navbar/DesktopNav";
 import useNavScroll from "/src/hooks/useNavScroll.js";
 import getNavStyles from "/src/components/layout/Navbar/getNavStyles";
+import Announcement from "/src/components/layout/Announcement.jsx";
 
 import LogoBlack from "/src/assets/images/Fooder-Logo-Black.png";
 import LogoWhite from "/src/assets/images/Fooder-Logo-White.png";
@@ -15,7 +16,7 @@ import { useAuth } from "/src/features/auth/hooks/useAuth.js";
 import { getNavLinks } from "/src/config/navigation.js";
 import { useLang } from "/src/hooks/useLang";
 
-const NavBar = () => {
+const NavBar = ({ announcement, onDismiss }) => {
   const { t } = useLang();
 
   const { pathname } = useLocation();
@@ -30,30 +31,11 @@ const NavBar = () => {
   const { user, handleLogout } = useAuth();
   const navLinks = getNavLinks(user, t);
 
-  // Estä scrollia kun mobile menu on auki
-  /*useEffect(() => {
-    if (mobileMenuOpen || cartDrawerOpen) {
-      const scrollY = window.scrollY;
-      
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
-      
-      return () => {
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.style.overflow = '';
-        window.scrollTo(0, scrollY);
-      };
-    }
-  }, [mobileMenuOpen, cartDrawerOpen]);*/
-
   return (
     <>
       <nav className={navClass}>
-        <div className="max-w-7xl mx-auto flex items-center justify-between p-2">
+        {announcement && <Announcement data={announcement} onDismiss={onDismiss} />}
+        <div className="max-w-[90%] mx-auto flex items-center justify-between p-2">
           {/* Fooder Logo */}
           <Link to="/">
             <img
