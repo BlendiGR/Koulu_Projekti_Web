@@ -1,11 +1,14 @@
+// client/src/pages/Profile.jsx
 import { useEffect, useState } from "react";
 import { useAuth } from "/src/features/auth/hooks/useAuth";
 import { useOrder, useUser } from "/src/hooks/api";
+import { useLang } from "/src/hooks/useLang";
 
 export default function Profile() {
   const { user, setUser } = useAuth();
   const { getOrdersByUser } = useOrder();
   const { updateUser } = useUser();
+  const { t } = useLang();
 
   const [orders, setOrders] = useState([]);
   const [ordersLoading, setOrdersLoading] = useState(true);
@@ -20,7 +23,6 @@ export default function Profile() {
   const [formSuccess, setFormSuccess] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
 
-  // Tilaukset profiilia varten
   useEffect(() => {
     if (!user) return;
 
@@ -31,9 +33,8 @@ export default function Profile() {
         setOrders(data || []);
         setOrdersError(null);
       } catch (err) {
-        console.error("Failed to fetch orders", err);
         setOrders([]);
-        setOrdersError(err.message || "Failed to fetch orders");
+        setOrdersError(err.message || t("profile.errors.fetchOrders"));
       } finally {
         setOrdersLoading(false);
       }
@@ -47,7 +48,7 @@ export default function Profile() {
     return (
       <main className="max-w-[960px] mx-auto pt-12 pb-24 px-4">
         <p className="text-center text-sm text-[var(--color-gray-200)]">
-          Loading profile...
+          {t("profile.loadingProfile")}
         </p>
       </main>
     );
@@ -67,11 +68,11 @@ export default function Profile() {
   const formatStatusLabel = (status) => {
     switch (status) {
       case "DELIVERED":
-        return "Delivered";
+        return t("profile.status.delivered");
       case "DELIVERING":
-        return "Delivering";
+        return t("profile.status.delivering");
       case "PREPARING":
-        return "Preparing";
+        return t("profile.status.preparing");
       default:
         return status;
     }
@@ -84,15 +85,11 @@ export default function Profile() {
     if (status === "DELIVERING") {
       return "bg-[rgba(241,196,15,0.15)] text-[#c27d00] px-2 py-0.5 rounded-full text-xs font-medium";
     }
-    // PREPARING tai muu
     return "bg-[rgba(0,0,0,0.05)] text-[var(--color-black-200)] px-2 py-0.5 rounded-full text-xs font-medium";
   };
 
-  // --- Edit logiikka ---
-
   const handleEditClick = () => {
     setIsEditing(true);
-    // Puretaan nykyinen username -> first + last
     const parts = displayName.split(" ").filter(Boolean);
     const first = parts[0] || "";
     const last = parts.slice(1).join(" ") || "";
@@ -119,36 +116,32 @@ export default function Profile() {
     const trimmedLast = formLastName.trim();
 
     if (!trimmedFirst) {
-      setFormError("First name cannot be empty.");
+      setFormError(t("profile.errors.emptyFirstName"));
       return;
     }
     if (!trimmedLast) {
-      setFormError("Last name cannot be empty.");
+      setFormError(t("profile.errors.emptyLastName"));
       return;
     }
 
     if (formPassword && formPassword.length < 8) {
-      setFormError("Password must be at least 8 characters long.");
+      setFormError(t("profile.errors.shortPassword"));
       return;
     }
 
     if (formPassword && formPassword !== formPasswordConfirm) {
-      setFormError("Passwords do not match.");
+      setFormError(t("profile.errors.passwordMismatch"));
       return;
     }
 
     const combinedUsername = `${trimmedFirst} ${trimmedLast}`.trim();
 
     const payload = {};
-    if (combinedUsername !== displayName) {
-      payload.username = combinedUsername;
-    }
-    if (formPassword) {
-      payload.password = formPassword;
-    }
+    if (combinedUsername !== displayName) payload.username = combinedUsername;
+    if (formPassword) payload.password = formPassword;
 
     if (Object.keys(payload).length === 0) {
-      setFormError("Nothing to update.");
+      setFormError(t("profile.errors.nothingToUpdate"));
       return;
     }
 
@@ -156,19 +149,14 @@ export default function Profile() {
       setIsSaving(true);
       const res = await updateUser(user.userId, payload);
 
-      if (!res.success) {
-        throw new Error(res.error?.message || "Failed to update profile");
-      }
+      if (!res.success)
+        throw new Error(res.error?.message || t("profile.errors.updateFailed"));
 
-      if (setUser) {
-        setUser(res.data);
-      }
-
-      setFormSuccess("Profile updated successfully.");
+      setUser(res.data);
+      setFormSuccess(t("profile.success"));
       setIsEditing(false);
     } catch (err) {
-      console.error("Failed to update profile", err);
-      setFormError(err.message || "Failed to update profile");
+      setFormError(err.message || t("profile.errors.updateFailed"));
     } finally {
       setIsSaving(false);
     }
@@ -176,10 +164,9 @@ export default function Profile() {
 
   return (
     <main className="max-w-[960px] mx-auto pt-12 pb-24 px-4">
-      {/* HEADER */}
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold mb-6 text-[var(--color-black-200)]">
-          My Profile
+          {t("profile.title")}
         </h1>
 
         <div
@@ -199,27 +186,31 @@ export default function Profile() {
         <p className="text-sm text-[var(--color-gray-200)]">{email}</p>
       </div>
 
-      {/* CONTENT */}
       <div className="flex flex-col gap-6">
-        {/* PROFILE INFO */}
         <section className="bg-[var(--color-white)] rounded-xl p-6 shadow-xl border border-[rgba(0,0,0,0.04)]">
-          <h3 className="font-semibold text-lg mb-4">Profile Information</h3>
+          <h3 className="font-semibold text-lg mb-4">{t("profile.info")}</h3>
 
           {!isEditing ? (
             <>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-[var(--color-black-200)]/70">Name</span>
+                  <span className="text-[var(--color-black-200)]/70">
+                    {t("profile.nameLabel")}
+                  </span>
                   <span className="font-medium">{displayName}</span>
                 </div>
+
                 <div className="flex justify-between text-sm">
                   <span className="text-[var(--color-black-200)]/70">
-                    Email
+                    {t("profile.emailLabel")}
                   </span>
                   <span className="font-medium break-all">{email}</span>
                 </div>
+
                 <div className="flex justify-between text-sm">
-                  <span className="text-[var(--color-black-200)]/70">Role</span>
+                  <span className="text-[var(--color-black-200)]/70">
+                    {t("profile.roleLabel")}
+                  </span>
                   <span className="font-medium">{role}</span>
                 </div>
               </div>
@@ -229,7 +220,7 @@ export default function Profile() {
                   onClick={handleEditClick}
                   className="bg-[var(--color-red-100)] hover:bg-[var(--color-red-200)] text-white px-6 py-2 rounded-full text-sm transition"
                 >
-                  Edit
+                  {t("profile.editButton")}
                 </button>
               </div>
             </>
@@ -237,7 +228,7 @@ export default function Profile() {
             <form onSubmit={handleSaveProfile} className="space-y-4 mt-1">
               <div className="flex flex-col gap-1 text-sm">
                 <label className="text-[var(--color-black-200)]/80">
-                  First name
+                  {t("profile.firstNameLabel")}
                 </label>
                 <input
                   type="text"
@@ -249,7 +240,7 @@ export default function Profile() {
 
               <div className="flex flex-col gap-1 text-sm">
                 <label className="text-[var(--color-black-200)]/80">
-                  Last name
+                  {t("profile.lastNameLabel")}
                 </label>
                 <input
                   type="text"
@@ -261,20 +252,20 @@ export default function Profile() {
 
               <div className="flex flex-col gap-1 text-sm">
                 <label className="text-[var(--color-black-200)]/80">
-                  New password (optional)
+                  {t("profile.newPasswordLabel")}
                 </label>
                 <input
                   type="password"
                   value={formPassword}
                   onChange={(e) => setFormPassword(e.target.value)}
                   className="w-full border border-[rgba(0,0,0,0.12)] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-red-100)]"
-                  placeholder="At least 8 characters"
+                  placeholder={t("profile.passwordPlaceholder")}
                 />
               </div>
 
               <div className="flex flex-col gap-1 text-sm">
                 <label className="text-[var(--color-black-200)]/80">
-                  Confirm new password
+                  {t("profile.confirmPasswordLabel")}
                 </label>
                 <input
                   type="password"
@@ -298,43 +289,52 @@ export default function Profile() {
                   className="px-5 py-2 rounded-full text-sm border border-[rgba(0,0,0,0.12)] text-[var(--color-black-200)] hover:bg-[rgba(0,0,0,0.03)] transition"
                   disabled={isSaving}
                 >
-                  Cancel
+                  {t("profile.cancelButton")}
                 </button>
                 <button
                   type="submit"
                   className="bg-[var(--color-red-100)] hover:bg-[var(--color-red-200)] text-white px-6 py-2 rounded-full text-sm transition disabled:opacity-70"
                   disabled={isSaving}
                 >
-                  {isSaving ? "Saving..." : "Save"}
+                  {isSaving ? t("profile.saving") : t("profile.saveButton")}
                 </button>
               </div>
             </form>
           )}
         </section>
 
-        {/* ORDER HISTORY */}
         <section className="bg-[var(--color-white)] rounded-xl p-6 shadow-xl border border-[rgba(0,0,0,0.04)]">
-          <h3 className="font-semibold text-lg mb-4">Order History</h3>
+          <h3 className="font-semibold text-lg mb-4">
+            {t("profile.orderHistoryTitle")}
+          </h3>
 
           {ordersLoading ? (
             <p className="text-sm text-[var(--color-gray-200)]">
-              Loading orders...
+              {t("profile.loadingOrders")}
             </p>
           ) : ordersError ? (
             <p className="text-sm text-red-600">{ordersError}</p>
           ) : orders.length === 0 ? (
             <p className="text-sm text-[var(--color-gray-200)]">
-              You have no orders yet.
+              {t("profile.noOrders")}
             </p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm border-collapse">
                 <thead className="border-b border-[rgba(0,0,0,0.05)]">
                   <tr className="text-[var(--color-black-200)]/60">
-                    <th className="py-2 text-left">Order #</th>
-                    <th className="py-2 text-left">Date</th>
-                    <th className="py-2 text-left">Total</th>
-                    <th className="py-2 text-left">Status</th>
+                    <th className="py-2 text-left">
+                      {t("profile.table.orderId")}
+                    </th>
+                    <th className="py-2 text-left">
+                      {t("profile.table.date")}
+                    </th>
+                    <th className="py-2 text-left">
+                      {t("profile.table.total")}
+                    </th>
+                    <th className="py-2 text-left">
+                      {t("profile.table.status")}
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
