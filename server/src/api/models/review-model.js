@@ -20,13 +20,27 @@ export const reviewFields = [
  * @param {Object} filter - Filter criteria for querying reviews.
  * @param {number} skip - Number of records to skip for pagination.
  * @param {number} take - Number of records to take for pagination.
+ * @param {string} sortBy - Field to sort by.
+ * @param {string} sortOrder - Sort order, either "asc" or "desc".
  * @returns {Promise<*>}
  */
-export const getReviews = async (filter = {}, skip = 0, take = 100) => {
+export const getReviews = async (filter = {}, skip = 0, take = 100, sortBy, sortOrder = "asc") => {
     return prisma.review.findMany({
         where: filter,
         skip: Number(skip),
         take: Number(take),
+        orderBy: sortBy ? { [sortBy]: sortOrder || "asc" } : undefined,
+    });
+};
+
+/**
+ * Get review count.
+ * @param {Object} filter - Filter criteria for counting reviews.
+ * @returns {Promise<number>}
+ */
+export const getReviewCount = async (filter = {}) => {
+    return prisma.review.count({
+        where: filter,
     });
 };
 
