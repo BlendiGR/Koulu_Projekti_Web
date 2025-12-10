@@ -18,7 +18,7 @@ const Products = () => {
     const { t } = useLang();
 
     const [sortBy, setSortBy] = useState("");
-    const [sortDir, setSortDir] = useState("asc");
+    const [sortOrder, setSortOrder] = useState("asc");
 
     const productTypes = [
         { value: "FOOD", label: t("admin.products.typeFood") },
@@ -54,6 +54,7 @@ const Products = () => {
           updateItem={(id, values, token) => updateProduct(id, values, token)}
           deleteItem={(id, token) => deleteProduct(id, token)}
           postFile={postFile}
+          allowCreate={true}
           createSchema={productSchema}
           createDefaultValues={createDefaults}
           renderCreate={({ register, handleCreate, handleFileChange, uploading, previewUrl, errors, submitting, success, error, reset }) => (
@@ -75,8 +76,6 @@ const Products = () => {
           )}
           renderList={({ items, loading, onUpdate, onDelete, fetchPage, pageSize, setPage }) => (
               <>
-                <h3 className="font-semibold mb-2">{t("admin.common.list")}</h3>
-
                   <SortBar
                       options={[
                           { value: "name", label: t("admin.products.name") },
@@ -84,13 +83,13 @@ const Products = () => {
                           { value: "type", label: t("admin.products.type") },
                           // add other sortable fields as desired
                       ]}
-                      value={{ sortBy, sortDir }}
-                      onChange={({ sortBy: newSortBy, sortDir: newSortDir }) => {
+                      value={{ sortBy, sortOrder }}
+                      onChange={({ sortBy: newSortBy, sortOrder: newSortOrder }) => {
                           setSortBy(newSortBy || "");
-                          setSortDir(newSortDir || "asc");
+                          setSortOrder(newSortOrder || "asc");
                           // trigger a fresh fetch for page 1 with sort params
                           setPage(1);
-                          fetchPage(1, pageSize, { sortBy: newSortBy, sortDir: newSortDir });
+                          fetchPage(1, pageSize, { sortBy: newSortBy, sortOrder: newSortOrder });
                       }}
                   />
 

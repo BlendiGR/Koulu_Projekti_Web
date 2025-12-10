@@ -21,15 +21,15 @@ const RecordTable = ({
 
     return (
         <div className="overflow-x-auto max-w-full bg-white border rounded">
-            <table className=" divide-y table-auto">
+            <table className="w-full divide-y table-auto">
                 <thead className="bg-gray-50">
                     <tr>
                         {fields.map((f) => (
-                            <th key={f.name} className="px-3 py-2 text-start text-sm font-semibold uppercase text-slate-600">
+                            <th key={f.name} className="px-3 py-2 text-start text-sm font-semibold uppercase text-slate-600 whitespace-nowrap">
                                 {f.label || f.name}
                             </th>
                         ))}
-                        <th className="px-3 py-2 text-start text-sm font-semibold uppercase text-slate-600">{t("admin.common.actions")}</th>
+                        <th className="px-3 py-2 text-start text-sm font-semibold uppercase text-slate-600 whitespace-nowrap">{t("admin.common.actions")}</th>
                     </tr>
                 </thead>
                 <tbody className="divide-y">

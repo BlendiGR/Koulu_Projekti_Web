@@ -8,6 +8,7 @@ import Checkbox from "./formFields/Checkbox.jsx";
 import ImageField from "./formFields/ImageField.jsx";
 import {useLang} from "../../../hooks/useLang.js";
 import {Pencil, Trash, Save, CircleX} from "lucide-react";
+import {showError, showSuccess} from "../../../utils/toast.jsx";
 
 const RecordRow = ({ item = {}, idKey = "id", fields = [], cellClass = "", resolver, onUpdate, onDelete, postFile }) => {
     const { t } = useLang();
@@ -51,14 +52,18 @@ const RecordRow = ({ item = {}, idKey = "id", fields = [], cellClass = "", resol
             const url = payload?.url || (payload && payload.url) || null;
             if (url) setValue(name, url, { shouldValidate: true, shouldDirty: true });
         } else {
-            setError(res?.error?.message || t("admin.common.uploadFail") || "Upload failed");
+            const msg = res?.error?.message || t("admin.common.uploadFail");
+            showError(msg);
+            setError(msg);
         }
     };
 
     const onSubmit = async (values) => {
         setError(null);
         if (uploading) {
-            setError(t("admin.common.waitForUpload") || "Wait for upload");
+            const msg = t("admin.common.waitForUpload");
+            showError(msg);
+            setError(msg);
             return;
         }
         setSubmitting(true);
@@ -69,50 +74,56 @@ const RecordRow = ({ item = {}, idKey = "id", fields = [], cellClass = "", resol
             if (res && res.success) {
                 setEditing(false);
             } else {
-                setError(res?.error?.message || t("admin.common.updateFail") || "Update failed");
+                const msg = res?.error?.message || t("admin.common.updateFail");
+                showError(msg);
+                setError(msg);
             }
         } catch (err) {
+            const msg = err?.message || t("admin.common.updateFail");
             setSubmitting(false);
-            setError(err?.message || "Update failed");
+            showError(msg);
+            setError(msg);
         }
     };
 
     const handleDelete = async () => {
-        if (!confirm(t("admin.common.confirmDelete") || "Delete this record?")) return;
+        if (!confirm(t("admin.common.confirmDelete"))) return;
         const id = item[idKey];
         const res = await onDelete(id);
         if (!(res && res.success)) {
-            setError(res?.error?.message || t("admin.common.deleteFail") || "Delete failed");
+            setError(res?.error?.message || t("admin.common.deleteFail"));
         }
     };
 
-    const renderCell = (f) => {
+    const renderCell = (f, index) => {
         const value = item[f.name];
+        const key = f.name ?? index;
+
         if (editing) {
             // render input components when editing
             const common = { name: f.name, register, error: errors[f.name], wrapperClass: "" };
             switch (f.type) {
                 case "select":
                     return (
-                        <td className={cellClass}>
+                        <td key={key} className={cellClass}>
                             <SelectField {...common} options={f.options || []} selectClass="w-full p-1 border rounded" />
                         </td>
                     );
                 case "textarea":
                     return (
-                        <td className={cellClass}>
+                        <td key={key} className={cellClass}>
                             <TextArea {...common} inputClass="w-full p-1 border rounded" />
                         </td>
                     );
                 case "checkbox":
                     return (
-                        <td className={cellClass}>
+                        <td key={key} className={cellClass}>
                             <Checkbox {...common} wrapperClass="items-center" />
                         </td>
                     );
                 case "image":
                     return (
-                        <td className={cellClass}>
+                        <td key={key} className={cellClass}>
                             <ImageField
                                 {...common}
                                 onFileChange={(e) => handleFileChange(f.name, e)}
@@ -125,7 +136,7 @@ const RecordRow = ({ item = {}, idKey = "id", fields = [], cellClass = "", resol
                     );
                 default:
                     return (
-                        <td className={cellClass}>
+                        <td key={key} className={cellClass}>
                             <InputField {...common} inputClass="w-full p-1 border rounded" />
                         </td>
                     );
@@ -136,23 +147,23 @@ const RecordRow = ({ item = {}, idKey = "id", fields = [], cellClass = "", resol
         switch (f.type) {
             case "image":
                 return (
-                    <td className={cellClass}>
+                    <td key={key} className={cellClass}>
                         {value ? <img src={value} alt={f.label || f.name} className="w-20 h-14 object-cover rounded" /> : <span className="text-sm text-gray-500">—</span>}
                     </td>
                 );
             case "checkbox":
-                return <td className={cellClass}>{value ? "Yes" : "No"}</td>;
+                return <td key={key} className={cellClass}>{value ? t("admin.common.yes") : t("admin.common.no")}</td>;
             case "textarea":
-                return <td className={cellClass}><span className="text-sm text-gray-700">{String(value || "").slice(0, 80)}{String(value || "").length > 80 ? "…" : ""}</span></td>;
+                return <td key={key} className={cellClass}><span className="text-sm text-gray-700">{String(value || "").slice(0, 80)}{String(value || "").length > 80 ? "…" : ""}</span></td>;
             default:
-                return <td className={cellClass}><span className="text-sm text-gray-700">{value ?? "—"}</span></td>;
+                return <td key={key} className={cellClass}><span className="text-sm text-gray-700">{value ?? "—"}</span></td>;
         }
     };
 
     return (
         <tr>
-            {fields.map((f) => renderCell(f))}
-            <td className="px-3 py-2 text-right">
+            {fields.map((f, index) => renderCell(f, index))}
+            <td className="px-3 py-2 text-center">
                 {!editing ? (
                     <div className="inline-flex gap-2">
                         <button type="button" title={t("admin.common.edit")} onClick={startEdit} className="p-2 bg-blue-600 text-white rounded text-sm rounded-full">

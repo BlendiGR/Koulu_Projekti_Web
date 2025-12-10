@@ -3,6 +3,7 @@ import {useForm} from 'react-hook-form';
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useLang} from "../../../hooks/useLang.js";
 import Pagination from "./Pagination.jsx";
+import {showSuccess, showError} from "../../../utils/toast.jsx";
 
 const RecordContainer = ({
     title,
@@ -14,6 +15,7 @@ const RecordContainer = ({
     createSchema = null,
     createDefaultValues = {},
     children,
+    allowCreate = false,
     renderCreate,
     renderList
     }) => {
@@ -30,6 +32,8 @@ const RecordContainer = ({
     });
     const { register, handleSubmit, reset, setValue, formState: { errors } } = form;
 
+    const [showCreate, setShowCreate] = useState(false);
+
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [submitting, setSubmitting] = useState(false);
@@ -39,13 +43,14 @@ const RecordContainer = ({
     const [total, setTotal] = useState(0);
 
     const fetchPage = useCallback(async (p = page, size = pageSize, extra = {}) => {
-        console.warn("fetchpage params: ", p, size);
         setLoading(true);
         try {
             const res = await getItems({ take: size, skip: (p - 1) * size, ...extra });
             setLoading(false);
             if (!res || !res.success) {
-                setError(res?.error?.message || "Failed to fetch");
+                const msg = res?.error?.message || t("admin.common.failedToFetch");
+                showError(msg);
+                setError(msg);
                 return;
             }
             let payload = res.data;
@@ -64,13 +69,14 @@ const RecordContainer = ({
                 setTotal(payload.length);
             }
         } catch (err) {
+            const msg = err?.message || t("admin.common.failedToFetch");
             setLoading(false);
-            setError(err?.message || "Failed to fetch");
+            showError(msg);
+            setError(msg);
         }
     }, [getItems, page, pageSize]);
 
     useEffect(() => {
-        console.error("[DEBUG] RecordContainer useEffect mount", { page, pageSize }); // loud visible log
         fetchPage(page, pageSize);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, pageSize]);
@@ -91,7 +97,9 @@ const RecordContainer = ({
                 setPreviewUrl(url);
             }
         } else {
-            setError(res?.error?.message || t("admin.common.uploadFail"));
+            const msg = res?.error?.message || t("admin.common.uploadFail");
+            showError(msg);
+            setError(msg);
         }
     };
 
@@ -119,19 +127,32 @@ const RecordContainer = ({
         setSubmitting(true);
         const token = localStorage.getItem("token");
         try {
-            const res = await createItem(values, token);
+            const payload = {...values};
+
+            if (!payload.imageUrl && previewUrl) {
+                payload.imageUrl = previewUrl;
+            }
+
+            const res = await createItem(payload, token);
             setSubmitting(false);
             if (res && res.success) {
-                setSuccess(t("admin.common.created") || "Created");
+                const msg = t("admin.common.created") || "Created";
+                showSuccess(msg);
+                setSuccess(msg);
                 reset(createDefaultValues);
                 setPreviewUrl(null);
+                setShowCreate(false);
                 await fetchPage(page, pageSize);
             } else {
-                setError(res?.error?.message || t("admin.common.createFail") || "Create failed");
+                const msg = res?.error?.message || t("admin.common.createFail");
+                showError(msg);
+                setError(msg);
             }
         } catch (err) {
+            const msg = err?.message || t("admin.common.createFail");
             setSubmitting(false);
-            setError(err?.message || t("admin.common.createFail") || "Create failed");
+            showError(msg);
+            setError(msg);
         }
     };
 
@@ -163,8 +184,22 @@ const RecordContainer = ({
 
     return (
         <section className="p-4 border rounded bg-white">
-            {title && <h2 className="text-xl font-semibold mb-2">{title}</h2>}
-            {renderCreate ? renderCreate(context) : null}
+            <div className="flex flex-col items-center justify-center md:flex-row md:justify-between">
+                {title && <h2 className="text-xl font-semibold mb-2">{title}</h2>}
+                {(allowCreate && renderCreate) ? (
+                    <div className="mb-3">
+                        <button
+                            type="button"
+                            onClick={() => setShowCreate(s => !s)}
+                            className="px-3 py-2 bg-blue-600 text-white rounded"
+                        >
+                            {showCreate ? t("admin.common.cancel") : t("admin.common.addNew")}
+                        </button>
+                    </div>
+                ) : null}
+            </div>
+
+            {showCreate ? renderCreate(context) : null}
             {renderList ? renderList(context) : null}
             {children ? children(context) : null}
 
