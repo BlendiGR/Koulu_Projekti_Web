@@ -49,7 +49,6 @@ model User {
   createdAt DateTime @default(now()) @map("created_at")
 
   orders Order[]
-  reviews Review[]
 
   @@map("users")
 }
@@ -65,7 +64,7 @@ model Order {
   userId Int  @map("order_user_id")
   user   User @relation(fields: [userId], references: [userId])
 
-  orderer String @map("orderer_name") @default("")
+  orderer String @default("") @map("orderer_name")
 
   orderProducts OrderProduct[]
 
@@ -88,14 +87,13 @@ model Product {
 }
 
 model Review {
-  reviewId  Int     @id @default(autoincrement()) @map("review_id")
+  reviewId  Int      @id @default(autoincrement()) @map("review_id")
   rating    Int
-  review    String  @db.Text
-  isActive  Boolean @default(false) @map("is_active")
-  createdAt          DateTime    @default(now()) @map("created_at")
+  review    String   @db.Text
+  isActive  Boolean  @default(false) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
 
-  userId Int  @map("review_user_id")
-  user   User @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  reviewer String @default("") @map("reviewer_name")
 
   @@map("reviews")
 }
@@ -113,12 +111,12 @@ model OrderProduct {
 }
 
 model Announcement {
-  id          Int      @id @default(autoincrement())
-  title       String
-  message     String
+  id      Int    @id @default(autoincrement())
+  title   String
+  message String
 
   isActive    Boolean  @default(true)
-  isSingleton Boolean  @default(true) @unique 
+  isSingleton Boolean  @unique @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -126,11 +124,11 @@ model Announcement {
 }
 
 model Coupon {
-  id          Int      @id @default(autoincrement())
-  code        String   @unique
-  discount    Decimal
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  code      String   @unique
+  discount  Decimal
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
 
   @@map("coupons")
 }
