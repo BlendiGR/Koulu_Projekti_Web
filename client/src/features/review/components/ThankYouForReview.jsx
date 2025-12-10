@@ -8,7 +8,7 @@ const ThankYouForReview = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="flex items-center justify-center p-6">
+        <div className="flex items-center justify-center min-h-[calc(100vh-10rem)] py-6">
             <div className="max-w-2xl w-full">
                 <div className="bg-white rounded-lg shadow-lg p-8 md:p-12 text-center animate-fade-in">
                     <div className="mb-6 flex justify-center">

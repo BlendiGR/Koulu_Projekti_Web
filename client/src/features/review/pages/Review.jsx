@@ -26,7 +26,7 @@ const Review = () => {
     }, []);
 
     return (
-        <div className="flex justify-center items-center h-[calc(100vh-10rem)]"> 
+        <div className="flex justify-center items-center min-h-screen"> 
             {isSuccess ? <ThankYouForReview /> : <ReviewForm setIsSuccess={setIsSuccess} />}
         </div>
     );
