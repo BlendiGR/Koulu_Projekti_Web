@@ -30,6 +30,14 @@ export const getReviews = async (filter = {}, skip = 0, take = 100, sortBy, sort
         skip: Number(skip),
         take: Number(take),
         orderBy: sortBy ? { [sortBy]: sortOrder || "asc" } : undefined,
+        include: {
+            user: {
+                select: {
+                    userId: true,
+                    username: true,
+                }
+            },
+        }
     });
 };
 
@@ -63,7 +71,14 @@ export const getReviewById = async (reviewId) => {
 export const getReviewWithUser = async (reviewId) => {
     const review = await prisma.review.findUnique({
         where: { reviewId: Number(reviewId) },
-        include: { user: true },
+        include: {
+            user: {
+                select: {
+                    userId: true,
+                    username: true,
+                }
+            }
+        },
     });
 
     if (!review) {

@@ -191,3 +191,51 @@ export const useProduct = () => {
 
   return { getProducts, createProduct, updateProduct, deleteProduct };
 };
+
+// --------------------------
+// REVIEW HOOKS
+// --------------------------
+export const useReview = () => {
+  const getReviews = async (params = {}) => {
+    const qs = new URLSearchParams(params).toString();
+    const url = qs ? `${API}/reviews?${qs}` : `${API}/reviews`;
+    const res = await fetchData(url);
+    if (!res.success) return res;
+    // unwrap server envelope: server returns { success: true, data: <payload> }
+    const payload = res.data && res.data.data !== undefined ? res.data.data : res.data;
+
+    console.table(payload);
+
+    return { success: true, data: payload };
+  };
+
+  const createReview = async (reviewData, token) => {
+
+  };
+
+  const updateReview = async (reviewId, reviewData, token) => {
+    const headers = { "Content-Type": "application/json" };
+    if (token) headers.Authorization = `Bearer ${token}`;
+
+    const res = await fetchData(`${API}/reviews/${reviewId}`, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify(reviewData),
+    });
+
+    console.log("data to update:",reviewData);
+
+
+    if (!res.success) return res;
+    const payload = res.data && res.data.data !== undefined ? res.data.data : res.data;
+
+    console.log("received data: ", payload);
+    return { success: true, data: payload };
+  };
+
+  const deleteReview = async (reviewId, token) => {
+
+  };
+
+  return {getReviews, createReview, updateReview, deleteReview};
+};
