@@ -1,24 +1,29 @@
-import { useForm } from "react-hook-form";
+import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useEffect } from "react";
 import { useLang } from "/src/hooks/useLang.js";
 
 const PaymentForm = ({ onFormChange }) => {
   const { t } = useLang();
-  const {
-    register,
-    watch,
-    formState: { errors, isValid },
-  } = useForm({
-    mode: "onChange",
-  });
+  const stripe = useStripe();
+  const elements = useElements();
 
   useEffect(() => {
-    onFormChange(true, { method: "mock" });
-  }, []);
+    if (stripe && elements) {
+      onFormChange(true, { method: "stripe" });
+    } else {
+        onFormChange(false, null);
+    }
+  }, [stripe, elements, onFormChange]);
+
+  const paymentElementOptions = {
+    layout: "tabs",
+  };
 
   return (
-    <div>
-      <div className="p-4 bg-green-50 text-green-700 rounded-lg"></div>
+    <div className="w-full">
+        <div className="p-1">
+             <PaymentElement id="payment-element" options={paymentElementOptions} />
+        </div>
     </div>
   );
 };

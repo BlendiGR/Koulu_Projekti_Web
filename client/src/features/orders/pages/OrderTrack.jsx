@@ -26,12 +26,17 @@ const OrderTrack = () => {
 
   const orderDetailsColumns = [
     {
-      key: "id",
+      key: "orderId",
       translationKey: "orderTrack.orderId",
     },
     {
       key: "destinationAddress",
       translationKey: "orderTrack.destinationAddress",
+      alignRight: true,
+    },
+    {
+      key: "phone",
+      translationKey: "orderTrack.phone",
       alignRight: true,
     },
     {
@@ -58,14 +63,14 @@ const OrderTrack = () => {
           <Spinner />
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center min-h-[calc(100vh-5rem)]">
+        <div className="flex flex-col items-center justify-center min-h-[calc(100vh-5rem)] p-10">
           <h1 className="md:text-5xl text-3xl font-bold text-center ">
             {t("orderTrack.tracking")}{" "}
             <span className="text-red-100">
               {t("orderTrack.order")} #{orderId}
             </span>
           </h1>
-          <div className="flex flex-col items-center justify-center w-[80%] p-4 bg-beige rounded-xl shadow-md mt-6">
+          <div className="flex flex-col items-center justify-center md:w-[80%] p-4 bg-beige rounded-xl shadow-md mt-6">
             <OrderStatus status={order.status} />
             <hr className="mt-6 border-brown-100/50  w-[80%]" />
             <div className="mt-6 p-6 border-1 border-brown-100 text-brown-200 rounded-2xl bg-[#FEFCE8]">
@@ -75,7 +80,7 @@ const OrderTrack = () => {
               </p>
             </div>
           </div>
-          <div className="flex flex-col md:items-center md:justify-between mt-6 w-[80%]">
+          <div className="flex flex-col md:items-center md:justify-between mt-6 md:w-[80%]">
             <Dropdown
               title={t("orderTrack.orderProducts")}
               rightLabel={

@@ -12,6 +12,8 @@ import Checkout from "/src/features/cart/pages/Checkout";
 import Success from "/src/features/cart/pages/Success";
 import OrderTrack from "/src/features/orders/pages/OrderTrack";
 import AdminPanel from "/src/features/admin/pages/AdminPanel";
+import PaymentVerify from "/src/features/cart/pages/PaymentVerify";
+import Review from "/src/features/review/pages/Review";
 
 import { AuthProvider } from "/src/features/auth/context/AuthContext.jsx";
 import { LanguageProvider } from "/src/context/LanguageContext.jsx";
@@ -31,7 +33,7 @@ const App = () => {
                 <Route path="menu" element={<Menu />} />
                 <Route path="visit" element={<Visit />} />
                 <Route path="login" element={<Login />} />
-
+                <Route path="review" element={<Review />} />
                 {/*  Suojatut */}
                 <Route
                   path="checkout"
@@ -41,6 +43,15 @@ const App = () => {
                     </ProtectedRoute>
                   }
                 />
+                <Route
+                  path="checkout/verify"
+                  element={
+                    <ProtectedRoute>
+                      <PaymentVerify />
+                    </ProtectedRoute>
+                  }
+                />
+
                 <Route
                   path="success/:orderId"
                   element={
@@ -75,7 +86,6 @@ const App = () => {
                     </ProtectedRoute>
                   }
                 />
-
                   <Route
                     path="admin"
                     element={

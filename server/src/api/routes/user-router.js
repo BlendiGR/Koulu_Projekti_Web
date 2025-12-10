@@ -54,6 +54,37 @@ userRouter
     userController.deleteUser
   );
 
+userRouter.route("/reviews/:userId")
+    .get(
+        authenticateToken,
+        ...validateUserIdParam,
+        validationErrors,
+        userController.getHasReviewed
+    );
+
+userRouter.route("/:userId")
+    .get(
+        authenticateToken,
+        authorizeOwnerOrAdmin(getUserById, {idField: "userId"}),
+        ...validateUserIdParam,
+        validationErrors,
+        userController.getUserById
+    )
+    .put(
+        authenticateToken,
+        authorizeOwnerOrAdmin(getUserById, {idField: "userId"}),
+        ...validateUserIdParam,
+        validateUpdateUser,
+        validationErrors,
+        userController.updateUser
+    )
+    .delete(
+        authenticateToken,
+        requireRole(["ADMIN"]),
+        ...validateUserIdParam,
+        validationErrors,
+        userController.deleteUser
+    );
 userRouter
   .route("/:userId/soft-delete")
   .put(

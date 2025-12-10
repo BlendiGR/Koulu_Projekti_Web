@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
     return { success: true };
   };
 
-  const handleLogin = async (credentials) => {
+  const handleLogin = async (credentials, redirectTo = null) => {
     const loginRes = await postLogin(credentials);
     if (!loginRes.success) {
       return loginRes;
@@ -36,6 +36,11 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem("token", token);
     setUser(user);
     console.log(user);
+
+    if (redirectTo) {
+      navigate(redirectTo);
+      return { success: true };
+    }
 
     if (user.role === "ADMIN") {
       navigate("/admin");
@@ -63,7 +68,6 @@ const AuthProvider = ({ children }) => {
       localStorage.removeItem("token");
       return;
     }
-    console.log(meRes);
     setUser(meRes.data);
     navigate(location.pathname);
   };

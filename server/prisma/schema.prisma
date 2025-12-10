@@ -45,11 +45,13 @@ model User {
   role      UserRole @default(CUSTOMER)
   email     String   @unique
   password  String
+  locale    String   @default("en")
   isActive  Boolean  @default(true) @map("is_active")
   createdAt DateTime @default(now()) @map("created_at")
 
+  reviewed  Boolean  @default(false)
+
   orders Order[]
-  reviews Review[]
 
   @@map("users")
 }
@@ -61,11 +63,12 @@ model Order {
   destinationAddress String      @map("destination_address")
   createdAt          DateTime    @default(now()) @map("created_at")
   completedAt        DateTime?   @map("completed_at")
+  phone              String      @map("phone")
 
   userId Int  @map("order_user_id")
   user   User @relation(fields: [userId], references: [userId])
 
-  orderer String @map("orderer_name") @default("")
+  orderer String @default("") @map("orderer_name")
 
   orderProducts OrderProduct[]
 
@@ -88,14 +91,13 @@ model Product {
 }
 
 model Review {
-  reviewId  Int     @id @default(autoincrement()) @map("review_id")
+  reviewId  Int      @id @default(autoincrement()) @map("review_id")
   rating    Int
-  review    String  @db.Text
-  isActive  Boolean @default(false) @map("is_active")
-  createdAt          DateTime    @default(now()) @map("created_at")
+  review    String   @db.Text
+  isActive  Boolean  @default(false) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
 
-  userId Int  @map("review_user_id")
-  user   User @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  reviewer String @default("") @map("reviewer_name")
 
   @@map("reviews")
 }
@@ -110,4 +112,27 @@ model OrderProduct {
 
   @@id([orderId, productId])
   @@map("order_products")
+}
+
+model Announcement {
+  id      Int    @id @default(autoincrement())
+  title   String
+  message String
+
+  isActive    Boolean  @default(true)
+  isSingleton Boolean  @unique @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("announcements")
+}
+
+model Coupon {
+  id        Int      @id @default(autoincrement())
+  code      String   @unique
+  discount  Decimal
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@map("coupons")
 }

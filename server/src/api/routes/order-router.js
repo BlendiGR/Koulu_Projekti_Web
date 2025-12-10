@@ -11,6 +11,7 @@ import {
 
 import {getOrderById} from "../models/order-model.js";
 import * as orderController from "../controllers/order-controller.js";
+import * as emailController from "../controllers/email-controller.js";
 
 const orderRouter = express.Router();
 
@@ -26,8 +27,10 @@ orderRouter.route("/")
         authenticateToken,
         ...validateCreateOrder,
         validationErrors,
-        orderController.createOrder
+        orderController.createOrder,
+        emailController.sendOrderEmail
     );
+
 
 orderRouter.route("/:orderId")
     .get(
@@ -35,12 +38,11 @@ orderRouter.route("/:orderId")
         authorizeOwnerOrAdmin(getOrderById, {idField: "orderId"}),
         ...validateOrderIdParam,
         validationErrors,
-        orderController.getOrderById
+        orderController.getOrderWithProducts
     )
     .put(
         authenticateToken,
         requireRole(["ADMIN"]),
-        // authorizeOwnerOrAdmin(getOrderById, {idField: "orderId"}),
         ...validateOrderIdParam,
         ...validateUpdateOrder,
         validationErrors,

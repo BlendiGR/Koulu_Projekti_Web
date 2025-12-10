@@ -64,7 +64,12 @@
     "empty": "Your cart is empty.",
     "loginToCheckout": "Login to Checkout",
     "close": "Continue Shopping",
-    "quantity": "Quantity"
+    "quantity": "Quantity",
+    "coupon": {
+      "label": "Coupon",
+      "placeholder": "Enter coupon code",
+      "notFound": "Coupon not found"
+    }
   },
   "checkout": {
     "title": "Checkout",
@@ -83,6 +88,7 @@
     "totalNoTax": "Total without tax",
     "totalTax": "Total tax (14%)",
     "total": "Total",
+    "discount": "Discount",
     "items": "items",
     "item": "item"
   },
@@ -98,7 +104,8 @@
     "orderDate": "Order Date",
     "orderStatus": "Status",
     "orderTotal": "Total",
-    "orderDetails": "Details"
+    "orderDetails": "Details",
+    "phone": "Phone"
   },
   "orderStatus": {
     "preparing": {
@@ -248,6 +255,28 @@
         "and": "and",
         "privacy": "Privacy Policy"
       }
+    }
+  },
+  "review": {
+    "rating": {
+      "min": "Please select a rating",
+      "max": "Rating must be between 1 and 5"
+    },
+    "redirect": "Login to review",
+    "review": {
+      "required": "Please write a review",
+      "max": "Review must be less than 300 characters"
+    },
+    "username": {
+      "required": "Please enter your name",
+      "max": "Name must be less than 100 characters"
+    },
+    "thankYou": {
+      "title": "Thank You for Your Review!",
+      "message": "We truly appreciate you taking the time to share your experience with us.",
+      "subtitle": "Your feedback helps us improve and serve you better.",
+      "backHome": "Back to Home",
+      "viewMenu": "View Menu"
     }
   },
   "profile": {

@@ -12,6 +12,7 @@ const main = async () => {
       role: "ADMIN",
       email: "admin1@fooder.fi",
       password: password,
+      locale: "fi",
     },
   });
 
@@ -19,22 +20,33 @@ const main = async () => {
   const product1 = await prisma.product.create({
     data: {
       type: "FOOD",
-      name: "Burger",
-      cost: 9.99,
-      diets: { vegan: false },
-      imageUrl: "burger.jpg",
-      ingredients: { list: ["bun", "beef", "cheese"] },
+      name: "Crispy Fries",
+      cost: 3.99,
+      diets: { vegetarian: true, vegan: true },
+      imageUrl: "src/assets/images/French Fries.png",
+      ingredients: { list: ["Potato", "Oil", "Salt", "Pepper"] },
     },
   });
 
   const product2 = await prisma.product.create({
     data: {
-      type: "DRINK",
-      name: "Cola",
-      cost: 2.49,
-      diets: { sugarFree: false },
-      imageUrl: "cola.jpg",
-      ingredients: { list: ["water", "sugar"] },
+      type: "FOOD",
+      name: "Chicken Nuggets",
+      cost: 6.99,
+      diets: { vegetarian: false, vegan: false },
+      imageUrl: "src/assets/images/Chicken Nuggets.png",
+      ingredients: { list: ["Chicken", "Breading", "Salt", "Pepper"] },
+    },
+  });
+
+  const product3 = await prisma.product.create({
+    data: {
+      type: "FOOD",
+      name: "Cheese Burger",
+      cost: 8.99,
+      diets: { vegetarian: false, vegan: false },
+      imageUrl: "src/assets/images/Cheese Burger.png",
+      ingredients: { list: ["Beef", "Cheddar", "Ketchup", "Mustard", "Mayonnaise", "Lettuce", "Tomato", "Onion"] },
     },
   });
 
@@ -45,6 +57,7 @@ const main = async () => {
       cost: 12.48,
       destinationAddress: "Test Street 123",
       userId: user.userId,
+      phone: "0441234567",
     },
   });
 
@@ -60,6 +73,25 @@ const main = async () => {
     data: {
       orderId: order.orderId,
       productId: product2.productId,
+    },
+  });
+
+  // 5. Seed announcement (no coupon relation)
+  await prisma.announcement.create({
+    data: {
+      title: "Welcome to Fooder!",
+      message: "Thank you for using Fooder. We hope you enjoy your experience!",
+      isActive: true,
+      isSingleton: true,
+    },
+  });
+
+  // 6. Seed a coupon (standalone)
+  await prisma.coupon.create({
+    data: {
+      code: "WELCOME10",
+      discount: 10.0,
+      isActive: true,
     },
   });
 

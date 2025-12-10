@@ -49,6 +49,22 @@ export const getUsers = async (filter = {}, skip = 0, take = 100) => {
 };
 
 /**
+ * Check if user has reviewed.
+ * @param {number} userId - The ID of the user to check.
+ * @returns {Promise<*>}
+ */
+export const getHasReviewed = async (userId) => {
+    return prisma.user.findUnique({
+        where: { userId: Number(userId) },
+        select: {
+            userId: true,
+            username: true,
+            reviewed: true,
+        },
+    })
+};
+
+/**
  * Get a user by their ID.
  * @param {number} userId - The ID of the user to retrieve.
  * @returns {Promise<*>}

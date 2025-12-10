@@ -4,13 +4,14 @@ import { registerSchema } from "/src/schemas/registerSchema.js";
 import { useState } from "react";
 import { useAuth } from "/src/features/auth/hooks/useAuth.js";
 import RedButton from "/src/components/common/ui/RedButton";
-
+import { useLang } from "/src/hooks/useLang";
 import { combineName } from "/src/utils/formatters.js";
 
 const RegisterForm = ({ t, state }) => {
   const { handleRegister } = useAuth();
   const [backendError, setBackendError] = useState(null);
   const setState = state;
+  const { lang } = useLang();
 
   const {
     register,
@@ -26,6 +27,7 @@ const RegisterForm = ({ t, state }) => {
       username: combineName(data.firstName, data.lastName),
       email: data.email,
       password: data.password,
+      locale: lang,
     };
     setBackendError(null);
     const res = await handleRegister(payLoad);

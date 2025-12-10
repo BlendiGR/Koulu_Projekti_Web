@@ -1,8 +1,12 @@
+import cheeseBurgerImg from "/src/assets/images/Cheese Burger.png";
+import frenchFriesImg from "/src/assets/images/French Fries.png";
+import chickenNuggetsImg from "/src/assets/images/Chicken Nuggets.png";
+
 export const mostBuyedProducts = [
   {
     id: 3,
     name: "Cheese Burger",
-    imageUrl: "src/assets/images/Cheese Burger.png",
+    imageUrl: cheeseBurgerImg,
     description: "Our #1 bestseller, juicy beef patty with melted cheddar.",
     ingredients: ["Beef", "Cheddar", "Ketchup", "Mustard", "Mayonnaise", "Lettuce", "Tomato", "Onion"],
     diets: ["Vegetarian", "Vegan"],
@@ -14,7 +18,7 @@ export const mostBuyedProducts = [
   {
     id: 1,
     name: "Crispy Fries",
-    imageUrl: "src/assets/images/French Fries.png",
+    imageUrl: frenchFriesImg,
     ingredients: ["Potato", "Oil", "Salt", "Pepper"],
     diets: ["Vegetarian", "Vegan"],
     description: "Golden, crispy perfection, perfectly seasoned.",
@@ -26,7 +30,7 @@ export const mostBuyedProducts = [
   {
     id: 2,
     name: "Chicken Nuggets",
-    imageUrl: "src/assets/images/Chicken Nuggets.png",
+    imageUrl: chickenNuggetsImg,
     description: "Crispy on the outside, tender on the inside.",
     ingredients: ["Chicken", "Breading", "Salt", "Pepper"],
     diets: ["Vegetarian", "Vegan"],

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useLang } from "/src/hooks/useLang";
 import LoginForm from "/src/features/auth/components/LoginForm";
 import RegisterForm from "/src/features/auth/components/RegisterForm";
+import heroBackground from "/src/assets/images/Hero-Background.png";
+import loginImage from "/src/assets/images/login.png";
 
 const Login = () => {
   const { t } = useLang();
@@ -12,7 +14,7 @@ const Login = () => {
       <div
         className="flex flex-col items-center md:items-end justify-center py-3 px-4 md:pr-12 w-full md:w-1/2 bg-cover bg-center mobile-bg-only" // mobile-bg-only custom class to display background image only on mobile 
         style={{
-          backgroundImage: "url('/src/assets/images/Hero-Background.png')",
+          backgroundImage: `url(${heroBackground})`,
         }}
       >
         <div className="w-full min-h-screen max-w-md p-6 mb-10">
@@ -74,7 +76,7 @@ const Login = () => {
       </div>
       <div className="hidden md:flex md:w-1/2 bg-gray-100 items-center justify-center">
         <img
-          src="/src/assets/images/login.png"
+          src={loginImage}
           alt="Login Page Image"
           className="w-full h-full object-cover transition-all duration-300 ease-in-out"
         />
