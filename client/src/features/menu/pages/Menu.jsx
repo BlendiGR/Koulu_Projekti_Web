@@ -1,11 +1,15 @@
 import { useLang } from "/src/hooks/useLang";
+import { useState } from "react";
 import ProductCard from "/src/components/common/ui/ProductCard.jsx";
 import { allProducts } from "/src/config/allProducts.js";
 import { mostBuyedProducts } from "/src/config/mostBuyedSection.js";
 
 const Menu = () => {
   const { t } = useLang();
-  const testloggg = () => {
+  const [activeButton, setActiveButton] = useState("All");
+
+  const handleButtonClick = (buttonName) => {
+    setActiveButton(buttonName);
     console.log("Did it yeah");
   };
   return (
@@ -16,40 +20,64 @@ const Menu = () => {
           {t("menu.subheading")}
         </p>
 
-        <div class="flex md:flex-row flex-col justify-center items-center gap-4">
+        <div className="flex md:flex-row flex-col justify-center items-center gap-4 max-w-2xl mx-auto">
           <button
-            onClick={testloggg}
-            className="flex justify-center text-center text-white md:text-2xl text-xl font-semibold bg-red-100 py-3 w-full rounded-2xl cursor-pointer active:bg-red-200 hover:bg-red-200 mt-5"
+            onClick={() => handleButtonClick("All")}
+            className={`flex justify-center text-center md:text-2xl text-xl font-semibold py-3 w-full rounded-2xl cursor-pointer hover:bg-red-50 mt-5 border-2 ${
+              activeButton === "All"
+                ? "bg-red-100 text-white border-red-100 hover:bg-red-100"
+                : "bg-white text-red-100 border-red-100 hover:bg-red-50"
+            }`}
           >
             All
           </button>
           <button
-            onClick={testloggg}
-            className="flex justify-center text-center text-white md:text-2xl text-xl font-semibold bg-red-100 py-3 w-full rounded-2xl cursor-pointer active:bg-red-200 hover:bg-red-200 mt-5"
+            onClick={() => handleButtonClick("Pizzas")}
+            className={`flex justify-center text-center md:text-2xl text-xl font-semibold py-3 w-full rounded-2xl cursor-pointer  mt-5 border-2 ${
+              activeButton === "Pizzas"
+                ? "bg-red-100 text-white border-red-100 hover:bg-red-100"
+                : "bg-white text-red-100 border-red-100 hover:bg-red-50"
+            }`}
           >
             Pizzas
           </button>
           <button
-            onClick={testloggg}
-            className="flex justify-center text-center text-white md:text-2xl text-xl font-semibold bg-red-100 py-3 w-full rounded-2xl cursor-pointer active:bg-red-200 hover:bg-red-200 mt-5"
+            onClick={() => handleButtonClick("Kebab")}
+            className={`flex justify-center text-center md:text-2xl text-xl font-semibold py-3 w-full rounded-2xl cursor-pointer hover:bg-red-50 mt-5 border-2 ${
+              activeButton === "Kebab"
+                ? "bg-red-100 text-white border-red-100 hover:bg-red-100"
+                : "bg-white text-red-100 border-red-100 hover:bg-red-50"
+            }`}
           >
             Kebab
           </button>
           <button
-            onClick={testloggg}
-            className="flex justify-center text-center text-white md:text-2xl text-xl font-semibold bg-red-100 py-3 w-full rounded-2xl cursor-pointer active:bg-red-200 hover:bg-red-200 mt-5"
+            onClick={() => handleButtonClick("Burgers")}
+            className={`flex justify-center text-center md:text-2xl text-xl font-semibold py-3 w-full rounded-2xl cursor-pointer hover:bg-red-50 mt-5 border-2 ${
+              activeButton === "Burgers"
+                ? "bg-red-100 text-white border-red-100 hover:bg-red-100"
+                : "bg-white text-red-100 border-red-100 hover:bg-red-50"
+            }`}
           >
             Burgers
           </button>
           <button
-            onClick={testloggg}
-            className="flex justify-center text-center text-white md:text-2xl text-xl font-semibold bg-red-100 py-3 w-full rounded-2xl cursor-pointer active:bg-red-200 hover:bg-red-200 mt-5"
+            onClick={() => handleButtonClick("Salads")}
+            className={`flex justify-center text-center md:text-2xl text-xl font-semibold py-3 w-full rounded-2xl cursor-pointer hover:bg-red-50 mt-5 border-2 ${
+              activeButton === "Salads"
+                ? "bg-red-100 text-white border-red-100 hover:bg-red-100"
+                : "bg-white text-red-100 border-red-100 hover:bg-red-50"
+            }`}
           >
             Salads
           </button>
           <button
-            onClick={testloggg}
-            className="flex justify-center text-center text-white md:text-2xl text-xl font-semibold bg-red-100 py-3 w-full rounded-2xl cursor-pointer active:bg-red-200 hover:bg-red-200 mt-5"
+            onClick={() => handleButtonClick("Drinks")}
+            className={`flex justify-center text-center md:text-2xl text-xl font-semibold py-3 w-full rounded-2xl cursor-pointer hover:bg-red-50 mt-5 border-2 ${
+              activeButton === "Drinks"
+                ? "bg-red-100 text-white border-red-100 hover:bg-red-100"
+                : "bg-white text-red-100 border-red-100 hover:bg-red-50"
+            }`}
           >
             Drinks
           </button>
