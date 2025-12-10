@@ -76,6 +76,7 @@ const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
+        setUser, // 🔹 lisätty tänne
         handleLogin,
         handleLogout,
         handleAutoLogin,

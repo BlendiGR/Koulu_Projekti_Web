@@ -55,5 +55,24 @@ export const useOrder = () => {
     return res.data;
   };
 
-  return { submitOrder, loading, error, order, getOrderById };
+  // 🔹 UUSI: hae kirjautuneen käyttäjän kaikki tilaukset
+  const getOrdersByUser = async () => {
+    if (!user) {
+      throw new Error("User not authenticated");
+    }
+
+    const res = await fetchData(`${API}/users/${user.userId}/orders`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.success) {
+      throw new Error(res.error?.message || "Failed to fetch orders");
+    }
+
+    return res.data;
+  };
+
+  return { submitOrder, loading, error, order, getOrderById, getOrdersByUser };
 };

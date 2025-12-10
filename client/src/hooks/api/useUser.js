@@ -50,5 +50,19 @@ export const useUser = () => {
     return res;
   };
 
-  return { postLogin, postUser, getUserByToken, getUserHasReviewed };
+  // 🔹 UUSI: käyttäjän päivitys (username / password / email ...)
+  const updateUser = async (userId, inputs) => {
+    const token = localStorage.getItem("token");
+
+    return await fetchData(`${API}/users/${userId}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(inputs),
+    });
+  };
+
+  return { postLogin, postUser, getUserByToken, updateUser };
 };
