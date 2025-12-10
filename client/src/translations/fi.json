@@ -75,7 +75,7 @@
     "required": "Pakollinen",
     "fillShippingFirst": "Täytä toimitustiedot ensin",
     "emptyCart": "Ostoskorisi on tyhjä",
-    "placeOrder": "Tilaa",  
+    "placeOrder": "Tilaa",
     "customer": "Tilaaja"
   },
   "orderSummary": {
@@ -250,6 +250,48 @@
       }
     }
   },
+  "profile": {
+    "title": "Profiilini",
+    "info": "Profiilin tiedot",
+    "nameLabel": "Nimi",
+    "emailLabel": "Sähköposti",
+    "roleLabel": "Rooli",
+    "editButton": "Muokkaa",
+    "firstNameLabel": "Etunimi",
+    "lastNameLabel": "Sukunimi",
+    "newPasswordLabel": "Uusi salasana (valinnainen)",
+    "confirmPasswordLabel": "Vahvista uusi salasana",
+    "passwordPlaceholder": "Vähintään 8 merkkiä",
+    "cancelButton": "Peruuta",
+    "saveButton": "Tallenna",
+    "saving": "Tallennetaan...",
+    "orderHistoryTitle": "Tilaushistoria",
+    "loadingProfile": "Ladataan profiilia...",
+    "loadingOrders": "Ladataan tilauksia...",
+    "noOrders": "Ei vielä tilauksia.",
+    "table": {
+      "orderId": "Tilaus #",
+      "date": "Päivä",
+      "total": "Yhteensä",
+      "status": "Tila"
+    },
+    "status": {
+      "delivered": "Toimitettu",
+      "delivering": "Toimituksessa",
+      "preparing": "Valmistuksessa"
+    },
+    "errors": {
+      "fetchOrders": "Tilausten haku epäonnistui",
+      "emptyFirstName": "Etunimi ei voi olla tyhjä.",
+      "emptyLastName": "Sukunimi ei voi olla tyhjä.",
+      "shortPassword": "Salasanan on oltava vähintään 8 merkkiä.",
+      "passwordMismatch": "Salasanat eivät täsmää.",
+      "nothingToUpdate": "Ei muutettavaa.",
+      "updateFailed": "Profiilin päivitys epäonnistui."
+    },
+    "success": "Profiili päivitetty onnistuneesti."
+  },
+
   "global": {
     "processing": "Käsitellään..."
   }

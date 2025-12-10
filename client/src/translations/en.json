@@ -250,6 +250,48 @@
       }
     }
   },
+  "profile": {
+    "title": "My Profile",
+    "info": "Profile Information",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "roleLabel": "Role",
+    "editButton": "Edit",
+    "firstNameLabel": "First Name",
+    "lastNameLabel": "Last Name",
+    "newPasswordLabel": "New password (optional)",
+    "confirmPasswordLabel": "Confirm new password",
+    "passwordPlaceholder": "At least 8 characters",
+    "cancelButton": "Cancel",
+    "saveButton": "Save",
+    "saving": "Saving...",
+    "orderHistoryTitle": "Order History",
+    "loadingProfile": "Loading profile...",
+    "loadingOrders": "Loading orders...",
+    "noOrders": "You have no orders yet.",
+    "table": {
+      "orderId": "Order #",
+      "date": "Date",
+      "total": "Total",
+      "status": "Status"
+    },
+    "status": {
+      "delivered": "Delivered",
+      "delivering": "Delivering",
+      "preparing": "Preparing"
+    },
+    "errors": {
+      "fetchOrders": "Failed to fetch orders",
+      "emptyFirstName": "First name cannot be empty.",
+      "emptyLastName": "Last name cannot be empty.",
+      "shortPassword": "Password must be at least 8 characters long.",
+      "passwordMismatch": "Passwords do not match.",
+      "nothingToUpdate": "Nothing to update.",
+      "updateFailed": "Failed to update profile."
+    },
+    "success": "Profile updated successfully."
+  },
+
   "global": {
     "processing": "Processing..."
   }
