@@ -2,7 +2,6 @@ import {body, query, param} from "express-validator";
 import AppError from "../../utils/AppError.js";
 
 import {reviewFields} from "../models/review-model.js";
-import {productFields} from "../models/product-model.js";
 
 const allowedQueryFields = [...reviewFields, "skip", "take", "sortBy", "sortOrder"];
 
@@ -17,9 +16,9 @@ export const validateReviewIdParam = [
  * Validation chain for creating a new review.
  */
 export const validateCreateReview = [
-    body("productId").isInt({ min: 1 }).withMessage("productId must be a positive integer").toInt(),
-    body("userId").isInt({ min: 1 }).withMessage("userId must be a positive integer").toInt(),
     body("rating").isInt({ min: 1, max: 5 }).withMessage("rating must be an integer between 1 and 5").toInt(),
+    body("reviewer").isString().trim().notEmpty().withMessage("reviewer must be a non-empty string")
+        .isLength({ max: 100 }).withMessage("reviewer must not exceed 100 characters"),
     body("review").isString().trim().notEmpty().withMessage("review must be a non-empty string")
         .isLength({ max: 2000 }).withMessage("review must not exceed 2000 characters"),
     body("isActive").optional().isBoolean().withMessage("isActive must be a boolean").toBoolean(),
@@ -34,14 +33,14 @@ export const validateCreateReview = [
  */
 export const validateUpdateReview = [
     body("rating").optional().isInt({ min: 1, max: 5 }).withMessage("rating must be an integer between 1 and 5").toInt(),
+    body("reviewer").optional().isString().trim().notEmpty().withMessage("reviewer must be a non-empty string")
+        .isLength({ max: 100 }).withMessage("reviewer must not exceed 100 characters"),
     body("review").optional().isString().trim().notEmpty().withMessage("review must be a non-empty string")
         .isLength({ max: 2000 }).withMessage("review must not exceed 2000 characters"),
     body("isActive").optional().isBoolean().withMessage("isActive must be a boolean").toBoolean(),
 
     // disallow modifying immutable/relational fields
     body("reviewId").not().exists().withMessage("reviewId cannot be modified"),
-    body("userId").not().exists().withMessage("userId cannot be modified"),
-    body("productId").not().exists().withMessage("productId cannot be modified"),
     body("createdAt").not().exists().withMessage("createdAt cannot be modified"),
 ];
 
@@ -73,9 +72,8 @@ export const validateReviewQuery = [
 
     // filters
     query("reviewId").optional().isInt({ min: 1 }).withMessage("reviewId must be a positive integer").toInt(),
-    query("userId").optional().isInt({ min: 1 }).withMessage("userId must be a positive integer").toInt(),
-    // query("productId").optional().isInt({ min: 1 }).withMessage("productId must be a positive integer").toInt(),
     query("rating").optional().isInt({ min: 1, max: 5 }).withMessage("rating must be an integer between 1 and 5").toInt(),
+    query("reviewer").optional().isString().withMessage("reviewer must be a string for filtering (partial match supported by model)"),
     query("isActive").optional().isBoolean().withMessage("isActive must be a boolean").toBoolean(),
     query("review").optional().isString().withMessage("review must be a string for filtering (partial match supported by model)"),
 ];
