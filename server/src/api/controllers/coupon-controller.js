@@ -1,6 +1,27 @@
 import { asyncHandler } from "../../utils/async-handler.js";
 import AppError from "../../utils/AppError.js";
 import * as Coupon from "../models/coupon-model.js";
+import {normalizeSort} from "../../utils/normalize-sort.js";
+
+/**
+ * Get all coupons with optional filtering, pagination, and sorting.
+ * @param req - Express request object
+ * @param res - Express response object
+ * @returns {Promise<void>}
+ */
+export const getAllCoupons = asyncHandler(async (req, res) => {
+    const {skip = 0, take = 100, sortBy, sortOrder, ...filters} = req.query;
+
+    const skipNum = Number(skip);
+    const takeNum = Number(take);
+
+    const normalizedSort = normalizeSort(sortOrder, sortBy) || { sortOrder: undefined, sortField: undefined };
+
+    const coupons = await Coupon.getCoupons(filters, skipNum, takeNum, normalizedSort.sortField, normalizedSort.sortOrder);
+    const totalCount = await Coupon.getCouponCount(filters);
+
+    res.sendSuccess({ data: coupons, total: totalCount });
+});
 
 /**
  * Get a coupon by its code.

@@ -1,4 +1,18 @@
-import { body } from "express-validator";
+import { body, query } from "express-validator";
+import AppError from "../../utils/AppError.js";
+
+export const validateNoCouponQuery = [
+    query().custom((value, { req }) => {
+        if (Object.keys(req.query || {}).length > 0) {
+            throw new AppError(
+                "Query parameters are not allowed on this endpoint.",
+                400,
+                "QUERY_NOT_ALLOWED"
+            );
+        }
+        return true;
+    }),
+];
 
 export const validateCreateCoupon = [
     body("code")
@@ -12,7 +26,7 @@ export const validateCreateCoupon = [
         .isDecimal().withMessage("Discount must be a decimal number")
         .custom((value) => {
             if (parseFloat(value) < 0 || parseFloat(value) > 100) {
-                throw new Error("Discount must be between 0 and 100");
+                throw new AppError("Invalid discount value", 400, "INVALID_DISCOUNT", "Discount must be between 0 and 100");
             }
             return true;
         }),
@@ -37,7 +51,7 @@ export const validateUpdateCoupon = [
         .isDecimal().withMessage("Discount must be a decimal number")
         .custom((value) => {
             if (value !== undefined && (parseFloat(value) < 0 || parseFloat(value) > 100)) {
-                throw new Error("Discount must be between 0 and 100");
+                throw new AppError("Invalid discount value", 400, "INVALID_DISCOUNT", "Discount must be between 0 and 100");
             }
             return true;
         }),
