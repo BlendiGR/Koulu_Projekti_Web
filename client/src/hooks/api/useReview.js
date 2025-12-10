@@ -13,8 +13,7 @@ export const useReview = () => {
         return { success: true, data: res.data };
     };
 
-    const createReview = async (reviewData) => {
-        const token = localStorage.getItem("token");
+    const createReview = async (reviewData, token) => {
         const headers = { "Content-Type": "application/json" };
         if (token) headers.Authorization = `Bearer ${token}`;
 

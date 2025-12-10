@@ -15,6 +15,17 @@ export const getAnnouncement = async () => {
 };
 
 /**
+ * Get the singleton announcement for admin (regardless of isActive).
+ */
+export const getAdminAnnouncement = async () => {
+    return prisma.announcement.findFirst({
+        where: {
+            isSingleton: true,
+        },
+    });
+};
+
+/**
  * Update the singleton announcement.
  * @param {number} id - The ID of the announcement to update.
  * @param {Object} updateData - The data to update the announcement with.

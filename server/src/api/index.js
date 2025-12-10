@@ -8,6 +8,7 @@ import reviewRouter from "./routes/review-router.js";
 import announcementRouter from "./routes/announcement-router.js";
 import couponRouter from "./routes/coupon-router.js";
 import paymentRouter from "./routes/paymentRoutes.js";
+import mediaRouter from "./routes/media-router.js";
 import emailRouter from "./routes/email-router.js";
 
 const router = express.Router();
@@ -20,6 +21,7 @@ router.use("/reviews", reviewRouter);
 router.use("/announcement", announcementRouter);
 router.use("/coupons", couponRouter);
 router.use("/payments", paymentRouter);
+router.use("/media", mediaRouter);
 router.use("/emails", emailRouter);
 
 export default router;

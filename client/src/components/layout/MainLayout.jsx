@@ -15,8 +15,8 @@ const MainLayout = () => {
 
   useEffect(() => {
     const fetchAnnouncement = async () => {
-        const data = await getAnnouncements();
-        setAnnouncement(data);
+        const res = await getAnnouncements();
+        setAnnouncement(res.data);
     };
     fetchAnnouncement();
     handleAutoLogin();

@@ -8,8 +8,21 @@ export const useAnnouncement = () => {
         if (!res.success) {
             return null;
         }
-        return res.data;
-    } 
+        return {success: true, data: res.data};
+    };
+
+    const getAnnouncementsAdmin = async (token) => {
+        const res = await fetchData("/api/v1/announcement/admin", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+
+        if (!res.success) return res;
+
+        return {success: true, data: res.data};
+    }
 
     const updateAnnouncement = async (announcement, token) => {
         const res = await fetchData("/api/v1/announcement", {
@@ -20,14 +33,14 @@ export const useAnnouncement = () => {
             },
             body: JSON.stringify(announcement),
         });
-        if (!res.success) {
-            return null;
-        }
-        return res.data;
-    }
+        if (!res.success) return res;
+
+        return {success: true, data: res.data};
+    };
 
     return {
         getAnnouncements,
+        getAnnouncementsAdmin,
         updateAnnouncement,
     };
 };

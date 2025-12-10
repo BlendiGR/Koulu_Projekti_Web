@@ -10,7 +10,7 @@ export const reviewSchema = (t) =>
             .string()
             .min(1, t("review.review.required"))
             .max(300, t("review.review.max")),
-        username: z
+        reviewer: z
             .string()
             .min(1, t("review.username.required"))
             .max(100, t("review.username.max")),

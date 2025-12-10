@@ -2,6 +2,7 @@ import {asyncHandler} from "../../utils/async-handler.js";
 import AppError from "../../utils/AppError.js";
 import {ensureExists} from "../../utils/ensure-exists.js";
 import * as User from "../models/user-model.js";
+import {normalizeSort} from "../../utils/normalize-sort.js";
 
 /**
  * Check if user has reviewed.
@@ -23,11 +24,17 @@ export const getHasReviewed = asyncHandler(async (req, res) => {
  * @returns {Promise<void>}
  */
 export const getAllUsers = asyncHandler(async (req, res) => {
-    const {skip = 0, take = 100, ...filters} = req.query;
+    const {skip = 0, take = 100, sortBy, sortOrder, ...filters} = req.query;
 
-    const users = await User.getUsers(filters, skip, take);
+    const skipNum = Number(skip);
+    const takeNum = Number(take);
 
-    res.sendSuccess(users);
+    const normalizedSort = normalizeSort(sortOrder, sortBy) || { sortOrder: undefined, sortField: undefined };
+
+    const users = await User.getUsers(filters, skipNum, takeNum, normalizedSort.sortField, normalizedSort.sortOrder);
+    const count = await User.getUserCount(filters);
+
+    res.sendSuccess({data: users, total: count});
 });
 
 /**

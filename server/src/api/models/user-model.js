@@ -39,12 +39,24 @@ export const userFields = [
  * @param {number} take - Number of records to take for pagination.
  * @returns {Promise<*>}
  */
-export const getUsers = async (filter = {}, skip = 0, take = 100) => {
+export const getUsers = async (filter = {}, skip = 0, take = 100, sortBy, sortOrder = "asc") => {
     return prisma.user.findMany({
         where: filter,
         skip: Number(skip),
         take: Number(take),
         select: withoutPasswordSelect,
+        orderBy: sortBy ? { [sortBy]: sortOrder || "asc" } : undefined,
+    });
+};
+
+/**
+ * Get user count.
+ * @param {Object} filter - Filter criteria for counting users.
+ * @returns {Promise<number>}
+ */
+export const getUserCount = async (filter = {}) => {
+    return prisma.user.count({
+        where: filter
     });
 };
 

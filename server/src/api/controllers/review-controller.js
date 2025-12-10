@@ -1,5 +1,6 @@
 import {asyncHandler} from "../../utils/async-handler.js";
 import AppError from "../../utils/AppError.js";
+import {normalizeSort} from "../../utils/normalize-sort.js";
 import * as Review from "../models/review-model.js";
 import prisma from "../../prisma.js";
 
@@ -10,11 +11,17 @@ import prisma from "../../prisma.js";
  * @returns {Promise<void>}
  */
 export const getAllReviews = asyncHandler(async (req, res) => {
-    const {skip = 0, take = 100, ...filters} = req.query;
+    const {skip = 0, take = 100, sortBy, sortOrder, ...filters} = req.query;
 
-    const reviews = await Review.getReviews(filters, skip, take);
+    const skipNum = Number(skip);
+    const takeNum = Number(take);
 
-    res.sendSuccess(reviews);
+    const normalizedSort = normalizeSort(sortOrder, sortBy) || { sortOrder: undefined, sortField: undefined };
+
+    const reviews = await Review.getReviews(filters, skipNum, takeNum, normalizedSort.sortField, normalizedSort.sortOrder);
+    const count = await Review.getReviewCount(filters);
+
+    res.sendSuccess({data: reviews, total: count});
 });
 
 /**

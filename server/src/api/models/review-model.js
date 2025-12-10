@@ -8,25 +8,38 @@ import AppError from "../../utils/AppError.js";
  */
 export const reviewFields = [
     "reviewId",
-    "userId",
-    "productId",
     "rating",
+    "reviewer",
     "review",
     "isActive"
-]
+];
 
 /**
  * Get all reviews from the database.
  * @param {Object} filter - Filter criteria for querying reviews.
  * @param {number} skip - Number of records to skip for pagination.
  * @param {number} take - Number of records to take for pagination.
+ * @param {string} sortBy - Field to sort by.
+ * @param {string} sortOrder - Sort order, either "asc" or "desc".
  * @returns {Promise<*>}
  */
-export const getReviews = async (filter = {}, skip = 0, take = 100) => {
+export const getReviews = async (filter = {}, skip = 0, take = 100, sortBy, sortOrder = "asc") => {
     return prisma.review.findMany({
         where: filter,
         skip: Number(skip),
         take: Number(take),
+        orderBy: sortBy ? { [sortBy]: sortOrder || "asc" } : undefined,
+    });
+};
+
+/**
+ * Get review count.
+ * @param {Object} filter - Filter criteria for counting reviews.
+ * @returns {Promise<number>}
+ */
+export const getReviewCount = async (filter = {}) => {
+    return prisma.review.count({
+        where: filter,
     });
 };
 
@@ -40,39 +53,6 @@ export const getReviewById = async (reviewId) => {
         where: { reviewId: Number(reviewId) },
     });
 };
-
-/**
- * Get review with associated user.
- * @param {number} reviewId - The ID of the review to retrieve.
- * @returns {Promise<*>}
- */
-export const getReviewWithUser = async (reviewId) => {
-    const review = await prisma.review.findUnique({
-        where: { reviewId: Number(reviewId) },
-        include: { user: true },
-    });
-
-    if (!review) {
-        throw new AppError("Review not found", 404, "REVIEW_NOT_FOUND", `No review found with ID ${reviewId}`);
-    }
-
-    return review;
-}
-
-/**
- * Get all reviews of a specific user.
- * @param {number} userId - The ID of the user whose reviews to retrieve.
- * @param {number} skip - Number of records to skip for pagination.
- * @param {number} take - Number of records to take for pagination.
- * @returns {Promise<*>}
- */
-export const getReviewsByUser = async (userId, skip = 0, take = 100) => {
-    return prisma.review.findMany({
-        where: { userId: Number(userId) },
-        skip: Number(skip),
-        take: Number(take),
-    });
-}
 
 /**
  * Create a new review.

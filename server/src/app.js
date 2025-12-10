@@ -7,7 +7,7 @@ import cors from "cors";
 const app = express();
 
 // Static Files
-app.use(express.static("public"));
+// app.use(express.static("public"));
 app.use("/uploads", express.static("uploads"));
 
 // Body Parsers

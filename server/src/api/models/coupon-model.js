@@ -2,6 +2,35 @@ import prisma from "../../prisma.js";
 import AppError from "../../utils/AppError.js";
 
 /**
+ * Get all coupons from the database.
+ * @param {Object} filter - Filter criteria for querying coupons.
+ * @param {number} skip - Number of records to skip for pagination.
+ * @param {number} take - Number of records to take for pagination.
+ * @param {string} sortBy - Field to sort by.
+ * @param {string} sortOrder - Sort order, either "asc" or "desc".
+ * @returns {Promise<*>}
+ */
+export const getCoupons = async (filter = {}, skip = 0, take = 100, sortBy, sortOrder = "asc") => {
+    return prisma.coupon.findMany({
+        where: filter,
+        skip: Number(skip),
+        take: Number(take),
+        orderBy: sortBy ? { [sortBy]: sortOrder || "asc" } : undefined,
+    });
+};
+
+/**
+ * Get coupon count.
+ * @param {Object} filter - Filter criteria for counting coupons.
+ * @returns {Promise<number>}
+ */
+export const getCouponCount = async (filter = {}) => {
+    return prisma.coupon.count({
+        where: filter
+    });
+};
+
+/**
  * Get a coupon by its code.
  * @param {string} code - The code of the coupon to retrieve.
  * @returns {Promise<*>}

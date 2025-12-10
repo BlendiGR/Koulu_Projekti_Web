@@ -2,6 +2,7 @@ import express from "express";
 import {authenticateToken, requireRole} from "../../middleware/authentication.js";
 import {validationErrors} from "../../middleware/error-handlers.js";
 import {validateProductIdParam, validateCreateProduct, validateUpdateProduct, validateProductQuery} from "../validators/product-validators.js";
+import { upload } from "../../middleware/upload.js";
 
 import * as productController from "../controllers/product-controller.js";
 
@@ -16,6 +17,7 @@ productRouter.route("/")
     .post(
         authenticateToken,
         requireRole(["ADMIN"]),
+        upload.single('file'),
         ...validateCreateProduct,
         validationErrors,
         productController.createProduct
@@ -30,6 +32,7 @@ productRouter.route("/:productId")
     .put(
         authenticateToken,
         requireRole(["ADMIN"]),
+        upload.single('file'),
         ...validateProductIdParam,
         ...validateUpdateProduct,
         validationErrors,
