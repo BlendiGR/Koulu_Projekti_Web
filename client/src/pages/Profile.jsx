@@ -12,7 +12,8 @@ export default function Profile() {
   const [ordersError, setOrdersError] = useState(null);
 
   const [isEditing, setIsEditing] = useState(false);
-  const [formUsername, setFormUsername] = useState("");
+  const [formFirstName, setFormFirstName] = useState("");
+  const [formLastName, setFormLastName] = useState("");
   const [formPassword, setFormPassword] = useState("");
   const [formPasswordConfirm, setFormPasswordConfirm] = useState("");
   const [formError, setFormError] = useState(null);
@@ -52,12 +53,13 @@ export default function Profile() {
     );
   }
 
-  const displayName = user.username;
+  const displayName = user.username || "";
   const email = user.email;
   const role = user.role;
 
   const initials = displayName
     .split(" ")
+    .filter(Boolean)
     .map((part) => part[0])
     .join("")
     .toUpperCase();
@@ -90,7 +92,12 @@ export default function Profile() {
 
   const handleEditClick = () => {
     setIsEditing(true);
-    setFormUsername(displayName || "");
+    // Puretaan nykyinen username -> first + last
+    const parts = displayName.split(" ").filter(Boolean);
+    const first = parts[0] || "";
+    const last = parts.slice(1).join(" ") || "";
+    setFormFirstName(first);
+    setFormLastName(last);
     setFormPassword("");
     setFormPasswordConfirm("");
     setFormError(null);
@@ -108,10 +115,15 @@ export default function Profile() {
     setFormError(null);
     setFormSuccess(null);
 
-    const trimmedUsername = formUsername.trim();
+    const trimmedFirst = formFirstName.trim();
+    const trimmedLast = formLastName.trim();
 
-    if (!trimmedUsername) {
-      setFormError("Username cannot be empty.");
+    if (!trimmedFirst) {
+      setFormError("First name cannot be empty.");
+      return;
+    }
+    if (!trimmedLast) {
+      setFormError("Last name cannot be empty.");
       return;
     }
 
@@ -125,9 +137,11 @@ export default function Profile() {
       return;
     }
 
+    const combinedUsername = `${trimmedFirst} ${trimmedLast}`.trim();
+
     const payload = {};
-    if (trimmedUsername !== displayName) {
-      payload.username = trimmedUsername;
+    if (combinedUsername !== displayName) {
+      payload.username = combinedUsername;
     }
     if (formPassword) {
       payload.password = formPassword;
@@ -175,7 +189,7 @@ export default function Profile() {
               "radial-gradient(circle at 30% 30%, #ffb199, var(--color-red-100))",
           }}
         >
-          {initials}
+          {initials || "U"}
         </div>
 
         <h2 className="text-lg font-semibold text-[var(--color-black-200)]">
@@ -195,9 +209,7 @@ export default function Profile() {
             <>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-[var(--color-black-200)]/70">
-                    Username
-                  </span>
+                  <span className="text-[var(--color-black-200)]/70">Name</span>
                   <span className="font-medium">{displayName}</span>
                 </div>
                 <div className="flex justify-between text-sm">
@@ -225,12 +237,24 @@ export default function Profile() {
             <form onSubmit={handleSaveProfile} className="space-y-4 mt-1">
               <div className="flex flex-col gap-1 text-sm">
                 <label className="text-[var(--color-black-200)]/80">
-                  Username
+                  First name
                 </label>
                 <input
                   type="text"
-                  value={formUsername}
-                  onChange={(e) => setFormUsername(e.target.value)}
+                  value={formFirstName}
+                  onChange={(e) => setFormFirstName(e.target.value)}
+                  className="w-full border border-[rgba(0,0,0,0.12)] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-red-100)]"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1 text-sm">
+                <label className="text-[var(--color-black-200)]/80">
+                  Last name
+                </label>
+                <input
+                  type="text"
+                  value={formLastName}
+                  onChange={(e) => setFormLastName(e.target.value)}
                   className="w-full border border-[rgba(0,0,0,0.12)] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-red-100)]"
                 />
               </div>
