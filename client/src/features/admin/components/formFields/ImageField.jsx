@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react';
 const ImageField = ({
     name = "imageUrl",
     register,
+    setValue,
     label,
     error,
     onFileChange,
@@ -16,7 +17,7 @@ const ImageField = ({
     previewClass = "max-h-32 w-full h-auto object-contain border rounded"
     }) => {
 
-    const [localPreview, setLocalPreview] = useState(null);
+    const [localPreview, setLocalPreview] = useState("");
 
     useEffect(() => {
         return () => {
@@ -24,22 +25,43 @@ const ImageField = ({
         };
     }, [localPreview]);
 
-    const handleFileChange = (e) => {
+    const handleFileChange = async (e) => {
         const file = e.target.files && e.target.files[0];
-
         if (!file) return;
+
         if (localPreview) URL.revokeObjectURL(localPreview);
+        const blobUrl = URL.createObjectURL(file);
+        setLocalPreview(blobUrl);
 
-        const url = URL.createObjectURL(file);
-        setLocalPreview(url);
-
-        if (typeof onFileChange === "function") {
-            onFileChange(e);
+        if (setValue) {
+            setValue(name, "", { shouldValidate: true, shouldDirty: true });
         }
-    }
+
+        if (typeof onFileChange === "function" && setValue) {
+            try {
+                const url = await onFileChange(e);
+                if (url) {
+                    const asString = String(url);
+                    setValue(name, asString, {
+                        shouldValidate: true,
+                        shouldDirty: true,
+                    });
+                    // console.log("ImageField -> setValue", name, asString);
+                }
+            } catch {
+                // errors handled upstream
+            }
+        }
+    };
+
+    const registered = register(name);
+    // console.log("ImageField -> register", name, registered);
 
     return (
         <div className={wrapperClass}>
+            {/* hidden value kept in form state */}
+            <input type="hidden" {...registered} />
+
             <div>
                 {label && <label className="block text-sm font-medium mb-1">{label}</label>}
                 <input type="file" accept={accept} onChange={handleFileChange} disabled={disabled} className={inputClass} />
@@ -52,8 +74,6 @@ const ImageField = ({
 
             {error && <p className="text-red-500 text-sm">{error.message || String(error)}</p>}
 
-            {/* hidden value kept in form state */}
-            <input type="hidden" {...register(name)} />
         </div>
     );
 };

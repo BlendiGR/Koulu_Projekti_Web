@@ -12,7 +12,7 @@ export const productSchema  = (t) => z.object({
     }
     return val;
   }, z.number().positive({ message: "Cost must be a positive number" }).optional()),
-  // imageUrl: z.string().url({ message: "Invalid URL" }).optional().or(z.literal("")).transform((v) => (v === "" ? undefined : v)),
+  imageUrl: z.string().url({ message: "Invalid URL" }).optional().or(z.literal("")).transform((v) => (v === "" ? undefined : v)),
   diets: z.preprocess((val) => {
     if (val == null || val === "") return [];
     if (Array.isArray(val)) return val;
