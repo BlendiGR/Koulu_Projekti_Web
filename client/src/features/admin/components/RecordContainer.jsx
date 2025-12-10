@@ -11,21 +11,19 @@ const RecordContainer = ({
     createItem,
     updateItem,
     deleteItem,
-    postFile,
     createSchema = null,
     createDefaultValues = {},
     children,
     allowCreate = false,
     renderCreate,
-    renderList
+    renderList,
+    paginate = true,
     }) => {
 
     const {t} = useLang();
 
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [uploading, setUploading] = useState(false);
-    const [previewUrl, setPreviewUrl] = useState(null);
 
     const resolvedFormSchema = useMemo(() => {
         if (!createSchema) return null;
@@ -35,10 +33,9 @@ const RecordContainer = ({
         resolver: resolvedFormSchema ? zodResolver(resolvedFormSchema) : undefined,
         defaultValues: createDefaultValues,
     });
-    const { register, handleSubmit, reset, setValue, formState: { errors } } = form;
+    const { register, handleSubmit, reset, setValue, getValues, formState: { errors } } = form;
 
     const [showCreate, setShowCreate] = useState(false);
-
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [submitting, setSubmitting] = useState(false);
@@ -58,7 +55,7 @@ const RecordContainer = ({
                 setError(msg);
                 return;
             }
-            let payload = res.data;
+            const payload = res.data;
             if (!Array.isArray(payload)) {
                 if (payload && Array.isArray(payload.data)) {
                     setItems(payload.data);
@@ -79,73 +76,43 @@ const RecordContainer = ({
             showError(msg);
             setError(msg);
         }
-    }, [getItems, page, pageSize]);
+    }, [getItems, page, pageSize, t]);
 
     useEffect(() => {
         fetchPage(page, pageSize);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, pageSize]);
 
-    const handleFileChange = async (e, fieldName = "imageUrl") => {
-        if (!postFile) return;
-        const file = e.target.files && e.target.files[0];
-        if (!file) return;
-        setUploading(true);
-        const token = localStorage.getItem("token");
-        const res = await postFile(file, token);
-        setUploading(false);
-        if (res && res.success) {
-            const payload = res.data && res.data.data !== undefined ? res.data.data : res.data;
-            const url = payload?.url || (payload && payload.url) || null;
-            if (url) {
-                setValue(fieldName, url, { shouldValidate: true, shouldDirty: true });
-                setPreviewUrl(url);
-            }
-        } else {
-            const msg = res?.error?.message || t("admin.common.uploadFail");
-            showError(msg);
-            setError(msg);
-        }
-    };
-
-    const onUpdate = async (id, values) => {
+    const onUpdate = useCallback(async (id, values) => {
         const token = localStorage.getItem("token");
         const res = await updateItem(id, values, token);
         if (res && res.success) await fetchPage(page, pageSize);
         return res;
-    };
+    }, [updateItem, fetchPage, page, pageSize]);
 
-    const onDelete = async (id) => {
+    const onDelete = useCallback(async (id) => {
         const token = localStorage.getItem("token");
         const res = await deleteItem(id, token);
         if (res && res.success) await fetchPage(page, pageSize);
         return res;
-    };
+    }, [deleteItem, fetchPage, page, pageSize]);
 
-    const handleCreate = async (values) => {
+    const onCreate = useCallback(async (values) => {
+        console.log("onCreate values:", values, "keys:", Object.keys(values));
+        // console.log("onCreate getValues():", getValues(), "imageUrl:", getValues("imageUrl"));
+
         setError(null);
         setSuccess(null);
-        if (uploading) {
-            setError(t("admin.common.waitForUpload") || "Wait for file upload to finish");
-            return;
-        }
         setSubmitting(true);
         const token = localStorage.getItem("token");
         try {
-            const payload = {...values};
-
-            if (!payload.imageUrl && previewUrl) {
-                payload.imageUrl = previewUrl;
-            }
-
-            const res = await createItem(payload, token);
+            const res = await createItem(values, token);
             setSubmitting(false);
             if (res && res.success) {
-                const msg = t("admin.common.created") || "Created";
+                const msg = t("admin.common.created");
                 showSuccess(msg);
                 setSuccess(msg);
                 reset(createDefaultValues);
-                setPreviewUrl(null);
                 setShowCreate(false);
                 await fetchPage(page, pageSize);
             } else {
@@ -159,12 +126,21 @@ const RecordContainer = ({
             showError(msg);
             setError(msg);
         }
-    };
+    }, [createItem, t, reset, createDefaultValues, fetchPage, page, pageSize]);
+
+    const handleCreate = useCallback(
+        (event) => {
+            // let RHF handle preventDefault + validation + onCreate
+            return handleSubmit(onCreate)(event);
+        },
+        [handleSubmit, onCreate]
+    );
 
     const context = {
         // list/context
         items,
         loading,
+        paginate,
         page,
         pageSize,
         total,
@@ -173,13 +149,11 @@ const RecordContainer = ({
         fetchPage,
         onUpdate,
         onDelete,
+        onCreate,
         // create form/context
         register,
-        handleCreate: handleSubmit(handleCreate),
-        handleFileChange,
-        uploading,
-        previewUrl,
-        setPreviewUrl,
+        setValue,
+        handleCreate,
         errors,
         submitting,
         error,
@@ -208,7 +182,7 @@ const RecordContainer = ({
             {renderList ? renderList(context) : null}
             {children ? children(context) : null}
 
-            {total > 0 && (
+            {(paginate && total) > 0 && (
                 <div className="mt-4">
                     <Pagination
                         currentPage={page}

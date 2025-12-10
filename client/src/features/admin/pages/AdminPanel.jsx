@@ -2,6 +2,8 @@ import Products from "../components/Products.jsx";
 import Reviews from "../components/Reviews.jsx";
 import Orders from "../components/Orders.jsx";
 import Users from "../components/Users.jsx";
+import Coupons from "../components/Coupons.jsx";
+import Announcement from "../components/Announcement.jsx";
 import {useLang} from "../../../hooks/useLang.js";
 import {useState} from "react";
 
@@ -11,10 +13,11 @@ const AdminPanel = () => {
     const [selected, setSelected] = useState("products");
 
     const adminNav = [
-        {id: "products", label: t("admin.products.title")},
         {id: "orders", label: t("admin.orders.title")},
+        {id: "products", label: t("admin.products.title")},
         {id: "users", label: t("admin.users.title")},
         {id: "reviews", label: t("admin.reviews.title")},
+        {id: "coupons", label: t("admin.coupons.title")}
     ]
 
     const renderSelected = () => {
@@ -26,8 +29,11 @@ const AdminPanel = () => {
             case "reviews":
                 return <Reviews />;
             case "products":
-            default:
                 return <Products />;
+            case "coupons":
+                return <Coupons />;
+            default:
+                return <Orders />;
         }
     }
 
@@ -55,7 +61,11 @@ const AdminPanel = () => {
                     </ul>
                 </nav>
 
-                <main>{renderSelected()}</main>
+                <main>
+                    {renderSelected()}
+                    <br/>
+                    <Announcement />
+                </main>
             </div>
         </div>
     );

@@ -42,19 +42,25 @@ const RecordRow = ({item = {}, idKey = "id", fields = [], cellClass = "", resolv
         reset(defaultValues);
     };
 
-    const handleFileChange = async (name, e) => {
+    const handleFileChange = async (e) => {
         const file = e.target.files && e.target.files[0];
-        if (!file || !postFile) return;
+        if (!file || !postFile) return null;
+
         setUploading(true);
         const res = await postFile(file);
         setUploading(false);
+
         if (res && res.success) {
             const payload = res.data && res.data.data !== undefined ? res.data.data : res.data;
             const url = payload?.url || (payload && payload.url) || null;
-            if (url) setValue(name, url, { shouldValidate: true, shouldDirty: true });
+            if (url) {
+                const strUrl = String(url);
+                return strUrl;
+            }
         } else {
             showError(res?.error?.message || t("admin.common.uploadFail"));
         }
+        return null;
     };
 
     const onSubmit = async (values) => {
@@ -131,7 +137,8 @@ const RecordRow = ({item = {}, idKey = "id", fields = [], cellClass = "", resolv
                         <td key={key} className={cellClass}>
                             <ImageField
                                 {...common}
-                                onFileChange={(e) => handleFileChange(f.name, e)}
+                                setValue={setValue}
+                                onFileChange={handleFileChange}
                                 uploading={uploading}
                                 previewUrl={watch(f.name) || item[f.name]}
                                 inputClass="w-full p-1"
@@ -180,9 +187,11 @@ const RecordRow = ({item = {}, idKey = "id", fields = [], cellClass = "", resolv
                         <button type="button" title={t("admin.common.edit")} onClick={startEdit} className="p-2 bg-blue-600 text-white rounded text-sm rounded-full">
                             <Pencil size={20} />
                         </button>
-                        <button type="button" title={t("admin.common.delete")} onClick={handleDelete} className="p-2 bg-red-600 text-white rounded text-sm rounded-full">
-                            <Trash size={20} />
-                        </button>
+                        {onDelete && (
+                            <button type="button" title={t("admin.common.delete")} onClick={handleDelete} className="p-2 bg-red-600 text-white rounded text-sm rounded-full">
+                                <Trash size={20} />
+                            </button>
+                        )}
                     </div>
                 ) : (
                     <div className="inline-flex gap-2">

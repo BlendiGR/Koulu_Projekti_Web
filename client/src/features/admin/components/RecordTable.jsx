@@ -29,7 +29,7 @@ const RecordTable = ({
                                 {f.label || f.name}
                             </th>
                         ))}
-                        <th className="px-3 py-2 text-start text-sm font-semibold uppercase text-slate-600 whitespace-nowrap">{t("admin.common.actions")}</th>
+                        <th className="px-3 py-2 text-sm font-semibold uppercase text-slate-600 text-center whitespace-nowrap">{t("admin.common.actions")}</th>
                     </tr>
                 </thead>
                 <tbody className="divide-y">
