@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const productSchema = z.object({
+export const productSchema  = (t) => z.object({
   name: z.string().min(1, { message: "Name is required" }),
   type: z.enum(["FOOD", "DRINK", "SIDE"]),
   // accept cost as string or number and coerce to number, allow decimals

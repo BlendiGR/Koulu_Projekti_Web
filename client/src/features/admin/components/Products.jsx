@@ -57,7 +57,7 @@ const Products = () => {
           allowCreate={true}
           createSchema={productSchema}
           createDefaultValues={createDefaults}
-          renderCreate={({ register, handleCreate, handleFileChange, uploading, previewUrl, errors, submitting, success, error, reset }) => (
+          renderCreate={({ register, handleCreate, handleFileChange, uploading, previewUrl, errors, submitting }) => (
               <div className="mb-4">
                 <h3 className="font-semibold mb-2">{t("admin.products.addProduct")}</h3>
                 <form onSubmit={handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -70,8 +70,6 @@ const Products = () => {
                   <Checkbox name="isActive" register={register} label={t("admin.products.active")} />
                   <Submit disabled={uploading || submitting} text={uploading ? t("admin.common.loading") : submitting ? t("admin.common.creating") : t("admin.common.create")} />
                 </form>
-                {error && <p className="text-red-600 mt-2">{error}</p>}
-                {success && <p className="text-green-600 mt-2">{success}</p>}
               </div>
           )}
           renderList={({ items, loading, onUpdate, onDelete, fetchPage, pageSize, setPage }) => (
@@ -81,13 +79,11 @@ const Products = () => {
                           { value: "name", label: t("admin.products.name") },
                           { value: "cost", label: t("admin.products.cost") },
                           { value: "type", label: t("admin.products.type") },
-                          // add other sortable fields as desired
                       ]}
                       value={{ sortBy, sortOrder }}
                       onChange={({ sortBy: newSortBy, sortOrder: newSortOrder }) => {
                           setSortBy(newSortBy || "");
                           setSortOrder(newSortOrder || "asc");
-                          // trigger a fresh fetch for page 1 with sort params
                           setPage(1);
                           fetchPage(1, pageSize, { sortBy: newSortBy, sortOrder: newSortOrder });
                       }}
@@ -100,13 +96,12 @@ const Products = () => {
                         items={items}
                         fields={fields}
                         idKey="productId"
-                        resolver={productSchema}
+                        resolver={productSchema(t)}
                         onUpdate={onUpdate}
                         onDelete={onDelete}
                         postFile={postFile}
                     />
                 )}
-                {/* Pagination component stays in Products or can be passed here as needed */}
               </>
           )}
       />

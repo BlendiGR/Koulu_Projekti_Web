@@ -87,10 +87,6 @@ export const createProduct = asyncHandler(async (req, res) => {
 export const updateProduct = asyncHandler(async (req, res) => {
     const productId = Number(req.params.productId);
 
-    if (isNaN(productId)) {
-        throw new AppError("Invalid product ID.", 400, "INVALID_PRODUCT_ID", "Product ID must be a valid number.");
-    }
-
     let {type, name, cost, diets, imageUrl, ingredients, isActive} = req.body;
 
     // If a file was uploaded directly to this endpoint, build its absolute URL and use it
