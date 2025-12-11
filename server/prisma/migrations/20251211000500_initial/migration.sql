@@ -5,8 +5,10 @@ CREATE TABLE `users` (
     `role` ENUM('CUSTOMER', 'ADMIN') NOT NULL DEFAULT 'CUSTOMER',
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
+    `locale` VARCHAR(191) NOT NULL DEFAULT 'en',
     `is_active` BOOLEAN NOT NULL DEFAULT true,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `reviewed` BOOLEAN NOT NULL DEFAULT false,
 
     UNIQUE INDEX `users_username_key`(`username`),
     UNIQUE INDEX `users_email_key`(`email`),
@@ -21,6 +23,7 @@ CREATE TABLE `orders` (
     `destination_address` VARCHAR(191) NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `completed_at` DATETIME(3) NULL,
+    `phone` VARCHAR(191) NOT NULL,
     `order_user_id` INTEGER NOT NULL,
     `orderer_name` VARCHAR(191) NOT NULL DEFAULT '',
 
@@ -48,7 +51,7 @@ CREATE TABLE `reviews` (
     `review` TEXT NOT NULL,
     `is_active` BOOLEAN NOT NULL DEFAULT false,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `review_user_id` INTEGER NOT NULL,
+    `reviewer_name` VARCHAR(191) NOT NULL DEFAULT '',
 
     PRIMARY KEY (`review_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -62,11 +65,34 @@ CREATE TABLE `order_products` (
     PRIMARY KEY (`order_id`, `product_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- AddForeignKey
-ALTER TABLE `orders` ADD CONSTRAINT `orders_order_user_id_fkey` FOREIGN KEY (`order_user_id`) REFERENCES `users`(`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+-- CreateTable
+CREATE TABLE `announcements` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(191) NOT NULL,
+    `message` VARCHAR(191) NOT NULL,
+    `isActive` BOOLEAN NOT NULL DEFAULT true,
+    `isSingleton` BOOLEAN NOT NULL DEFAULT true,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+
+    UNIQUE INDEX `announcements_isSingleton_key`(`isSingleton`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `coupons` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `code` VARCHAR(191) NOT NULL,
+    `discount` DECIMAL(65, 30) NOT NULL,
+    `isActive` BOOLEAN NOT NULL DEFAULT true,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    UNIQUE INDEX `coupons_code_key`(`code`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `reviews` ADD CONSTRAINT `reviews_review_user_id_fkey` FOREIGN KEY (`review_user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `orders` ADD CONSTRAINT `orders_order_user_id_fkey` FOREIGN KEY (`order_user_id`) REFERENCES `users`(`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `order_products` ADD CONSTRAINT `order_products_order_id_fkey` FOREIGN KEY (`order_id`) REFERENCES `orders`(`order_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
