@@ -73,10 +73,8 @@ export const sendOrderEmail = asyncHandler(async (req, res) => {
 
 /**
  * Send review request email
- * @param {Object} req - Express request object
- * @param {string} req.body.email - Recipient email address
- * @param {string} req.body.locale - Language locale ('en' or 'fi')
- * @param {Object} res - Express response object
+ * @param {string} userId - User ID
+ * @returns {Promise<void>}
  */
 export const sendReviewEmail = asyncHandler(async (userId) => {
     

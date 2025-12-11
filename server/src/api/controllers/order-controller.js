@@ -143,8 +143,8 @@ export const updateOrder = asyncHandler(async (req, res) => {
     const orderId = Number(req.params.orderId);
     const updateData = req.body;
     const updatedOrder = await Order.updateOrder(orderId, updateData);
-    if (updateData.status == "DELIVERED") {
-        sendReviewEmail(updatedOrder.userId);
+    if (updateData.status === "DELIVERED") {
+       await sendReviewEmail(updatedOrder.userId);
     }
     res.sendSuccess(updatedOrder);
 });
