@@ -1,6 +1,7 @@
 import {asyncHandler} from "../../utils/async-handler.js";
 import AppError from "../../utils/AppError.js";
 import {normalizeSort} from "../../utils/normalize-sort.js";
+import {normalizeQueryBooleans} from "../../utils/normalizeBooleans.js";
 import * as Product from "../models/product-model.js";
 
 /**
@@ -12,13 +13,15 @@ import * as Product from "../models/product-model.js";
 export const getAllProducts = asyncHandler(async (req, res) => {
     const {skip = 0, take = 100, sortBy, sortOrder, ...filters} = req.query;
 
+    const normalizedFilters = normalizeQueryBooleans(filters, ["isActive"]);
+
     const skipNum = Number(skip);
     const takeNum = Number(take);
 
     const normalizedSort = normalizeSort(sortOrder, sortBy) || { sortOrder: undefined, sortField: undefined };
 
-    const products = await Product.getProducts(filters, skipNum, takeNum, normalizedSort.sortField, normalizedSort.sortOrder);
-    const count = await Product.getProductCount(filters);
+    const products = await Product.getProducts(normalizedFilters, skipNum, takeNum, normalizedSort.sortField, normalizedSort.sortOrder);
+    const count = await Product.getProductCount(normalizedFilters);
 
     res.sendSuccess({data: products, total: count});
 });
