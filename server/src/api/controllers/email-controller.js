@@ -78,8 +78,7 @@ export const sendOrderEmail = asyncHandler(async (req, res) => {
  * @param {string} req.body.locale - Language locale ('en' or 'fi')
  * @param {Object} res - Express response object
  */
-export const sendReviewEmail = asyncHandler(async (req, res) => {
-    const { userId } = req.body;
+export const sendReviewEmail = asyncHandler(async (userId) => {
     
     const user = await prisma.user.findUnique({
         where: { 
@@ -110,10 +109,6 @@ export const sendReviewEmail = asyncHandler(async (req, res) => {
         
         console.log(`Review email sent to ${email}`);
         
-        res.status(200).json({
-            success: true,
-            message: 'Review email sent successfully'
-        });
     } catch (emailError) {
         console.error('Failed to send review email:', emailError.message);
     }

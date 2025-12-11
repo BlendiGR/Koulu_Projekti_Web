@@ -2,6 +2,7 @@ import {asyncHandler} from "../../utils/async-handler.js";
 import AppError from "../../utils/AppError.js";
 import * as Order from "../models/order-model.js";
 import {normalizeSort} from "../../utils/normalize-sort.js";
+import { sendReviewEmail } from "./email-controller.js";
 
 /**
  * Get all orders with optional filtering and pagination.
@@ -141,8 +142,10 @@ export const createOrder = asyncHandler(async (req, res, next) => {
 export const updateOrder = asyncHandler(async (req, res) => {
     const orderId = Number(req.params.orderId);
     const updateData = req.body;
-
     const updatedOrder = await Order.updateOrder(orderId, updateData);
+    if (updateData.status == "DELIVERED") {
+        sendReviewEmail(updatedOrder.userId);
+    }
     res.sendSuccess(updatedOrder);
 });
 
