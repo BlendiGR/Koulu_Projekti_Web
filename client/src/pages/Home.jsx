@@ -1,7 +1,7 @@
 import { Award, Heart, Mail, MapPin, Phone, Users } from "lucide-react";
 import { useLang } from "/src/hooks/useLang";
 import { useState, useEffect } from "react";
-
+import {useProduct} from "../hooks/api/";
 import FeatureCard from "/src/components/common/ui/FeatureCard.jsx";
 import HeroSection from "/src/pages/HeroSection.jsx";
 import heroBackground from "/src/assets/images/Hero-Background.png";
@@ -16,8 +16,11 @@ import { formatDate } from "/src/utils/formatters";
 const Home = () => {
   const { t } = useLang();
   const { getReviews } = useReview();
+  const { getProducts } = useProduct();
   const { loading, withLoading } = useLoading();
+
   const [reviews, setReviews] = useState([]);
+  const [randomProducts, setRandomProducts] = useState([]);
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -38,23 +41,17 @@ const Home = () => {
     fetchReviews();
   }, []);
 
-  const contactCards = [
-    {
-      icon: <MapPin size={44} className="text-red-100" />,
-      title: t("home.contact.location"),
-      text: "Blablablakatu 4,\n00100 Helsinki",
-    },
-    {
-      icon: <Phone size={44} className="text-green-100" />,
-      title: t("home.contact.phone"),
-      text: `050 000 0000\n${t("home.contact.phoneText")}`,
-    },
-    {
-      icon: <Mail size={44} className="text-blue-400" />,
-      title: t("home.contact.email"),
-      text: `info@web-fooder.fi\n${t("home.contact.emailText")}`,
-    },
-  ];
+  useEffect(() => {
+    const fetchRandomProducts = async () => {
+      const res = await getProducts({ skip: 0, take: 3, isActive: true });
+      if (res.success && res.data) {
+        // adjust according to your backend pagination shape
+        setRandomProducts(res.data.data || res.data);
+      }
+    };
+
+    fetchRandomProducts();
+  }, []);
 
   const featureCards = [
     {
@@ -126,8 +123,8 @@ const Home = () => {
           <span className="text-red-100">{t("home.mostOrdered.titleTwo")}</span>
         </h3>
         <div className="flex md:flex-row flex-col justify-center items-center gap-10 mt-10">
-          {mostBuyedProducts.map((item) => (
-            <ProductCard key={item.id} item={item} />
+          {randomProducts.map((item, idx) => (
+            <ProductCard key={item.productId} item={item} rank={idx + 1} />
           ))}
         </div>
       </section>

@@ -2,7 +2,7 @@ import AddToCartButton from "/src/features/cart/components/AddToCartButton.jsx";
 import ProductModal from "/src/components/common/ui/ProductModal.jsx";
 import { useState, useEffect } from "react";
 
-const ProductCard = ({ item = {}, bgColor = "white" }) => {
+const ProductCard = ({ item = {}, bgColor = "white", rank = null }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -34,6 +34,11 @@ const ProductCard = ({ item = {}, bgColor = "white" }) => {
     `}
     onClick={() => setIsOpen(!isOpen)}
       >
+        {rank && (
+            <div className="absolute top-3 right-3 bg-red-600 text-white text-sm font-semibold px-3 py-1 rounded-full shadow">
+              #{rank}
+            </div>
+        )}
         <img
           src={item.imageUrl}
           alt={item.name}
