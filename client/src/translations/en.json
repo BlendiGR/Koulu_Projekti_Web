@@ -55,6 +55,16 @@
       "subtitle": "See what our customers say about us!"
     }
   },
+  "visit": {
+    "visit": "Visit",
+    "us": "us",
+    "subheading": "We are waiting for your visit!",
+    "title": "Find us",
+    "publicTransport": "Public transport",
+    "transportInfo": "We are located near the central bus stations in Lohja, easily accessible by all major routes.",
+    "parking": "Parking",
+    "parkingInfo": "Free parking is available right outside our restaurant for all customers."
+  },
   "cart": {
     "button": "Cart",
     "addtocart": "Add To Cart",
@@ -332,7 +342,10 @@
     },
     "success": "Profile updated successfully."
   },
-
+  "menu": {
+    "title": "Our menu",
+    "subheading": "Delicious pizzas, burgers, kebab, and more"
+  },
   "admin": {
     "heading": "Dashboard",
     "common": {
