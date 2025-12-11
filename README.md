@@ -59,9 +59,9 @@ Sovellus on jaettu kahteen pääosaan: Asiakaspuoleen ja Hallintapaneeliin (Admi
     *   Ajankohtaiset ilmoitukset (Announcements) sivun ylälaidassa.
 
 *   **Menu & Tuotteet:**
-    *   Kattava ruokalista kategorioittain (esim. Burgerit, Pizzat, Juomat).
+    *   Kattava ruokalista kategorioittain (esim. Ruoat, juomat).
     *   Tuotekortit kuvilla, hinnoilla ja "Lisää ostoskoriin" -toiminnolla.
-    *   **Tuotemodaali:** Klikkaamalla tuotetta aukeaa tarkempi näkymä, jossa on kuvaus, ainesosat ja allergiatiedot.
+    *   **Tuotemodaali:** Klikkaamalla tuotetta aukeaa tarkempi näkymä, jossa on kuvaus, ainesosat ja ruokavaliot.
 
 *   **Ostoskori (Cart):**
     *   Sivusta aukeava ostoskori, joka on aina helposti saatavilla.
@@ -72,11 +72,11 @@ Sovellus on jaettu kahteen pääosaan: Asiakaspuoleen ja Hallintapaneeliin (Admi
 *   **Kassa (Checkout) & Maksaminen:**
     *   Selkeä kassasivu, jossa syötetään toimitustiedot (automaattinen validointi).
     *   **Stripe-integraatio:** Maksaminen kortilla. Testitilassa käytetään Stripen testikortteja.
-    *   Kuitti ja tilausvahvistus sähköpostiin onnistuneen maksun jälkeen.
+    *   Tilausvahvistus sähköpostiin onnistuneen maksun jälkeen.
 
 *   **Tilaukset & Seuranta:**
     *   **Tilaushistoria:** "Orders"-sivulla käyttäjä näkee omat menneet tilauksensa.
-    *   **Reaaliaikainen seuranta (Order Track):** Visuaalinen seurantasivu yksittäiselle tilaukselle. Näyttää tilan (Vastaanotettu -> Valmistuksessa -> Kuljetuksessa -> Toimitettu) ja arvioidun toimitusajan.
+    *   **Reaaliaikainen seuranta (Order Track):** Visuaalinen seurantasivu yksittäiselle tilaukselle. Näyttää tilan (PREPARING, DELIVERING, DELIVERED) ja arvioidun toimitusajan.
 
 *   **Käyttäjäprofiili:**
     *   Omien tietojen hallinta.
@@ -84,13 +84,12 @@ Sovellus on jaettu kahteen pääosaan: Asiakaspuoleen ja Hallintapaneeliin (Admi
     *   Tilaushistorian tarkastelu.
 
 *   **Arvostelut:**
-    *   Mahdollisuus jättää arvosteluja ravintolasta ja tuotteista.
+    *   Mahdollisuus jättää arvostelun. Yhden käyttäjän on mahdollista jättää vain yhden arvostelun.
 
 *   **Autentikaatio:**
     *   Rekisteröityminen ja kirjautuminen (JWT-pohjainen).
-    *   Sähköpostivahvistus rekisteröitymisen yhteydessä.
     *   Suojatut reitit (vain kirjautuneille).
-
+ 
 ### Hallintapaneeli (Admin)
 
 Vain Admin-oikeuksilla varustetut käyttäjät pääsevät `/admin` -näkymään.
@@ -98,7 +97,7 @@ Vain Admin-oikeuksilla varustetut käyttäjät pääsevät `/admin` -näkymään
 *   **Dashboard (Yleisnäkymä):** Yhteenveto tilastoista.
 *   **Tilauksien Hallinta (Orders):**
     *   Listaus kaikista tilauksista.
-    *   **Tilan päivitys:** Admin voi muuttaa tilauksen tilaa (esim. "Pending" -> "Cooking"). Tämä päivittyy reaaliajassa asiakkaan seurantanäkymään.
+    *   **Tilan päivitys:** Admin voi muuttaa tilauksen tilaa (esim. "PREPARING" -> "DELIVERING"). Tämä päivittyy asiakkaan seurantanäkymään.
 *   **Tuotteiden Hallinta (Products):**
     *   Uusien tuotteiden lisääminen (kuvat, hinnat, kuvaukset).
     *   Olemassa olevien tuotteiden muokkaus ja poisto.
@@ -214,41 +213,52 @@ Sovellus aukeaa osoitteeseen: `http://localhost:5173`
 Tämä polku varmistaa, että käyt läpi kaikki sovelluksen keskeiset ominaisuudet.
 
 ### Vaihe 1: Rekisteröityminen ja Tutustuminen
-1.  Avaa sovellus etusivulle.
+1.  Avaa sovellus.
 2.  Navigoi "Menu" -sivulle ja selaa tuotteita. Klikkaa tuotetta nähdäksesi lisätiedot (modaalissa).
-3.  Yritä lisätä tuote ostoskoriin -> Sovellus ohjaa kirjautumaan.
-4.  Valitse "Sign Up" ja luo uusi käyttäjä. (Varmista sähköposti, jos testikonfiguraatio vaatii sen, tai käytä suoraan jos dev-tilassa).
+3.  Lisää tuotteita ostoskoriin.
+4.  Mene ostoskoriin ja yritä painaa "Siirry kassaan" nappia -> sovellus ohjaa kirjautumaan.
+5.  Valitse "Sign Up" ja luo uusi käyttäjä. Laita oikea sähköposti, jotta Nodemailer pystyy lähettämään sähköposteja.
 
 ### Vaihe 2: Tilausprosessi (Asiakas)
 1.  Kirjaudu sisään juuri luomallasi tunnuksella.
-2.  Mene takaisin Menuun ja lisää muutama tuote (esim. Pizza ja Juoma) ostoskoriin.
+2.  Mene takaisin Menuun ja lisää muutama tuote lisää (esim. Pizza ja Juoma) ostoskoriin.
 3.  Avaa ostoskori (Drawer) oikeasta reunasta. Testaa määrien muuttamista.
-4.  **Kuponki:** Jos tiedät toimivan koodin (esim. "ALE10"), syötä se ja katso hinnan muuttuvan.
-5.  Paina "Proceed to Checkout".
+4.  **Kuponki:** Jos tiedät toimivan koodin (esim. "ALE10"), syötä se ja katso hinnan muuttuvan. *(Pitäisi olla valmiina WELCOME10 databasessa jos prisma seed mennyt läpi.)*
+5.  Paina "Siirry kassaan".
 6.  Täytä toimitustiedot (Katuosoite, Postinumero, Kaupunki). Lomake validoi puuttuvat tiedot.
 7.  **Maksaminen:** Syötä Stripen testikortin tiedot:
     *   Kortin numero: `4242 4242 4242 4242`
     *   Pvm: Mikä tahansa tulevaisuuden pvm (esim. 12/28)
     *   CVC: `123`
-8.  Paina "Pay". Odota hetki ("Processing...").
-9.  Sinut ohjataan onnistumissivulle (`/success/:id`). Tarkista sähköpostisi (virtuaalinen tai oikea), sinne pitäisi tulla tilausvahvistus.
+8.  Paina "Pay" ja odota hetki.
+9.  Sinut ohjataan onnistumissivulle (`/success/:id`). Tarkista sähköpostisi, sinne pitäisi tulla tilausvahvistus.
 
 ### Vaihe 3: Seuranta (Asiakas)
 1.  Onnistumissivulta klikkaa "Track Order" tai mene Profiili -> Orders -> Valitse uusin tilaus.
-2.  Näet visuaalisen janan (Order Status). Aluksi tila on todennäköisesti "Pending" tai "Received".
+2.  Näet visuaalisen janan (Order Status). Aluksi tila on "PREPARING".
 3.  Jätä tämä sivu auki yhteen välilehteen/ikkunaan.
 
 ### Vaihe 4: Hallinta (Admin) - Huom: Vaatii Admin-tunnukset
-*Jos sinulla ei ole admin-tunnusta, muokkaa tietokannasta user-objektin rooliksi "admin" tai luo se seed-scriptillä.*
+*PRISMA SEED skripti on luonut valmiiksi admin käyttäjän. Tarkista ne seed.js tiedostosta tai .env*
 
-1.  Avaa uusi incognito-ikkuna tai kirjaudu ulos ja sisään Admin-tunnuksilla.
-2.  Mene osoitteeseen `/admin`.
-3.  **Dashbord:** Katso tilastot.
-4.  **Orders-välilehti:** Etsi äsken tekemäsi tilaus listasta.
-5.  Muuta tilauksen status: Vaihda se esim. "Cooking" tai "On the way".
-6.  Palaa Asiakas-ikkunaan (Vaihe 3). Huomaa, että seurantasivun palkki on päivittynyt automaattisesti!
+1.  Avaa uusi **incognito-ikkuna** tai **kirjaudu ulos**, ja kirjaudu sitten takaisin sisään **ylläpitäjän tunnuksilla**.
+2.  Valitse navigointivalikosta **Hallinta**.
+3.  **Kojelauta (Dashboard):** Tarkastele kaikkia näkymiä ja kokeile eri **toiminnallisuuksia**.
+4.  Muuta tilauksen tilaa: Vaihda tila esimerkiksi tilaan "**TOIMITUKSESSA**" (`DELIVERING`).
+5.  Palaa Asiakas-ikkunaan (Vaihe 3). Päivitä sivu ja huomaa, että tilauksen seuranta on päivittynyt.
+6.  Palaa takaisin ylläpitäjän paneeliin ja vaihda tilauksen tila tilaan "**TOIMITETTU**" (`DELIVERED`).
+7.  Tarkista sähköpostisi – sinne pitäisi tulla **arviointipyyntö**.
+8.  Napsauta **Jätä arvio** -painiketta.
+    > *Huom: Jos olet määrittänyt `.env`-tiedoston sähköpostiasetukset oikein, linkin pitäisi ohjata suoraan arviointi-osioon.*
+9.  Jätä arvostelu ja siirry takaisin ylläpitäjän paneelin **Arvostelut**-osioon.
+10. **Hyväksy** jättämäsi arvostelu (aktivoi se).
+11. Mene etusivulle, selaa alas ja tarkastele tekemääsi arvostelua.
 
 ### Vaihe 5: Muut ominaisuudet
 1.  **Admin - Products:** Kokeile lisätä uusi tuote "Test Burger" kuvalla ja hinnalla. Mene Menu-sivulle ja etsi se.
 2.  **Admin - Coupons:** Luo uusi kuponki, esim. "TEST50", alennus 50%. Mene kassalle ja testaa toimiiko se.
-3.  **Arvostelut:** Mene "Reviews" sivulle (jos käytössä) ja jätä arvostelu.
+
+### ℹ️ Lisätietoa arvosteluista
+Sovellus toimii niin, että se:
+* **Ei lähetä** arvostelupyyntöä sähköpostitse, jos kyseinen käyttäjä on jo jättänyt arvostelun kyseisestä tilauksesta.
+* **Ei anna** käyttäjän jättää uutta arvostelua tilauksesta, jos hän on sen jo tehnyt.
