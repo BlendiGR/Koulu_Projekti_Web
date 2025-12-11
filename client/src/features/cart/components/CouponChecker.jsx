@@ -25,7 +25,6 @@ const CouponChecker = () => {
         setSuccess(false);
         await withLoading(async () => {
             const coupon = await checkCoupon(data.coupon);
-            console.log(coupon);
             if (!coupon) {
                 throw new Error(t("cart.coupon.notFound"));
             }

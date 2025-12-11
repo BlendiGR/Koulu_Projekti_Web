@@ -318,6 +318,8 @@
     "loadingProfile": "Ladataan profiilia...",
     "loadingOrders": "Ladataan tilauksia...",
     "noOrders": "Ei vielä tilauksia.",
+    "orderButton": "Seuraa tilausta",
+    "trackOrderButton": "Seuranta",
     "table": {
       "orderId": "Tilaus #",
       "date": "Päivä",

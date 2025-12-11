@@ -23,7 +23,6 @@ const MainLayout = () => {
   }, []);
 
   const handleDismissAnnouncement = () => {
-    console.log("clicked")
     setAnnouncement(null);
   };
 

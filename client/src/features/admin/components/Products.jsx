@@ -63,9 +63,8 @@ const Products = () => {
             const url = res.data?.url;
             if (url) {
                 const strUrl = String(url);
-                setPreviewUrl(strUrl); // purely for visual preview
+                setPreviewUrl(strUrl); 
                 showSuccess(t("admin.common.uploadSuccess"));
-                console.log("handleFileChange -> uploaded URL:", strUrl);
                 return strUrl;
             }
         } else {
@@ -78,13 +77,6 @@ const Products = () => {
     const createProductWithImage = async (values, token) => {
         const resolvedUrl =
             typeof values.imageUrl === "string" ? values.imageUrl.trim() : "";
-
-        console.log(
-            "createProductWithImage -> values.imageUrl:",
-            values.imageUrl,
-            "resolved:",
-            resolvedUrl
-        );
 
         if (!resolvedUrl) {
             showError(t("admin.common.createFail"));

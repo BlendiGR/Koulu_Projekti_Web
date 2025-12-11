@@ -320,6 +320,8 @@
     "loadingProfile": "Loading profile...",
     "loadingOrders": "Loading orders...",
     "noOrders": "You have no orders yet.",
+    "orderButton": "Track Order",
+    "trackOrderButton": "Tracking",
     "table": {
       "orderId": "Order #",
       "date": "Date",

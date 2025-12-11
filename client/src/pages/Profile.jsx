@@ -1,14 +1,15 @@
-// client/src/pages/Profile.jsx
 import { useEffect, useState } from "react";
 import { useAuth } from "/src/features/auth/hooks/useAuth";
 import { useOrder, useUser } from "/src/hooks/api";
 import { useLang } from "/src/hooks/useLang";
+import { useNavigate } from "react-router";
 
 export default function Profile() {
   const { user, setUser } = useAuth();
   const { getOrdersByUser } = useOrder();
   const { updateUser } = useUser();
   const { t } = useLang();
+  const navigate = useNavigate();
 
   const [orders, setOrders] = useState([]);
   const [ordersLoading, setOrdersLoading] = useState(true);
@@ -209,7 +210,7 @@ export default function Profile() {
               <div className="flex justify-end mt-4">
                 <button
                   onClick={handleEditClick}
-                  className="bg-[var(--color-red-100)] hover:bg-[var(--color-red-200)] text-white px-6 py-2 rounded-full text-sm transition"
+                  className="bg-red-100 hover:bg-red-200 active:scale-105 transition cursor-pointer text-white px-6 py-2 rounded-full text-sm"
                 >
                   {t("profile.editButton")}
                 </button>
@@ -326,6 +327,9 @@ export default function Profile() {
                     <th className="py-2 text-left">
                       {t("profile.table.status")}
                     </th>
+                    <th className="py-2 text-right">
+                      {t("profile.orderButton")}
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -344,6 +348,15 @@ export default function Profile() {
                         <span className={getStatusClassName(order.status)}>
                           {formatStatusLabel(order.status)}
                         </span>
+                      </td>
+                      <td className="text-right">
+                        <button
+                          type="button"
+                          onClick={() => navigate(`/orders/${order.orderId}`)}
+                          className="bg-red-100 text-white rounded-2xl text-xs px-2 py-1 hover:bg-red-200 cursor-pointer active:scale-105 transition"
+                        >
+                          {t("profile.trackOrderButton")}
+                        </button>
                       </td>
                     </tr>
                   ))}

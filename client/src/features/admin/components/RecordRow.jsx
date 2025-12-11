@@ -91,7 +91,6 @@ const RecordRow = ({item = {}, idKey = "id", fields = [], cellClass = "", resolv
     };
 
     const onInvalid = (errs) => {
-        console.log("RecordRow validation errors:", errs);
         const firstKey = Object.keys(errs)[0];
         const msg = errs[firstKey]?.message || t("admin.common.validationFail");
         showError(msg);

@@ -82,7 +82,6 @@ export const useCheckout = () => {
                      if (res.success) {
                          setOrder(res.data);
                          clearCart();
-                         console.log(fullOrderData);
                          navigate("/success/" + res.data.orderId);
                      } else {
                          throw new Error(

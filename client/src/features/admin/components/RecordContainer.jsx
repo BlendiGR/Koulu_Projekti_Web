@@ -98,8 +98,6 @@ const RecordContainer = ({
     }, [deleteItem, fetchPage, page, pageSize]);
 
     const onCreate = useCallback(async (values) => {
-        console.log("onCreate values:", values, "keys:", Object.keys(values));
-        // console.log("onCreate getValues():", getValues(), "imageUrl:", getValues("imageUrl"));
 
         setError(null);
         setSuccess(null);

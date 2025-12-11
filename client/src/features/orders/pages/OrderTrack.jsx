@@ -22,7 +22,6 @@ const OrderTrack = () => {
     fetchOrder();
   }, []);
 
-  console.log(order);
 
   const orderDetailsColumns = [
     {
