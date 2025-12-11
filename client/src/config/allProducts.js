@@ -1,9 +1,10 @@
-export const allProducts = [
+const allProducts = [
   {
     id: 1,
-    name: "Cheese Burger Cheese",
+    name: "Pizza 1",
     imageUrl: "src/assets/images/Cheese Burger.png",
-    description: "Our #1 bestseller of all time, juicy beef patty with melted cheddar.",
+    description:
+      "Our #1 bestseller of all time, juicy beef patty with melted cheddar.",
     price: 8.99,
     orders: 1200,
     rank: 1,
@@ -11,7 +12,7 @@ export const allProducts = [
   },
   {
     id: 2,
-    name: "Crispyest Fries",
+    name: "Pizza 2",
     imageUrl: "src/assets/images/French Fries.png",
     description: "Golden, crispy perfection, epicly seasoned.",
     price: 3.99,
@@ -21,7 +22,7 @@ export const allProducts = [
   },
   {
     id: 3,
-    name: "Chicken Nuggets Extra",
+    name: "Pizza 3",
     imageUrl: "src/assets/images/Chicken Nuggets.png",
     description: "Extra crispy on the outside, tender on the inside.",
     price: 6.99,
@@ -31,7 +32,145 @@ export const allProducts = [
   },
   {
     id: 4,
-    name: "Turbo Fries",
+    name: "Pizza 4",
+    imageUrl: "src/assets/images/French Fries.png",
+    description: "Turbo good.",
+    price: 6.66,
+    orders: 980,
+    rank: 4,
+    bgColor: "white",
+  },
+  {
+    id: 5,
+    name: "BURGERCheese Burger Cheese",
+    imageUrl: "src/assets/images/Cheese Burger.png",
+    description:
+      "Our #1 bestseller of all time, juicy beef patty with melted cheddar.",
+    price: 8.99,
+    orders: 1200,
+    rank: 1,
+    bgColor: "white",
+  },
+  {
+    id: 6,
+    name: "BURGERCrispyest Fries",
+    imageUrl: "src/assets/images/French Fries.png",
+    description: "Golden, crispy perfection, epicly seasoned.",
+    price: 3.99,
+    orders: 980,
+    rank: 2,
+    bgColor: "white",
+  },
+  {
+    id: 7,
+    name: "KebAB Burger Cheese",
+    imageUrl: "src/assets/images/Cheese Burger.png",
+    description:
+      "Our #1 bestseller of all time, juicy beef patty with melted cheddar.",
+    price: 8.99,
+    orders: 1200,
+    rank: 1,
+    bgColor: "white",
+  },
+  {
+    id: 8,
+    name: "KEBAB Fries",
+    imageUrl: "src/assets/images/French Fries.png",
+    description: "Golden, crispy perfection, epicly seasoned.",
+    price: 3.99,
+    orders: 980,
+    rank: 2,
+    bgColor: "white",
+  },
+  {
+    id: 9,
+    name: "BURGERsaladCheese Burger Cheese",
+    imageUrl: "src/assets/images/Cheese Burger.png",
+    description:
+      "Our #1 bestseller of all time, juicy beef patty with melted cheddar.",
+    price: 8.99,
+    orders: 1200,
+    rank: 1,
+    bgColor: "white",
+  },
+  {
+    id: 10,
+    name: "SALAD Fries",
+    imageUrl: "src/assets/images/French Fries.png",
+    description: "Golden, crispy perfection, epicly seasoned.",
+    price: 3.99,
+    orders: 980,
+    rank: 2,
+    bgColor: "white",
+  },
+  {
+    id: 11,
+    name: "salasddslad Fries",
+    imageUrl: "src/assets/images/French Fries.png",
+    description: "Golden, crispy perfection, epicly seasoned.",
+    price: 3.99,
+    orders: 980,
+    rank: 2,
+    bgColor: "white",
+  },
+  {
+    id: 43,
+    name: "cola",
+    imageUrl: "src/assets/images/Cheese Burger.png",
+    description:
+      "Our #1 bestseller of all time, juicy beef patty with melted cheddar.",
+    price: 8.99,
+    orders: 1200,
+    rank: 1,
+    bgColor: "white",
+  },
+  {
+    id: 56,
+    name: "vesi",
+    imageUrl: "src/assets/images/French Fries.png",
+    description: "Golden, crispy perfection, epicly seasoned.",
+    price: 3.99,
+    orders: 980,
+    rank: 2,
+    bgColor: "white",
+  },
+];
+
+const pizzas = [
+  {
+    id: 1,
+    name: "Pizza 1",
+    imageUrl: "src/assets/images/Cheese Burger.png",
+    description:
+      "Our #1 bestseller of all time, juicy beef patty with melted cheddar.",
+    price: 8.99,
+    orders: 1200,
+    rank: 1,
+    bgColor: "white",
+  },
+  {
+    id: 2,
+    name: "Pizza 2",
+    imageUrl: "src/assets/images/French Fries.png",
+    description: "Golden, crispy perfection, epicly seasoned.",
+    price: 3.99,
+    orders: 980,
+    rank: 2,
+    bgColor: "white",
+  },
+  {
+    id: 3,
+    name: "Pizza 3",
+    imageUrl: "src/assets/images/Chicken Nuggets.png",
+    description: "Extra crispy on the outside, tender on the inside.",
+    price: 6.99,
+    orders: 875,
+    rank: 3,
+    bgColor: "white",
+  },
+  {
+    id: 4,
+    name: "Pizza 4",
     imageUrl: "src/assets/images/French Fries.png",
     description: "Turbo good.",
     price: 6.66,
@@ -40,3 +179,111 @@ export const allProducts = [
     bgColor: "white",
   },
 ];
+
+const burgers = [
+  {
+    id: 5,
+    name: "BURGERCheese Burger Cheese",
+    imageUrl: "src/assets/images/Cheese Burger.png",
+    description:
+      "Our #1 bestseller of all time, juicy beef patty with melted cheddar.",
+    price: 8.99,
+    orders: 1200,
+    rank: 1,
+    bgColor: "white",
+  },
+  {
+    id: 6,
+    name: "BURGERCrispyest Fries",
+    imageUrl: "src/assets/images/French Fries.png",
+    description: "Golden, crispy perfection, epicly seasoned.",
+    price: 3.99,
+    orders: 980,
+    rank: 2,
+    bgColor: "white",
+  },
+];
+
+const kebab = [
+  {
+    id: 7,
+    name: "KebAB Burger Cheese",
+    imageUrl: "src/assets/images/Cheese Burger.png",
+    description:
+      "Our #1 bestseller of all time, juicy beef patty with melted cheddar.",
+    price: 8.99,
+    orders: 1200,
+    rank: 1,
+    bgColor: "white",
+  },
+  {
+    id: 8,
+    name: "KEBAB Fries",
+    imageUrl: "src/assets/images/French Fries.png",
+    description: "Golden, crispy perfection, epicly seasoned.",
+    price: 3.99,
+    orders: 980,
+    rank: 2,
+    bgColor: "white",
+  },
+];
+
+const salad = [
+  {
+    id: 9,
+    name: "BURGERsaladCheese Burger Cheese",
+    imageUrl: "src/assets/images/Cheese Burger.png",
+    description:
+      "Our #1 bestseller of all time, juicy beef patty with melted cheddar.",
+    price: 8.99,
+    orders: 1200,
+    rank: 1,
+    bgColor: "white",
+  },
+  {
+    id: 10,
+    name: "SALAD Fries",
+    imageUrl: "src/assets/images/French Fries.png",
+    description: "Golden, crispy perfection, epicly seasoned.",
+    price: 3.99,
+    orders: 980,
+    rank: 2,
+    bgColor: "white",
+  },
+  {
+    id: 11,
+    name: "salasddslad Fries",
+    imageUrl: "src/assets/images/French Fries.png",
+    description: "Golden, crispy perfection, epicly seasoned.",
+    price: 3.99,
+    orders: 980,
+    rank: 2,
+    bgColor: "white",
+  },
+];
+
+const drinks = [
+  {
+    id: 43,
+    name: "cola",
+    imageUrl: "src/assets/images/Cheese Burger.png",
+    description:
+      "Our #1 bestseller of all time, juicy beef patty with melted cheddar.",
+    price: 8.99,
+    orders: 1200,
+    rank: 1,
+    bgColor: "white",
+  },
+  {
+    id: 56,
+    name: "vesi",
+    imageUrl: "src/assets/images/French Fries.png",
+    description: "Golden, crispy perfection, epicly seasoned.",
+    price: 3.99,
+    orders: 980,
+    rank: 2,
+    bgColor: "white",
+  },
+];
+
+export { allProducts, pizzas, burgers, kebab, salad, drinks };

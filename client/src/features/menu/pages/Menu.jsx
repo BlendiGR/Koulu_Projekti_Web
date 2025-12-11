@@ -2,8 +2,14 @@ import { useLang } from "/src/hooks/useLang";
 import { useState } from "react";
 import ProductCard from "/src/components/common/ui/ProductCard.jsx";
 import ChooseTypeButton from "../components/ChooseTypeButton";
-import { allProducts } from "/src/config/allProducts.js";
-import { mostBuyedProducts } from "/src/config/mostBuyedSection.js";
+import {
+  allProducts,
+  pizzas,
+  burgers,
+  kebab,
+  salad,
+  drinks,
+} from "/src/config/allProducts.js";
 
 const Menu = () => {
   const { t } = useLang();
@@ -33,18 +39,8 @@ const Menu = () => {
           ))}
         </div>
 
-        <div className="flex md:flex-row flex-col justify-center items-center gap-10 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mt-10 justify-items-center">
           {allProducts.map((item) => (
-            <ProductCard key={item.id} item={item} />
-          ))}
-        </div>
-        <div className="flex md:flex-row flex-col justify-center items-center gap-10 mt-10">
-          {allProducts.map((item) => (
-            <ProductCard key={item.id} item={item} />
-          ))}
-        </div>
-        <div className="flex md:flex-row flex-col justify-center items-center gap-10 mt-10">
-          {mostBuyedProducts.map((item) => (
             <ProductCard key={item.id} item={item} />
           ))}
         </div>
