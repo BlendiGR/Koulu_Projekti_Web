@@ -61,6 +61,8 @@ const CartDrawer = ({ isOpen, onClose }) => {
           </h2>
           <button
             onClick={onClose}
+            aria-label="Close cart"
+            title="Close cart"
             className="p-2 text-black-200 hover:bg-gray-100 rounded-lg transition-colors"
           >
             <X size={28} />

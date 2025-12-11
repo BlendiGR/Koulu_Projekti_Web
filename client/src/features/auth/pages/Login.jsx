@@ -11,13 +11,15 @@ const Login = () => {
 
   return (
     <div className="flex flex-col md:flex-row">
+      <div className="absolute inset-0 bg-black/60 rounded-b-3xl shadow-2xl md:hidden z-1"></div>
+
       <div
-        className="flex flex-col items-center md:items-end justify-center py-3 px-4 md:pr-12 w-full md:w-1/2 bg-cover bg-center mobile-bg-only" // mobile-bg-only custom class to display background image only on mobile 
+        className="flex flex-col items-center md:items-end justify-center py-3 px-4 md:pr-12 w-full md:w-1/2 bg-cover bg-center mobile-bg-only md:bg-black/0" // mobile-bg-only custom class to display background image only on mobile 
         style={{
           backgroundImage: `url(${heroBackground})`,
         }}
       >
-        <div className="w-full min-h-screen max-w-md p-6 mb-10">
+        <div className="w-full min-h-screen max-w-md p-6 mb-10 z-999">
           <div className="text-center mb-10">
             <h1 className="text-white md:text-black text-5xl mt-5 font-extrabold">
               Welcome to <span className="text-red-600">Fooder</span>

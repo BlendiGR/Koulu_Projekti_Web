@@ -53,6 +53,7 @@ const ProductCard = ({ item = {}, bgColor = "white" }) => {
 
         <img
           src={imageUrl}
+          alt={`image of ${name}`}
           className="max-w-[120px] sm:w-[220px] md:w-[260px] lg:w-[300px] object-contain"
         />
 
