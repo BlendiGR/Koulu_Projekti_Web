@@ -33,12 +33,12 @@ const Reviews = () => {
         {name: "isActive", label: t("admin.reviews.active"), type: "checkbox"},
     ];
 
-    const createDefaults = {
-        rating: 0,
-        reviewer: "",
-        review: "",
-        isActive: false,
-    };
+    // const createDefaults = {
+    //     rating: 0,
+    //     reviewer: "",
+    //     review: "",
+    //     isActive: false,
+    // };
 
     return (
         <RecordContainer
@@ -47,21 +47,21 @@ const Reviews = () => {
             createItem={(values, token) => createReview(values, token)}
             updateItem={(id, values, token) => updateReview(id, values, token)}
             deleteItem={(id, token) => deleteReview(id, token)}
-            allowCreate={true}
-            createSchema={reviewSchema}
-            createDefaultValues={createDefaults}
-            renderCreate={({ register, handleCreate, errors, submitting }) => (
-                <div className="mb-4">
-                    <h3 className="font-semibold mb-2">{t("admin.reviews.addReview")}</h3>
-                    <form onSubmit={handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <SelectField name="rating" register={register} options={ratingOptions} error={errors.rating} label={t("admin.reviews.rating")} />
-                        <InputField name="reviewer" register={register} error={errors.reviewer} label={t("admin.reviews.username")} />
-                        <TextArea name="review" register={register} error={errors.review} label={t("admin.reviews.review")} placeholder={t("admin.reviews.reviewPlaceholder")} />
-                        <Checkbox name="isActive" register={register} label={t("admin.reviews.active")} />
-                        <Submit disabled={submitting} text={submitting ? t("admin.common.creating") : t("admin.common.create")} />
-                    </form>
-                </div>
-            )}
+            allowCreate={false} // disabled for now
+            // createSchema={null}
+            //createDefaultValues={createDefaults}
+            // renderCreate={({ register, handleCreate, errors, submitting }) => (
+            //     <div className="mb-4">
+            //         <h3 className="font-semibold mb-2">{t("admin.reviews.addReview")}</h3>
+            //         <form onSubmit={handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            //             <SelectField name="rating" register={register} options={ratingOptions} error={errors.rating} label={t("admin.reviews.rating")} />
+            //             <InputField name="reviewer" register={register} error={errors.reviewer} label={t("admin.reviews.username")} />
+            //             <TextArea name="review" register={register} error={errors.review} label={t("admin.reviews.review")} placeholder={t("admin.reviews.reviewPlaceholder")} />
+            //             <Checkbox name="isActive" register={register} label={t("admin.reviews.active")} />
+            //             <Submit disabled={submitting} text={submitting ? t("admin.common.creating") : t("admin.common.create")} />
+            //         </form>
+            //     </div>
+            // )}
             renderList={({ items, loading, onUpdate, onDelete, fetchPage, pageSize, setPage }) => (
                 <>
                     <SortBar
