@@ -7,11 +7,10 @@ export const getNavLinks = (user, t) => {
     ...(user
       ? [
           { label: t("nav.profile"), to: "/profile" },
-          { label: t("nav.orders"), to: "/orders" },
         ]
       : []),
-      ...(user && user.role === "ADMIN" ? [
-        { label: t("nav.admin"), to: "/admin" },
-      ] : []),
+    ...(user && user.role === "ADMIN" ? [
+      { label: t("nav.admin"), to: "/admin" },
+    ] : []),
   ];
 };

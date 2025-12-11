@@ -6,7 +6,7 @@ const main = async () => {
   console.log("Seeding...");
 
   // 1. Create the initial admin user
-  const password = await bcrypt.hash(process.env.ADMIN_PW, 10);
+  const password = await bcrypt.hash(process.env.ADMIN_PW || "admin123", 10);
   const admin = await prisma.user.upsert({
     where: { email: "admin@fooder.fi" },
     update: {},
