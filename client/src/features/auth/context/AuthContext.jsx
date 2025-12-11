@@ -64,6 +64,7 @@ const AuthProvider = ({ children }) => {
 
     if (!meRes.success) {
       localStorage.removeItem("token");
+      navigate("/login?redirect=" + location.pathname);
       return;
     }
     setUser(meRes.data);

@@ -13,7 +13,7 @@ const ReviewForm = ({ setIsSuccess }) => {
     const { t } = useLang();
     const { user } = useAuth();
     const [rating, setRating] = useState(5);
-    const { withLoading, isLoading, error, setError } = useLoading();
+    const { withLoading, loading, setLoadingError } = useLoading();
     const { createReview } = useReview();
 
     const {
@@ -25,7 +25,7 @@ const ReviewForm = ({ setIsSuccess }) => {
     } = useForm({
         resolver: zodResolver(reviewSchema(t)),
         defaultValues: {
-            username: user?.username || "",
+            reviewer: user?.username || "",
             rating: 5,
             review: "",
         },
@@ -37,11 +37,11 @@ const ReviewForm = ({ setIsSuccess }) => {
     };
 
     const onSubmit = async (data) => {
-        const { username, ...rest } = data;
+        const token = localStorage.getItem("token");
         withLoading(async () => {
-            const res = await createReview({ ...rest, reviewer: username, userId: user?.userId });
+            const res = await createReview(user?.userId, data, token);
             if (!res.success) {
-                setError(res.error);
+                setLoadingError(res.error);
                 return;
             }
             setIsSuccess(true);
@@ -53,15 +53,15 @@ const ReviewForm = ({ setIsSuccess }) => {
         <div className="mx-auto p-6">
             <div className="bg-white rounded-lg shadow-lg p-8">
                 <h2 className="text-3xl font-bold text-gray-800 mb-2">
-                    Share Your Experience
+                    {t("review.form.title")}
                 </h2>
                 <p className="text-gray-600 mb-8">
-                    We'd love to hear about your experience with us!
+                    {t("review.form.subtitle")}
                 </p>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-3">
-                            How would you rate your experience?
+                            {t("review.form.ratingLabel")}
                         </label>
                         <ReviewStars value={rating} onChange={handleRatingChange} size={48} />
                         {errors.rating && (
@@ -72,21 +72,21 @@ const ReviewForm = ({ setIsSuccess }) => {
                     </div>
                     <div>
                         <label
-                            htmlFor="username"
+                            htmlFor="reviewer"
                             className="block text-sm font-semibold text-gray-700 mb-2"
                         >
-                            Your Name
+                            {t("review.form.nameLabel")}
                         </label>
                         <input
                             type="text"
-                            id="username"
-                            {...register("username")}
+                            id="reviewer"
+                            {...register("reviewer")}
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-gray-400 focus:outline-none transition-all duration-200"
-                            placeholder="Enter your name"
+                            placeholder={t("review.form.namePlaceholder")}
                         />
-                        {errors.username && (
+                        {errors.reviewer && (
                             <p className="mt-2 text-sm text-red-600">
-                                {errors.username.message}
+                                {errors.reviewer.message}
                             </p>
                         )}
                     </div>
@@ -95,14 +95,14 @@ const ReviewForm = ({ setIsSuccess }) => {
                             htmlFor="review"
                             className="block text-sm font-semibold text-gray-700 mb-2"
                         >
-                            Your Review
+                            {t("review.form.reviewLabel")}
                         </label>
                         <textarea
                             id="review"
                             {...register("review")}
                             rows={6}
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-gray-400 focus:outline-none transition-all duration-200 resize-none"
-                            placeholder="Tell us about your experience..."
+                            placeholder={t("review.form.reviewPlaceholder")}
                         />
                         {errors.review && (
                             <p className="mt-2 text-sm text-red-600">
@@ -113,10 +113,10 @@ const ReviewForm = ({ setIsSuccess }) => {
                     <div className="pt-4">
                         <RedButton
                             type="submit"
-                            disabled={isLoading}
+                            disabled={loading}
                             className="w-full py-4 text-lg font-semibold"
                         >
-                            {isLoading ? "Submitting..." : "Submit Review"}
+                            {loading ? t("review.form.submitting") : t("review.form.submitButton")}
                         </RedButton>
                     </div>
                 </form>

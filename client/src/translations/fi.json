@@ -270,6 +270,17 @@
       "required": "Syötä nimesi",
       "max": "Nimi saa olla enintään 100 merkkiä"
     },
+    "form": {
+      "title": "Jaa Kokemuksesi",
+      "subtitle": "Haluaisimme kuulla kokemuksestasi!",
+      "ratingLabel": "Miten arvioisit kokemuksesi?",
+      "nameLabel": "Nimesi",
+      "namePlaceholder": "Syötä nimesi",
+      "reviewLabel": "Arviosi",
+      "reviewPlaceholder": "Kerro kokemuksestasi...",
+      "submitButton": "Lähetä arvostelu",
+      "submitting": "Lähetetään..."
+    },
     "thankYou": {
       "title": "Kiitos arvostelustasi!",
       "message": "Arvostamme suuresti, että käytit aikaa kokemuksesi jakamiseen kanssamme.",

@@ -1,17 +1,42 @@
 import { Award, Heart, Mail, MapPin, Phone, Users } from "lucide-react";
 import { useLang } from "/src/hooks/useLang";
+import { useState, useEffect } from "react";
 
 import FeatureCard from "/src/components/common/ui/FeatureCard.jsx";
 import HeroSection from "/src/pages/HeroSection.jsx";
-import InfoTile from "/src/components/common/ui/InfoTile.jsx";
 import heroBackground from "/src/assets/images/Hero-Background.png";
 import HorizontalReviewSlider from "/src/components/common/ui/HorizontalReviewSlider.jsx";
-import { reviews } from "/src/config/reviews.js";
 import ProductCard from "/src/components/common/ui/ProductCard.jsx";
 import { mostBuyedProducts } from "/src/config/mostBuyedSection.js";
+import { useReview } from "/src/hooks/api";
+import { useLoading } from "/src/hooks/useLoading";
+import { formatDate } from "/src/utils/formatters";
+
 
 const Home = () => {
   const { t } = useLang();
+  const { getReviews } = useReview();
+  const { loading, withLoading } = useLoading();
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      await withLoading(async () => {
+        const res = await getReviews({skip: 0, take: 10, isActive: true});
+        if (res.success && res.data) {
+          const transformedReviews = res.data.data.map(review => ({
+            text: review.review,
+            author: review.reviewer || "Anonymous",
+            timeAgo: formatDate(review.createdAt),
+            rating: review.rating
+          }));
+          setReviews(transformedReviews);
+        }
+      });
+    };
+    
+    fetchReviews();
+  }, []);
 
   const contactCards = [
     {
@@ -114,7 +139,13 @@ const Home = () => {
         </p>
         <p className="text-center font-medium">{t("home.reviews.subtitle")}</p>
         <div className="mt-10">
-          <HorizontalReviewSlider reviews={reviews} />
+          {loading ? (
+            <p className="text-center text-gray-500">Loading reviews...</p>
+          ) : reviews.length > 0 ? (
+            <HorizontalReviewSlider reviews={reviews} />
+          ) : (
+            <p className="text-center text-gray-500">No reviews yet. Be the first to leave one!</p>
+          )}
         </div>
       </section>
     </div>

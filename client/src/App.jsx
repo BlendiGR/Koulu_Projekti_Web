@@ -33,7 +33,14 @@ const App = () => {
                 <Route path="menu" element={<Menu />} />
                 <Route path="visit" element={<Visit />} />
                 <Route path="login" element={<Login />} />
-                <Route path="review" element={<Review />} />
+                <Route 
+                  path="review" 
+                  element={
+                    <ProtectedRoute>
+                      <Review />
+                    </ProtectedRoute>
+                  } 
+                />
                 {/*  Suojatut */}
                 <Route
                   path="checkout"

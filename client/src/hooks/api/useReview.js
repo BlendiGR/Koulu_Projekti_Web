@@ -20,7 +20,7 @@ export const useReview = () => {
         const res = await fetchData(`${API}/reviews`, {
             method: "POST",
             headers,
-            body: JSON.stringify(reviewData),
+            body: JSON.stringify({userId, ...reviewData}),
         });
 
         if (!res.success) return res;

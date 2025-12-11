@@ -12,18 +12,16 @@ const Review = () => {
     const [isSuccess, setIsSuccess] = useState(false);
 
     useEffect(() => {
-        if (!user) {
-            navigate("/login?redirect=/review");
-            return;
-        }
         const checkUserHasReviewed = async () => {
+            if (!user) return; 
+            
             const hasReviewed = await getUserHasReviewed(user.userId);
             if (hasReviewed.data.reviewed || !hasReviewed.success) {
                 navigate("/");
             }
         };
         checkUserHasReviewed();
-    }, []);
+    }, [user]);
 
     return (
         <div className="flex justify-center items-center min-h-screen"> 
