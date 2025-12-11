@@ -332,7 +332,10 @@
     },
     "success": "Profile updated successfully."
   },
-
+  "menu": {
+    "title": "Our menu",
+    "subheading": "Delicious pizzas, burgers, kebab, and more"
+  },
   "admin": {
     "heading": "Dashboard",
     "common": {

@@ -330,7 +330,10 @@
     },
     "success": "Profiili päivitetty onnistuneesti."
   },
-
+  "menu": {
+    "title": "Meidän ruokalista",
+    "subheading": "Herkulliset pizzat, burgerit, kebabit sun muut!"
+  },
   "admin": {
     "heading": "Hallintapaneeli",
     "common": {
