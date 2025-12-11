@@ -1,4 +1,4 @@
-const allProducts = [
+const all = [
   {
     id: 1,
     name: "Pizza 1",
@@ -286,4 +286,4 @@ const drinks = [
   },
 ];
 
-export { allProducts, pizzas, burgers, kebab, salad, drinks };
+export { all, pizzas, burgers, kebab, salad, drinks };
