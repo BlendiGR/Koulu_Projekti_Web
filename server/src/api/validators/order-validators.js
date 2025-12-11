@@ -3,7 +3,7 @@ import AppError from "../../utils/AppError.js";
 
 import {orderFields, ORDER_STATUSES} from "../models/order-model.js";
 
-const allowedOrderFields = [...orderFields, "orderer", "createdAt", "completedAt", "cost"];
+const allowedQueryFields = [...orderFields, "orderer", "createdAt", "completedAt", "cost", "skip", "take", "sortBy", "sortOrder"];
 
 /**
  * Validation chain for orderId URL parameter.
@@ -55,12 +55,12 @@ export const validateUpdateOrder = [
     body("orderer").optional().isString().trim().withMessage("orderer must be a string"),
     body("completedAt").optional().isISO8601().withMessage("completedAt must be a valid ISO8601 date"),
     // enforce completedAt when status becomes DELIVERED
-    body().custom((_, { req }) => {
-      if (req.body.status === "DELIVERED" && !req.body.completedAt) {
-        throw new AppError("completedAt is required when status is DELIVERED", 400, "MISSING_COMPLETED_AT", "completedAt must be provided when status is DELIVERED");
-      }
-      return true;
-    }),
+    // body().custom((_, { req }) => {
+    //   if (req.body.status === "DELIVERED" && !req.body.completedAt) {
+    //     throw new AppError("completedAt is required when status is DELIVERED", 400, "MISSING_COMPLETED_AT", "completedAt must be provided when status is DELIVERED");
+    //   }
+    //   return true;
+    // }),
 ];
 
 /**
@@ -69,15 +69,25 @@ export const validateUpdateOrder = [
  */
 export const validateOrderQuery = [
     query().custom((_, { req }) => {
-        const allowed = [...allowedOrderFields, "skip", "take"];
-        const invalid = Object.keys(req.query).filter((k) => !allowed.includes(k));
+        const invalid = Object.keys(req.query).filter((k) => !allowedQueryFields.includes(k));
         if (invalid.length > 0) {
-            throw new AppError("Invalid order query parameters", 400, "INVALID_ORDER_PARAMETERS", `Invalid order query params: ${invalid.join(", ")}`);
+            throw new AppError(
+                "Invalid order query parameters",
+                400,
+                "INVALID_ORDER_PARAMETERS",
+                `Invalid order query params: ${invalid.join(", ")}`
+            );
         }
         return true;
     }),
     query("skip").optional().isInt({ min: 0 }).withMessage("skip must be a non-negative integer").toInt(),
     query("take").optional().isInt({ min: 1, max: 100 }).withMessage("take must be an integer between 1 and 100").toInt(),
+    query("sortBy").optional().isString().isIn(orderFields).withMessage(`sortBy must be one of: ${orderFields.join(", ")}`),
+    query("sortOrder")
+        .optional()
+        .customSanitizer((v) => (v == null ? v : String(v).toLowerCase()))
+        .isIn(["asc", "desc"]).withMessage("sortOrder must be either 'asc' or 'desc'"),
+
     query("orderId").optional().isInt({ min: 1 }).withMessage("orderId must be a positive integer").toInt(),
     query("userId").optional().isInt({ min: 1 }).withMessage("userId must be a positive integer").toInt(),
     query("status").optional().isString().isIn(ORDER_STATUSES).withMessage(`status must be one of: ${ORDER_STATUSES.join(", ")}`),

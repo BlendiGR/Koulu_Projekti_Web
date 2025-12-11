@@ -1,6 +1,7 @@
 import {asyncHandler} from "../../utils/async-handler.js";
 import AppError from "../../utils/AppError.js";
 import * as Order from "../models/order-model.js";
+import {normalizeSort} from "../../utils/normalize-sort.js";
 
 /**
  * Get all orders with optional filtering and pagination.
@@ -9,11 +10,14 @@ import * as Order from "../models/order-model.js";
  * @returns {Promise<void>}
  */
 export const getAllOrders = asyncHandler(async (req, res) => {
-    const {skip = 0, take = 100, ...filters} = req.query;
+    const {skip = 0, take = 100, sortBy, sortOrder, ...filters} = req.query;
 
-    const orders = await Order.getOrders(filters, skip, take);
+    const normalizedSort = normalizeSort(sortOrder, sortBy) || { sortOrder: undefined, sortField: undefined };
 
-    res.sendSuccess(orders);
+    const orders = await Order.getOrders(filters, skip, take, normalizedSort.sortField, normalizedSort.sortOrder);
+    const count = await Order.getOrderCount(filters);
+
+    res.sendSuccess({data: orders, total: count});
 });
 
 /**
@@ -23,11 +27,14 @@ export const getAllOrders = asyncHandler(async (req, res) => {
  * @returns {Promise<void>}
  */
 export const getAllOrdersWithProducts = asyncHandler(async (req, res) => {
-    const {skip = 0, take = 100, ...filters} = req.query;
+    const {skip = 0, take = 100, sortBy, sortOrder, ...filters} = req.query;
 
-    const orders = await Order.getOrdersWithProducts(filters, skip, take);
+    const normalizedSort = normalizeSort(sortOrder, sortBy) || { sortOrder: undefined, sortField: undefined };
 
-    res.sendSuccess(orders);
+    const orders = await Order.getOrdersWithProducts(filters, skip, take, normalizedSort.sortField, normalizedSort.sortOrder);
+    const count = await Order.getOrderCount(filters);
+
+    res.sendSuccess({data: orders, total: count});
 });
 
 /**
