@@ -13,7 +13,7 @@ const Coupons = () => {
 
     const fields = [
         { name: "code", label: t("admin.coupons.code"), type: "input" },
-        { name: "discount", label: t("admin.coupons.discount"), type: "input" },
+        { name: "discount", label: t("admin.coupons.discount"), type: "number" },
         { name: "isActive", label: t("admin.coupons.active"), type: "checkbox" },
     ];
 
