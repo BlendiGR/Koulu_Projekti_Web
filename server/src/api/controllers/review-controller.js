@@ -47,34 +47,6 @@ export const getReviewById = asyncHandler(async (req, res) => {
 });
 
 /**
- * Get a review along with its associated user.
- * @param req - Express request object
- * @param res - Express response object
- * @returns {Promise<void>}
- */
-export const getReviewWithUser = asyncHandler(async (req, res) => {
-    const reviewId = Number(req.params.reviewId);
-    const review = await Review.getReviewWithUser(reviewId);
-
-    res.sendSuccess(review);
-});
-
-/**
- * Get all reviews by a specific user with pagination.
- * @param req - Express request object
- * @param res - Express response object
- * @returns {Promise<void>}
- */
-export const getReviewsByUser = asyncHandler(async (req, res) => {
-    const userId = Number(req.params.userId);
-    const {skip = 0, take = 100} = req.query;
-
-    const reviews = await Review.getReviewsByUser(userId, skip, take);
-
-    res.sendSuccess(reviews);
-});
-
-/**
  * Create a new review.
  * @param req - Express request object
  * @param res - Express response object

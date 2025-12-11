@@ -57,6 +57,7 @@ export const getReviewById = async (reviewId) => {
 /**
  * Create a new review.
  * @param {Object} reviewData - Data for the new review.
+ * @param {number} userId - ID of the user creating the review.
  * @returns {Promise<*>}
  */
 export const createReview = async (reviewData, userId) => {

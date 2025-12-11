@@ -10,6 +10,8 @@ export const useProduct = () => {
 
     if (!res.success) return res;
 
+    // console.log({ success: true, res.data });
+
     return { success: true, data: res.data };
   };
 
