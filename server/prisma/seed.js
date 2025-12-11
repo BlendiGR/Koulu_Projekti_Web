@@ -141,6 +141,104 @@ const main = async () => {
     }
   });
 
+  // 7. Seed reviews
+  await prisma.review.createMany({
+    data: [
+      {
+        rating: 5,
+        review: "Best burger I have had in a long time. Juicy, fresh, and perfectly seasoned.",
+        isActive: true,
+        reviewer: "Laura Nieminen",
+      },
+      {
+        rating: 4,
+        review: "Fries were crispy and hot, could have used a bit more salt but still great.",
+        isActive: true,
+        reviewer: "Antti Korhonen",
+      },
+      {
+        rating: 3,
+        review: "Food was okay, delivery took a bit longer than expected.",
+        isActive: true,
+        reviewer: "Sanni Virtanen",
+      },
+      {
+        rating: 5,
+        review: "Loved the nuggets! Crunchy outside and tender inside. Will order again.",
+        isActive: true,
+        reviewer: "Jukka Mäkinen",
+      },
+      {
+        rating: 4,
+        review: "Nice portion size for the price. Burger bun was really soft and fresh.",
+        isActive: true,
+        reviewer: "Elina Salmi",
+      },
+      {
+        rating: 2,
+        review: "Fries were a bit soggy this time, maybe an off day in the kitchen.",
+        isActive: true,
+        reviewer: "Matti Lehtonen",
+      },
+      {
+        rating: 5,
+        review: "Great taste and fast delivery. Everything arrived still warm.",
+        isActive: true,
+        reviewer: "Riikka Laine",
+      },
+      {
+        rating: 4,
+        review: "Good variety of options and the nuggets were especially tasty.",
+        isActive: true,
+        reviewer: "Oskari Ranta",
+      },
+      {
+        rating: 3,
+        review: "Burger was decent, but I would have liked more sauce.",
+        isActive: true,
+        reviewer: "Hanna Koskinen",
+      },
+      {
+        rating: 5,
+        review: "Absolutely delicious! Fries and burger combo was perfect.",
+        isActive: true,
+        reviewer: "Ville Saarinen",
+      },
+      {
+        rating: 4,
+        review: "Tasty food and polite courier. Packaging kept everything neat.",
+        isActive: true,
+        reviewer: "Tiina Aalto",
+      },
+      {
+        rating: 1,
+        review: "Order arrived cold and late. Hoping this improves next time.",
+        isActive: true,
+        reviewer: "Petri Hämäläinen",
+      },
+      {
+        rating: 5,
+        review: "Super friendly service and the food quality is consistently high.",
+        isActive: true,
+        reviewer: "Anni Peltola",
+      },
+      {
+        rating: 4,
+        review: "Nice seasoning on the fries, not too salty, just right.",
+        isActive: true,
+        reviewer: "Sampo Heikkinen",
+      },
+      {
+        rating: 5,
+        review: "My go-to place for a quick and tasty burger meal. Highly recommended.",
+        isActive: true,
+        reviewer: "Katja Jokinen",
+      },
+    ],
+    skipDuplicates: true,
+  });
+
+
   console.log("Seeding complete.");
 };
 
