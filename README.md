@@ -1,22 +1,53 @@
 # Fooder - Ravintolasovellus
  
-Tämä on moderni ravintolasovellus, joka tarjoaa saumattoman tilauskokemuksen asiakkaille ja tehokkaat hallintatyökalut ravintoloitsijoille. 
-Projektissa on käytetty MariaDB, Express, Prisma ORM, React ja Node.js.
 
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 
+![Hero Section](http://placeholder-image-url-here "Hero Section Screenshot")
+
+Tämä on moderni ravintolasovellus, joka tarjoaa saumattoman tilauskokemuksen asiakkaille ja tehokkaat hallintatyökalut ravintoloitsijoille.
 
 ## 1. Sovelluksen Idea ja Kohderyhmä
 
 **Idea:**
-Fooder tuo ravintolan palvelut tarjoamalla visuaalisesti miellyttävän ja helppokäyttöisen alustan ruoan tilaamiseen ja asiakaskokemuksen hallintaan. Sovellus keskittyy korkealaatuiseen käyttäjäkokemukseen (UX) ja responsiivisuuteen.
+Fooder tuo ravintolan palvelut digitaaliseen aikaan tarjoamalla visuaalisesti miellyttävän ja helppokäyttöisen alustan ruoan tilaamiseen, pöytävarauksiin ja asiakaskokemuksen hallintaan. Sovellus keskittyy korkealaatuiseen käyttäjäkokemukseen (UX) ja responsiivisuuteen.
 
 **Kohderyhmä:**
-*   **Asiakkaat:** Henkilöt, jotka haluavat tilata ravintolaruokaa helposti kotiin, sekä seurata tilauksensa etenemistä.
+*   **Asiakkaat:** Henkilöt, jotka haluavat tilata laadukasta ravintolaruokaa helposti kotiin tai noutona, sekä seurata tilauksensa etenemistä reaaliajassa.
 *   **Ravintoloitsijat:** Yritykset, jotka tarvitsevat modernin järjestelmän tilausten, tuotteiden, asiakkaiden ja markkinoinnin (kupongit, ilmoitukset) hallintaan.
 
 ---
 
-## 2. Sovelluksen Toiminnallisuudet
+## 2. Teknologiat (Tech Stack)
+
+Projekti hyödyntää modernia Javascript-ekosysteemiä sekä asiakas- että palvelinpuolella.
+
+**Backend (Server):**
+*   **Runtime:** Node.js
+*   **Framework:** Express.js (v5)
+*   **Tietokanta:** MariaDB
+*   **ORM:** Prisma
+*   **Autentikaatio:** JWT & BCrypt
+*   **Maksut:** Stripe API
+*   **Sähköposti:** Nodemailer
+
+**Frontend (Client):**
+*   **Framework:** React (v19)
+*   **Build Tool:** Vite
+*   **Tyylit:** Tailwind CSS (v4)
+*   **Reititys:** React Router Dom (v7)
+*   **Ilmoitukset:** Sonner
+*   **Validointi:** Zod & React Hook Form
+
+---
+
+## 3. Sovelluksen Toiminnallisuudet
 
 Sovellus on jaettu kahteen pääosaan: Asiakaspuoleen ja Hallintapaneeliin (Admin).
 
@@ -28,9 +59,9 @@ Sovellus on jaettu kahteen pääosaan: Asiakaspuoleen ja Hallintapaneeliin (Admi
     *   Ajankohtaiset ilmoitukset (Announcements) sivun ylälaidassa.
 
 *   **Menu & Tuotteet:**
-    *   Kattava ruokalista kategorioittain (esim. Ruoat, Juomat).
+    *   Kattava ruokalista kategorioittain (esim. Burgerit, Pizzat, Juomat).
     *   Tuotekortit kuvilla, hinnoilla ja "Lisää ostoskoriin" -toiminnolla.
-    *   **Tuotemodaali:** Klikkaamalla tuotetta aukeaa tarkempi näkymä, jossa on kuvaus, ainesosat ja ruokavaliot.
+    *   **Tuotemodaali:** Klikkaamalla tuotetta aukeaa tarkempi näkymä, jossa on kuvaus, ainesosat ja allergiatiedot.
 
 *   **Ostoskori (Cart):**
     *   Sivusta aukeava ostoskori, joka on aina helposti saatavilla.
@@ -57,6 +88,7 @@ Sovellus on jaettu kahteen pääosaan: Asiakaspuoleen ja Hallintapaneeliin (Admi
 
 *   **Autentikaatio:**
     *   Rekisteröityminen ja kirjautuminen (JWT-pohjainen).
+    *   Sähköpostivahvistus rekisteröitymisen yhteydessä.
     *   Suojatut reitit (vain kirjautuneille).
 
 ### Hallintapaneeli (Admin)
@@ -66,12 +98,12 @@ Vain Admin-oikeuksilla varustetut käyttäjät pääsevät `/admin` -näkymään
 *   **Dashboard (Yleisnäkymä):** Yhteenveto tilastoista.
 *   **Tilauksien Hallinta (Orders):**
     *   Listaus kaikista tilauksista.
-    *   **Tilan päivitys:** Admin voi muuttaa tilauksen tilaa (esim. "PREPARING" -> "DELIVERING"). Tämä päivittyy asiakkaan seurantanäkymään.
+    *   **Tilan päivitys:** Admin voi muuttaa tilauksen tilaa (esim. "Pending" -> "Cooking"). Tämä päivittyy reaaliajassa asiakkaan seurantanäkymään.
 *   **Tuotteiden Hallinta (Products):**
-    *   Uusien tuotteiden lisääminen (kuvat, hinnat).
+    *   Uusien tuotteiden lisääminen (kuvat, hinnat, kuvaukset).
     *   Olemassa olevien tuotteiden muokkaus ja poisto.
 *   **Käyttäjien Hallinta (Users):**
-    *   Käyttäjälistaus.
+    *   Käyttäjälistaus ja roolien hallinta (esim. Admin-oikeuksien antaminen).
 *   **Kuponkien Hallinta (Coupons):**
     *   Luo uusia alennuskoodeja (esim. "SALE20", -20%).
     *   Määritä voimassaoloajat ja alennusprosentit.
@@ -79,16 +111,13 @@ Vain Admin-oikeuksilla varustetut käyttäjät pääsevät `/admin` -näkymään
     *   Luo ja hallitse yläpalkin ilmoituksia (esim. "Ilmainen kuljetus tänään!").
 
 ### Server & Tekninen Tausta
-
-*   **Sähköpostipalvelu:** Automaattiset sähköpostit (vahvistus, kuitti) käyttäen Nodemailer-kirjastoa ja HTML-pohjia.
-*   **Tietokanta:** MariaDB tietojen (käyttäjät, tuotteet, tilaukset) tallennukseen.
-*   **API:** RESTful API `express`-palvelimella.
+**Katso kohta 2. Teknologiat**
 
 ---
 
-## 3. Demo
+## 4. Demo
 
-Sovelluksen testaamiseksi omalla koneellasi:
+Sovelluksen testaamiseksi omalla koneellasi (koska live-demoa ei ole tässä linkitetty), toimi seuraavasti:
 
 **Vaatimukset:**
 *   Node.js asennettuna.
@@ -98,7 +127,7 @@ Sovelluksen testaamiseksi omalla koneellasi:
 **Käynnistys:**
 1.  Avaa terminaali ja mene palvelimen kansioon: `cd server`
 2.  Asenna riippuvuudet: `npm install`
-3.  Käynnistä palvelin: `npm run dev` (Käynnistyy määritettyyn porttiin).
+3.  Käynnistä palvelin: `npm run dev` (Käynnistyy porttiin 5000 tai määritettyyn porttiin).
 4.  Avaa toinen terminaali ja mene client-kansioon: `cd client`
 5.  Asenna riippuvuudet: `npm install`
 6.  Käynnistä sovellus: `npm run dev`
@@ -106,7 +135,7 @@ Sovelluksen testaamiseksi omalla koneellasi:
 
 ---
 
-## 4. Ohjeistus: Näin testaat sovelluksen
+## 5. Ohjeistus: Näin testaat sovelluksen
 
 Tämä polku varmistaa, että käyt läpi kaikki sovelluksen keskeiset ominaisuudet.
 
@@ -114,7 +143,7 @@ Tämä polku varmistaa, että käyt läpi kaikki sovelluksen keskeiset ominaisuu
 1.  Avaa sovellus etusivulle.
 2.  Navigoi "Menu" -sivulle ja selaa tuotteita. Klikkaa tuotetta nähdäksesi lisätiedot (modaalissa).
 3.  Yritä lisätä tuote ostoskoriin -> Sovellus ohjaa kirjautumaan.
-4.  Valitse "Sign Up" ja luo uusi käyttäjä. Käytä oikeeta sähköpostia, jotta Nodemailer saa lähetettyä sähköpostit.
+4.  Valitse "Sign Up" ja luo uusi käyttäjä. (Varmista sähköposti, jos testikonfiguraatio vaatii sen, tai käytä suoraan jos dev-tilassa).
 
 ### Vaihe 2: Tilausprosessi (Asiakas)
 1.  Kirjaudu sisään juuri luomallasi tunnuksella.
@@ -127,8 +156,8 @@ Tämä polku varmistaa, että käyt läpi kaikki sovelluksen keskeiset ominaisuu
     *   Kortin numero: `4242 4242 4242 4242`
     *   Pvm: Mikä tahansa tulevaisuuden pvm (esim. 12/28)
     *   CVC: `123`
-8.  Paina "Order" nappia ja odota.
-9.  Sinut ohjataan onnistumissivulle (`/success/:id`). Tarkista sähköpostisi, sinne pitäisi tulla tilausvahvistus.
+8.  Paina "Pay". Odota hetki ("Processing...").
+9.  Sinut ohjataan onnistumissivulle (`/success/:id`). Tarkista sähköpostisi (virtuaalinen tai oikea), sinne pitäisi tulla tilausvahvistus.
 
 ### Vaihe 3: Seuranta (Asiakas)
 1.  Onnistumissivulta klikkaa "Track Order" tai mene Profiili -> Orders -> Valitse uusin tilaus.
@@ -138,17 +167,14 @@ Tämä polku varmistaa, että käyt läpi kaikki sovelluksen keskeiset ominaisuu
 ### Vaihe 4: Hallinta (Admin) - Huom: Vaatii Admin-tunnukset
 *Jos sinulla ei ole admin-tunnusta, muokkaa tietokannasta user-objektin rooliksi "admin" tai luo se seed-scriptillä.*
 
-1.  Kirjaudu ulos ja sisään Admin-tunnuksilla.
-2.  Paina "Admin" linkistä navigoinnissa.
+1.  Avaa uusi incognito-ikkuna tai kirjaudu ulos ja sisään Admin-tunnuksilla.
+2.  Mene osoitteeseen `/admin`.
 3.  **Dashbord:** Katso tilastot.
 4.  **Orders-välilehti:** Etsi äsken tekemäsi tilaus listasta.
 5.  Muuta tilauksen status: Vaihda se esim. "Cooking" tai "On the way".
-6.  Palaa Asiakas-ikkunaan (Vaihe 3).
-7.  Etsi aikasemmin tehty tilaus, ja muuta sen statusta "DELIVERED"
-8.  Katso sähköpostiasi, sinne pitäisi tulla arvostelupyyntö.
-9.  **Arvostelut:** Linkki ohjaa arvostellu sivulle johon voit jättää arvostelun.
-
+6.  Palaa Asiakas-ikkunaan (Vaihe 3). Huomaa, että seurantasivun palkki on päivittynyt automaattisesti!
 
 ### Vaihe 5: Muut ominaisuudet
 1.  **Admin - Products:** Kokeile lisätä uusi tuote "Test Burger" kuvalla ja hinnalla. Mene Menu-sivulle ja etsi se.
 2.  **Admin - Coupons:** Luo uusi kuponki, esim. "TEST50", alennus 50%. Mene kassalle ja testaa toimiiko se.
+3.  **Arvostelut:** Mene "Reviews" sivulle (jos käytössä) ja jätä arvostelu.

@@ -57,8 +57,8 @@ const Menu = () => {
   };
 
   return (
-      <div>
-        <section className="p-8 mt-20 bg-beige text-center shadow-xl rounded-3xl">
+      <div className="min-h-[calc(100vh-15rem)]">
+        <section className="p-8 mt-20 bg-beige text-center rounded-3xl">
           <h1 className="md:text-5xl text-4xl mb-4 pt-11 font-bold">
             <span className="">{t("menu.our")} </span>
             <span className="text-red-100">{t("menu.menu")}</span>
