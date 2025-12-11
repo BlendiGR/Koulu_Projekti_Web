@@ -3,7 +3,7 @@ import { useLang } from "/src/hooks/useLang";
 import LoginForm from "/src/features/auth/components/LoginForm";
 import RegisterForm from "/src/features/auth/components/RegisterForm";
 import heroBackground from "/src/assets/images/Hero-Background.png";
-import loginImage from "/src/assets/images/login.png";
+import loginImage from "/src/assets/images/Login.png";
 
 const Login = () => {
   const { t } = useLang();
