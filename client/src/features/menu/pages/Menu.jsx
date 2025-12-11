@@ -23,7 +23,10 @@ const Menu = () => {
   return (
     <div>
       <section className="p-8 mt-20 bg-beige text-center shadow-xl rounded-3xl">
-        <h1 className="md:text-5xl text-4xl mb-4 pt-11">{t("menu.title")}</h1>
+        <h1 className="md:text-5xl text-4xl mb-4 pt-11">
+          <span className="">Our </span>
+          <span className="text-red-100">Menu</span>
+        </h1>
         <p className="text-gray-700 max-w-xl mx-auto text-lg md:text-xl">
           {t("menu.subheading")}
         </p>
