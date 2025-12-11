@@ -42,7 +42,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className={`fixed inset-0 z-999 bg-black/40 transition-opacity duration-300 overflow-y-auto ${
+      className={`fixed inset-0 z-[100] bg-black/40 transition-opacity duration-300 overflow-y-auto ${
         isOpen
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"

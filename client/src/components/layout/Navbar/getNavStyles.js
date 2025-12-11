@@ -5,7 +5,7 @@ const getNavStyles = ({ isLanding, scrolled }) => {
 
   const navNormal = "bg-beige drop-shadow-md";
 
-  const navClass = `w-full fixed top-0 left-0 z-11 transition-all duration-700 ${
+  const navClass = `w-full fixed top-0 left-0 z-50 transition-all duration-700 ${
     isLanding ? navLanding : navNormal
   }`;
 
