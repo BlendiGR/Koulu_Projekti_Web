@@ -33,6 +33,8 @@ const MobileDrawer = ({
         {/* close */}
         <button
           onClick={onClose}
+          aria-label="Close mobile drawer"
+          title="Close mobile drawer"
           className="absolute top-5 right-5 p-2 text-black-200"
         >
           <X size={28} />

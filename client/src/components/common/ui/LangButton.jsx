@@ -8,6 +8,9 @@ const LangButton = ({ color }) => {
       value={lang}
       onChange={(e) => setLang(e.target.value)}
       className={`px-3 py-2 rounded-md border border-${color}`}
+      aria-label="Language selector"
+      title="Language selector"
+      
     >
       <option className="text-black" value="fi">
         FI
