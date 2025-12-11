@@ -78,7 +78,7 @@ const Home = () => {
   ];
 
   return (
-    <div>
+    <div className="bg-beige">
       <HeroSection
         backgroundImage={heroBackground}
         headline={
@@ -93,7 +93,7 @@ const Home = () => {
         ctaTo="/menu"
       />
 
-      <section className="p-8 mt-25 bg-white text-center">
+      <section className="p-8 mt-25 bg-beige text-center">
         <h2 className="md:text-5xl text-4xl mb-4 font-bold">
           {t("home.about.titlep1")}{" "}
           <span className="text-red-100">{t("home.about.titlep2")}</span>
@@ -120,14 +120,14 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-25 mt-20 bg-beige text-center shadow-xl rounded-3xl">
+      <section className="py-25 mt-20 bg-white text-center shadow-xl rounded-3xl">
         <h3 className="md:text-5xl text-4xl mb-4 font-bold">
           {t("home.mostOrdered.titleOne")}{" "}
           <span className="text-red-100">{t("home.mostOrdered.titleTwo")}</span>
         </h3>
         <div className="flex md:flex-row flex-col justify-center items-center gap-10 mt-10">
           {mostBuyedProducts.map((item) => (
-            <ProductCard key={item.id} item={item} />
+            <ProductCard key={item.productId} item={item} bgColor="beige" />
           ))}
         </div>
       </section>

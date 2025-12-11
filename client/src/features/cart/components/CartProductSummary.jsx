@@ -4,7 +4,7 @@ import { useLang } from "/src/hooks/useLang.js";
 const CartProductSummary = ({ item, index, deleteCartItem, cartItems }) => {
   const { t } = useLang();
   return (
-    <div key={item.id}>
+    <div key={item.productId}>
       <div className="flex flex-row items-center gap-4 md:gap-6">
         <img
           src={"/" + item.imageUrl}
@@ -15,7 +15,7 @@ const CartProductSummary = ({ item, index, deleteCartItem, cartItems }) => {
           <div className="flex justify-between items-start">
             <h3 className="font-bold text-xl text-gray-800">{item.name}</h3>
             <button
-              onClick={() => deleteCartItem(item.id)}
+              onClick={() => deleteCartItem(item.productId)}
               className="text-red-400 hover:text-red-600 transition-colors p-2 cursor-pointer"
               aria-label="Remove item"
             >

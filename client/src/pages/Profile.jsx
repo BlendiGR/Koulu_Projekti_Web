@@ -44,15 +44,6 @@ export default function Profile() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  if (!user) {
-    return (
-      <main className="max-w-[960px] mx-auto pt-12 pb-24 px-4">
-        <p className="text-center text-sm text-[var(--color-gray-200)]">
-          {t("profile.loadingProfile")}
-        </p>
-      </main>
-    );
-  }
 
   const displayName = user.username || "";
   const email = user.email;
@@ -163,7 +154,7 @@ export default function Profile() {
   };
 
   return (
-    <main className="max-w-[960px] mx-auto pt-12 pb-24 px-4">
+    <div className="max-w-[960px] mx-auto pt-12 pb-24 px-4 bg-beige">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold mb-6 text-[var(--color-black-200)]">
           {t("profile.title")}
@@ -362,6 +353,6 @@ export default function Profile() {
           )}
         </section>
       </div>
-    </main>
+    </div>
   );
 }

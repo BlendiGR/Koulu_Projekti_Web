@@ -42,7 +42,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className={`fixed inset-0 z-999 bg-black/30 transition-opacity duration-300 overflow-y-auto ${
+      className={`fixed inset-0 z-999 bg-black/40 transition-opacity duration-300 overflow-y-auto ${
         isOpen
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
@@ -50,7 +50,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
       onClick={onClose}
     >
       <div
-        className={`absolute top-0 right-0 min-h-full w-full md:w-[450px] transition-transform duration-300 bg-white ${
+        className={`absolute top-0 right-0 min-h-full w-full md:w-[450px] transition-transform duration-300 bg-beige ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } flex flex-col`}
         onClick={(e) => e.stopPropagation()}
@@ -79,7 +79,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
             <div className="space-y-6">
               {cartItems.map((item, index) => (
                 <CartProductSummary
-                  key={item.id}
+                  key={item.productId}
                   item={item}
                   index={index}
                   deleteCartItem={deleteCartItem}

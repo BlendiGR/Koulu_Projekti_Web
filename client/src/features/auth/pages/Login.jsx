@@ -10,7 +10,7 @@ const Login = () => {
   const [activeTab, setActiveTab] = useState("login");
 
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row bg-beige">
       <div className="absolute inset-0 bg-black/60 rounded-b-3xl shadow-2xl md:hidden z-1"></div>
 
       <div
@@ -19,7 +19,7 @@ const Login = () => {
           backgroundImage: `url(${heroBackground})`,
         }}
       >
-        <div className="w-full min-h-screen max-w-md p-6 mb-10 z-999">
+        <div className="w-full min-h-screen max-w-md p-6 mb-10 z-500">
           <div className="text-center mb-10">
             <h1 className="text-white md:text-black text-5xl mt-5 font-extrabold">
               Welcome to <span className="text-red-600">Fooder</span>
@@ -29,7 +29,7 @@ const Login = () => {
             </p>
           </div>
 
-          <div className="bg-beige rounded-xl shadow-md p-6">
+          <div className="bg-white rounded-xl shadow-md p-6">
             <div className="flex mb-6 rounded-full bg-gray-100 p-1 border border-gray-200">
               <button
                 onClick={() => setActiveTab("login")}

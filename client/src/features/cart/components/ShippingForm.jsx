@@ -57,7 +57,7 @@ const ShippingForm = ({ onFormChange }) => {
               type="text"
               id="firstName"
               {...register("firstName")}
-              className="bg-white p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="bg-white p-2 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             />
             {errors.firstName && (
               <p className="mt-2 text-sm text-red-600">
@@ -76,7 +76,7 @@ const ShippingForm = ({ onFormChange }) => {
               type="text"
               id="lastName"
               {...register("lastName")}
-              className="bg-white p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="bg-white p-2 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             />
             {errors.lastName && (
               <p className="mt-2 text-sm text-red-600">
@@ -95,7 +95,7 @@ const ShippingForm = ({ onFormChange }) => {
               type="text"
               id="phone"
               {...register("phone")}
-              className="bg-white p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="bg-white p-2 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             />
             {errors.phone && (
               <p className="mt-2 text-sm text-red-600">
@@ -114,7 +114,7 @@ const ShippingForm = ({ onFormChange }) => {
               type="text"
               id="street"
               {...register("street")}
-              className="bg-white p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="bg-white p-2 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             />
             {errors.street && (
               <p className="mt-2 text-sm text-red-600">
@@ -133,7 +133,7 @@ const ShippingForm = ({ onFormChange }) => {
               type="text"
               id="postalCode"
               {...register("postalCode")}
-              className="bg-white p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="bg-white p-2 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             />
             {errors.postalCode && (
               <p className="mt-2 text-sm text-red-600">
@@ -152,7 +152,7 @@ const ShippingForm = ({ onFormChange }) => {
               type="text"
               id="city"
               {...register("city")}
-              className="bg-white p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="bg-white p-2 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             />
             {errors.city && (
               <p className="mt-2 text-sm text-red-600">{errors.city.message}</p>

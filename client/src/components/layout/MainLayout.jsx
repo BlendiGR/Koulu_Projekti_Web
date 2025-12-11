@@ -30,7 +30,7 @@ const MainLayout = () => {
   return (
     <div>
       <NavBar announcement={announcement} onDismiss={handleDismissAnnouncement} />
-      <main className={location.pathname === "/" ? "" : announcement ? "mt-25 md:mt-31" : "mt-17 md:mt-22"}>
+      <main className={location.pathname === "/" ? "" : announcement ? "mt-25 md:mt-31 bg-beige" : "mt-17 md:mt-22 bg-beige"}>
         <Outlet />
         <Toaster position="bottom-right" />
       </main>

@@ -36,7 +36,7 @@ const CouponChecker = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex  items-center justify-center w-full bg-beige rounded-3xl border border-brown-100 p-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex  items-center justify-center w-full bg-white rounded-3xl border border-brown-100 p-4">
                 <div className="w-full">
                     <label
                     htmlFor="coupon"
@@ -54,7 +54,7 @@ const CouponChecker = () => {
                             type="text"
                             id="coupon"
                             {...register("coupon")}
-                            className="relative bg-white p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pr-12"
+                            className="relative bg-white p-2 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pr-12"
                         />
                         <RedButton
                             type="submit"

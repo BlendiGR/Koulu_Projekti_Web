@@ -40,6 +40,7 @@ const OrderStatus = ({ status = "PREPARING" }) => {
         relative w-full max-w-4xl mx-auto mt-10 
         flex flex-col gap-10
         md:flex-row md:items-center md:justify-between
+        bg-white
       "
     >
       <div className="hidden md:block p-1 absolute top-6 left-0 w-full h-[3px] bg-gray-300 z-0" />
@@ -66,7 +67,7 @@ const OrderStatus = ({ status = "PREPARING" }) => {
             className="
               relative flex flex-col items-center text-center 
               md:w-1/3
-              bg-beige bg-opacity-80 md:bg-transparent rounded-lg p-2 md:p-0 z-10
+              bg-white bg-opacity-80 md:bg-transparent rounded-lg p-2 md:p-0 z-10
             "
           >
             <div

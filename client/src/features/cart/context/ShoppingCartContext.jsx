@@ -8,7 +8,7 @@ const readStoredCart = () => {
     if (!stored) return [];
     const parsed = JSON.parse(stored);
     return parsed
-      .filter((item) => item && typeof item.id !== "undefined")
+      .filter((item) => item && typeof item.productId !== "undefined")
       .map((item) => ({
         ...item,
         quantity: Number(item.quantity) || 1,
@@ -57,10 +57,10 @@ export const CartProvider = ({ children }) => {
   const addCartItem = (item, quantity = 1) => {
     if (!item) return;
     setCartItems((prev) => {
-      const existing = prev.find((i) => i.id === item.id);
+      const existing = prev.find((i) => i.productId === item.productId);
       if (existing) {
         return prev.map((i) =>
-          i.id === item.id
+          i.productId === item.productId
             ? { ...i, ...item, quantity: (i.quantity ?? 0) + quantity }
             : i
         );
@@ -71,7 +71,7 @@ export const CartProvider = ({ children }) => {
 
   const deleteCartItem = (itemId) => {
     setCartItems((prev) => {
-      const existingItem = prev.find((item) => item.id === itemId);
+      const existingItem = prev.find((item) => item.productId === itemId);
 
       if (!existingItem) {
         return prev;
@@ -79,10 +79,10 @@ export const CartProvider = ({ children }) => {
 
       if (existingItem.quantity && existingItem.quantity > 1) {
         return prev.map((item) =>
-          item.id === itemId ? { ...item, quantity: item.quantity - 1 } : item
+          item.productId === itemId ? { ...item, quantity: item.quantity - 1 } : item
         );
       } else {
-        return prev.filter((item) => item.id !== itemId);
+        return prev.filter((item) => item.productId !== itemId);
       }
     });
   };

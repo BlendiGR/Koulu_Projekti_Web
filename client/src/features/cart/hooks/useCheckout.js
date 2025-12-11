@@ -52,7 +52,7 @@ export const useCheckout = () => {
                  const { error: confirmError, paymentIntent } = await stripe.confirmPayment({
                      elements,
                      confirmParams: {
-                         return_url: window.location.origin + "/checkout/verify", 
+                         return_url: window.location.origin + "/checkout", 
                          payment_method_data: {
                              billing_details: {
                                  name: shippingData.fullName,

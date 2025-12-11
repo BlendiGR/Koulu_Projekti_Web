@@ -14,7 +14,7 @@ const OrderSummary = ({
   const withoutTax = totalPrice - totalTax;
     
   return (
-    <div className="bg-beige p-6 rounded-3xl border border-brown-100 shadow-sm sticky top-4">
+    <div className="bg-white p-6 rounded-3xl border border-brown-100 shadow-sm sticky top-4">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">
         {t("orderSummary.title")}
       </h2>

@@ -24,7 +24,7 @@ export const useOrder = () => {
                     destinationAddress: orderData.fullAddress,
                     phone: orderData.phone,
                     products: orderData.items.map((item) => ({
-                        productId: item.id,
+                        productId: item.productId,
                         quantity: item.quantity || 1,
                     })),
                     ...(orderData.couponId ? {couponId: orderData.couponId} : {}),
