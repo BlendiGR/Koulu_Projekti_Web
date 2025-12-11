@@ -55,6 +55,16 @@
       "subtitle": "Katso mitä asiakkaamme sanovat!"
     }
   },
+  "visit": {
+    "visit": "Tule",
+    "us": "käymään",
+    "subheading": "Odotamme innolla vierailuasi!",
+    "title": "Löydä meidät",
+    "publicTransport": "Julkisilla",
+    "transportInfo": "Sijaitsemme keskeisellä paikalla Lohjan bussipysäkin välittömässä läheisyydessä.",
+    "parking": "Parkkeeraaminen",
+    "parkingInfo": "Ilmainen pysäköinti on saatavilla ravintolamme edessä ja lähistöllä olevissa parkkihalleissa."
+  },
   "cart": {
     "button": "Kori",
     "addtocart": "Lisää ostoskoriin",

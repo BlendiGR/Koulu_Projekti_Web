@@ -83,9 +83,9 @@ const Home = () => {
         backgroundImage={heroBackground}
         headline={
           <>
-            <span className="text-red-100 shadow-md">{t("hero.taste")} </span>
-            <span className="shadow-md">{t("hero.real")} </span>
-            <span className="text-green-100 shadow-md">{t("hero.food")}</span>
+            <span className="text-red-100">{t("hero.taste")} </span>
+            <span>{t("hero.our")} </span>
+            <span>{t("hero.meat")}</span>
           </>
         }
         subheading={t("hero.subheading")}
