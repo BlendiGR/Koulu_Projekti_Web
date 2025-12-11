@@ -14,7 +14,7 @@ const Visit = () => {
       icon: <MapPin size={40} className="text-red-100" />,
       glow: "bg-red-light",
       title: t("home.contact.location"),
-      text: "Blablablakatu 4,\n00100 Helsinki",
+      text: "Laurinkatu 34, \n08100 Lohja",
     },
     {
       icon: <Phone size={40} className="text-green-100" />,
@@ -43,7 +43,7 @@ const Visit = () => {
           <span className="text-red-100">Us</span>
         </h1>
         <p className="text-gray-700 max-w-xl mx-auto text-lg md:text-xl">
-          We'd love to see you at foonder!
+          We'd love to see you at Fooder!
         </p>
         <div className="mt-16 lg:max-w-[80%] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
           {featureCards.map(({ icon, title, text, glow }) => (
@@ -55,6 +55,35 @@ const Visit = () => {
               glow={glow}
             />
           ))}
+        </div>
+        <div className="mt-12 pb-8">
+          <h2 className="text-3xl font-semibold mb-6">Find Us</h2>
+          <div className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7919.543725023565!2d24.05158077125056!3d60.248805201158916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x468dbf7a90feb01d%3A0x31e2efe9e67459d!2sLaurinkatu%2034%2C%2008100%20Lohja!5e0!3m2!1sfi!2sfi!4v1765452181727!5m2!1sfi!2sfi"
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Restaurant Location"
+            ></iframe>
+          </div>
+          <div className="mt-8 w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-gray-50 p-6 rounded-2xl shadow-md">
+              <h3 className="text-xl font-semibold mb-3">Public Transport</h3>
+              <p className="text-gray-700">
+                We're easily accessible by bus. Lohja central bus station is located within a 2 minute walk.
+              </p>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-2xl shadow-md">
+              <h3 className="text-xl font-semibold mb-3">Parking Information</h3>
+              <p className="text-gray-700">
+                Free street parking is available on surrounding streets and a public parking lot is located 100m away on Linnaistenkatu.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </div>
