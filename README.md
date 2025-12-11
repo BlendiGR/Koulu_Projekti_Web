@@ -16,7 +16,7 @@ Tämä on moderni ravintolasovellus, joka tarjoaa saumattoman tilauskokemuksen a
 ## 1. Sovelluksen Idea ja Kohderyhmä
 
 **Idea:**
-Fooder tuo ravintolan palvelut digitaaliseen aikaan tarjoamalla visuaalisesti miellyttävän ja helppokäyttöisen alustan ruoan tilaamiseen, pöytävarauksiin ja asiakaskokemuksen hallintaan. Sovellus keskittyy korkealaatuiseen käyttäjäkokemukseen (UX) ja responsiivisuuteen.
+Fooder tuo ravintolan palvelut tarjoamalla visuaalisesti miellyttävän ja helppokäyttöisen alustan ruoan tilaamiseen ja asiakaskokemuksen hallintaan. Sovellus keskittyy korkealaatuiseen käyttäjäkokemukseen (UX) ja responsiivisuuteen.
 
 **Kohderyhmä:**
 *   **Asiakkaat:** Henkilöt, jotka haluavat tilata laadukasta ravintolaruokaa helposti kotiin tai noutona, sekä seurata tilauksensa etenemistä reaaliajassa.
@@ -117,21 +117,95 @@ Vain Admin-oikeuksilla varustetut käyttäjät pääsevät `/admin` -näkymään
 
 ## 4. Demo
 
-Sovelluksen testaamiseksi omalla koneellasi (koska live-demoa ei ole tässä linkitetty), toimi seuraavasti:
+Sovelluksen pystyttäminen omalle koneelle testausta varten.
 
-**Vaatimukset:**
-*   Node.js asennettuna.
-*   MariaDB tietokanta.
-*   `.env` tiedostot kunnossa sekä `client` että `server` kansioissa (sisältäen mm. Stripe avaimet, MariaDB URL, JWT Secret).
+### 1. Asenna Riippuvuudet
 
-**Käynnistys:**
-1.  Avaa terminaali ja mene palvelimen kansioon: `cd server`
-2.  Asenna riippuvuudet: `npm install`
-3.  Käynnistä palvelin: `npm run dev` (Käynnistyy porttiin 5000 tai määritettyyn porttiin).
-4.  Avaa toinen terminaali ja mene client-kansioon: `cd client`
-5.  Asenna riippuvuudet: `npm install`
-6.  Käynnistä sovellus: `npm run dev`
-7.  Avaa selain osoitteessa `http://localhost:5173` (tai mitä terminaali näyttää).
+```bash
+# 1. Mene server-kansioon ja asenna riippuvuudet
+cd server
+npm install
+
+# 2. Mene client-kansioon ja asenna riippuvuudet
+cd ../client
+npm install
+```
+
+### 2. Ympäristömuuttujat (.env Setup)
+
+Luo **server** -kansioon tiedosto `.env` ja lisää seuraavat (muokkaa arvoja tarvittaessa):
+
+```env
+NODE_ENV=kehitys
+HOST=localhost
+PORT=3000
+
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=salasana
+DB_NAME=ravintola_tietokanta
+DATABASE_URL="mysql://root:salasana@localhost:3306/ravintola_tietokanta"
+
+JWT_SECRET=oma_jwt_salainen_avain
+JWT_EXPIRES_IN="24h"
+BCRYPT_SALT=10
+
+ADMIN_PW=yllapitajan_salasana
+
+STRIPE_SECRET_KEY=oma_stripe_salainen_avain
+
+# Sähköpostiasetukset
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=oma-sahkoposti@gmail.com
+EMAIL_PASS=oma-sovellussalasana
+EMAIL_FROM_NAME=Ravintolasovellus
+
+# Käyttöliittymän URL (sähköpostilinkkejä varten)
+FRONTEND_URL=http://localhost:5173
+
+# Logon URL (sähköposteja varten - täytyy olla julkisesti saatavilla)
+LOGO_URL=https://oma-verkkotunnus.com/logo-black.png
+```
+
+Luo **client** -kansioon tiedosto `.env` ja lisää seuraavat:
+
+```env
+# client/.env
+
+# Backend API URL
+VITE_API_URL="http://localhost:5000/api"
+
+# Stripe Publishable Key (sama tili kuin serverillä)
+VITE_STRIPE_PUBLISHABLE_KEY="pk_test_..."
+```
+
+### 3. Tietokanta ja Käynnistys
+
+Varmista että MariaDB on käynnissä.
+
+```bash
+# 1. Aja tietokantamigraatiot (Server-kansiossa)
+cd server
+#alusta prisma
+npx prisma generate
+
+#alusta db
+npx prisma migrate reset
+
+# 3. Käynnistä Backend
+npm run dev
+```
+
+Avaa uusi terminaali:
+
+```bash
+# 4. Käynnistä Frontend (Client-kansiossa)
+cd client
+npm run dev
+```
+
+Sovellus aukeaa osoitteeseen: `http://localhost:5173`
 
 ---
 
