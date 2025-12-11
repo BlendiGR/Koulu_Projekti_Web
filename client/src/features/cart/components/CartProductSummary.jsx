@@ -7,7 +7,7 @@ const CartProductSummary = ({ item, index, deleteCartItem, cartItems }) => {
     <div key={item.productId}>
       <div className="flex flex-row items-center gap-4 md:gap-6">
         <img
-          src={"/" + item.imageUrl}
+          src={item.imageUrl}
           alt={item.name}
           className="w-24 h-24 md:w-32 md:h-32 object-cover rounded-xl shadow-sm"
         />

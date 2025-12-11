@@ -2,59 +2,87 @@ import AddToCartButton from "/src/features/cart/components/AddToCartButton.jsx";
 import ProductModal from "/src/components/common/ui/ProductModal.jsx";
 import { useState, useEffect } from "react";
 
-const ProductCard = ({ item = {}, bgColor = "white", rank = null }) => {
+const ProductCard = ({ item = {}, rank = null }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
+    return () => { document.body.style.overflow = "auto"; };
   }, [isOpen]);
 
-  return (
-    <>
-      <div
-        className={`bg-${bgColor}
-      relative
-      p-6 sm:p-8 md:p-5
-      rounded-3xl shadow-md
-      flex flex-col justify-between
-      items-center
-      text-center
-      min-w-[260px]
-      w-full
-      max-w-[320px] sm:max-w-[380px] md:max-w-[440px] lg:max-w-[400px]
-      lg:max-h-[500px]
-      hover:scale-107
-      active:scale-107
-      cursor-pointer
-      transition-all duration-300 ease-in-out
-    `}
-    onClick={() => setIsOpen(!isOpen)}
-      >
-        {rank && (
-            <div className="absolute top-3 right-3 bg-red-600 text-white text-sm font-semibold px-3 py-1 rounded-full shadow">
-              #{rank}
-            </div>
-        )}
-        <img
-          src={item.imageUrl}
-          alt={item.name}
-          className="max-w-[120px] sm:w-[220px] md:w-[260px] lg:w-[300px] object-contain"
-        />
+  const handleCardClick = () => setIsOpen(true);
 
-        <div className="flex flex-col items-center md:items-start text-center md:text-left w-full gap-2 mt-4">
-          <p className="font-bold text-xl sm:text-xl lg:2text-xl">{item.name}</p>
-          <p className="text-2xl sm:text-3xl font-semibold">{item.cost} €</p>
+  const handleAddToCartClick = (e) => {
+    e.stopPropagation();
+  };
+
+  const renderIngredients = () => {
+    const data = item.ingredients;
+    if (!data) return null;
+    if (Array.isArray(data)) return data.join(", ");
+    return data;
+  };
+
+  const ingredientsText = renderIngredients();
+
+  return (
+      <>
+        <div
+            onClick={handleCardClick}
+            className="
+          group relative flex flex-col justify-between
+          w-full max-w-sm mx-auto
+          bg-white rounded-2xl overflow-hidden
+          shadow-md hover:shadow-xl
+          transform transition-all duration-300 hover:-translate-y-1
+          cursor-pointer border border-gray-100
+        "
+        >
+          {rank && (
+              <div className="absolute top-0 left-0 z-10">
+                <div className="bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-br-lg shadow-sm">
+                  #{rank} Best Seller
+                </div>
+              </div>
+          )}
+          <div className="relative w-full aspect-[4/3] bg-gray-50 flex items-center justify-center p-6 overflow-hidden">
+            <img
+                src={item.imageUrl}
+                alt={item.name}
+                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-sm"
+            />
+          </div>
+
+          <div className="p-5 flex flex-col flex-grow">
+            <div className="flex justify-between items-start gap-2 mb-2">
+              <h3 className="font-bold text-start text-lg text-gray-800 leading-tight line-clamp-2">
+                {item.name}
+              </h3>
+              <span className="shrink-0 text-xl font-extrabold text-gray-900">
+              {item.cost} €
+            </span>
+            </div>
+            {ingredientsText && (
+                <div className="mb-4">
+                  <p className="text-sm text-gray-200 italic line-clamp-2 leading-relaxed">
+                    {ingredientsText}
+                  </p>
+                </div>
+            )}
+            <div className="mt-auto pt-2" onClick={handleAddToCartClick}>
+              <div className="w-full transform transition-all duration-300">
+                <AddToCartButton item={item} />
+              </div>
+            </div>
+          </div>
         </div>
 
-        <AddToCartButton item={item}/>
-
-      </div>
-    <ProductModal isOpen={isOpen} onClose={() => setIsOpen(false)} product={item} />
-    </>
+        <ProductModal
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            product={item}
+        />
+      </>
   );
 };
 

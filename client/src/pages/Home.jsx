@@ -7,7 +7,6 @@ import HeroSection from "/src/pages/HeroSection.jsx";
 import heroBackground from "/src/assets/images/Hero-Background.png";
 import HorizontalReviewSlider from "/src/components/common/ui/HorizontalReviewSlider.jsx";
 import ProductCard from "/src/components/common/ui/ProductCard.jsx";
-import { mostBuyedProducts } from "/src/config/mostBuyedSection.js";
 import { useReview } from "/src/hooks/api";
 import { useLoading } from "/src/hooks/useLoading";
 import { formatDate } from "/src/utils/formatters";
@@ -122,7 +121,7 @@ const Home = () => {
           {t("home.mostOrdered.titleOne")}{" "}
           <span className="text-red-100">{t("home.mostOrdered.titleTwo")}</span>
         </h3>
-        <div className="flex md:flex-row flex-col justify-center items-center gap-10 mt-10">
+        <div className="flex max-w-7xl mx-auto md:flex-row flex-col justify-center items-center gap-10 mt-10">
           {randomProducts.map((item, idx) => (
             <ProductCard key={item.productId} item={item} rank={idx + 1} bgColor="beige" />
           ))}

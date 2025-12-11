@@ -61,9 +61,6 @@ const ProductModal = ({ isOpen, onClose, product }) => {
 
             {product.diets && product.diets.length > 0 && (
                 <div className="mb-4">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                    Dietary Info
-                  </h3>
                   <div className="flex flex-wrap gap-2">
                     {product.diets.map((diet, index) => (
                         <span
