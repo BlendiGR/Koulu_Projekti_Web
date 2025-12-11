@@ -29,13 +29,11 @@ const AuthProvider = ({ children }) => {
     }
 
     const data = loginRes.data;
-    console.log(loginRes.data);
     const token = data.token;
     const user = data.user;
 
     localStorage.setItem("token", token);
     setUser(user);
-    console.log(user);
 
     if (redirectTo) {
       navigate(redirectTo);

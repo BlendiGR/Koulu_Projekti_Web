@@ -65,6 +65,7 @@
     "loginToCheckout": "Login to Checkout",
     "close": "Continue Shopping",
     "quantity": "Quantity",
+
     "coupon": {
       "label": "Coupon",
       "placeholder": "Enter coupon code",

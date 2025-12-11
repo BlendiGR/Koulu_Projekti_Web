@@ -23,6 +23,7 @@ const LoginForm = ({ t }) => {
 
   const onSubmit = async (data) => {
     setBackendError(null);
+
     const res = await handleLogin(data, redirectTo);
 
     if (!res.success) {
@@ -38,12 +39,18 @@ const LoginForm = ({ t }) => {
   return (
     <>
       {backendError && (
-        <p className="text-red-600 p-2 rounded text-sm mb-2">{backendError}</p>
+        <p className="text-red-600 p-2 rounded text-md text-center mb-2">{backendError}</p>
       )}
 
-      {redirectTo && (
-        <p className="text-red-600 p-2 rounded text-sm mb-2">
+      {redirectTo == "/review" && (
+        <p className="text-red-600 p-2 rounded text-md text-center mb-2">
           {t("review.redirect")}
+        </p>
+      )}
+
+      {redirectTo == "/checkout" && (
+        <p className="text-red-600 p-2 rounded text-md text-center mb-2">
+          {t("cart.loginToCheckout")}
         </p>
       )}
 

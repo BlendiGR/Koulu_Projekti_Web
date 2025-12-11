@@ -96,7 +96,7 @@ export const orderConfirmationTemplate = (data) => {
                 </table>
 
                 <div style="text-align: center; margin: 30px 0;">
-                    <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/orders/${order.orderId}" 
+                    <a href="${process.env.FRONTEND_URL}/orders/${order.orderId}" 
                        style="display: inline-block; background-color: #C73228; color: #ffffff !important; text-decoration: none; padding: 12px 30px; font-size: 14px; font-weight: bold; border: 2px solid #C73228;">
                         ${t.trackButton}
                     </a>

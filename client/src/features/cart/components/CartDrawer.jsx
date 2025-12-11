@@ -28,7 +28,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
   };
 
   const handleLogin = () => {
-    navigate("/login");
+    navigate("/login?redirect=/checkout");
     onClose();
   };
 
