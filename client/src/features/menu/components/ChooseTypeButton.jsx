@@ -1,4 +1,4 @@
-const ChooseTypeButton = ({ type, activeButton, onClick }) => {
+const ChooseTypeButton = ({ type, label, activeButton, onClick }) => {
   const isActive = activeButton === type;
 
   return (
@@ -10,7 +10,7 @@ const ChooseTypeButton = ({ type, activeButton, onClick }) => {
           : "bg-white text-red-100 border-red-100"
       }`}
     >
-      {type}
+      {label || type}
     </button>
   );
 };

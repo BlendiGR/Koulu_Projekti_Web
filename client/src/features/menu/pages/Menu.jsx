@@ -8,19 +8,19 @@ const Menu = () => {
   const { t } = useLang();
   const {getProducts} = useProduct();
 
-  const [activeButton, setActiveButton] = useState("All");
+  const [activeButton, setActiveButton] = useState("all");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const menuTypes = ["All", "Foods", "Drinks", "Sides"];
+  const menuTypes = ["all", "foods", "drinks", "sides"];
 
   const apiTypeForButton = useMemo(
       () => ({
-        All: undefined, // no type filter
-        Foods: "FOOD",
-        Drinks: "DRINK",
-        Sides: "SIDE",
+        all: undefined, // no type filter
+        foods: "FOOD",
+        drinks: "DRINK",
+        sides: "SIDE",
       }),
       []
   );
@@ -40,7 +40,7 @@ const Menu = () => {
       const res = await getProducts(params);
 
       if (!res.success) {
-        setError(res.message || "Failed to load products");
+        setError(res.message || t("menu.error"));
         setProducts([]);
       } else {
         setProducts(res.data.data );
@@ -60,8 +60,8 @@ const Menu = () => {
       <div>
         <section className="p-8 mt-20 bg-beige text-center shadow-xl rounded-3xl">
           <h1 className="md:text-5xl text-4xl mb-4 pt-11 font-bold">
-            <span className="">Our </span>
-            <span className="text-red-100">Menu</span>
+            <span className="">{t("menu.our")} </span>
+            <span className="text-red-100">{t("menu.menu")}</span>
           </h1>
           <p className="text-gray-700 max-w-xl mx-auto text-lg md:text-xl">
             {t("menu.subheading")}
@@ -72,13 +72,14 @@ const Menu = () => {
                 <ChooseTypeButton
                     key={type}
                     type={type}
+                    label={t(`menu.filter.${type}`)}
                     activeButton={activeButton}
                     onClick={handleButtonClick}
                 />
             ))}
           </div>
 
-          {loading && <p className="mt-6">Loading...</p>}
+          {loading && <p className="mt-6">{t("menu.loading")}</p>}
           {error && <p className="mt-6 text-red-500">{error}</p>}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10 justify-items-center max-w-6xl mx-auto">

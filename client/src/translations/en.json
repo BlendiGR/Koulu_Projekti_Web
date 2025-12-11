@@ -346,7 +346,17 @@
   },
   "menu": {
     "title": "Our menu",
-    "subheading": "Delicious pizzas, burgers, kebab, and more"
+    "subheading": "Delicious pizzas, burgers, kebab, and more",
+    "our": "Our",
+    "menu": "Menu",
+    "loading": "Loading products...",
+    "error": "Failed to load products",
+    "filter": {
+      "all": "All",
+      "foods": "Foods",
+      "drinks": "Drinks",
+      "sides": "Sides"
+    }
   },
   "admin": {
     "heading": "Dashboard",

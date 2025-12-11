@@ -344,7 +344,17 @@
   },
   "menu": {
     "title": "Meidän ruokalista",
-    "subheading": "Herkulliset pizzat, burgerit, kebabit sun muut!"
+    "subheading": "Herkulliset pizzat, burgerit, kebabit sun muut!",
+    "our": "Meidän",
+    "menu": "Ruokalista",
+    "loading": "Ladataan tuotteita...",
+    "error": "Tuotteiden lataus epäonnistui",
+    "filter": {
+      "all": "Kaikki",
+      "foods": "Ruuat",
+      "drinks": "Juomat",
+      "sides": "Lisukkeet"
+    }
   },
   "admin": {
     "heading": "Hallintapaneeli",
