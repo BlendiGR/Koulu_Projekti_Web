@@ -3,7 +3,7 @@ import { useState } from "react";
 import ProductCard from "/src/components/common/ui/ProductCard.jsx";
 import ChooseTypeButton from "../components/ChooseTypeButton";
 import {
-  allProducts,
+  all,
   pizzas,
   burgers,
   kebab,
@@ -20,6 +20,24 @@ const Menu = () => {
   };
 
   const menuTypes = ["All", "Pizzas", "Kebab", "Burgers", "Salads", "Drinks"];
+
+  const filteredProducts = () => {
+    switch (activeButton) {
+      case "Pizzas":
+        return pizzas;
+      case "Kebab":
+        return kebab;
+      case "Burgers":
+        return burgers;
+      case "Salads":
+        return salad;
+      case "Drinks":
+        return drinks;
+      default:
+        return all;
+    }
+  };
+
   return (
     <div>
       <section className="p-8 mt-20 bg-beige text-center shadow-xl rounded-3xl">
@@ -43,7 +61,7 @@ const Menu = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mt-10 justify-items-center">
-          {allProducts.map((item) => (
+          {filteredProducts().map((item) => (
             <ProductCard key={item.id} item={item} />
           ))}
         </div>
