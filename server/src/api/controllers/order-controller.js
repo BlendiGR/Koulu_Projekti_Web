@@ -120,9 +120,9 @@ export const getOrdersByStatusWithProducts = asyncHandler(async (req, res) => {
  */
 export const createOrder = asyncHandler(async (req, res, next) => {
     const orderData = req.body;
-    const { userId, destinationAddress, phone, products } = orderData;
+    const { userId, destinationAddress, phone, products, couponId } = orderData;
 
-    const orderToCreate = { userId, destinationAddress, phone, products };
+    const orderToCreate = { userId, destinationAddress, phone, products, couponId };
     const newOrder = await Order.createOrder(orderToCreate);
 
     if (newOrder) {
