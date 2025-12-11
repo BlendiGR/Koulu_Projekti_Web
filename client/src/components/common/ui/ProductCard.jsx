@@ -54,8 +54,8 @@ const ProductCard = ({ item = {}, rank = null }) => {
           </div>
 
           <div className="p-5 flex flex-col flex-grow">
-            <div className="flex justify-between items-start gap-2 mb-2">
-              <h3 className="font-bold text-start text-lg text-gray-800 leading-tight line-clamp-2">
+            <div className="flex justify-between items-center gap-2 mb-2">
+              <h3 className="font-bold text-start text-xl text-gray-800 leading-tight line-clamp-2">
                 {item.name}
               </h3>
               <span className="shrink-0 text-xl font-extrabold text-gray-900">
@@ -63,8 +63,8 @@ const ProductCard = ({ item = {}, rank = null }) => {
             </span>
             </div>
             {ingredientsText && (
-                <div className="mb-4">
-                  <p className="text-sm text-gray-200 italic line-clamp-2 leading-relaxed">
+                <div className="mb-3">
+                  <p className="text-base font-medium text-gray-200 italic line-clamp-2 leading-relaxed">
                     {ingredientsText}
                   </p>
                 </div>

@@ -311,55 +311,56 @@ export default function Profile() {
               {t("profile.noOrders")}
             </p>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm border-collapse">
+            <div className="overflow-x-auto -mx-2 sm:mx-0">
+              <table className="w-full text-sm border-collapse min-w-[520px]">
                 <thead className="border-b border-[rgba(0,0,0,0.05)]">
-                  <tr className="text-[var(--color-black-200)]/60">
-                    <th className="py-2 text-left">
-                      {t("profile.table.orderId")}
-                    </th>
-                    <th className="py-2 text-left">
-                      {t("profile.table.date")}
-                    </th>
-                    <th className="py-2 text-left">
-                      {t("profile.table.total")}
-                    </th>
-                    <th className="py-2 text-left">
-                      {t("profile.table.status")}
-                    </th>
-                    <th className="py-2 text-right">
-                      {t("profile.orderButton")}
-                    </th>
-                  </tr>
+                <tr className="text-[var(--color-black-200)]/60">
+                  <th className="py-2 pr-6 text-left whitespace-nowrap">
+                    {t("profile.table.orderId")}
+                  </th>
+                  <th className="py-2 pr-6 text-left whitespace-nowrap">
+                    {t("profile.table.date")}
+                  </th>
+                  <th className="py-2 pr-6 text-left whitespace-nowrap">
+                    {t("profile.table.total")}
+                  </th>
+                  <th className="py-2 pr-6 text-left whitespace-nowrap">
+                    {t("profile.table.status")}
+                  </th>
+                  <th className="py-2 pl-3 text-right whitespace-nowrap">
+                    {t("profile.orderButton")}
+                  </th>
+                </tr>
                 </thead>
                 <tbody>
-                  {orders.map((order) => (
-                    <tr key={order.orderId}>
-                      <td className="py-2">#{order.orderId}</td>
-                      <td className="py-2">
+                {orders.map((order) => (
+                    <tr
+                        key={order.orderId}
+                        className="border-b border-[rgba(0,0,0,0.03)] last:border-b-0"
+                    >
+                      <td className="py-3 pr-6">#{order.orderId}</td>
+                      <td className="py-3 pr-6">
                         {order.createdAt
-                          ? new Date(order.createdAt).toLocaleDateString(
-                              "fi-FI"
-                            )
-                          : "-"}
+                            ? new Date(order.createdAt).toLocaleDateString("fi-FI")
+                            : "-"}
                       </td>
-                      <td className="py-2">{order.cost} €</td>
-                      <td className="py-2">
-                        <span className={getStatusClassName(order.status)}>
-                          {formatStatusLabel(order.status)}
-                        </span>
+                      <td className="py-3 pr-6">{order.cost} €</td>
+                      <td className="py-3 pr-6">
+                      <span className={getStatusClassName(order.status)}>
+                        {formatStatusLabel(order.status)}
+                      </span>
                       </td>
-                      <td className="text-right">
+                      <td className="py-3 pl-3 text-right">
                         <button
-                          type="button"
-                          onClick={() => navigate(`/orders/${order.orderId}`)}
-                          className="bg-red-100 text-white rounded-2xl text-xs px-2 py-1 hover:bg-red-200 cursor-pointer active:scale-105 transition"
+                            type="button"
+                            onClick={() => navigate(`/orders/${order.orderId}`)}
+                            className="bg-red-100 text-white rounded-2xl text-xs px-2 py-1 hover:bg-red-200 cursor-pointer active:scale-105 transition whitespace-nowrap"
                         >
                           {t("profile.trackOrderButton")}
                         </button>
                       </td>
                     </tr>
-                  ))}
+                ))}
                 </tbody>
               </table>
             </div>
