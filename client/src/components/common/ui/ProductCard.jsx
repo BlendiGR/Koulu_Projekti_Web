@@ -3,14 +3,6 @@ import ProductModal from "/src/components/common/ui/ProductModal.jsx";
 import { useState, useEffect } from "react";
 
 const ProductCard = ({ item = {}, bgColor = "white" }) => {
-  const {
-    imageUrl,
-    name,
-    description = "",
-    price,
-    orderAmount = 0,
-    rank = 0,
-  } = item;
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -20,8 +12,6 @@ const ProductCard = ({ item = {}, bgColor = "white" }) => {
       document.body.style.overflow = "auto";
     }
   }, [isOpen]);
-
-
 
   return (
     <>
@@ -44,24 +34,15 @@ const ProductCard = ({ item = {}, bgColor = "white" }) => {
     `}
     onClick={() => setIsOpen(!isOpen)}
       >
-        {/* Tämä on se punainen oikeassa yläkulmassa */}
-        {rank > 0 && (
-          <div className="absolute top-3 right-3 bg-red-600 text-white text-sm font-semibold px-3 py-1 rounded-full shadow">
-            #{rank}
-          </div>
-        )}
-
         <img
-          src={imageUrl}
+          src={item.imageUrl}
+          alt={item.name}
           className="max-w-[120px] sm:w-[220px] md:w-[260px] lg:w-[300px] object-contain"
         />
 
         <div className="flex flex-col items-center md:items-start text-center md:text-left w-full gap-2 mt-4">
-          <p className="font-bold text-xl sm:text-xl lg:2text-xl">{name}</p>
-          <p className="text-base sm:text-xd md:text-sm lg:text-lg text-gray-700">
-            {description}
-          </p>
-          <p className="text-2xl sm:text-3xl font-semibold">{price} €</p>
+          <p className="font-bold text-xl sm:text-xl lg:2text-xl">{item.name}</p>
+          <p className="text-2xl sm:text-3xl font-semibold">{item.cost} €</p>
         </div>
 
         <AddToCartButton item={item}/>

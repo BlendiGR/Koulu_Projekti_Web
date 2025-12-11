@@ -107,7 +107,7 @@ export const CartProvider = ({ children }) => {
   
   const totalPrice = useMemo(() => {
     const basePrice = cartItems.reduce(
-      (sum, item) => sum + (Number(item.price) || 10) * item.quantity,
+      (sum, item) => sum + (Number(item.cost)) * item.quantity,
       0
     );
     
