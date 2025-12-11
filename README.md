@@ -259,6 +259,5 @@ Tämä polku varmistaa, että käyt läpi kaikki sovelluksen keskeiset ominaisuu
 2.  **Admin - Coupons:** Luo uusi kuponki, esim. "TEST50", alennus 50%. Mene kassalle ja testaa toimiiko se.
 
 ### ℹ️ Lisätietoa arvosteluista
-Sovellus toimii niin, että se:
-* **Ei lähetä** arvostelupyyntöä sähköpostitse, jos kyseinen käyttäjä on jo jättänyt arvostelun kyseisestä tilauksesta.
-* **Ei anna** käyttäjän jättää uutta arvostelua tilauksesta, jos hän on sen jo tehnyt.
+* **Sovellus ei lähetä** arvostelupyyntöä sähköpostitse, jos kyseinen käyttäjä on jo jättänyt arvostelun kyseisestä tilauksesta.
+* **Sovellus ei anna** käyttäjän jättää uutta arvostelua tilauksesta, jos hän on jo jättänyt arvostelun.
