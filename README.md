@@ -112,9 +112,64 @@ Vain Admin-oikeuksilla varustetut käyttäjät pääsevät `/admin` -näkymään
 ### Server & Tekninen Tausta
 **Katso kohta 2. Teknologiat**
 
+## 4. Ohjeistus: Näin testaat sovelluksen
+
+Tämä polku varmistaa, että käyt läpi kaikki sovelluksen keskeiset ominaisuudet.
+
+### Vaihe 1: Rekisteröityminen ja Tutustuminen
+1.  Avaa sovellus.
+2.  Navigoi "Menu" -sivulle ja selaa tuotteita. Klikkaa tuotetta nähdäksesi lisätiedot (modaalissa).
+3.  Lisää tuotteita ostoskoriin.
+4.  Mene ostoskoriin ja yritä painaa "Siirry kassaan" nappia -> sovellus ohjaa kirjautumaan.
+5.  Valitse "Sign Up" ja luo uusi käyttäjä. Laita oikea sähköposti, jotta Nodemailer pystyy lähettämään sähköposteja.
+
+### Vaihe 2: Tilausprosessi (Asiakas)
+1.  Kirjaudu sisään juuri luomallasi tunnuksella.
+2.  Mene takaisin Menuun ja lisää muutama tuote lisää (esim. Pizza ja Juoma) ostoskoriin.
+3.  Avaa ostoskori (Drawer) oikeasta reunasta. Testaa määrien muuttamista.
+4.  **Kuponki:** Jos tiedät toimivan koodin (esim. "ALE10"), syötä se ja katso hinnan muuttuvan. *(Pitäisi olla valmiina WELCOME10 databasessa jos prisma seed mennyt läpi.)*
+5.  Paina "Siirry kassaan".
+6.  Täytä toimitustiedot (Katuosoite, Postinumero, Kaupunki). Lomake validoi puuttuvat tiedot.
+7.  **Maksaminen:** Syötä Stripen testikortin tiedot:
+    *   Kortin numero: `4242 4242 4242 4242`
+    *   Pvm: Mikä tahansa tulevaisuuden pvm (esim. 12/28)
+    *   CVC: `123`
+8.  Paina "Pay" ja odota hetki.
+9.  Sinut ohjataan onnistumissivulle (`/success/:id`). Tarkista sähköpostisi, sinne pitäisi tulla tilausvahvistus.
+
+### Vaihe 3: Seuranta (Asiakas)
+1.  Onnistumissivulta klikkaa "Track Order" tai mene Profiili -> Orders -> Valitse uusin tilaus.
+2.  Näet visuaalisen janan (Order Status). Aluksi tila on "PREPARING".
+3.  Jätä tämä sivu auki yhteen välilehteen/ikkunaan.
+
+### Vaihe 4: Hallinta (Admin) - Huom: Vaatii Admin-tunnukset
+*PRISMA SEED skripti on luonut valmiiksi admin käyttäjän. Tarkista ne seed.js tiedostosta tai .env*
+
+1.  Avaa uusi **incognito-ikkuna** tai **kirjaudu ulos**, ja kirjaudu sitten takaisin sisään **ylläpitäjän tunnuksilla**.
+2.  Valitse navigointivalikosta **Hallinta**.
+3.  **Kojelauta (Dashboard):** Tarkastele kaikkia näkymiä ja kokeile eri **toiminnallisuuksia**.
+4.  Muuta tilauksen tilaa: Vaihda tila esimerkiksi tilaan "**TOIMITUKSESSA**" (`DELIVERING`).
+5.  Palaa Asiakas-ikkunaan (Vaihe 3). Päivitä sivu ja huomaa, että tilauksen seuranta on päivittynyt.
+6.  Palaa takaisin ylläpitäjän paneeliin ja vaihda tilauksen tila tilaan "**TOIMITETTU**" (`DELIVERED`).
+7.  Tarkista sähköpostisi – sinne pitäisi tulla **arviointipyyntö**.
+8.  Napsauta **Jätä arvio** -painiketta.
+    > *Huom: Jos olet määrittänyt `.env`-tiedoston sähköpostiasetukset oikein, linkin pitäisi ohjata suoraan arviointi-osioon.*
+9.  Jätä arvostelu ja siirry takaisin ylläpitäjän paneelin **Arvostelut**-osioon.
+10. **Hyväksy** jättämäsi arvostelu (aktivoi se).
+11. Mene etusivulle, selaa alas ja tarkastele tekemääsi arvostelua.
+
+### Vaihe 5: Muut ominaisuudet
+1.  **Admin - Products:** Kokeile lisätä uusi tuote "Test Burger" kuvalla ja hinnalla. Mene Menu-sivulle ja etsi se.
+2.  **Admin - Coupons:** Luo uusi kuponki, esim. "TEST50", alennus 50%. Mene kassalle ja testaa toimiiko se.
+
+### ℹ️ Lisätietoa arvosteluista
+* **Sovellus ei lähetä** arvostelupyyntöä sähköpostitse, jos kyseinen käyttäjä on jo jättänyt arvostelun kyseisestä tilauksesta.
+* **Sovellus ei anna** käyttäjän jättää uutta arvostelua tilauksesta, jos hän on jo jättänyt arvostelun.
+
+
 ---
 
-## 4. Demo
+## 5. Asennus omalle koneelle
 
 Sovelluksen pystyttäminen omalle koneelle testausta varten.
 
@@ -207,57 +262,3 @@ npm run dev
 Sovellus aukeaa osoitteeseen: `http://localhost:5173`
 
 ---
-
-## 5. Ohjeistus: Näin testaat sovelluksen
-
-Tämä polku varmistaa, että käyt läpi kaikki sovelluksen keskeiset ominaisuudet.
-
-### Vaihe 1: Rekisteröityminen ja Tutustuminen
-1.  Avaa sovellus.
-2.  Navigoi "Menu" -sivulle ja selaa tuotteita. Klikkaa tuotetta nähdäksesi lisätiedot (modaalissa).
-3.  Lisää tuotteita ostoskoriin.
-4.  Mene ostoskoriin ja yritä painaa "Siirry kassaan" nappia -> sovellus ohjaa kirjautumaan.
-5.  Valitse "Sign Up" ja luo uusi käyttäjä. Laita oikea sähköposti, jotta Nodemailer pystyy lähettämään sähköposteja.
-
-### Vaihe 2: Tilausprosessi (Asiakas)
-1.  Kirjaudu sisään juuri luomallasi tunnuksella.
-2.  Mene takaisin Menuun ja lisää muutama tuote lisää (esim. Pizza ja Juoma) ostoskoriin.
-3.  Avaa ostoskori (Drawer) oikeasta reunasta. Testaa määrien muuttamista.
-4.  **Kuponki:** Jos tiedät toimivan koodin (esim. "ALE10"), syötä se ja katso hinnan muuttuvan. *(Pitäisi olla valmiina WELCOME10 databasessa jos prisma seed mennyt läpi.)*
-5.  Paina "Siirry kassaan".
-6.  Täytä toimitustiedot (Katuosoite, Postinumero, Kaupunki). Lomake validoi puuttuvat tiedot.
-7.  **Maksaminen:** Syötä Stripen testikortin tiedot:
-    *   Kortin numero: `4242 4242 4242 4242`
-    *   Pvm: Mikä tahansa tulevaisuuden pvm (esim. 12/28)
-    *   CVC: `123`
-8.  Paina "Pay" ja odota hetki.
-9.  Sinut ohjataan onnistumissivulle (`/success/:id`). Tarkista sähköpostisi, sinne pitäisi tulla tilausvahvistus.
-
-### Vaihe 3: Seuranta (Asiakas)
-1.  Onnistumissivulta klikkaa "Track Order" tai mene Profiili -> Orders -> Valitse uusin tilaus.
-2.  Näet visuaalisen janan (Order Status). Aluksi tila on "PREPARING".
-3.  Jätä tämä sivu auki yhteen välilehteen/ikkunaan.
-
-### Vaihe 4: Hallinta (Admin) - Huom: Vaatii Admin-tunnukset
-*PRISMA SEED skripti on luonut valmiiksi admin käyttäjän. Tarkista ne seed.js tiedostosta tai .env*
-
-1.  Avaa uusi **incognito-ikkuna** tai **kirjaudu ulos**, ja kirjaudu sitten takaisin sisään **ylläpitäjän tunnuksilla**.
-2.  Valitse navigointivalikosta **Hallinta**.
-3.  **Kojelauta (Dashboard):** Tarkastele kaikkia näkymiä ja kokeile eri **toiminnallisuuksia**.
-4.  Muuta tilauksen tilaa: Vaihda tila esimerkiksi tilaan "**TOIMITUKSESSA**" (`DELIVERING`).
-5.  Palaa Asiakas-ikkunaan (Vaihe 3). Päivitä sivu ja huomaa, että tilauksen seuranta on päivittynyt.
-6.  Palaa takaisin ylläpitäjän paneeliin ja vaihda tilauksen tila tilaan "**TOIMITETTU**" (`DELIVERED`).
-7.  Tarkista sähköpostisi – sinne pitäisi tulla **arviointipyyntö**.
-8.  Napsauta **Jätä arvio** -painiketta.
-    > *Huom: Jos olet määrittänyt `.env`-tiedoston sähköpostiasetukset oikein, linkin pitäisi ohjata suoraan arviointi-osioon.*
-9.  Jätä arvostelu ja siirry takaisin ylläpitäjän paneelin **Arvostelut**-osioon.
-10. **Hyväksy** jättämäsi arvostelu (aktivoi se).
-11. Mene etusivulle, selaa alas ja tarkastele tekemääsi arvostelua.
-
-### Vaihe 5: Muut ominaisuudet
-1.  **Admin - Products:** Kokeile lisätä uusi tuote "Test Burger" kuvalla ja hinnalla. Mene Menu-sivulle ja etsi se.
-2.  **Admin - Coupons:** Luo uusi kuponki, esim. "TEST50", alennus 50%. Mene kassalle ja testaa toimiiko se.
-
-### ℹ️ Lisätietoa arvosteluista
-* **Sovellus ei lähetä** arvostelupyyntöä sähköpostitse, jos kyseinen käyttäjä on jo jättänyt arvostelun kyseisestä tilauksesta.
-* **Sovellus ei anna** käyttäjän jättää uutta arvostelua tilauksesta, jos hän on jo jättänyt arvostelun.
