@@ -389,7 +389,7 @@
       "rating": "Arvosana",
       "ratingGuide": "Anna arvosana (1 - 5)",
       "review": "Arvostelu",
-      "reviewGuide": "Kirjoita vapaamuotoinen arvostelu"
+      "reviewPlaceholder": "Kirjoita vapaamuotoinen arvostelu"
     },
     "users": {
       "title": "Käyttäjät",
@@ -425,6 +425,25 @@
       "boxTitle": "Sivustoilmoitus",
       "message": "Viesti",
       "active": "Näytä ilmoitus"
+    },
+    "orders": {
+      "title": "Tilaukset",
+      "singular": "tilaus",
+      "id": "Tilaus #",
+      "customer": "Asiakas",
+      "createdAt": "Tilausaika",
+      "completedAt": "Valmistumisaika",
+      "total": "Yhteensä",
+      "status": "Tila",
+      "statusPreparing": "Valmistellaan",
+      "statusDelivering": "Toimituksessa",
+      "statusDelivered": "Toimitettu",
+      "details": "Tiedot",
+      "cost": "Hinta (EUR)",
+      "items": "Tuotteet",
+      "phone": "Puhelin",
+      "email": "Sähköposti",
+      "destinationAddress": "Toimitusosoite"
     }
   },
   "global": {

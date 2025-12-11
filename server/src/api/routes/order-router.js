@@ -21,7 +21,7 @@ orderRouter.route("/")
         requireRole(["ADMIN"]),
         ...validateOrderQuery,
         validationErrors,
-        orderController.getAllOrders
+        orderController.getAllOrdersWithProducts
     )
     .post(
         authenticateToken,

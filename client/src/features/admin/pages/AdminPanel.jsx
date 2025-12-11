@@ -22,8 +22,6 @@ const AdminPanel = () => {
 
     const renderSelected = () => {
         switch (selected) {
-            case "orders":
-                return <Orders />;
             case "users":
                 return <Users />;
             case "reviews":
@@ -32,6 +30,7 @@ const AdminPanel = () => {
                 return <Products />;
             case "coupons":
                 return <Coupons />;
+            case "orders":
             default:
                 return <Orders />;
         }

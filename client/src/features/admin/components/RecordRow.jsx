@@ -146,6 +146,16 @@ const RecordRow = ({item = {}, idKey = "id", fields = [], cellClass = "", resolv
                             />
                         </td>
                     );
+                case "number":
+                    return (
+                        <td key={key} className={cellClass}>
+                            <InputField
+                                {...common}
+                                inputClass="w-full p-1 border rounded"
+                                type="number"
+                            />
+                        </td>
+                    );
                 case "read-only":
                     return (
                         <td key={key} className={cellClass}>
@@ -184,9 +194,11 @@ const RecordRow = ({item = {}, idKey = "id", fields = [], cellClass = "", resolv
             <td className="px-3 py-2 text-center">
                 {!editing ? (
                     <div className="inline-flex gap-2">
-                        <button type="button" title={t("admin.common.edit")} onClick={startEdit} className="p-2 bg-blue-600 text-white rounded text-sm rounded-full">
-                            <Pencil size={20} />
-                        </button>
+                        {onUpdate && (
+                            <button type="button" title={t("admin.common.edit")} onClick={startEdit} className="p-2 bg-blue-600 text-white rounded text-sm rounded-full">
+                                <Pencil size={20} />
+                            </button>
+                        )}
                         {onDelete && (
                             <button type="button" title={t("admin.common.delete")} onClick={handleDelete} className="p-2 bg-red-600 text-white rounded text-sm rounded-full">
                                 <Trash size={20} />

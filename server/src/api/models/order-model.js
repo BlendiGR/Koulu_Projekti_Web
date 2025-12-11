@@ -11,6 +11,8 @@ export const orderFields = [
     "userId",
     "status",
     "phone",
+    "createdAt",
+    "completedAt"
 ];
 
 /**
@@ -24,13 +26,27 @@ export const ORDER_STATUSES = ["PREPARING", "DELIVERING", "DELIVERED"];
  * @param {Object} filter - Filter criteria for querying orders.
  * @param {number} skip - Number of records to skip for pagination.
  * @param {number} take - Number of records to take for pagination.
+ * @param {string} sortBy - Field to sort by.
+ * @param {string} sortOrder - Sort order, either "asc" or "desc".
  * @returns {Promise<*>}
  */
-export const getOrders = async (filter = {}, skip = 0, take = 100) => {
+export const getOrders = async (filter = {}, skip = 0, take = 100, sortBy, sortOrder = "asc") => {
     return prisma.order.findMany({
         where: filter,
         skip: Number(skip),
         take: Number(take),
+        orderBy: sortBy ? { [sortBy]: sortOrder || "asc" } : undefined,
+    });
+};
+
+/**
+ * Get order count.
+ * @param {Object} filter - Filter criteria for counting orders.
+ * @returns {Promise<number>}
+ */
+export const getOrderCount = async (filter = {}) => {
+    return prisma.order.count({
+        where: filter,
     });
 };
 
@@ -39,21 +55,56 @@ export const getOrders = async (filter = {}, skip = 0, take = 100) => {
  * @param {Object} filter - Filter criteria for querying orders.
  * @param {number} skip - Number of records to skip for pagination.
  * @param {number} take - Number of records to take for pagination.
+ * @param {string} sortBy - Field to sort by.
+ * @param {string} sortOrder - Sort order, either "asc" or "desc".
  * @returns {Promise<*>}
  */
-export const getOrdersWithProducts = async (filter = {}, skip = 0, take = 100) => {
-    return prisma.order.findMany({
+export const getOrdersWithProducts = async (filter = {}, skip = 0, take = 100, sortBy, sortOrder = "asc") => {
+    const rows = await prisma.order.findMany({
         where: filter,
         skip: Number(skip),
         take: Number(take),
-        include: {
+        orderBy: sortBy ? { [sortBy]: sortOrder || "asc" } : undefined,
+        select: {
+            orderId: true,
+            status: true,
+            createdAt: true,
+            completedAt: true,
+            cost: true,
+            phone: true,
+            destinationAddress: true,
+            user: {
+                select: {
+                    email: true,
+                },
+            },
+            // include only product name + quantity
             orderProducts: {
-                include: {
-                    product: true
-                }
-            }
-        },
+                select: {
+                    quantity: true,
+                    product: {
+                        select: {
+                            name: true,
+                        },
+                    },
+                },
+            },
+        }
     });
+
+    return rows.map(o => ({
+        orderId: o.orderId,
+        status: o.status,
+        createdAt: o.createdAt,
+        completedAt: o.completedAt,
+        cost: o.cost,
+        phone: o.phone,
+        destinationAddress: o.destinationAddress,
+        email: o.user?.email ?? null,
+        items: o.orderProducts
+            .map(op => `${op.quantity}x ${op.product?.name ?? ""}`.trim())
+            .join(", "),
+    }));
 };
 
 /**
@@ -248,6 +299,10 @@ export const createOrder = async (orderData) => {
  * @returns {Promise<*>}
  */
 export const updateOrder = async (orderId, updateData) => {
+    if (updateData.status === "DELIVERED" && !updateData.completedAt) {
+        updateData.completedAt = new Date().toISOString();
+    }
+
     try {
         return await prisma.order.update({
             where: { orderId: Number(orderId) },

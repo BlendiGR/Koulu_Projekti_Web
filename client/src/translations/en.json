@@ -390,7 +390,7 @@
       "rating": "Rating",
       "ratingGuide": "Give a rating (1 - 5)",
       "review": "Review",
-      "reviewGuide": "Write a free-form review"
+      "reviewPlaceholder": "Write a free-form review"
     },
     "users": {
       "title": "Users",
@@ -426,6 +426,25 @@
       "boxTitle": "Site announcement",
       "message": "Message",
       "active": "Show announcement"
+    },
+    "orders": {
+      "title": "Orders",
+      "singular": "order",
+      "id": "Order #",
+      "customer": "Customer",
+      "createdAt": "Created at",
+      "completedAt": "Completed at",
+      "total": "Total",
+      "status": "Status",
+      "statusPreparing": "Preparing",
+      "statusDelivering": "Delivering",
+      "statusDelivered": "Delivered",
+      "details": "Details",
+      "cost": "Cost (EUR)",
+      "items": "Products",
+      "phone": "Phone",
+      "email": "Email",
+      "destinationAddress": "Address"
     }
   },
   "global": {
