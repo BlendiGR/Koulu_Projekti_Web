@@ -11,6 +11,8 @@
 
 ![Hero Section](https://raw.githubusercontent.com/BlendiGR/Restaurant-App/refs/heads/main/client/src/assets/Fooder-Hero.png "Hero Section Screenshot")
 
+[![CodeFactor](https://www.codefactor.io/repository/github/blendigr/restaurant-app/badge)](https://www.codefactor.io/repository/github/blendigr/restaurant-app)
+
 Tämä on moderni ravintolasovellus, joka tarjoaa saumattoman tilauskokemuksen asiakkaille ja tehokkaat hallintatyökalut ravintoloitsijoille.
 
 ## 1. Sovelluksen Idea ja Kohderyhmä
