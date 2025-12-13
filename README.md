@@ -8,10 +8,9 @@
 ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+[![CodeFactor](https://www.codefactor.io/repository/github/blendigr/restaurant-app/badge)](https://www.codefactor.io/repository/github/blendigr/restaurant-app)
 
 ![Hero Section](https://raw.githubusercontent.com/BlendiGR/Restaurant-App/refs/heads/main/client/src/assets/Fooder-Hero.png "Hero Section Screenshot")
-
-[![CodeFactor](https://www.codefactor.io/repository/github/blendigr/restaurant-app/badge)](https://www.codefactor.io/repository/github/blendigr/restaurant-app)
 
 Tämä on moderni ravintolasovellus, joka tarjoaa saumattoman tilauskokemuksen asiakkaille ja tehokkaat hallintatyökalut ravintoloitsijoille.
 
